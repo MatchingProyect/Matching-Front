@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './login.styles.css';
+import styles from './login.module.css';
 
-export default function LoginForm() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -52,3 +52,4 @@ export default function LoginForm() {
   );
 };
 
+export default Login;
