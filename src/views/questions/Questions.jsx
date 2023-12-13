@@ -1,6 +1,7 @@
 import { Button } from '@mui/material'
 import styles from './Questions.module.css'
 import logo from '../../assets/logo-matching.svg'
+import QuestionOne from '../../components/questions/QuestionOne'
 
 const Questions = () => {
   return (
@@ -16,6 +17,7 @@ const Questions = () => {
                 </div>
                 <p className={ styles.cuenta }>1/6</p>
             </div>
+             <QuestionOne />
         </div>
     </>
   )
