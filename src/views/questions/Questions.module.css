@@ -1,7 +1,6 @@
 .contentQuestions{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
@@ -9,6 +8,7 @@
 }
 
 #contentLogo{
+    margin-top: 95px;
     width: 294px;
     height: 70px;
 }
@@ -19,7 +19,6 @@
 }
 
 .questionInfo{
-    font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 20px;
     color: rgba(249, 249, 249, 0.94);
