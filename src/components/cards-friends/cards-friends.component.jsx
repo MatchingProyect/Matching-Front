@@ -1,6 +1,8 @@
-import CardFriends from "../card-friends/card-friends.component";
+import List from '@mui/material/List';
+import CardFriends from '../card-friends/card-friends.component'
 
-function CardsFriends() {
+export default function CardsFriends() {
+
   const friends = [
     {
         name: "John",
@@ -26,17 +28,11 @@ function CardsFriends() {
   ]
 
   return (
-    <div>
-      <div  className='card-list'>
+    <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
         {
         friends?.map((friend) => (
           <CardFriends key={friend.name} friend={friend} ></CardFriends>
         ))}
-      </div>
-
-    </div>
-    
+    </List>
   );
 }
-
-export default CardsFriends;
