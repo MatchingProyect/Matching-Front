@@ -17,10 +17,18 @@ const Questions = () => {
                 </div>
                 <p className={ styles.cuenta }>1/6</p>
             </div>
-             <QuestionOne />
+            <QuestionOne /> 
+            <Button sx={ { ..._styled.nextBtn } } variant='contained' >Siguiente</Button>
         </div>
     </>
   )
+}
+
+const _styled = {
+    nextBtn: {
+        width: '338px',
+        height: '50px'
+    }
 }
 
 export default Questions
