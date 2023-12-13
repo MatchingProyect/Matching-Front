@@ -1,54 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { Link } from "react-router-dom"; 
 import styles from './login.module.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { handleSubmit, control, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    console.log('Iniciar sesión con:', email, password);
-  };
-
-  const toggleShowPassword = () => {
+  const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <div className="mobile-first-container">
-      <h2>Iniciar Sesión</h2>
-      <form>
-        <label>
-          Correo Electrónico:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-
-        <label>
-          Contraseña:
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="button" onClick={toggleShowPassword}>
-          {showPassword ? 'Ocultar Contraseña' : 'Mostrar Contraseña'}
-        </button>
-
-        <button type="button" onClick={handleLogin}>
-          Iniciar Sesión
-        </button>
-      </form>
-
-      <div className="links-container">
-        <p>No tienes cuenta? <a href="/registro">Registrarse</a></p>
-        <p>¿Olvidaste tu contraseña? <a href="/recuperar-contrasenia">Recuperar Contraseña</a></p>
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <div>
+        <label>Correo electrónico:</label>
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: 'Este campo es requerido',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: 'Dirección de correo electrónico no válida',
+            },
+          }}
+          render={({ field }) => (
+            <>
+              <input type="email" {...field}  inputMode="email" />
+              {errors.email && <p>{errors.email.message}</p>}
+            </>
+          )}
+        />
       </div>
-    </div>
+
+      <div>
+        <label>Contraseña:</label>
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: 'Este campo es requerido',
+            minLength: {
+              value: 8,
+              message: 'La contraseña debe tener al menos 8 caracteres',
+            },
+            maxLength: {
+              value: 15,
+              message: 'La contraseña no debe exceder los 15 caracteres',
+            },
+          }}
+          render={({ field }) => (
+            <>
+              <input type={showPassword ? "text" : "password"} {...field} />
+              {errors.password && <p>{errors.password.message}</p>}
+              <span onClick={togglePasswordVisibility}>
+                {showPassword ? "Ocultar" : "Mostrar"} contraseña
+              </span>
+            </>
+          )}
+        />
+      </div>
+
+      <button type="submit">Iniciar sesión</button>
+
+      <p>No tienes cuenta? <Link to="/registro">Regístrate</Link></p>
+    </form>
   );
 };
 
