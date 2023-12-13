@@ -21,7 +21,7 @@ export default function FriendsContainer(props){
     return(
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
-                <h3>Amigos Conectados: 20</h3>
+                <h3>Amigos Conectados: 21</h3>
                 <Link to = '/amigos'> <button>Ver Todos</button> </Link>
             </div>
             <div className = {styles.friendsImages}>

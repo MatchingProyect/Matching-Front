@@ -35,7 +35,7 @@ export default function Profile(props) {
                 </div>
                 <div className = {styles.info}>
                     <p>{email}</p>
-                    <p>Correo</p>
+                    <p>Correo Electronico</p>
                 </div>
                 <div className = {styles.info}>
                     <p>{phone}</p>
