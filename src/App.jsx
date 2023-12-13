@@ -1,12 +1,13 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/home/home.component';
 import Profile from './views/profile/profile.component';
-import Login from './views/login/login.component';
-import Registro from './views/login/registro.component'; 
-import Friends from './views/friends/Friends';
+import Registro from './views/login/Registro'; 
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
-import './App.css';
 import Questions from './views/questions/Questions';
+import './App.css';
+import Friends from './views/friends/friends';
+import Login from './views/login/Login';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path = "/profile/edit" element ={<ProfileEdit />} />
-        <Route path ="/amigos" element = {<Friends />} />
+        <Route path="/friends" element = { <Friends /> } />
         <Route path="/questions" element={<Questions />} />
         <Route path="/registro" element={<Registro />} />
       </Routes>

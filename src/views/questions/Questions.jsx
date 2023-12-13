@@ -27,7 +27,7 @@ const Questions = () => {
 const _styled = {
     nextBtn: {
         width: '338px',
-        height: '50px'
+        height: '50px',
     }
 }
 
