@@ -4,7 +4,7 @@ import Home from './views/home/home.component';
 import Profile from './views/profile/profile.component';
 import Login from './views/login/login.component';
 import Registro from './views/login/registro.component'; 
-
+import Friends from './views/friends/Friends';
 import './App.css';
 import Questions from './views/questions/Questions';
 
@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path = '/amigos' element = {<Friends />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/registro" element={<Registro />} />
       </Routes>
