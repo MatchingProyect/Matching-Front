@@ -12,7 +12,12 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit((data) => console.log(data))}>
+    <form className={styles.formContainer} onSubmit={handleSubmit((data) => console.log(data))}>
+    <img
+      src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
+      alt="Logo"
+      className={styles.logo}
+    />
       <div>
         <label>Correo electrónico:</label>
         <Controller
