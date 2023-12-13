@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/home/home.component';
 import Profile from './views/profile/profile.component';

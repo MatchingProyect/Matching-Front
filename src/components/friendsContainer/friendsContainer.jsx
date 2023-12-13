@@ -1,20 +1,20 @@
-import React from 'react';
+// import React from 'react';
 import styles from './friendsContainer.styles.css';
 import { Link } from 'react-router-dom';
 
-export default function FriendsContainer(props){
+export default function FriendsContainer(){
     //Entendiendo que friends es un array de objetos (podria ser todos los users menos el usuario que inicio sesion).
-    const { friends } = props;
+    // const { friends } = props;
 
-    function estadoAvailable(isAvailable){
-        if (isAvailable == true){
-            return (
-                <h3>🟢</h3>
-            )
-        } else if (isAvailable == false){
-            return;
-        }
-    };
+    // function estadoAvailable(isAvailable){
+    //     if (isAvailable == true){
+    //         return (
+    //             <h3>🟢</h3>
+    //         )
+    //     } else if (isAvailable == false){
+    //         return;
+    //     }
+    // };
 
     //En amigos conectados, seria friends.length pero de colocarlo asi suelta, igualmente en el map paraa los amigos
 
@@ -34,4 +34,4 @@ export default function FriendsContainer(props){
             </div>
         </div>
     )
-};
+}
