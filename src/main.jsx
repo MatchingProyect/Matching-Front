@@ -10,10 +10,10 @@ const theme = createTheme();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme = {theme}>
-  <BrowserRouter>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  </BrowserRouter>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
   </ThemeProvider>  
 )

@@ -6,6 +6,7 @@ import Login from './views/login/login.component';
 
 
 import './App.css';
+import Questions from './views/questions/Questions';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/questions" element={ <Questions /> } />
       </Routes>
     </div>
   );
