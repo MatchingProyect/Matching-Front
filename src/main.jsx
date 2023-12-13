@@ -12,6 +12,7 @@ const theme = createTheme();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store = {store}>
   <ThemeProvider theme = {theme}>
+<<<<<<< HEAD
   <BrowserRouter>
   <React.StrictMode>
     <App />
@@ -20,3 +21,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </ThemeProvider>
   </Provider>
 );
+=======
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
+  </ThemeProvider>  
+)
+>>>>>>> 0745a43770123f00ca4b691fd2ffa875b50947c3
