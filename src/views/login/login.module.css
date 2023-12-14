@@ -5,7 +5,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
+    justify-content: center;
+    /* Aqui cambie el color del background por el color del mockup */
+    background-color: #203144;
     width: 100%;
     height: 100vh;
     padding: 50px 0;
@@ -17,10 +19,51 @@
     width: 294px;
     height: 70px;
     position: absolute;
-    top: 0;
+    top: 95px;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 30px;
+  }
+
+  /* Estos son los estilos que agregue para tratar de ayudar un poco con lo que no estaba agarrando. son clases que cree para las etiquetas que no tenian clase ya gregue unas mas */
+  .contentFormFields{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+  }
+
+  .contentController{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 385px;
+    height: 93px;
+  }
+
+  .labels{
+    font-weight: 700;
+    font-size: 20px;
+    height: 30px;
+  }
+
+  .inputEmail{
+    height: 55px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    color: #203144;
+    padding-left: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    outline: transparent;
+  }
+
+  .h2Title{
+    font-size: 20px;
+    font-weight: 700;
   }
   
   /* Estilos del formulario */
