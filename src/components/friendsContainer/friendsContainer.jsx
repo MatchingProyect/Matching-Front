@@ -2,35 +2,47 @@
 import styles from './friendsContainer.module.css';
 import { Link } from 'react-router-dom';
 
-export default function FriendsContainer(){
-    //Entendiendo que friends es un array de objetos (podria ser todos los users menos el usuario que inicio sesion).
-    // const { friends } = props;
 
-    // function estadoAvailable(isAvailable){
-    //     if (isAvailable == true){
-    //         return (
-    //             <h3>🟢</h3>
-    //         )
-    //     } else if (isAvailable == false){
-    //         return;
-    //     }
-    // };
+export default function FriendsContainer(props){
 
-    //En amigos conectados, seria friends.length pero de colocarlo asi suelta, igualmente en el map paraa los amigos
+    const friends = [
+        {
+            image: 'https://i.imgur.com/AzTVKKt.png',
+            isAvailable: true
+        },
+        {
+            image: 'https://i.imgur.com/CbpwPx8.png',
+            isAvailable: false
+        },
+        {
+            image: 'https://i.imgur.com/TgLh7Es.png',
+            isAvailable: false
+        }
+    ]
+
+    function estadoAvailable(isAvailable){
+        if (isAvailable == true){
+            return (
+                <h1>🟢</h1>
+            )
+        } else if (isAvailable == false){
+            return;
+        }
+    };
 
     return(
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
-                <h3>Amigos Conectados: 21</h3>
+                <h3>Amigos: {friends.length}</h3>
                 <Link to = '/amigos'> <button>Ver Todos</button> </Link>
             </div>
             <div className = {styles.friendsImages}>
-                {/* {friends.map((element) => 
+                {friends.map((element) => 
                 <div className = {styles.friend}>
                     <img src = {element.image} alt = {element.name}/>
                     {estadoAvailable(friends.isAvailable)}
                 </div>
-                )} */}
+                )}
             </div>
         </div>
     )
