@@ -35,7 +35,9 @@ const Questions = () => {
             <div id={ styles.contentLogo }>
                 <img id={ styles.logo } src={ logo } alt="Logo matching" />
             </div>
-            <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>
+            <div className={ styles.contentQuestionInfo}>
+                <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>
+            </div>
             <div className={ styles.contentBar }>
                 <div className={ styles.bar }>
                     <div className={ styles.barProgress } />
@@ -59,7 +61,6 @@ const _styled = {
         fontSize: '20px',
         fontWeight: '600',
         lineHeight: '30px',
-        marginTop: '15px',
     }
 }
 

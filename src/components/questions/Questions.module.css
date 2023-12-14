@@ -4,6 +4,7 @@
 }
 
 .titleQuestion{
+    margin-top: 20px;
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
@@ -11,6 +12,7 @@
 }
 
 .contentOptions{
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -47,4 +49,85 @@
     font-family: 'Poppins', sans-serif;
     background-color: transparent;
     border: 1px solid white;
+}
+
+.contentFormLocation{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentLocation{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputLocation{
+    width: 385px;
+    height: 55px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    border: 1px solid white;
+    padding-left: 13px;
+}
+
+.contentNumber{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contentAreasNumber{
+    display: flex;
+    flex-direction: column;
+}
+
+.labelArea{
+    margin-left: 6px;
+}
+
+.inputArea{
+    height: 55px;
+    width: 106px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid white;
+    margin-top: 6PX;
+    padding-left: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.inputNumber{
+    width: 261px;
+    height: 55px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid white;
+    margin-top: 6PX;
+    padding-left: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.subtitleQuestion{
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-left: 20px;
+}
+
+.contentSports{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
