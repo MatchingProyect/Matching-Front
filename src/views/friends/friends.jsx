@@ -1,7 +1,7 @@
 // import styles from './friends.styles.css';
 import  { useState } from 'react';
 // import SearchIcon from '@material-ui/icons/Search';
-import CardsFriends from '../../components/cards-friends/Cards-friends.component'
+// import CardsFriends from '../../components/cards-friends/Cards-friends.component'
 export default function Friends(){
 
     const [name, setName] = useState('');
@@ -33,7 +33,7 @@ export default function Friends(){
                 </button>
             </form>
 
-            <CardsFriends></CardsFriends>
+            {/* <CardsFriends></CardsFriends> */}
             
             
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './profile.module.css';
-import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
+// import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
 import { Link } from 'react-router-dom'
-import { Typography } from '@mui/material';
+// import { Typography } from '@mui/material';
 
 export default function Profile(props) {
 
@@ -26,7 +26,7 @@ export default function Profile(props) {
                 <h3>{user.description}</h3>
             </div>
             <div className = {styles.divTwoProfile}>
-                <FriendsContainer />
+                {/* <FriendsContainer /> */}
             </div>
             <div className = {styles.divThreeProfile}>
                 <Link to = "/profile/edit">Editar</Link>

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import styles from './QuestionOne.module.css'
+import styles from './Questions.module.css'
 import { useState } from 'react'
 
 const QuestionOne = () => {
@@ -27,7 +27,6 @@ const QuestionOne = () => {
             <p className={ styles.titleQuestion } >¿Cúal es tu genero?</p>
             <div className={ styles.contentOptions }>
                 <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Femenino' >
-                    
                     Femenino
                     {
                         // Esta validacion es la que hago para que si el estado es igual al name del boton al que hago click, se muestre el svg
