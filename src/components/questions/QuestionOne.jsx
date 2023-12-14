@@ -52,6 +52,7 @@ const QuestionOne = () => {
   )
 }
 
+// Estilos que ajuste para los componentes por defecto del material UI
 const _stylesBtn = {
     btn: {
         borderRadius: '20px',
