@@ -12,7 +12,6 @@ function CardFriends({friend}) {
 
   return (
     <div className='container'>
-
     <ListItem alignItems="flex-start">
             <ListItemAvatar>
             <Avatar alt="Travis Howard" src="" />
@@ -35,7 +34,12 @@ function CardFriends({friend}) {
                 </React.Fragment>
               }
             />
+        
+        <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507668/icon-park_more_m9dh5t.svg" } alt="Search" />
+   
       </ListItem>
+      
+
       <Divider variant="inset" component="li" />
     </div>
   );

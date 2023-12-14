@@ -1,32 +1,10 @@
 import List from '@mui/material/List';
 import CardFriends from '../card-friends/card-friends.component'
+import PropTypes from 'prop-types';
 
-export default function CardsFriends() {
-
-  const friends = [
-    {
-        name: "John",
-        games: 10
-    },
-    {
-        name: "Adam",
-        games: 8
-    },
-    {
-        name: "Peter",
-        games: 3
-    },
-    {
-        name: "Diego",
-        games: 3
-    },
-    {
-        name: "Daniel",
-        games: 0
-    }
-
-  ]
-
+export default function CardsFriends({friends}) {
+  // console.log(friends)
+  
   return (
     <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
         {
@@ -36,3 +14,12 @@ export default function CardsFriends() {
     </List>
   );
 }
+
+CardsFriends.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      games: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};

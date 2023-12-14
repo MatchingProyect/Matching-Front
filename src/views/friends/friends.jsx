@@ -1,8 +1,32 @@
-// import styles from './friends.styles.css';
 import  { useState } from 'react';
-// import SearchIcon from '@material-ui/icons/Search';
 import CardsFriends from '../../components/cards-friends/cards-friends.component'
+import { Link } from 'react-router-dom';
+
 export default function Friends(){
+
+    const friends = [
+        {
+            name: "John",
+            games: 10
+        },
+        {
+            name: "Adam",
+            games: 8
+        },
+        {
+            name: "Peter",
+            games: 3
+        },
+        {
+            name: "Diego",
+            games: 3
+        },
+        {
+            name: "Daniel",
+            games: 0
+        }
+    
+      ]
 
     const [name, setName] = useState('');
 
@@ -26,16 +50,28 @@ export default function Friends(){
             <h1>Amigos</h1>
 
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder='Busque la raza' value={name} onChange={handleChange} />
-            
                 <button type='button' className='icon-button' onClick={handleSubmit}>
-                {/* <SearchIcon className='icon' /> */}
+                    <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702489357/eye.slash_vthsb6.svg" } alt="Search" />
                 </button>
+                <input type="text" placeholder='Buscar por nombre o correo' value={name} onChange={handleChange} />
             </form>
 
-            <CardsFriends></CardsFriends>
-            
-            
+            <div className='filter'>
+                <p>{friends.length} amigos.</p>
+                <p>Ordenar</p>
+            </div>
+
+            <CardsFriends friends ={friends}></CardsFriends>
+
+
+            <div>
+                <Link to = '/'> 
+                    <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702508016/ic_baseline-share_pzgv1u.svg" } alt="Compartir" />
+                    <p>Invitar Amigos</p>
+                </Link>
+
+            </div>
+
 
 
         </div>
