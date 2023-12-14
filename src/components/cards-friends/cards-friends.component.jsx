@@ -1,15 +1,15 @@
 import List from '@mui/material/List';
 import CardFriends from '../card-friends/card-friends.component'
 import PropTypes from 'prop-types';
+// import styles from './cards-friends.module.css'
 
 export default function CardsFriends({friends}) {
-  // console.log(friends)
   
   return (
     <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
         {
-        friends?.map((friend) => (
-          <CardFriends key={friend.name} friend={friend} ></CardFriends>
+        friends?.map((friend, index) => (
+          <CardFriends key={friend.name} friend={friend} index={index} ></CardFriends>
         ))}
     </List>
   );

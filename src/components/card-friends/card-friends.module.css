@@ -1,0 +1,13 @@
+.containerCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.centeredImage {
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+  }
