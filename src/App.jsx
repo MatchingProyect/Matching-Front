@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/home/home.component';
-import Profile from './views/profile/profile.component';
+import Profile from './views/profile/Profile.jsx';
 import Registro from './views/login/Registro'; 
-import ProfileEdit from './views/profile/profileEdit/profileEdit';
+import ProfileEdit from './views/profile/profileEdit/ProfileEdit';
 import Questions from './views/questions/Questions';
 import './App.css';
 import Friends from './views/friends/friends';
