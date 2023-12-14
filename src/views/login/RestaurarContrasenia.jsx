@@ -1,11 +1,11 @@
-// Login.jsx
+// RestaurarContrasenia.jsx
 
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./login.module.css";
 
-const Login = ({ onSubmit }) => {
+const RestaurarContrasenia = ({ onSubmit }) => {
   const { handleSubmit, control, formState: { errors } } = useForm();
 
   return (
@@ -24,7 +24,6 @@ const Login = ({ onSubmit }) => {
             <Controller
               name="email"
               control={control}
-              defaultValue=""  // Proporciona un valor inicial aquí
               rules={{
                 required: "Este campo es requerido",
                 pattern: {
@@ -40,7 +39,13 @@ const Login = ({ onSubmit }) => {
               )}
             />
           </div>
-          <button type="submit" className={styles.submitButton}>Enviar Código</button>
+
+          {/* Utiliza Link en lugar del botón submit */}
+          <Link to="/restaurar-contrasenia-codigo">
+            <button type="submit" className={styles.submitButton}>
+              Enviar Código
+            </button>
+          </Link>
         </div>
 
         <div className={styles.container}>
@@ -53,4 +58,4 @@ const Login = ({ onSubmit }) => {
   );
 };
 
-export default Login;
+export default RestaurarContrasenia;
