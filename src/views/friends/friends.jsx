@@ -1,11 +1,14 @@
 import  { useState } from 'react';
-import CardsFriends from '../../components/cards-friends/cards-friends.component';
 import styles from './friends.module.css';
-
 import { Link } from 'react-router-dom';
+
+import CardsFriends from '../../components/cards-friends/cards-friends.component';
 import NavbarLow from '../../components/navbarLow/navbarLow';
+import OptionsFriends from '../../components/optionsFriends/optionsFriends';
+
 
 export default function Friends(){
+
 
     const friends = [
         {
@@ -25,7 +28,7 @@ export default function Friends(){
             games: 3
         },
         {
-            name: "Daniel",
+            name: "quart",
             games: 0
         },
         {
@@ -33,14 +36,20 @@ export default function Friends(){
             games: 0
         },
         {
-            name: "Diego",
+            name: "ferred",
             games: 3
         },
       ]
 
     const [name, setName] = useState('');
+    const [showOptions, setShowOptions] = useState(false); 
 
+    const handleCardClick = (friendName) => {
+        setName(friendName);
+        setShowOptions(true); 
+      };
 
+      
     const handleSubmit = (event) => {
         event.preventDefault();
         // onSearch(name);
@@ -82,7 +91,7 @@ export default function Friends(){
             </div>
 
 
-            <CardsFriends friends ={friends}></CardsFriends>
+            <CardsFriends friends ={friends} onCardClick={handleCardClick}></CardsFriends>
 
             <div className={styles.shareFriends}>
                 <Link to='/'>
@@ -95,6 +104,7 @@ export default function Friends(){
 
             <NavbarLow></NavbarLow>
 
+            {showOptions && <OptionsFriends name={name} />}
         </div>
     )
 } 

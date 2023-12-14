@@ -1,0 +1,42 @@
+
+.containerOptions {
+    padding: 16px, 10px, 32px, 10px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 8px 8px 0px 0px;
+    background-color: white;
+}
+
+
+.options {
+    display: flex;
+    padding: 4px, 10px, 4px, 10px
+}
+
+.optionsImg{
+    background-color: #F3F3F3;
+    min-width: 44px;
+    border-radius: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 9px 10px;
+}
+
+.options h4 p{
+    font-family: 'Inter', sans-serif;
+
+}
+.options h4 {
+    font-size:  14px;
+}
+
+.options p {
+    font-size: 12px;
+}
+
+.optionsDescription {
+    display: flex;
+    flex-direction: column;
+    padding: 0px, 10px, 0px, 10px;
+}

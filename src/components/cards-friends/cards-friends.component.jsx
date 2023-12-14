@@ -3,13 +3,14 @@ import CardFriends from '../card-friends/card-friends.component'
 import PropTypes from 'prop-types';
 // import styles from './cards-friends.module.css'
 
-export default function CardsFriends({friends}) {
+export default function CardsFriends({friends, onCardClick}) {
   
   return (
     <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
         {
         friends?.map((friend, index) => (
-          <CardFriends key={friend.name} friend={friend} index={index} ></CardFriends>
+          <CardFriends key={friend.name} friend={friend} index={index}           onClick={onCardClick}
+          ></CardFriends>
         ))}
     </List>
   );
@@ -22,4 +23,5 @@ CardsFriends.propTypes = {
       games: PropTypes.number.isRequired,
     })
   ).isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };

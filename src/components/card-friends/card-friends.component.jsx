@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import styles from './card-friends.module.css'
 
-function CardFriends({friend, index}) {
+function CardFriends({friend, index, onClick}) {
 
   return (
     <div>
@@ -37,11 +37,15 @@ function CardFriends({friend, index}) {
                 }
               />
               <div className={styles.centeredImage}>
-                <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507668/icon-park_more_m9dh5t.svg" } alt="Search" />
+                <button onClick={() => onClick(friend.name)}>
+                  <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507668/icon-park_more_m9dh5t.svg" } alt="Options" />
+                </button>
               </div>
             </div>
 
         </ListItem>
+
+        
         
     </div>
   );
@@ -53,7 +57,7 @@ CardFriends.propTypes = {
         games: PropTypes.number.isRequired,
       }).isRequired,
     index: PropTypes.number.isRequired, 
-
+    onClick: PropTypes.func
 };
   
 
