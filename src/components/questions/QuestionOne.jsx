@@ -10,6 +10,7 @@ const QuestionOne = () => {
         setClicked( event.target.name );
     }
 
+    //Esta funcion la cree para no repetir el codigo al tener el estado del boton que selecciona
     const handleShowCheck = () => {
         return(
             <span className={ styles.check}>
@@ -26,8 +27,10 @@ const QuestionOne = () => {
             <p className={ styles.titleQuestion } >¿Cúal es tu genero?</p>
             <div className={ styles.contentOptions }>
                 <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Femenino' >
+                    
                     Femenino
                     {
+                        // Esta validacion es la que hago para que si el estado es igual al name del boton al que hago click, se muestre el svg
                         clicked === 'Femenino' && handleShowCheck()
                     }
                 </Button>
