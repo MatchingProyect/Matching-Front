@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* Aqui cambie el color del background por el color del mockup */
     background-color: #203144;
     width: 100%;
     height: 100vh;
@@ -24,6 +25,7 @@
     margin-top: 30px;
   }
 
+  /* Estos son los estilos que agregue para tratar de ayudar un poco con lo que no estaba agarrando. son clases que cree para las etiquetas que no tenian clase ya gregue unas mas */
   .contentFormFields{
     display: flex;
     flex-direction: column;
