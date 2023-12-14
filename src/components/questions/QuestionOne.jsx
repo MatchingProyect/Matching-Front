@@ -1,15 +1,48 @@
 import { Button } from '@mui/material'
 import styles from './QuestionOne.module.css'
+import { useState } from 'react'
 
 const QuestionOne = () => {
+
+    const [ clicked,setClicked ] = useState('');
+
+    const handleClickGender = ( event ) => {
+        setClicked( event.target.name );
+    }
+
+    const handleShowCheck = () => {
+        return(
+            <span className={ styles.check}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="49" viewBox="0 0 48 49" fill="none">
+                    <path d="M17 24.6207L20.1 21.5862L28.625 29.931L45.2875 14L48 17.0345L28.625 36L17 24.6207Z" fill="#DDDDDD"/>
+                </svg>
+            </span>
+        )
+    }
+
   return (
     <>
         <div className={ styles.contentQuestion } >
             <p className={ styles.titleQuestion } >¿Cúal es tu genero?</p>
             <div className={ styles.contentOptions }>
-                <Button sx={ { ..._stylesBtn.btn } } variant='outlined' >Femenino</Button>
-                <Button sx={ { ..._stylesBtn.btn } } variant='outlined' >Masculino</Button>
-                <Button sx={ { ..._stylesBtn.btn } } variant='outlined' >Prefiero no decirlo</Button>
+                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Femenino' >
+                    Femenino
+                    {
+                        clicked === 'Femenino' && handleShowCheck()
+                    }
+                </Button>
+                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Masculino' >
+                    Masculino
+                    {
+                        clicked === 'Masculino' && handleShowCheck()
+                    }
+                </Button>
+                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='No' >
+                    Prefiero no decirlo
+                    {
+                        clicked === 'No' && handleShowCheck()
+                    }
+                </Button>
             </div>
         </div>
     </>
@@ -18,7 +51,6 @@ const QuestionOne = () => {
 
 const _stylesBtn = {
     btn: {
-        display: 'flex',
         borderRadius: '20px',
         width: '100%',
         height: '55px',
@@ -30,6 +62,9 @@ const _stylesBtn = {
         fontSize: '16px',
         fontWeight: '400',
         lineHeight: '24px',
+        '&:focus': {
+            color: 'white',
+        }
     }
 }
 

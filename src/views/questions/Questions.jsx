@@ -18,7 +18,7 @@ const Questions = () => {
                 <p className={ styles.cuenta }>1/6</p>
             </div>
             <QuestionOne /> 
-            <Button sx={ { ..._styled.nextBtn } } variant='contained' >Siguiente</Button>
+            <Button sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
         </div>
     </>
   )
@@ -28,6 +28,11 @@ const _styled = {
     nextBtn: {
         width: '338px',
         height: '50px',
+        borderRadius: '10px',
+        fontSize: '20px',
+        fontWeight: '600',
+        lineHeight: '30px',
+        marginTop: '15px',
     }
 }
 

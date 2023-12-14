@@ -1,5 +1,6 @@
 .contentQuestion{
     width: 100%;
+    height: 550px;
 }
 
 .titleQuestion{
@@ -19,11 +20,9 @@
     height: 200px;
 }
 
-.btnQOne{
-    border-radius: 20px;
-    width: 100%;
-    height: 55px;
-    color: white; 
-    border: 1px solid white;
+.check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 220px;
 }
-
