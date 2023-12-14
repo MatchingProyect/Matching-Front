@@ -3,6 +3,7 @@ import CardsFriends from '../../components/cards-friends/cards-friends.component
 import styles from './friends.module.css';
 
 import { Link } from 'react-router-dom';
+import NavbarLow from '../../components/navbarLow/navbarLow';
 
 export default function Friends(){
 
@@ -92,7 +93,7 @@ export default function Friends(){
                 </Link>
             </div>
 
-
+            <NavbarLow></NavbarLow>
 
         </div>
     )

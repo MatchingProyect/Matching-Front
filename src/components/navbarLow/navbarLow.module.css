@@ -1,0 +1,7 @@
+.containerNavbar{
+    display: flex;
+    justify-content: space-around;
+}
+.icon{
+    color: aqua;
+}
