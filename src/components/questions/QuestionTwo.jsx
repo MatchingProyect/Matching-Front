@@ -14,7 +14,7 @@ const QuestionTwo = () => {
         <div className={ styles.contentQuestion } >
             <p className={ styles.titleQuestion } >¿Cuál es tu fecha de nacimiento?</p>
             <form className={ styles.contentForm } onSubmit={ handleSubmit( onSubmit ) }>
-                <input className={ styles.inputDate } type="date" { ...register( 'date',{ required: true, } ) } />
+                <input className={ styles.inputDate } type="date" { ...register( 'date',{ required: true } ) } />
             </form>
         </div>
     </>
