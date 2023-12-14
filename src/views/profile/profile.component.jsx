@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
-import FriendsContainer from '../../components/friendsContainer/friendsContainer';
+import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
 import { Link } from 'react-router-dom'
 import { Typography } from '@mui/material';
 
