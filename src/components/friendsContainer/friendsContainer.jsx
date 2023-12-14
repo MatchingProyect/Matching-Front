@@ -1,10 +1,10 @@
-// import React from 'react';
+import React from 'react';
 import styles from './friendsContainer.module.css';
 import { Link } from 'react-router-dom';
 
 
 export default function FriendsContainer(props){
-
+    //Info hardcodeada que traeria la llamada al back
     const friends = [
         {
             image: 'https://i.imgur.com/AzTVKKt.png',
@@ -16,31 +16,37 @@ export default function FriendsContainer(props){
         },
         {
             image: 'https://i.imgur.com/TgLh7Es.png',
-            isAvailable: false
+            isAvailable: true
+        },
+        {
+            image: 'https://i.imgur.com/TgLh7Es.png',
+            isAvailable: true
         }
-    ]
+    ];
 
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
             return (
-                <h1>🟢</h1>
+                <h1 className = {styles.status}>🟢</h1>
             )
         } else if (isAvailable == false){
-            return;
+            return(
+                <h1 className = {styles.status}></h1>
+            )
         }
     };
 
     return(
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
-                <h3>Amigos: {friends.length}</h3>
-                <Link to = '/amigos'> <button>Ver Todos</button> </Link>
+                <p className = {styles.text1}>Amigos: {friends.length}</p>
+                <Link to = '/friends'> <a>Ver Todos</a> </Link>
             </div>
             <div className = {styles.friendsImages}>
                 {friends.map((element) => 
-                <div className = {styles.friend}>
-                    <img src = {element.image} alt = {element.name}/>
-                    {estadoAvailable(friends.isAvailable)}
+                <div className = {styles.friend} key = {element.name}>
+                    <img className = {styles.friendImg} src = {element.image} alt = {element.name} key = {element.name}/>
+                    {estadoAvailable(element.isAvailable)}
                 </div>
                 )}
             </div>

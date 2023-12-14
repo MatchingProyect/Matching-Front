@@ -1,0 +1,43 @@
+.friendsContainer{
+    background-color: bisque;
+    position: relative;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: black;
+    min-width: 90vw;
+}
+
+.infoGeneral{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text1 {
+    color: black;
+    font-size: 15px;
+}
+
+.friendsImages{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin:5px;
+}
+
+.friendImg{
+    position: relative;
+    max-width: 90px;
+    max-height: 90px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+}
+.status{
+    position: relative;
+    font-size: 20px;
+    top: -30px;
+
+}
+
