@@ -8,7 +8,6 @@ import Questions from './views/questions/Questions';
 import './App.css';
 import Friends from './views/friends/friends';
 import Login from './views/login/Login';
-import Registro from './views/login/Registro';
 import RestaurarContrasenia from './views/login/RestaurarContrasenia';
 import RestaurarContraseniaCodigo from './views/login/RestaurarContraseniaCodigo.jsx';
 import { useDispatch, useSelector } from 'react-redux';
