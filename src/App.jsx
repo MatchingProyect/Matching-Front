@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/home/home.component';
-import Profile from './views/profile/profile.component';
+// import Profile from './views/profile/profile.component';
 import Registro from './views/login/Registro'; 
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
 import Questions from './views/questions/Questions';
 import './App.css';
 import Friends from './views/friends/friends';
 import Login from './views/login/Login';
-import Registro from './views/login/Registro';
+// import Registro from './views/login/Registro';
 import RestaurarContrasenia from './views/login/RestaurarContrasenia';
 import RestaurarContraseniaCodigo from './views/login/RestaurarContraseniaCodigo.jsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
-        <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/profile/edit" element={<ProfileEdit />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={<Questions />} />
