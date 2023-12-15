@@ -1,28 +1,9 @@
 import React from 'react';
-import styles from './friendsContainer.module.css';
+import styles from './FriendsContainer.module.css';
 import { Link } from 'react-router-dom';
 
 
-export default function FriendsContainer(props){
-    //Info hardcodeada que traeria la llamada al back
-    const friends = [
-        {
-            image: 'https://i.imgur.com/AzTVKKt.png',
-            isAvailable: true
-        },
-        {
-            image: 'https://i.imgur.com/CbpwPx8.png',
-            isAvailable: false
-        },
-        {
-            image: 'https://i.imgur.com/TgLh7Es.png',
-            isAvailable: true
-        },
-        {
-            image: 'https://i.imgur.com/TgLh7Es.png',
-            isAvailable: true
-        }
-    ];
+export default function FriendsContainer({friends}){
 
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
@@ -40,7 +21,7 @@ export default function FriendsContainer(props){
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
                 <p className = {styles.text1}>Amigos: {friends.length}</p>
-                <Link to = '/friends'> <a>Ver Todos</a> </Link>
+                <Link to = '/friends'> <a className = {styles.verTodos}>Ver Todos</a> </Link>
             </div>
             <div className = {styles.friendsImages}>
                 {friends.map((element) => 
