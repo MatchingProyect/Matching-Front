@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
-import FriendsContainer from '../../components/friendsContainer/friendsContainer';
+import FriendsContainer from '../../components/friendsContainer/FriendsContainer.jsx';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';

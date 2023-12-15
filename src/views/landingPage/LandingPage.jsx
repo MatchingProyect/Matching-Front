@@ -1,10 +1,14 @@
-import { Container } from '@mui/material'
+import { Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   return (
+    <div>
     <Container sx={ { ..._styled.container } } >
         <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702602441/logoPrincipal_k03wos.svg" alt="Logo Matching" />
-    </Container>
+    </Container>    
+    </div>
+
   )
 }
 

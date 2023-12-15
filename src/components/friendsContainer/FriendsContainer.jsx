@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './friendsContainer.module.css';
+import styles from './FriendsContainer.module.css';
 import { Link } from 'react-router-dom';
 
 
