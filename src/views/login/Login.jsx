@@ -1,16 +1,26 @@
-// Login.jsx
-
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./login.module.css";
 
-const Login = ({ onSubmit }) => {
-  const { handleSubmit, control, formState: { errors } } = useForm();
+const Login = () => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <>
-      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={styles.formContainer}
+        onSubmit={handleSubmit((data) => console.log(data))}
+      >
         <img
           src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
           alt="Logo"
@@ -18,13 +28,14 @@ const Login = ({ onSubmit }) => {
         />
 
         <div className={styles.inputContainer}>
-          <h2 className={styles.h2Title}>Restaurar Contraseña</h2>
+          <h2 className={styles.h2Title}>INICIO DE SESION</h2>
           <div className={styles.contentController}>
-            <label className={`${styles.labels} ${styles.emailLabel}`}>Email</label>
+            <label className={`${styles.labels} ${styles.emailLabel}`}>
+              Email
+            </label>
             <Controller
               name="email"
               control={control}
-              defaultValue=""  // Proporciona un valor inicial aquí
               rules={{
                 required: "Este campo es requerido",
                 pattern: {
@@ -34,20 +45,77 @@ const Login = ({ onSubmit }) => {
               }}
               render={({ field }) => (
                 <>
-                  <input className={styles.inputEmail} type="email" {...field} inputMode="email" />
+                  <input
+                    className={styles.inputEmail}
+                    type="email"
+                    {...field}
+                    inputMode="email"
+                  />
                   {errors.email && <p>{errors.email.message}</p>}
                 </>
               )}
             />
           </div>
-          <button type="submit" className={styles.submitButton}>Enviar Código</button>
+
+          <div className={styles.contentController}>
+            <label className={styles.labelsPass}>Contraseña:</label>
+            <div className={styles.passwordContainer}>
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: "Este campo es requerido",
+                  minLength: {
+                    value: 8,
+                    message: "La contraseña debe tener al menos 8 caracteres",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "La contraseña no debe exceder los 15 caracteres",
+                  },
+                }}
+                render={({ field }) => (
+                  <>
+                    <input
+                      className={styles.inputPass}
+                      type={showPassword ? "text" : "password"}
+                      {...field}
+                    />
+                  </>
+                )}
+              />
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={togglePasswordVisibility}
+              >
+                <img
+                  src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702489357/eye.slash_vthsb6.svg"
+                  alt="Mostrar/Ocultar contraseña"
+                  className={styles.eyeIcon}
+                />
+              </button>
+            </div>
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
         </div>
 
+        <button type="submit" className={styles.submitButton}>
+          INICIAR SESION
+        </button>
+
         <div className={styles.container}>
-          <p className={styles.registerText}>
-            ¿Ya tienes cuenta? <Link to="/">Inicia sesión</Link>
-          </p>
-        </div>
+  <p className={styles.registerText}>
+    ¿No tienes cuenta? <br />
+    <Link to="/registro" className={styles.registerLink}>
+      Regístrate
+    </Link>
+  </p>
+
+  <Link to='/restaurar-contrasenia' className={styles.forgotPasswordText}>
+    ¿Olvidaste tu contraseña?
+  </Link>
+</div>
       </form>
     </>
   );

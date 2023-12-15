@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom"; 
 
+
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,7 @@ const Registro = () => {
 
       <button type="submit">REGISTRARME</button>
 
-      <p>¿Ya tienes cuenta? <Link to="/">Inicia sesión</Link></p>
+      <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
     </form>
   );
 };

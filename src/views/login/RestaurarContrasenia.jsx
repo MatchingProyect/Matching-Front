@@ -50,7 +50,7 @@ const RestaurarContrasenia = ({ onSubmit }) => {
 
         <div className={styles.container}>
           <p className={styles.registerText}>
-            ¿Ya tienes cuenta? <Link to="/">Inicia sesión</Link>
+            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
           </p>
         </div>
       </form>
