@@ -12,6 +12,8 @@ import RestaurarContrasenia from './views/login/RestaurarContrasenia';
 import RestaurarContraseniaCodigo from './views/login/RestaurarContraseniaCodigo.jsx';
 import Profile from './views/profile/Profile.jsx';
 import LandingPage from './views/landingPage/LandingPage.jsx';
+import Historial from './views/historial/Historial.jsx';
+
 import './App.css';
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/profile/historial" element={<Historial />} />
+
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />
         <Route path="/registro" element={<Registro />} />

@@ -1,0 +1,10 @@
+.columnTitles {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+  }
+  
+  .column {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
