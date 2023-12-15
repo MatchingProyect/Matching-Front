@@ -1,0 +1,22 @@
+.containerCard{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+}
+
+.centeredImage {
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+  }
+
+.centeredImage button {
+    border: none  !important;
+    background-color: transparent !important;
+}
+
+.centeredImage button:hover,
+.centeredImage button:focus,
+.centeredImage button:focus-visible{
+    border: none !important;
+    outline: none !important;
+}

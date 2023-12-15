@@ -1,0 +1,67 @@
+.contentLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 47px;
+    margin-top: 47px;
+}
+
+.contentLogo img{
+    width: 90px;
+    height: 47px;
+}
+
+.contentTitle{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.carrousel{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 120px;
+    overflow: scroll;
+}
+
+.carrousel::-webkit-scrollbar{
+    display: none;
+}
+
+.contentQuestions{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pQuestions{
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.contentAnswers{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    margin-top: 17px;
+}
+
+.contentSubmit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 24px;
+}

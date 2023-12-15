@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './Profile.module.css';
+import styles from './profile.module.css';
+// import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
 import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom'

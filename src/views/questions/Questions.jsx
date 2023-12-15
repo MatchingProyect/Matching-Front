@@ -6,15 +6,16 @@ import { useState } from 'react'
 import QuestionTwo from '../../components/questions/QuestionTwo'
 import QuestionThree from '../../components/questions/QuestionThree'
 import QuestionFour from '../../components/questions/QuestionFour'
+import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
 
 const Questions = () => {
 
     const [ count,setCount ] = useState( 1 );
 
     const handleCountQuestion = () => {
-        if( count < 4 ){
+        if( count <= 4 ){
             setCount( count + 1 );
-        }
+        } 
     }
 
     const handleRenderQuestion = () => {
@@ -30,25 +31,33 @@ const Questions = () => {
     }
 
   return (
-    <>
-        <div className={ styles.contentQuestions }>
-            <div id={ styles.contentLogo }>
-                <img id={ styles.logo } src={ logo } alt="Logo matching" />
-            </div>
-            <div className={ styles.contentQuestionInfo}>
-                <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>
-            </div>
-            <div className={ styles.contentBar }>
-                <div className={ styles.bar }>
-                    <div className={ styles.barProgress } />
+    <>  
+        {
+            count < 5 
+            ? (
+                <div className={ styles.contentQuestions }>
+                    <div id={ styles.contentLogo }>
+                        <img id={ styles.logo } src={ logo } alt="Logo matching" />
+                    </div>
+                    <div className={ styles.contentQuestionInfo}>
+                        <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>
+                    </div>
+                    <div className={ styles.contentBar }>
+                        <div className={ styles.bar }>
+                            <div className={ styles.barProgress } />
+                        </div>
+                        <p className={ styles.cuenta }>{ count }/4</p>
+                    </div>
+                    {
+                        handleRenderQuestion()
+                    }
+                    <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
                 </div>
-                <p className={ styles.cuenta }>{ count }/4</p>
-            </div>
-            {
-                handleRenderQuestion()
-            }
-            <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
-        </div>
+            )
+            : (
+                <ProfileSportQuestions />
+            )
+        }
     </>
   )
 }
