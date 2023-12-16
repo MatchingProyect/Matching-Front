@@ -1,0 +1,26 @@
+.statsPerfilDeportDiv{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;    
+    width: 90vw;
+    padding: 2vw;
+    margin: 2vh;  box-shadow: 0 0 10px rgba(0, 0, 0, 0.236); 
+    background-color: white;
+    border-radius: 10px;
+}
+
+.divRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    margin-right: 5vw;
+
+}
+.text{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top:1vh;
+    margin-bottom:1vh;
+}

@@ -4,6 +4,7 @@ import FriendsContainer from '../../components/friendsContainer/FriendsContainer
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
+import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor';
 
 export default function Profile(props) {
     //Info hardcodeada que traeria llamada al back por el user logueado;
@@ -44,6 +45,14 @@ export default function Profile(props) {
                 dayPreference: 'Lunes - Miercoles',
                 timePreference: '7:00 pm - 11:00 pm',
                 categorylvl: 'Rango 4',
+                historial: {
+                    jugadas: 15,
+                    ganadas: 10,
+                    perdidas: 5,
+                    organizadas: 4,
+                    asistencias: 14,
+                    canceladas:1
+                }
             },
             {
                 sport: 'Soccer',
@@ -53,6 +62,14 @@ export default function Profile(props) {
                 dayPreference: 'Lunes - Viernes',
                 timePreference: '6:00 pm - 12:00 pm',
                 categorylvl: 'Rango 7',
+                historial: {
+                    jugadas: 20,
+                    ganadas: 10,
+                    perdidas: 10,
+                    organizadas: 3,
+                    asistencias: 15,
+                    canceladas:2
+                }
             },
             {
                 sport: 'League of Legends',
@@ -62,6 +79,14 @@ export default function Profile(props) {
                 dayPreference: 'Lunes - Domingo',
                 timePreference: 'Todo el dia',
                 categorylvl: 'Challenger 789 PL',
+                historial: {
+                    jugadas: 40,
+                    ganadas: 28,
+                    perdidas: 12,
+                    organizadas: 20,
+                    asistencias: 15,
+                    canceladas:5
+                }
             },
         ],
     };
@@ -111,19 +136,24 @@ export default function Profile(props) {
     //Componente Perfiles Deportivos
     function PerfilesDeportivos(props){
         const { user } = props;
-        const result = user.perfilesDeportivos[0];
-        const [ perfilDepor, setPerfilDepor ] = useState(result);
+        const firstProfile = user.perfilesDeportivos[0];
+        const toRender = user.perfilesDeportivos;
+        const  [ depProfile, setDepProfile ] = useState(firstProfile);
+        const stats = depProfile.historial;
 
-        const handlerDeportProfile = function(event){
-            let infoToRender = event.target.value;
-            let resultado = user.perfilesDeportivos.filter((element) => element.sport == infoToRender);
-            setPerfilDepor(resultado[0]);
-        };
+    function handlerProfileChange (event){
+        let buttonValue = event.target.value;
+        let selectedProfile = toRender.find((element) => element.sport == buttonValue);
+        setDepProfile(selectedProfile);
+    }
 
         return(
             <div className = {styles.perfilesDeportivosContainer}>
-                <div className = {styles.perfilesDivOne}>
-            {user.perfilesDeportivos.map((element) => <div key = {element.sport} className = {styles.sportDiv}><button className = {styles.sportText} value = {element.sport} onClick = {handlerDeportProfile}>{element.sport}</button></div>)}
+                <div className = {styles.divOne}>
+            {toRender.map((element) => <button key = {element.sport} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.sport}>{element.sport}</button>)}
+            </div>
+            <div className = {styles.statsDiv}>
+                <StatsPerfilDepor stats = {stats}/>
             </div>
             <div className = {styles.DivTwo}>
                 <p className = {styles.textOne}>Mis Puntos</p>
@@ -146,27 +176,27 @@ export default function Profile(props) {
                     </div>
                     <div className = {styles.divThreeProfile}>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.laterality}</p>
+                            <p className = {styles.dato}>{depProfile.laterality}</p>
                             <p className = {styles.nombreDelDato}>Lateralidad</p>
                         </div>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.categorylvl}</p>
+                            <p className = {styles.dato}>{depProfile.categorylvl}</p>
                             <p className = {styles.nombreDelDato}>Categoria</p>
                         </div>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.courtSide}</p>
+                            <p className = {styles.dato}>{depProfile.courtSide}</p>
                             <p className = {styles.nombreDelDato}>Posicion</p>
                         </div>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.dayPreference}</p>
+                            <p className = {styles.dato}>{depProfile.dayPreference}</p>
                             <p className = {styles.nombreDelDato}>Dia Preferido</p>
                         </div>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.matchType}</p>
+                            <p className = {styles.dato}>{depProfile.matchType}</p>
                             <p className = {styles.nombreDelDato}>Tipo de partida</p>
                         </div>
                         <div className = {styles.info}>
-                            <p className = {styles.dato}>{perfilDepor.timePreference}</p>
+                            <p className = {styles.dato}>{depProfile.timePreference}</p>
                             <p className = {styles.nombreDelDato}>Hora Preferida</p>
                         </div>
                     </div>

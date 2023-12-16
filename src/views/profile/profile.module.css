@@ -155,30 +155,34 @@
   justify-content: space-between;
   align-items: center; 
 }
-.perfilesDivOne{
+.divOne{
   display: flex;
   flex-direction: row;
+  width: 93vw;
   justify-content: center;
-  align-items: center; 
-
+  align-items: center;
 }
-.sportDiv{
-  background-color: none;
+
+/* Este es el Btn */
+.sportText{
+  text-align: top;
   padding: 2ch;
-  height: 10vh;
-  border-style: solid;
+  height: 60px;
+  width: 30%;
+  font-size: 13px;
+  font-weight: 600;
   border-radius: 10px;
+  margin: 10px;
   border-width: 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.236); 
-  margin: 10px;
-  background-color: white;
-}
-
-.sportText{
-  text-align: center;
-  font-size: 15px;
   background-color: white;
   border: none;
+  cursor: pointer;
+}
+.statsDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .DivTwo{
