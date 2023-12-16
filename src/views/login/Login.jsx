@@ -95,8 +95,8 @@ const Login = () => {
                   className={styles.eyeIcon}
                 />
               </button>
-            </div>
             {errors.password && <p>{errors.password.message}</p>}
+            </div>
           </div>
         </div>
 

@@ -19,6 +19,9 @@ const RestaurarContrasenia = ({ onSubmit }) => {
 
         <div className={styles.inputContainer}>
           <h2 className={styles.h2Title}>Restaurar Contraseña</h2>
+          <div className={ styles.contentInfoRestPass }>
+            <p className={ styles.infoRestPass } >Introduce tu email y te enviaremos un codigo para que restaures tu contraseña</p>
+          </div>
           <div className={styles.contentController}>
             <label className={`${styles.labels} ${styles.emailLabel}`}>Email</label>
             <Controller
@@ -41,16 +44,16 @@ const RestaurarContrasenia = ({ onSubmit }) => {
           </div>
 
           {/* Utiliza Link en lugar del botón submit */}
-          <Link to="/restaurar-contrasenia-codigo">
+          <Link className={ styles.sentCode } to="/restaurar-contrasenia-codigo">
             <button type="submit" className={styles.submitButton}>
               Enviar Código
             </button>
           </Link>
         </div>
 
-        <div className={styles.container}>
+        <div className={styles.containerSendCode }>
           <p className={styles.registerText}>
-            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+            ¿Ya tienes cuenta? <Link className={ styles.loginSendCode } to="/login">Inicia sesión</Link>
           </p>
         </div>
       </form>

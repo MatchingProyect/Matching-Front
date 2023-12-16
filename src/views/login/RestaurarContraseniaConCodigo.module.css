@@ -1,0 +1,106 @@
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #203144;
+}
+
+.logo{
+    margin-top: 95px;
+    width: 294px;
+    height: 70px;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin-top: 30px;
+}
+
+.h2Title{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.pharapRestPass{
+    width: 389px;
+    height: 48px;
+    margin-top: 41px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.contentController{
+    width: 388px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.labels{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.inputField{
+    height: 55px;
+    border-radius: 10px;
+    outline: transparent;
+    padding: 13px 19px 13px 19px;
+    gap: 174px;
+    color: #203144;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.inputPass{
+    margin-top: 8px;
+    height: 55px;
+    border-radius: 10px;
+    outline: transparent;
+    padding: 13px 19px 13px 19px;
+    gap: 174px;
+    color: #203144;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.submitButton{
+    margin-top: 24px;
+    height: 50px;
+    width: 388px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+.submitButton:nth-child(2n){
+    background-color: #0075F8;
+    border: transparent;
+}
+
+.container{
+    display: flex;
+    width: 388px;
+    margin-top: 24px;
+    font-size: 16px;
+}
+
+.registerText{
+    color: white;
+    font-weight: 400;
+}
+
+.linkSesion{
+    font-weight: 700;
+    color: #0075F8;
+}

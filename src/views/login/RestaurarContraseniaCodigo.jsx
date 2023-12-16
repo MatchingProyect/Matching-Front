@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
-import styles from "./login.module.css";
+import styles from "./RestaurarContraseniaConCodigo.module.css";
 
 const RestaurarContraseniaCodigo = ({ onSubmit }) => {
   const { handleSubmit, control, formState: { errors } } = useForm();
@@ -16,8 +16,8 @@ const RestaurarContraseniaCodigo = ({ onSubmit }) => {
         />
 
         <div className={styles.inputContainer}>
-          <h2 className={styles.h2Title}>Restaurar Contraseña</h2>
-          <p>Introduce el código que enviamos a tu email y elige una nueva contraseña.</p>
+          <h2 className={styles.h2Title}>RESTAURAR CONTRASEÑA</h2>
+          <p className={ styles.pharapRestPass } >Introduce el código que enviamos a tu email y elige una nueva contraseña.</p>
           <div className={styles.contentController}>
             <label className={styles.labels}>Código de Verificación</label>
             <Controller
@@ -60,13 +60,13 @@ const RestaurarContraseniaCodigo = ({ onSubmit }) => {
               )}
             />
           </div>
-          <button type="submit" className={styles.submitButton}>Restaurar Contraseña</button>
-          <button type="button" className={styles.submitButton}>Reenviar Código</button>
+          <button type="submit" className={styles.submitButton}>RESTAURAR CONTRASEÑA</button>
+          <button type="button" className={styles.submitButton}>REENVIAR CODIGO</button>
         </div>
 
         <div className={styles.container}>
           <p className={styles.registerText}>
-            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+            ¿Ya tienes cuenta? <Link className={ styles.linkSesion } to="/login">Inicia sesión</Link>
           </p>
         </div>
       </form>
