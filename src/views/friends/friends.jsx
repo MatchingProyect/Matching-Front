@@ -68,7 +68,7 @@ export default function Friends(){
         <div className={styles.containerFriends}>
             <div className={styles.containerTitle}>
                 <div className={styles.containerTitleImg}>
-                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" />
+                    <Link to = '/profile'><img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" /></Link>
                 </div>
                 <div className={styles.containerTitleText}>
                     <h2>Amigos</h2>

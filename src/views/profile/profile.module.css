@@ -1,16 +1,17 @@
 .completeComponent {
   background-color: #F9F9F9;
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
+  justify-content: space-between;
+  padding: 20px 20px;
   width: 100vw;
   height: 100vh;
 }
 
 .divButtons {
-  position: sticky;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -19,21 +20,18 @@
 }
 
 .divButtons1 {
-  position: relative;
   width: 38vw;
   height: 52px;
   background-color: none;
 }
 
 .divButtons2 {
-  position: relative;
   width: 38vw;
   height: 52px;
   background-color: none;
 }
 
 .miPerfilBtn{
-  position: relative;
   background-color: #F9F9F9;
   color: black;
   background-color: none;
@@ -47,7 +45,6 @@
 }
 
 .perfilDeportivoBtn{
-  position: relative;
   background-color: #F9F9F9;
   color: black;
   background-color: none;
@@ -65,12 +62,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center; 
+
 }
 
 .divOneProfile {
-  position: relative;
   background-color: white;
   max-width: 95%;
   height: auto;
@@ -78,7 +75,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 95vw;
+  width: 90vw;
   margin-bottom: 20px;
   border-radius: 15px;
   padding-top: 1.5%;
@@ -90,13 +87,14 @@
 .name {
   color: black;
   font-size: 25px;
+  font-weight: 500;
   margin-top:5px;
   margin-bottom:5px;
 }
 
 .divTwoProfile {
   position: relative;
-  width: 91vw;
+  width: 90vw;
 }
 
 .description {
@@ -114,6 +112,7 @@
   border-radius: 50%;
   border-style: solid;
   border: 2px solid transparent; 
+  border-color: black;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274); 
 }
 
@@ -145,4 +144,82 @@
 .nombreDelDato {
   position: relative;
   margin-right: 5px;
+}
+
+/* CSS Para el componente Perfiles deportivos */
+
+.perfilesDeportivosContainer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; 
+}
+.perfilesDivOne{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+
+}
+.sportDiv{
+  background-color: none;
+  padding: 2ch;
+  height: 10vh;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 0px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.236); 
+  margin: 10px;
+  background-color: white;
+}
+
+.sportText{
+  text-align: center;
+  font-size: 15px;
+  background-color: white;
+  border: none;
+}
+
+.DivTwo{
+  width: 90vw;
+}
+
+.pointsContainer{
+  height: 5vh;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textOne{
+  margin-left: 1%;
+  color: blue;
+  font-weight: 500;
+}
+
+.pointsBtn{
+  position: relative;
+  height: 5vh;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: white;
+  background-color: rgba(0, 0, 255, 0.758);
+  border-radius: 5px;
+  font-weight: 500;
+  border-style: solid;
+  border-width: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.236); 
+  
+}
+.divThree{
+  margin-top: 5%;
+}
+
+.divThree2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
 }

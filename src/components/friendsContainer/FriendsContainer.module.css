@@ -1,12 +1,12 @@
 .friendsContainer{
-    background-color: #ffffff;
+    background-color: #F9F9F9;
     position: relative;
-    border-style: solid;
+    /* border-style: solid; */
     border-radius: 10px;
-    border-color: black;
     min-width: 90vw;
+    /* border-color: black;
     border: 2px solid transparent; 
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274); 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274);  */
 }
 
 .infoGeneral{
@@ -18,7 +18,7 @@
 
 .text1 {
     color: black;
-    font-size: 13px;
+    font-size: 15px;
     margin: 4px;
 }
 

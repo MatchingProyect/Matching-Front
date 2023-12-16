@@ -21,12 +21,12 @@ export default function FriendsContainer({friends}){
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
                 <p className = {styles.text1}>Amigos: {friends.length}</p>
-                <Link to = '/friends'> <a className = {styles.verTodos}>Ver Todos</a> </Link>
+                <Link to = '/friends'> <p className = {styles.verTodos}>Ver Todos</p> </Link>
             </div>
             <div className = {styles.friendsImages}>
                 {friends.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
-                    <img className = {styles.friendImg} src = {element.image} alt = {element.name} key = {element.name}/>
+                    <img className = {styles.friendImg} src = {element.image} alt = {element.name} />
                     {estadoAvailable(element.isAvailable)}
                 </div>
                 )}

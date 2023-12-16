@@ -13,6 +13,9 @@ import RestaurarContraseniaCodigo from './views/login/RestaurarContraseniaCodigo
 import Profile from './views/profile/Profile.jsx';
 import LandingPage from './views/landingPage/LandingPage.jsx';
 import Historial from './views/historial/Historial.jsx';
+import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
+import Error from './views/error/Error.jsx';
+import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 
 import './App.css';
 
@@ -38,13 +41,15 @@ function App() {
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
-
+        <Route path="/profile/canjearPuntos" element = {<CanjearPuntos />}/>
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />
         <Route path="/registro" element={<Registro />} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
+        <Route path = "*" element = {<Error />} />
       </Routes>
     </div>
   );

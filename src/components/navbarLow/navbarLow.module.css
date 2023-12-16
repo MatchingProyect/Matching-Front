@@ -1,6 +1,9 @@
 .containerNavbar{
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    min-height: 70px;
+    min-width: 80vw;
 }
 .icon{
     color: aqua;
