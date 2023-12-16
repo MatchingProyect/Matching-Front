@@ -64,7 +64,7 @@ const ProfileSportQuestions = () => {
                 <p className={ styles.pQuestions } >¿Horario de juego preferido?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
-                        <InputLabel id='selectHorario' >Horario</InputLabel>
+                        <InputLabel sx={ { ..._styled.inputLabel } } id='selectHorario' >Horario</InputLabel>
                         <Select sx={ { ..._styled.select } } name={ 'horario' } onChange={ handleChange } value={ valuesSelect.horario } labelId='selectHorario' label='Selecciona'>
                             <MenuItem value={ 'Mañana' } >Mañana</MenuItem>
                             <MenuItem value={ 'Tarde' } >Tarde</MenuItem>
@@ -75,7 +75,7 @@ const ProfileSportQuestions = () => {
                 <p className={ styles.pQuestions } >¿Que dias prefieres para jugar?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
-                        <InputLabel id='selectDias' >Dias</InputLabel>
+                        <InputLabel sx={ { ..._styled.inputLabel } } id='selectDias' >Dias</InputLabel>
                         <Select sx={ { ..._styled.select } } name={ 'dias' } onChange={ handleChange } value={ valuesSelect.dias } labelId='selectDias' label='Selecciona'>
                             <MenuItem value={ 'Entre semana' } >Entre semana</MenuItem>
                             <MenuItem value={ 'Fines de semana' } >Fines de semana</MenuItem>
@@ -119,6 +119,9 @@ const _styled = {
         fontSize: '20px',
         fontFamily: 'Poppins',
         fontWeight: '600',
+    },
+    inputLabel: {
+        color: '#676666'
     }
 }
 

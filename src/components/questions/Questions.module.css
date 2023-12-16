@@ -9,6 +9,7 @@
     font-weight: 700;
     line-height: 30px;
     margin-left: 20px;
+    color: white;
 }
 
 .contentOptions{
@@ -49,6 +50,7 @@
     font-family: 'Poppins', sans-serif;
     background-color: transparent;
     border: 1px solid white;
+    color: white;
 }
 
 .contentFormLocation{
@@ -88,7 +90,12 @@
 }
 
 .labelArea{
+    color: white;
     margin-left: 6px;
+}
+
+.labelNumber{
+    color: white;
 }
 
 .inputArea{
@@ -119,6 +126,7 @@
 
 .subtitleQuestion{
     margin-top: 20px;
+    color: white;
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
