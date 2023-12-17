@@ -1,0 +1,27 @@
+.container{
+    background-color: #F9F9F9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px 20px;
+    color: #333333;
+}
+
+.containerTitle{
+    display: flex;
+    color: #203144;
+    align-items: center;
+}
+.containerTitleImg{
+    min-width: 14px;
+}
+
+.containerTitleText {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+}
