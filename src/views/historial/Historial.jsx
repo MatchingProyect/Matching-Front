@@ -6,7 +6,7 @@ import NavbarLow from '../../components/navbarLow/navbarLow';
 export default function Historial(){
     const historial = [
         {
-            fecha: "12/12",
+            fecha: "16/12",
             hora: "15:00", 
             equipo: ["diego", "jose", "maria"],
             resultado:[ "4-5", "6-7", "8-9"],
