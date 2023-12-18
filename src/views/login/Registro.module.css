@@ -1,0 +1,64 @@
+.formContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #203144;
+}
+
+.contentLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+}
+
+.logo {
+    height: 100%;
+}
+
+.contentDatas{
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    width: 385px;
+    justify-content: space-between;
+}
+
+.labelsDatas{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.inputsDatas{
+    height: 55px;
+    border-radius: 10px;
+    outline: transparent;
+    padding-left: 13px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.containerPs{
+    width: 388px;
+    margin-top: 24px;
+}
+
+.pRegister{
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
+.pLogin{
+    color: #0075F8;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 8px;
+}
