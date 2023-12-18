@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./login.module.css";
+import { Button } from "@mui/material";
+import styled from "@emotion/styled";
 
 const Login = () => {
   const {
@@ -104,6 +106,8 @@ const Login = () => {
           INICIAR SESION
         </button>
 
+        <Button sx={ { ..._styled.signWithGoogle} }>INICIAR SESION CON GOOGLE</Button>
+
         <div className={styles.container}>
   <p className={styles.registerText}>
     ¿No tienes cuenta? <br />
@@ -120,5 +124,11 @@ const Login = () => {
     </>
   );
 };
+
+const _styled = {
+  signWithGoogle: {
+    marginTop: '15px',
+  }
+}
 
 export default Login;

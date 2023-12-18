@@ -132,7 +132,7 @@
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 499px;
+  top: 475px;
   right: 10px;
   transform: translateY(-50%);
   padding: 0;
@@ -345,14 +345,6 @@
   margin-top: 46px;
   color: white;
   font-size: 16px;
-}
-
-.errors{
-  color: red;
-}
-
-.errorsPass{
-  color: red;
 }
 
 @media only screen and (max-width: 768px) {
