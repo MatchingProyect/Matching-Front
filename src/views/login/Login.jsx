@@ -28,7 +28,9 @@ const Login = () => {
         />
 
         <div className={styles.inputContainer}>
-          <h2 className={styles.h2Title}>INICIO DE SESION</h2>
+          <div className={ styles.containerTitleLogin }>
+            <h2 className={ styles.titleLogin } >INICIO DE SESION</h2>
+          </div>
           <div className={styles.contentController}>
             <label className={`${styles.labels} ${styles.emailLabel}`}>
               Email
@@ -59,7 +61,6 @@ const Login = () => {
 
           <div className={styles.contentController}>
             <label className={styles.labelsPass}>Contraseña:</label>
-            <div className={styles.passwordContainer}>
               <Controller
                 name="password"
                 control={control}
@@ -95,9 +96,8 @@ const Login = () => {
                   className={styles.eyeIcon}
                 />
               </button>
-            {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && <p className={ styles.pPass }>{errors.password.message}</p>}
             </div>
-          </div>
         </div>
 
         <button type="submit" className={styles.submitButton}>
