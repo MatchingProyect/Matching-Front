@@ -23,42 +23,54 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action)=>{
         state.allLocations = action.payload
+       },
+       setProfiles: (state, action) =>{
+        state.allProfiles = action.payload
        }
     }
 })
 
+export const fetchProfiles = ()=>async(dispatch)=>{
+    try {
+         const {data} = await axios('/profiles')
+        if(data.status) dispatch(setProfiles(data.allProfiles))
+    } catch (error) {
+        throw error.message
+    }
+}
+
 export const fetchUsers = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('http://localhost:3000/users')
-        // if(data.status) dispatch(setUsers(data.allUsers))
+         const {data} = await axios('/users')
+        if(data.status) dispatch(setUsers(data.allUsers))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchSports = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('http://localhost:3000/sports')
-        // if(data.status) dispatch(setSports(data.allSports))
+        const {data} = await axios('/sports')
+        if(data.status) dispatch(setSports(data.allSports))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchLocations = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('http://localhost:3000/locations')
-        // if(data.status) dispatch(setLocations(data.allLocations))
+        const {data} = await axios('/locations')
+        if(data.status) dispatch(setLocations(data.allLocations))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchClubs = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('http://localhost:3000/clubs')
-        // if(data.status) dispatch(setClubs(data.allClubs))
+         const {data} = await axios('/clubs')
+         if(data.status) dispatch(setClubs(data.allClubs))
     } catch (error) {
         throw error.message
     }
 }
 
-export const { setClubs, setLocations, setUsers, setSports } = userSlice.actions;
+export const { setClubs, setLocations, setUsers, setSports, setProfiles } = userSlice.actions;
 export default userSlice.reducer;
