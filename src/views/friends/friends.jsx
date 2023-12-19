@@ -39,6 +39,18 @@ export default function Friends(){
             name: "ferred",
             games: 3
         },
+        {
+            name: "aaa",
+            games: 0
+        },
+        {
+            name: "ssss",
+            games: 0
+        },
+        {
+            name: "qqq",
+            games: 3
+        },
       ]
 
     const [name, setName] = useState('');
@@ -71,7 +83,7 @@ export default function Friends(){
                     <Link to = '/profile'><img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" /></Link>
                 </div>
                 <div className={styles.containerTitleText}>
-                    <h2>Amigos</h2>
+                    <p>Amigos</p>
                 </div>
             </div>
 
@@ -80,7 +92,7 @@ export default function Friends(){
                     <button type='button' onClick={handleSubmit}>
                         <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507247/icono-search_qd0ndi.svg" } alt="Search" />
                     </button>
-                    <input type="text" placeholder='Buscar por nombre o correo' value={name} onChange={handleChange} />
+                    <input className={styles.searchInput} type="text" placeholder='Buscar por nombre o correo' value={name} onChange={handleChange} />
                 </form>
             </div>
 
@@ -104,7 +116,7 @@ export default function Friends(){
 
             <NavbarLow></NavbarLow>
 
-            {showOptions && <OptionsFriends name={name} />}
+            {showOptions && <OptionsFriends name={name} setShowOptions={setShowOptions} showOptions={showOptions}/>}
         </div>
     )
 } 

@@ -16,6 +16,7 @@ import Historial from './views/historial/Historial.jsx';
 import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
+import HistorialActividad from './views/historial/HistorialActividad/HistorialActividad.jsx';
 import './App.css';
 import UserDetail from './views/userDetail/UserDetail.jsx';
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
+        <Route path="/profile/historial/actividad" element={<HistorialActividad />} />
         <Route path="/profile/canjearPuntos" element = {<CanjearPuntos />}/>
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />

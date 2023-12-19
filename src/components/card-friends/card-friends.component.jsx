@@ -13,7 +13,7 @@ function CardFriends({friend, index, onClick}) {
   return (
     <div>
         <ListItem alignItems="flex-start"  sx={{
-            backgroundColor: index % 2 === 0 ? 'white' : '#F3F3F3', 
+            backgroundColor: index % 2 === 0 ? 'white' : '#F3F3F3', padding: '0px'
           }}>
             <div className={styles.containerCard}>
               <ListItemAvatar>
@@ -31,7 +31,7 @@ function CardFriends({friend, index, onClick}) {
                     >
                     </Typography>
                     {
-                      friend.games.length>0 ? `(${friend.games} partidos juntos)`: `(No tienes partidos con ${friend.name})`
+                      friend.games>0 ? `(${friend.games} partidos juntos)`: `(No tienes partidos con ${friend.name})`
                     }
                   </React.Fragment>
                 }

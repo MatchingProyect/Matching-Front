@@ -69,13 +69,17 @@ export default function EditDepor(){
                     <Link to = '/profile'><img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" /></Link>
                 </div>
                 <div className={styles.containerTitleText}>
-                    <h2>Editar mis preferencias</h2>
+                    <p>Editar mis preferencias</p>
                 </div>
             </div>
 
             <CardsEditPref preferencias ={preferencias} ></CardsEditPref>
 
+            <div className={styles.containerButtons}>
+                <button className={styles.saveButton}> Guardar </button>
+                <button className={styles.cancelButton}> Cancelar</button>
 
+            </div>
 
 
             <NavbarLow></NavbarLow>

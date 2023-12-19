@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export default function CardsFriends({friends, onCardClick}) {
   
   return (
-    <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper', padding:'0' }}>
         {
         friends?.map((friend, index) => (
           <CardFriends key={friend.name} friend={friend} index={index}           onClick={onCardClick}

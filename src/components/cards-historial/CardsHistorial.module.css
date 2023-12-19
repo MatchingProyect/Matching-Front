@@ -1,10 +1,27 @@
+
+.containerCards{
+  min-height: 678px !important;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
 .columnTitles {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); 
-  }
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  text-align: center;
+  align-items: center;
+  background-color: white;
+  gap: 4px;
+  margin-bottom: 10px;
+}
   
-  .column {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-  }
+.column {
+  font-size: 14px !important;
+  font-family: "Inter", sans-serif;
+  padding: 10px 0px;
+} 
+
+.column:not(:last-child) {
+  border-right: 1px solid #DDDDDD;
+}
