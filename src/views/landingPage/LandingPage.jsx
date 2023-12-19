@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const LandingPage = () => {
   return (
     <div>
-    <Link to = './friends'>
+    <Link to = './login'>
       <Container sx={ { ..._styled.container } } >
           <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702602441/logoPrincipal_k03wos.svg" alt="Logo Matching" />
       </Container>    

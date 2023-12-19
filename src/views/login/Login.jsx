@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./login.module.css";
+import { Button } from "@mui/material";
 
 const Login = () => {
   const {
@@ -28,7 +29,9 @@ const Login = () => {
         />
 
         <div className={styles.inputContainer}>
-          <h2 className={styles.h2Title}>INICIO DE SESION</h2>
+          <div className={ styles.containerTitleLogin }>
+            <h2 className={ styles.titleLogin } >INICIO DE SESION</h2>
+          </div>
           <div className={styles.contentController}>
             <label className={`${styles.labels} ${styles.emailLabel}`}>
               Email
@@ -59,7 +62,6 @@ const Login = () => {
 
           <div className={styles.contentController}>
             <label className={styles.labelsPass}>Contraseña:</label>
-            <div className={styles.passwordContainer}>
               <Controller
                 name="password"
                 control={control}
@@ -95,14 +97,15 @@ const Login = () => {
                   className={styles.eyeIcon}
                 />
               </button>
-            {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && <p className={ styles.pPass }>{errors.password.message}</p>}
             </div>
-          </div>
         </div>
 
         <button type="submit" className={styles.submitButton}>
           INICIAR SESION
         </button>
+
+        <Button sx={ { ..._styled.signWithGoogle} }>INICIAR SESION CON GOOGLE</Button>
 
         <div className={styles.container}>
   <p className={styles.registerText}>
@@ -120,5 +123,11 @@ const Login = () => {
     </>
   );
 };
+
+const _styled = {
+  signWithGoogle: {
+    marginTop: '15px',
+  }
+}
 
 export default Login;
