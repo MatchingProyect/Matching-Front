@@ -1,0 +1,58 @@
+.profileEditHoleContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.divOne{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;;
+}
+.return{
+position: relative;
+left:3vw;
+top:4vh;
+width: 20px;
+height: 20px;
+color: white;
+margin-top: -8px;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 26px;
+    margin-top: 5px;
+
+}
+
+.divTwo{
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    background-color: none;
+}

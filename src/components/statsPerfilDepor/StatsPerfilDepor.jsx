@@ -3,7 +3,6 @@ import styles from './StatsPerfilDepor.module.css';
 
 export default function StatsPerfilDepor(props){
     const { stats } = props;
-    console.log(stats);
     return(
         <div className = {styles.statsPerfilDeportDiv}>
             <div className = {styles.divRow}>

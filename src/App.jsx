@@ -16,7 +16,6 @@ import Historial from './views/historial/Historial.jsx';
 import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
-
 import './App.css';
 
 function App() {

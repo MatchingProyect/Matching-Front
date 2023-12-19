@@ -26,7 +26,7 @@ export default function FriendsContainer({friends}){
             <div className = {styles.friendsImages}>
                 {friends.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
-                    <img className = {styles.friendImg} src = {element.image} alt = {element.name} />
+                    <img className = {styles.friendImg} src = {element.image} alt = {element.name}/>
                     {estadoAvailable(element.isAvailable)}
                 </div>
                 )}

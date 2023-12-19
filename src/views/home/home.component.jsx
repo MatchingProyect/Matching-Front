@@ -4,6 +4,7 @@ import CardUser from '../cardUsers/CardUser';
 import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import CardLocation from '../cardLocations/CardLocation';
+
 export default function Home({sports, clubs, locations, users}) {
     return(
         <>
