@@ -2,7 +2,7 @@
     background-color: #F9F9F9;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100vw;
     height: 100vh;
     padding: 20px 20px;
@@ -21,7 +21,7 @@
 .containerTitleText {
     width: 100%;
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: 16px;    
     display: flex;
     justify-content: center;
 }
@@ -42,19 +42,20 @@
     flex-direction: row;
 }
 
-.searchBar input {
+.searchInput {
     color: #203144;
+    width: 100%;
+    background-color: white;
+    border: none !important;
+    outline: none !important;
 }
 
 .searchBar button {
     background-color: white;
+    border: transparent;
+    margin-right: 10px;
 }
 
-.searchBar input {
-    width: 100%;
-    background-color: white;
-    border: none;
-}
 
 .filterFriends{
     width: 100%;
@@ -70,7 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start; 
-    margin: 0 30px;
+    margin: 0 10px;
     color: #203144;
 }
 .flexContainer img{

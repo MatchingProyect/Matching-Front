@@ -1,21 +1,33 @@
 
-.containerOptions {
-    padding: 16px, 10px, 32px, 10px;
+.containerFriends{
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999;
+    display: flex;
+    align-items: flex-end;
+}
+.contentOptions {
+    padding: 16px 10px 32px 10px;
     width: 100%;
     border: 1px solid white;
     border-radius: 8px 8px 0px 0px;
     background-color: white;
-}
+  }
 
 
 .options {
     display: flex;
-    padding: 4px, 10px, 4px, 10px
+    padding: 4px 10px;
 }
 
 .optionsImg{
     background-color: #F3F3F3;
     min-width: 44px;
+    min-height: 44px;
     border-radius: 29px;
     display: flex;
     align-items: center;
@@ -38,5 +50,4 @@
 .optionsDescription {
     display: flex;
     flex-direction: column;
-    padding: 0px, 10px, 0px, 10px;
 }
