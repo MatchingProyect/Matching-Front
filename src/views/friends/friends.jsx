@@ -58,8 +58,6 @@ export default function Friends(){
 
     const handleCardClick = (friendName) => {
         setName(friendName);
-        console.log("trueee")
-
         setShowOptions(true); 
       };
 

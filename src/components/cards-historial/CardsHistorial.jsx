@@ -7,21 +7,21 @@ import styles from './CardsHistorial.module.css';
 export default function CardsHistorial({historial}) {
   
   return (
+    <div className={styles.containerCards}>
+      <List sx={{ width: '100%', padding: '0px' }}>
+          <div className={styles.columnTitles}>
+            <Typography variant="subtitle1" className={styles.column}>Fecha hs.</Typography>
+            <Typography variant="subtitle1" className={styles.column}>Club</Typography>
+            <Typography variant="subtitle1" className={styles.column}>Equipo</Typography>
+            <Typography variant="subtitle1" className={styles.column}>Resultados</Typography>
+            <Typography variant="subtitle1" className={styles.column}>Más</Typography>
 
-    <List sx={{ width: '100%', maxWidth: 460, bgcolor: 'background.paper' }}>
-        <div className={styles.columnTitles}>
-          <Typography variant="subtitle1" className={styles.column}>Fecha</Typography>
-          <Typography variant="subtitle1" className={styles.column}>hs.</Typography>
-          <Typography variant="subtitle1" className={styles.column}>Club</Typography>
-          <Typography variant="subtitle1" className={styles.column}>Equipo</Typography>
-          <Typography variant="subtitle1" className={styles.column}>Resultados</Typography>
-          <Typography variant="subtitle1" className={styles.column}>Más</Typography>
-
-        </div>
-        {historial?.map((game, index) => (
-          <CardHistorial key={game.name} game={game} index={index}></CardHistorial>
-        ))}
-    </List>
+          </div>
+          {historial?.map((game, index) => (
+            <CardHistorial key={game.name} game={game} index={index}></CardHistorial>
+          ))}
+      </List>
+    </div>
   );
 }
 

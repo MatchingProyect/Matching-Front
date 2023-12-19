@@ -1,14 +1,26 @@
 
+
 .containerPref{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: white;
     border-radius: 10px;
     border: 2px solid transparent;  
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    padding: 5px 6px;
+    padding: 10px 12px;
     margin: 4px 0;
 } 
 
+.customContainer{
+    min-width: 47px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.customSelect :focus{
+    background-color: white !important;
+
+}

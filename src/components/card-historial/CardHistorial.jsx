@@ -11,71 +11,61 @@ import styles from './CardHistorial.module.css';
 function CardHistorial({game, index }) {
 
   return (
-    <div>
+    <div className={styles.listHistorial} >
         <ListItem alignItems="flex-start"  sx={{
             backgroundColor: index % 2 === 0 ? 'white' : '#F3F3F3', 
           }}>
             <div className={styles.containerCard}>
-              <ListItemText
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                    </Typography>
-                    {game.fecha}
-                  </React.Fragment>
-                }
-              />
-               <ListItemText
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                    </Typography>
-                      {game.hora}
-                  </React.Fragment>
-                }
-              />
-              <ListItemAvatar>
-                <Avatar alt="Club" src="" />
-              </ListItemAvatar>
+              <div className={styles.dateText}>
+                <ListItemText
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                      </Typography>
+                      {game.fecha}
+                    </React.Fragment>
+                  }
+                />
+              </div>
+              <div className={styles.dateAvatar}>
+                <ListItemAvatar>
+                    <Avatar alt="Club" src="" className={styles.avatar}/>
+                </ListItemAvatar>
+              </div>               
+             
 
-              <ListItemAvatar>
-                <Avatar alt="Travis Howard" src="" />
-              </ListItemAvatar>
-              
-              <ListItemText
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                    </Typography>
-                    {
-                      game.resultado
-                    }
-                  
-                  </React.Fragment>
-                }
-              />
+              <div className={styles.dateAvatarGroup}>
+                {game.equipo.map((jugador, index) => (
+                    <Avatar key={index} alt={jugador} src={`/static/images/avatar/${index + 1}.jpg`} className={styles.avatar} />
+                  ))}
+              </div>       
+    
+              <div className={styles.dateText}>
+                <ListItemText
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                      </Typography>
+                      <p>{game.resultado}</p>
+                      
+                    
+                    </React.Fragment>
+                  }
+                />
+              </div>
+             
 
               <div className={styles.centeredImage}>
                 <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507668/icon-park_more_m9dh5t.svg" } alt="Options" />
               </div>
-
-
-
 
             </div>
 

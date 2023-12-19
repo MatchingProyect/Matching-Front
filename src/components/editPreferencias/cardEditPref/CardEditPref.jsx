@@ -10,7 +10,7 @@ function CardEditPref({preferencia}) {
     const iconArrowLow = "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702836674/arrowLow_szgc1l.svg"
     const iconArrowUp= " https://res.cloudinary.com/dbffmtz0y/image/upload/v1702836674/arrowUp_r09eic.svg"
 
-   
+   console.log(preferencia)
     const [age, setAge] = useState('');
     const [open, setOpen] = useState(false);
 
@@ -29,15 +29,15 @@ function CardEditPref({preferencia}) {
   return (
     <div className={styles.containerPref}>
         <div>
-            <img src={preferencia.logo} alt="Options" />
+            <img src={preferencia.logo} alt="a" />
         </div>
         
         <div>
             <p>{preferencia.name}</p>
         </div>
 
-        <div  className={styles.customContainer}>
-            <FormControl className={styles.customSelect} sx={{ m: 1, minWidth: 120}}>
+        <div className={styles.customContainer}>
+            <FormControl className={styles.customSelect} sx={{ m: 1, position: 'relative' }}>
                 <Select
                     value={age}
                     onChange={handleChange}
@@ -49,23 +49,27 @@ function CardEditPref({preferencia}) {
                     onOpen={handleOpen}
                     variant="standard" 
                     sx={{
-                        border: 'none',
-                        '&:before': {
+                      border: 'none',
+                      '&:before': {
                           borderBottom: 'none', 
-                        },
-                        '&:after': {
+                          outline: 'none',
+                      },
+                      '&:after': {
                           borderBottom: 'none', 
-                        },
-                      }}                
-                >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+
+                      }
+
+                    }}                  
+                  >
+                  {preferencia.options.map((option) => (
+                      <MenuItem key={option.value} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+
                 </Select>
             </FormControl>
+
         </div>
     </div>
   );

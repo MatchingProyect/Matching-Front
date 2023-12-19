@@ -7,6 +7,8 @@
     height: 100vh;
     padding: 20px 20px;
     color: #333333;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .containerTitle{
@@ -20,8 +22,48 @@
 
 .containerTitleText {
     width: 100%;
-    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     display: flex;
     justify-content: center;
+}
+
+
+
+.containerButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.saveButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0075F8;
+    padding: 2px 47px;
+    border: 1px #0075F8 solid; 
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: 50px;
+
+}
+
+.cancelButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 47px;
+    border: 1px #0075F8 solid !important; 
+    border-radius: 10px;
+    color: #0075F8;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    min-height: 50px;
+
 }

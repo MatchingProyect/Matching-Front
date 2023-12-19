@@ -8,20 +8,15 @@ export default function OptionsFriends({name, setShowOptions, showOptions}){
     const [hasRendered, setHasRendered] = useState(false);
 
     useEffect(() => {
-      // Evitar que la función se ejecute en el primer renderizado
+
       if (!hasRendered) {
         setHasRendered(true);
         return;
       }
   
       const handleClick = (event) => {
-        const optionsContainer = document.getElementById('optionsFriendsContainer');
-        console.log(event.target);
-        console.log(optionsContainer == true);
-        console.log(showOptions);
-  
-        if (optionsContainer && !optionsContainer.contains(event.target) && showOptions) {
-          console.log("falseee");
+        const contentContainer = document.getElementById('contentFriendsContainer');  
+        if (!contentContainer.contains(event.target) && showOptions) {
           setShowOptions(false);
         }
       };
@@ -35,7 +30,7 @@ export default function OptionsFriends({name, setShowOptions, showOptions}){
   
     return(
         <div id="optionsFriendsContainer" className={styles.containerFriends}>
-            <div className={styles.contentOptions}>
+            <div id="contentFriendsContainer" className={styles.contentOptions}>
                 <div className={styles.options}>
                         <div className={styles.optionsImg}>
                             <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702576188/iconamoon_profile-bold_xoimai.svg" alt="Bloquear" />

@@ -1,13 +1,65 @@
+
+
+
+.listHistorial{
+    font-size: 14px !important;
+}
+.listHistorial li{
+    padding: 0 !important;
+
+}
 .containerCard{
     display: grid;
-    grid-template-columns: repeat(6, 1fr); 
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+    gap: 4px;
+    min-height: 54px;
+}
+
+.dateText{
+    display: flex;
+    align-items: center;
+    text-align: center; 
+
+}
+.dateText p{
+    font-size: 14px;
+}
+
+
+.dateAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.avatar{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.dateAvatarGroup{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 24px !important;
+    height: 24px !important;
+    flex-direction: row;
+}
+.dateAvatarGroup .avatar{
+    margin-left: -12px;
 }
 
 .centeredImage {
     display: flex;
     align-items: center;
-    margin-left: auto; 
-  }
+    justify-content: center; 
+
+}
+
+
 
 .centeredImage button {
     border: none  !important;
