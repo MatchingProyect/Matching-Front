@@ -41,7 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
         <Route path="/profile" element={ <Profile /> } />
-        <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
         <Route path="/profile/canjearPuntos" element = {<CanjearPuntos />}/>

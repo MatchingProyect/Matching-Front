@@ -23,9 +23,21 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action)=>{
         state.allLocations = action.payload
+       },
+       setProfiles: (state, action) =>{
+        state.allProfiles = action.payload
        }
     }
 })
+
+export const fetchProfiles = ()=>async(dispatch)=>{
+    try {
+         const {data} = await axios('/profiles')
+        if(data.status) dispatch(setProfiles(data.allProfiles))
+    } catch (error) {
+        throw error.message
+    }
+}
 
 export const fetchUsers = ()=>async(dispatch)=>{
     try {
@@ -60,5 +72,5 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
-export const { setClubs, setLocations, setUsers, setSports } = userSlice.actions;
+export const { setClubs, setLocations, setUsers, setSports, setProfiles } = userSlice.actions;
 export default userSlice.reducer;
