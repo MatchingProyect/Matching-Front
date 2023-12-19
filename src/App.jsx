@@ -18,6 +18,7 @@ import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 
 import './App.css';
+import UserDetail from './views/userDetail/UserDetail.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
+        <Route path='/user/:id' element={<UserDetail/>} />
         <Route path = "*" element = {<Error />} />
       </Routes>
     </div>
