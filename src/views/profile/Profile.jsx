@@ -9,6 +9,7 @@ import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor
 export default function Profile(props) {
     //Info hardcodeada que traeria llamada al back por el user logueado;
     const user = {
+        id: 123,
         name: 'Leonardo',
         lastname: 'Risco',
         gender: 'Masculino',
@@ -107,7 +108,7 @@ export default function Profile(props) {
                 <FriendsContainer friends = {user.friends} />
             </div>
             <div className = {styles.divThreeProfile}>
-                <Link to = "/profile/edit"><p>Editar</p></Link>
+                <Link to = {`/profile/edit/${user.id}`}><p>Editar</p></Link>
                 <div className = {styles.info}>
                     <p className = {styles.dato}>{user.name + ' ' + user.lastname}</p>
                     <p className = {styles.nombreDelDato}>Nombre y Apellido</p>
@@ -172,7 +173,7 @@ export default function Profile(props) {
             <div className = {styles.divThree}>
                     <div className = {styles.divThree2}>
                         <p>Mis Preferencias</p>
-                        <Link to = '/profile/editDepor'>Editar</Link>
+                        <Link to = {`/profile/editDepor/${user.id}`}>Editar</Link>
                     </div>
                     <div className = {styles.divThreeProfile}>
                         <div className = {styles.info}>

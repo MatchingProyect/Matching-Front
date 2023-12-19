@@ -17,6 +17,7 @@ import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 import './App.css';
+import UserDetail from './views/userDetail/UserDetail.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
         <Route path="/profile" element={ <Profile /> } />
-        <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
         <Route path="/profile/canjearPuntos" element = {<CanjearPuntos />}/>
@@ -48,6 +49,7 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
+        <Route path='/user/:id' element={<UserDetail/>} />
         <Route path = "*" element = {<Error />} />
       </Routes>
     </div>
