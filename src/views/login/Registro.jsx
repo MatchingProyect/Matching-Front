@@ -8,13 +8,28 @@ const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
+  const [ datosUser,setDatosUser ] = useState({
+    nombreApellido: '',
+    email: '',
+    pass: ''
+  })
+
+  const onChangeView = async ( data ) => {
+    setDatosUser({
+      nombreApellido: data.nombreApellido,
+      email: data.email,
+      pass: data.contrasenia
+    })
+    alert('Datos guardados');
+  }
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <form className={ styles.formContainer } onSubmit={handleSubmit((data) => console.log(data))}>
-      
+    <form className={ styles.formContainer } onSubmit={ handleSubmit( (data) => onChangeView( data ) )}>
+
       <div className={ styles.contentLogo }>
         <img
           src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
@@ -48,11 +63,21 @@ const Registro = () => {
         </span>
       </div>
 
-      <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
+      {
+        datosUser.nombreApellido && datosUser.email && datosUser.pass 
+        ? (
+        <Link to={'/questions'}>
+          <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">COMPLETAR PERFIL</Button>
+        </Link>
+        ) :
+        <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
+      }
+      {/* <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button> */}
 
       <div className={ styles.containerPs }>
         <p className={ styles.pRegister } >¿Ya tienes cuenta? <Link className={ styles.pLogin } to="/login">Inicia sesión</Link></p>
       </div>
+
     </form>
   );
 };
