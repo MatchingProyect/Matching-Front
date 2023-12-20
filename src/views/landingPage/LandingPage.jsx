@@ -1,9 +1,10 @@
 import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import styles from './landing.module.css'
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className={styles.containerAll}>
     <Link to = './login'>
       <Container sx={ { ..._styled.container } } >
           <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702602441/logoPrincipal_k03wos.svg" alt="Logo Matching" />
