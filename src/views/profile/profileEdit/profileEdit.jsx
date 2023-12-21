@@ -3,10 +3,9 @@ import axios from 'axios';
 import styles from './ProfileEdit.module.css';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../../components/navbarLow/navbarLow';
-import { Container, TextField, Button, InputAdornment } from '@mui/material';
+import { Container, TextField, Button, InputAdornment, NativeSelect } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { fetchProfiles } from '../../../redux/reducer';
 
 export default function ProfileEdit() {
     const { id } = useParams();
@@ -65,7 +64,7 @@ export default function ProfileEdit() {
         }
     });
 
-    const { register, handleSubmit, formState: { errors } } = form;
+    const { register, handleSubmit, formState: { errors }, watch } = form;
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -100,12 +99,16 @@ export default function ProfileEdit() {
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
                         {...register('name', {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: 'Nombre requerido.'
+                            },
                             maxLength: 32,
                             minLength: 3,
                         })}
                         sx={{
                             width: '70vw',
+                            marginTop: '20px',
                             backgroundColor: 'white',
                             borderRadius: '7px',
                             marginBottom: '3vw',
@@ -114,13 +117,16 @@ export default function ProfileEdit() {
                             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.274)',
                         }}
                         className={styles.input} variant='filled' id="textInput" label="Nombre" />
-                    {errors.name?.type === "required" && <p>This field is required</p>}
-                    {errors.name?.type === "minLength" && <p>Name should contain at least 3 characters</p>}
-                    {errors.name?.type === "maxLength" && <p>Name can only contain 32 characters</p>}
+                    {errors.name?.type === "required" && <p className = {styles.errors}>Nombre requerido.</p>}
+                    {errors.name?.type === "minLength" && <p className = {styles.errors}>Nombre debe tener al menos 3 caracteres.</p>}
+                    {errors.name?.type === "maxLength" && <p className = {styles.errors}>Nombre debe tener como maximo 32 caracteres.</p>}
 
                     <TextField
                         {...register('lastName', {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: 'Apellido requerido.'
+                            },
                             maxLength: 32,
                             minLength: 3,
                         })}
@@ -135,10 +141,11 @@ export default function ProfileEdit() {
                         }}
                         defaultValue={user.lastName}
                         className={styles.input} variant='filled' id="outlined-basic" label="Apellido" />
+                    {errors.lastName?.type === "required" && <p className = {styles.errors}>Apellido requerido.</p>}
+                    {errors.lastName?.type === "minLength" && <p className = {styles.errors}>Apellido debe tener al menos 3 caracteres.</p>}
+                    {errors.lastName?.type === "maxLength" && <p className = {styles.errors}>Apellido debe tener como maximo 32 caracteres.</p>}
+
                     {/* Esto debe cambiar a un select con: Masculino, Femenino, No binario, Prefiero no especificar */}
-                    {errors.lastName?.type === "required" && <p>This field is required</p>}
-                    {errors.lastName?.type === "minLength" && <p>Name should contain at least 3 characters</p>}
-                    {errors.lastName?.type === "maxLength" && <p>Name can only contain 32 characters</p>}
                     <TextField
                         {...register('gender', {
                             required: true,
@@ -155,13 +162,29 @@ export default function ProfileEdit() {
                             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.274)',
                         }}
                         defaultValue={user.gender}
-                        className={styles.input} variant='filled' id="outlined-basic" label="Genero" />
-                        {errors.gender?.type === "required" && <p>This field is required</p>}
+                        className={styles.input}
+                        variant='filled'
+                        id="outlined-basic"
+                        label="Genero">
+                        <option value={'Masculino'}>Masculino</option>
+                        <option value={'Femenino'}>Femenino</option>
+                        <option value={'No Binario'}>No Binario</option>
+                        <option value={'Prefiero no especificar'}>Prefiero no especificar</option>
+                    </TextField>
+                    {errors.gender?.type === "required" && <p className = {styles.errors}>Genero requerido.</p>}
+
                     <TextField
                         {...register('dayBirth', {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: `Fecha de nacimiento requerida.`
+                            },
                             maxLength: 32,
                             minLength: 3,
+                            pattern: {
+                                value: /(\d{4})[-.\/](\d{2})[-.\/](\d{2})/,
+                                message: 'Formato Incorrecto.',
+                            }
                         })}
                         sx={{
                             maxWidth: '70vw',
@@ -174,12 +197,22 @@ export default function ProfileEdit() {
                             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.274)',
                         }}
                         defaultValue={user.dayBirth}
-                        className={styles.input} variant='filled' id="outlined-basic" label="Fecha de Nacimiento" type='date' />
-                        {errors.lastName?.type === "required" && <p>This field is required</p>}
+                        className={styles.input}
+                        variant='filled' id="outlined-basic"
+                        label="Fecha de Nacimiento"
+                        type='date' />
+                    {errors.dayBirth && <p className = {styles.errors}>{errors.dayBirth.message}</p>}
                     <TextField
                         {...register('email', {
-                            required: true,
-                            maxLength: 20
+                            required: {
+                                value: true,
+                                message: `Correo requerido.`
+                            },
+                            maxLength: 20,
+                            pattern: {
+                                value: /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/,
+                                message: `Correo no valido.`
+                            }
                         })}
                         sx={{
                             width: '70vw',
@@ -190,10 +223,24 @@ export default function ProfileEdit() {
                             borderColor: 'black',
                             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.274)',
                         }}
-                        defaultValue={user.email}
                         className={styles.input} variant='filled' id="outlined-basic" label="Correo electronico" />
+                    {errors.email && <p className = {styles.errors}>{errors.email.message}</p>}
+
                     <TextField
-                        {...register('phone', { required: true, maxLength: 20 })}
+                        {...register('phone', {
+                            required: {
+                                value: true,
+                                message: `Numero telefonico requerido.`
+                            },
+                            maxLength: {
+                                value: '12',
+                                message: `Debe contener menos de 12 digitos.`
+                            },
+                            minLength: {
+                                value: '8',
+                                message: `Debe contener mas de 8 digitos.`
+                            }
+                        })}
                         sx={{
                             minWidth: '70vw',
                             backgroundColor: 'white',
@@ -208,19 +255,28 @@ export default function ProfileEdit() {
                             startAdornment: <InputAdornment position="start">+ 51</InputAdornment>,
                         }}
 
-                        className={styles.input} variant='filled' id="outlined-basic" label="Numero" />
+                        className={styles.input} variant='filled' id="outlined-basic" label="Numero Telefonico" />
+                    {errors.phone && <p className = {styles.errors}>{errors.phone.message}</p>}
                     <TextField
-                        {...register('description', { required: false, maxLength: 260 })}
+                        {...register('description', { 
+                            required: false, 
+                            maxLength: {
+                                value: '6',
+                                message: 'La descripcion no debe exceder los 260 caracteres.'
+                            }
+                        })}
                         sx={{
                             minWidth: '70vw',
                             backgroundColor: 'white',
                             borderRadius: '7px',
-                            marginBottom: '3vw',
+                            marginBottom: '2vw',
                             borderStyle: 'solid',
                             borderColor: 'black',
                             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.274)',
                         }}
                         className={styles.input} multiline rows={4} variant='filled' id="outlined-multiline-static" label="Descripcion" />
+                        <p className = {styles.aviso}>260 caracteres</p>
+                        {errors.description && <p className = {styles.Description}>{errors.description.message}</p>}
                     <Button
                         type='submit'
                         sx={{
@@ -236,6 +292,20 @@ export default function ProfileEdit() {
                         className={styles.submitBtn}
                     >Guardar Cambios</Button>
                 </form>
+                <Button
+                        type='button'
+                        sx={{
+                            marginTop: '2vh',
+                            fontSize: '16px',
+                            fontWeight: '600',
+                            minWidth: '70vw',
+                            height: '50px',
+                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
+                        }}
+                        color='success'
+                        variant='contained'
+                        className={styles.submitBtn}
+                    ><Link to = "/profile/edit/resetpassword"><p>Cambiar Contraseña</p></Link></Button>
             </Container>
             <NavbarLow />
         </div>

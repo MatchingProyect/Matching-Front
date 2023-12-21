@@ -55,4 +55,25 @@ margin-top: -8px;
 
 .input{
     background-color: none;
+    
+}
+
+.errors{
+    color: red;
+    font-weight: 500;
+    margin-top: -14px;
+    /* margin-bottom: 20px; */
+    /* margin-top: -1vh; */
+    margin-bottom: 2vh;
+}
+.aviso{
+    font-weight: 300;
+    font-size: 12px;
+    margin-top: -15px;
+}
+.Description{
+    color: red;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 2vh;
 }
