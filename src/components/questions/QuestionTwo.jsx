@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form'
 import styles from './Questions.module.css'
+import { useUserContext } from '../../context/UserProvider';
 
 const QuestionTwo = () => {
 
     const { register,handleSubmit } = useForm();
+    const { datosUser,setDatosUser } = useUserContext();
+    console.log( datosUser )
 
     const onSubmit = ( data ) => {
         console.log( data )

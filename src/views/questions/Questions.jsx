@@ -1,16 +1,27 @@
+import { useEffect,useState } from 'react'
 import { Button } from '@mui/material'
-import styles from './Questions.module.css'
-import logo from '../../assets/logo-matching.svg'
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from '../../context/UserProvider'
 import QuestionOne from '../../components/questions/QuestionOne'
-import { useState } from 'react'
 import QuestionTwo from '../../components/questions/QuestionTwo'
 import QuestionThree from '../../components/questions/QuestionThree'
 import QuestionFour from '../../components/questions/QuestionFour'
 import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
+import logo from '../../assets/logo-matching.svg'
+import styles from './Questions.module.css'
 
 const Questions = () => {
 
+    const { datosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if( !datosUser.nombreApellido || !datosUser.email || !datosUser.pass ){
+            navigate('/login');
+        }
+    }, [ datosUser,history ])
+    
 
     const handleCountQuestion = () => {
         if( count <= 4 ){
@@ -51,6 +62,7 @@ const Questions = () => {
                     {
                         handleRenderQuestion()
                     }
+
                     <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
                 </div>
             )

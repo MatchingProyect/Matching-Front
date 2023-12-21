@@ -17,8 +17,8 @@ import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 import HistorialActividad from './views/historial/HistorialActividad/HistorialActividad.jsx';
-import './App.css';
 import UserDetail from './views/userDetail/UserDetail.jsx';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();

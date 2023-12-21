@@ -2,33 +2,30 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
 
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-
-  const [ datosUser,setDatosUser ] = useState({
-    nombreApellido: '',
-    email: '',
-    pass: ''
-  })
-
-  const onChangeView = async ( data ) => {
-    setDatosUser({
-      nombreApellido: data.nombreApellido,
-      email: data.email,
-      pass: data.contrasenia
-    })
-    alert('Datos guardados');
-  }
+  const { setDatosUser,datosUser } = useUserContext();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const onSubmit = ( data ) => {
+    setDatosUser({
+      ...datosUser,
+      nombreApellido: data.nombreApellido,
+      email: data.email,
+      pass: data.contrasenia
+    });
+    alert('Datos guardados');
+  }
+
   return (
-    <form className={ styles.formContainer } onSubmit={ handleSubmit( (data) => onChangeView( data ) )}>
+    <form className={ styles.formContainer } onSubmit={ handleSubmit( onSubmit )}>
 
       <div className={ styles.contentLogo }>
         <img
@@ -72,7 +69,6 @@ const Registro = () => {
         ) :
         <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
       }
-      {/* <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button> */}
 
       <div className={ styles.containerPs }>
         <p className={ styles.pRegister } >¿Ya tienes cuenta? <Link className={ styles.pLogin } to="/login">Inicia sesión</Link></p>
