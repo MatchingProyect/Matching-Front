@@ -2,18 +2,16 @@ import { useEffect,useState } from 'react'
 import { Button } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from '../../context/UserProvider'
-import QuestionOne from '../../components/questions/QuestionOne'
-import QuestionTwo from '../../components/questions/QuestionTwo'
-import QuestionThree from '../../components/questions/QuestionThree'
-import QuestionFour from '../../components/questions/QuestionFour'
+import { QuestionOne,QuestionTwo,QuestionThree,QuestionFour } from '../../components/questions'
 import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
 import logo from '../../assets/logo-matching.svg'
 import styles from './Questions.module.css'
 
 const Questions = () => {
 
-    const { datosUser } = useUserContext();
+    const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
+    // const [ questionAnswer,setQuestionAnswer ] = useState( false )
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,9 +22,13 @@ const Questions = () => {
     
 
     const handleCountQuestion = () => {
-        if( count <= 4 ){
+        if( count <= 4 && datosUser.questionsAnsker ){
             setCount( count + 1 );
-        } 
+            setDatosUser({
+                ...datosUser,
+                questionsAnsker: false
+            })
+        }
     }
 
     const handleRenderQuestion = () => {
@@ -63,7 +65,15 @@ const Questions = () => {
                         handleRenderQuestion()
                     }
 
-                    <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
+                    {
+                        datosUser.questionsAnsker 
+                        ? (
+                            <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtn } } variant='contained'>Siguiente</Button>
+                        ) : (
+                            <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtnOff } } variant='contained' >Siguiente</Button>
+                        )
+                    }
+
                 </div>
             )
             : (
@@ -82,6 +92,19 @@ const _styled = {
         fontSize: '20px',
         fontWeight: '600',
         lineHeight: '30px',
+    },
+    nextBtnOff: {
+        width: '338px',
+        height: '50px',
+        borderRadius: '10px',
+        fontSize: '20px',
+        fontWeight: '600',
+        lineHeight: '30px',
+        backgroundColor: '#657689',
+        color: 'white',
+        '&:focus': {
+            backgroundColor: '#657689',
+        }
     }
 }
 

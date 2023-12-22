@@ -13,6 +13,7 @@ export const UserProvider = ( { children } ) => {
     phone: '',
     location: '',
     sport: '',
+    questionsAnsker: false
   });
 
   return (
