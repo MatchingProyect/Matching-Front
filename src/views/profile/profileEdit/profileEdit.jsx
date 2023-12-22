@@ -4,10 +4,12 @@ import styles from './ProfileEdit.module.css';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../../components/navbarLow/navbarLow';
 import { Container, TextField, Button, InputAdornment, NativeSelect } from '@mui/material';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 export default function ProfileEdit() {
+    
     const { id } = useParams();
 
     // Function para traer perfil del usuario
@@ -46,8 +48,13 @@ export default function ProfileEdit() {
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem accusamus iure asperiores? Ea magni, expedita nam placeat minima dolorem ab blanditiis.',
         dayBirth: '1999-01-27',
         email: '123321@gmail.com',
-        phone: '123456789'
+        phone: '123456789',
+        avatarImg: 'https://i.scdn.co/image/ab6761610000e5eb275c91cb36d4206bc657c07c',
+        creaditCardWarranty: '',
+        password: '123',
     };
+
+    const [estadoImg , setEstadoImg] = useState(user.avatarImg);
 
     const form = useForm({
         defaultValues: {
@@ -57,14 +64,14 @@ export default function ProfileEdit() {
             dayBirth: user.dayBirth,
             email: user.email, //Confirmacion por correo Electronico
             phone: user.phone,
-            creditCardWarranty: '', //??
-            avatarImg: '', //Input de tipo file para la actualizacion del perfil
-            password: '', //Boton de reset Password
-            description: ''
+            creditCardWarranty: user.creaditCardWarranty, //??
+            avatarImg: user.avatarImg, //Input de tipo file para la actualizacion del perfil
+            password: user.password, //Boton de reset Password
+            description: user.description,
         }
     });
 
-    const { register, handleSubmit, formState: { errors }, watch } = form;
+    const { register, handleSubmit, formState: { errors }, watch, setValue } = form;
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -97,6 +104,29 @@ export default function ProfileEdit() {
             </Container>
             <Container className={styles.divTwo} maxWidth='string' sx={{ display: 'flex', flex: 'column', justifyContent: 'center', alignItems: 'center', }}>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                    <div className = {styles.photoContainer}>
+                        <img src = {estadoImg} alt = {user.name} className = {styles.avatarImg}/>
+                        <input 
+                        type='file' 
+                        accept='image/*' 
+                        name = '123' 
+                        className = {styles.inputFile}
+                        //Saving Foto URL
+                        onChange={({target: {files}}) => {
+                            let result = URL.createObjectURL(files[0]);
+                            console.log(files, result);
+                            setEstadoImg(result);
+                            setValue('avatarImg', result);
+                        }}
+                        //Saving Foto Name
+                        // onChange={({target: {files}}) => {
+                        //     let result2 = files[0].name;
+                        //     console.log(files, result2);
+                        //     setEstadoImg(result2);
+                        //     setValue('avatarImg', result2);
+                        // }}
+                        autoFocus/>
+                    </div>
                     <TextField
                         {...register('name', {
                             required: {
@@ -261,7 +291,7 @@ export default function ProfileEdit() {
                         {...register('description', { 
                             required: false, 
                             maxLength: {
-                                value: '6',
+                                value: '260',
                                 message: 'La descripcion no debe exceder los 260 caracteres.'
                             }
                         })}
@@ -277,12 +307,43 @@ export default function ProfileEdit() {
                         className={styles.input} multiline rows={4} variant='filled' id="outlined-multiline-static" label="Descripcion" />
                         <p className = {styles.aviso}>260 caracteres</p>
                         {errors.description && <p className = {styles.Description}>{errors.description.message}</p>}
+                        <Button
+                        type='button'
+                        sx={{
+                            marginTop: '3vh',
+                            marginBottom: '1vh',
+                            fontSize: '16px',
+                            fontWeight: '500',
+                            minWidth: '70vw',
+                            height: '50px',
+                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
+                        }}
+                        color='success'
+                        variant='contained'
+                        className={styles.submitBtn}
+                    ><Link to = "/profile/edit/resetpassword"><p className = {styles.link}>Cambiar Contraseña</p></Link></Button>
+                    <Button
+                        type='button'
+                        sx={{
+                            marginTop: '3vh',
+                            marginBottom: '1vh',
+                            fontSize: '16px',
+                            fontWeight: '500',
+                            minWidth: '70vw',
+                            height: '50px',
+                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
+                        }}
+                        color='success'
+                        variant='contained'
+                        className={styles.submitBtn}
+                    ><Link to = "/profile/edit/resetemail"><p className = {styles.link}>Cambiar Correo Electronico</p></Link></Button>
                     <Button
                         type='submit'
                         sx={{
                             marginTop: '2vh',
+                            marginBottom: '4vh',
                             fontSize: '16px',
-                            fontWeight: '600',
+                            fontWeight: '500',
                             minWidth: '70vw',
                             height: '50px',
                             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
@@ -292,20 +353,7 @@ export default function ProfileEdit() {
                         className={styles.submitBtn}
                     >Guardar Cambios</Button>
                 </form>
-                <Button
-                        type='button'
-                        sx={{
-                            marginTop: '2vh',
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            minWidth: '70vw',
-                            height: '50px',
-                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
-                        }}
-                        color='success'
-                        variant='contained'
-                        className={styles.submitBtn}
-                    ><Link to = "/profile/edit/resetpassword"><p>Cambiar Contraseña</p></Link></Button>
+                
             </Container>
             <NavbarLow />
         </div>

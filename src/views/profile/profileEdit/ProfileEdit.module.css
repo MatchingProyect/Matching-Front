@@ -60,7 +60,7 @@ margin-top: -8px;
 
 .errors{
     color: red;
-    font-weight: 500;
+    font-weight: 400;
     margin-top: -14px;
     /* margin-bottom: 20px; */
     /* margin-top: -1vh; */
@@ -69,11 +69,46 @@ margin-top: -8px;
 .aviso{
     font-weight: 300;
     font-size: 12px;
-    margin-top: -15px;
+    margin-top: -2px;
 }
 .Description{
     color: red;
     font-weight: 500;
     margin-top: 0px;
     margin-bottom: 2vh;
+    text-align: center;
+}
+.photoContainer{
+    max-width: 95%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    /* margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+    padding-top: 1.5%;
+    border: 2px solid transparent; 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274);  */
+}
+
+.avatarImg{
+position: relative;
+background-color: white;
+border-radius: 50%;
+border-style: solid;
+border: 3.5px solid transparent; 
+border-color: black;
+box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.551);
+height: 55vw;
+width: 55vw;
+max-height: 350px;
+max-width: 350px;
+margin-top: 1vh;
+margin-bottom: 1vh;
+}
+.link{
+    color: white;
 }
