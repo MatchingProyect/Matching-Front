@@ -49,8 +49,8 @@ export const fetchUsers = ()=>async(dispatch)=>{
 }
 export const fetchSports = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('/sports')
-        // if(data.status) dispatch(setSports(data.allSports))
+        const {data} = await axios('/sports')
+        if(data.status) dispatch(setSports(data.allSports))
     } catch (error) {
         throw error.message
     }
