@@ -1,6 +1,6 @@
 import styles from './Questions.module.css'
 
-const QuestionThree = () => {
+export const QuestionThree = () => {
   return (
     <>
         <div className={ styles.contentQuestion } >
@@ -25,5 +25,3 @@ const QuestionThree = () => {
     </>
   )
 }
-
-export default QuestionThree

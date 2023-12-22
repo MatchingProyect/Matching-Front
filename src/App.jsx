@@ -17,8 +17,11 @@ import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 import HistorialActividad from './views/historial/HistorialActividad/HistorialActividad.jsx';
-import './App.css';
 import UserDetail from './views/userDetail/UserDetail.jsx';
+import ProfileChangeEmail from './views/profile/profileEdit/ProfileChangeEmail/ProfileChangeEmail.jsx';
+import './App.css';
+import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +45,8 @@ function App() {
         <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
+        <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />
+        <Route path="/profile/edit/resetemail" element={<ProfileChangeEmail />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
         <Route path="/profile/historial/actividad" element={<HistorialActividad />} />

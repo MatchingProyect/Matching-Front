@@ -1,7 +1,7 @@
 import CardSport from './card-sport/CardSport'
 import styles from './Questions.module.css'
 
-const QuestionFour = () => {
+export const QuestionFour = () => {
 
   const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
 
@@ -23,5 +23,3 @@ const QuestionFour = () => {
     </>
   )
 }
-
-export default QuestionFour
