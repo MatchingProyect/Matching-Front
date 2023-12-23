@@ -5,7 +5,7 @@ const initialState = {
     allUsers: [],
     allSports: [],
     allClubs: [],
-    allLocations: []
+    allCourts: []
 };
 
 export const userSlice = createSlice({
@@ -21,8 +21,8 @@ export const userSlice = createSlice({
        setClubs: (state, action)=>{
         state.allClubs = action.payload
        },
-       setLocations: (state, action)=>{
-        state.allLocations = action.payload
+       setCourts: (state, action)=>{
+        state.allCourts = action.payload
        },
        setProfiles: (state, action) =>{
         state.allProfiles = action.payload
@@ -55,10 +55,10 @@ export const fetchSports = ()=>async(dispatch)=>{
         throw error.message
     }
 }
-export const fetchLocations = ()=>async(dispatch)=>{
+export const fetchCourts = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('/locations')
-        // if(data.status) dispatch(setLocations(data.allLocations))
+        // const {data} = await axios('/courts')
+        // if(data.status) dispatch(setCourts(data.allCourts))
     } catch (error) {
         throw error.message
     }
@@ -72,5 +72,5 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
-export const { setClubs, setLocations, setUsers, setSports, setProfiles } = userSlice.actions;
+export const { setClubs, setCourts, setUsers, setSports, setProfiles } = userSlice.actions;
 export default userSlice.reducer;

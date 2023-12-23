@@ -4,9 +4,9 @@ import CardUser from '../cardUsers/CardUser';
 import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
-import CardLocation from '../cardLocations/CardLocation';
+import CardCourt from '../cardCourt/CardCourt';
 
-export default function Home({ sports, clubs, locations, users }) {
+export default function Home({ sports, clubs, courts, users }) {
 
     return (
         <>
@@ -26,8 +26,8 @@ export default function Home({ sports, clubs, locations, users }) {
                     <CardClub club={club} />
                 )
             })}
-            {locations.map((location) => {
-                <CardLocation location={location} />
+            {courts.map((court) => {
+                <CardCourt court={court} />
             })}
         </>
     )

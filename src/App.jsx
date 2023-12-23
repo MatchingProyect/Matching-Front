@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { fetchClubs, fetchLocations, fetchSports, fetchUsers } from './redux/reducer';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import Home from './views/home/home.component';
+import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro'; 
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
 import Questions from './views/questions/Questions';
@@ -29,12 +29,12 @@ function App() {
   const users = useSelector((state) => state.user.allUsers);
   const sports = useSelector((state) => state.user.allSports);
   const clubs = useSelector((state) => state.user.allClubs);
-  const locations = useSelector((state) => state.user.allLocations);
+  const courts = useSelector((state) => state.user.allcourts);
 
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchClubs());
-    dispatch(fetchLocations());
+    dispatch(fetchCourts());
     dispatch(fetchSports());
   }, []);
 
@@ -43,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <LandingPage /> }/>
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
+        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} courts={courts} />} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />
