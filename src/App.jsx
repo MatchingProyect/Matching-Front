@@ -21,6 +21,7 @@ import UserDetail from './views/userDetail/UserDetail.jsx';
 import ProfileChangeEmail from './views/profile/profileEdit/ProfileChangeEmail/ProfileChangeEmail.jsx';
 import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
+import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
         <Route path='/user/:id' element={<UserDetail/>} />
+        <Route path='clubs/:id' element={<ClubsDetail/>} />
         <Route path = "*" element = {<Error />} />
       </Routes>
     </div>
