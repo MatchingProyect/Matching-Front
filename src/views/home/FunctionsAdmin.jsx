@@ -14,10 +14,15 @@ const FunctionsAdmin = () => {
     const dispatch = useDispatch();
 
     const onSubmit = async (data) => {
-        const endPoint = '/sports'
-        const response = await axios.post(endPoint, data)
-        if (response.status) {
-            if (data) dispatch(fetchSports());
+        try {
+            const endPoint = '/sports'
+            const response = await axios.post(endPoint, data)
+            if (response.status) {
+                 dispatch(fetchSports());
+            }
+            
+        } catch (error) {
+            
         }
     }
 
