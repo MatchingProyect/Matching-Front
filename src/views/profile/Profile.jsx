@@ -108,7 +108,7 @@ export default function Profile(props) {
                 <FriendsContainer friends = {user.friends} />
             </div>
             <div className = {styles.divThreeProfile}>
-                <Link to = {`/profile/edit/${user.id}`}><p>Editar</p></Link>
+                <Link to = {`/profile/edit/${user.id}`}><p className = {styles.linksTo}>Editar</p></Link>
                 <div className = {styles.info}>
                     <p className = {styles.dato}>{user.name + ' ' + user.lastname}</p>
                     <p className = {styles.nombreDelDato}>Nombre y Apellido</p>

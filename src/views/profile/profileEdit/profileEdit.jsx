@@ -81,7 +81,6 @@ export default function ProfileEdit() {
         // try {
         //     const endPoint = `/users/${id}`;
         //     const response = await axios.put(endPoint, data);
-        //     console.log(123);
         //     if (response.status) {
         //         dispatch(fetchProfiles());
 
@@ -314,6 +313,7 @@ export default function ProfileEdit() {
                             marginBottom: '1vh',
                             fontSize: '16px',
                             fontWeight: '500',
+                            backgroundColor: '#203144',
                             minWidth: '70vw',
                             height: '50px',
                             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
@@ -329,6 +329,7 @@ export default function ProfileEdit() {
                             marginBottom: '1vh',
                             fontSize: '16px',
                             fontWeight: '500',
+                            backgroundColor: '#203144',
                             minWidth: '70vw',
                             height: '50px',
                             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
@@ -342,6 +343,7 @@ export default function ProfileEdit() {
                         sx={{
                             marginTop: '2vh',
                             marginBottom: '4vh',
+                            backgroundColor: '#203144',
                             fontSize: '16px',
                             fontWeight: '500',
                             minWidth: '70vw',
