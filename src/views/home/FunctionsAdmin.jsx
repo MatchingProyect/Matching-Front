@@ -2,8 +2,15 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchSports } from "../../redux/reducer";
 import { useForm } from 'react-hook-form';
+import { useState } from "react";
 
 const FunctionsAdmin = () => {
+
+    const [create, setCreate] = useState({
+        sport: '',
+        club: '',
+        court: ''
+    });
 
     const {
         handleSubmit,

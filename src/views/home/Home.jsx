@@ -27,7 +27,9 @@ export default function Home({ sports, clubs, courts, users }) {
                 )
             })}
             {courts.map((court) => {
-                <CardCourt court={court} />
+                return(
+                    <CardCourt court={court} />
+                )
             })}
         </>
     )
