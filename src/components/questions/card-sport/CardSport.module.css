@@ -16,8 +16,22 @@
     height: 24px;
 }
 
+.iconSportOff{
+    width: 24px;
+    height: 24px;
+}
+
 .nameSport{
     color: white;
+    height: 24px;
+    width: 83px;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+}
+
+.nameSportOff{
+    color: #676666;
     height: 24px;
     width: 83px;
     font-weight: 700;
