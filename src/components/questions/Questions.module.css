@@ -63,6 +63,7 @@
 .contentLocation{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -77,6 +78,7 @@
     background-color: transparent;
     border: 1px solid white;
     padding-left: 13px;
+    color: white;
 }
 
 .contentNumber{
@@ -110,6 +112,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 16px;
+    color: white;
 }
 
 .inputNumber{
@@ -123,6 +126,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 16px;
+    color: white;
 }
 
 .subtitleQuestion{
@@ -146,4 +150,11 @@
     color: rgba(255, 157, 157, 0.986);
     font-style: italic;
     font-size: 14px;
+}
+
+.errorsSpan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

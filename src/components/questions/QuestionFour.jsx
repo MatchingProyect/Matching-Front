@@ -1,9 +1,18 @@
+import { useEffect } from 'react';
+import { useUserContext } from '../../context/UserProvider';
 import CardSport from './card-sport/CardSport'
 import styles from './Questions.module.css'
 
 export const QuestionFour = () => {
 
   const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
+
+  const { datosUser,setDatosUser } = useUserContext();
+
+  useEffect(() => {
+    console.log( datosUser )
+  }, [])
+  
 
   return (
     <>
