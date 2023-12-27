@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
+import { useUserContext } from '../../context/UserProvider';
 import styles from './Questions.module.css'
 
 export const QuestionThree = () => {
+
+    const { datosUser,setDatosUser } = useUserContext();
+
+    useEffect(() => {
+      console.log( datosUser );
+    }, [])
+    
+
   return (
     <>
         <div className={ styles.contentQuestion } >
