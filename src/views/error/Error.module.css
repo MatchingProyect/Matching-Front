@@ -1,0 +1,87 @@
+.errorContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.pageTitle{
+    margin-top: 4vh;
+
+}
+
+.pageInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: first baseline;
+    width: 70vw;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.274); 
+
+}
+
+.pageTitle2{
+    margin-bottom: 3vh;
+    position: relative;
+
+}
+
+.pageSubTitle{
+    margin-bottom: 2vh;
+    position: relative;
+    align-items:right;
+
+}
+
+
+
+.pageText{
+    text-align:justify;
+    margin-bottom: 3vh;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:  center;
+    width: 100%;
+}
+.homeBtn{
+    width: 30vw;
+    height: 55px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    background-color: #203144;
+    margin-right: 2vw;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.274); 
+}
+.helpBtn{
+    width: 30vw;
+    height: 55px;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    margin-left: 2vw;
+    background-color: #203144;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.274); 
+}
+
+.imageDiv{
+    margin-bottom: 0px;
+
+}
+
+.image{
+    min-height: 200px;
+    min-width: 100px;
+    max-height: 30vh;
+    max-width: 30vw;
+}

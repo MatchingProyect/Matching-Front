@@ -385,7 +385,7 @@
       margin-bottom: 2em;
     }
     .formContainer{
-      background-color: red;
+      /* background-color: red; */
       background-size: cover;
     }
   }

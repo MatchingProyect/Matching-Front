@@ -22,6 +22,7 @@ import ProfileChangeEmail from './views/profile/profileEdit/ProfileChangeEmail/P
 import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
+import Help from './views/help/Help.jsx';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />
         <Route path="/registro" element={<Registro />} />
+        <Route path='/help' element={<Help/>} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
         <Route path='/user/:id' element={<UserDetail/>} />

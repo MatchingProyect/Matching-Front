@@ -2,9 +2,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
     min-width: 80vw;
+    width: 100vw;
+    height: 5vh;
+    min-height: 8vh;
 }
 .icon{
     color: aqua;
 }
+

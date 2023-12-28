@@ -11,22 +11,22 @@ export default function Home({ sports, clubs, courts, users }) {
     return (
         <>
             <SearchBar users={users} />
-            {users.map((user) => {
+            {users?.map((user) => {
                 return (
                     <CardUser user={user} />
                 )
             })}
-            {sports.map((sport) => {
+            {sports?.map((sport) => {
                 return (
                     <CardSport sport={sport} />
                 )
             })}
-            {clubs.map((club) => {
+            {clubs?.map((club) => {
                 return (
                     <CardClub club={club} />
                 )
             })}
-            {courts.map((court) => {
+            {courts?.map((court) => {
                 return(
                     <CardCourt court={court} />
                 )
