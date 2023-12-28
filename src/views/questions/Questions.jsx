@@ -11,7 +11,6 @@ const Questions = () => {
 
     const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
-    // const [ questionAnswer,setQuestionAnswer ] = useState( false )
     const navigate = useNavigate();
 
     useEffect(() => {
