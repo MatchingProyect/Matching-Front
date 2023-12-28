@@ -16,7 +16,7 @@ const crearReserva = ({reserva, setReserva, court}) => {
 
     const onSubmit = async(data) =>{
         try {
-            const response = await axios.post('/reservations', data)
+            const response = await axios.post(`/reservations/${id}`, data)
             if(response.status) setReserva(false);
             
         } catch (error) {
