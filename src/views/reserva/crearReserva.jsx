@@ -16,13 +16,13 @@ const crearReserva = ({reserva, setReserva, court}) => {
 
     const onSubmit = async(data) =>{
         try {
-            await axios.post(`/reservations/${id}`, data)
+            const response = await axios.post('/reservations', data)
+            if(response.status) setReserva(false);
             
         } catch (error) {
             return error.message
         }
     }
-
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
