@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react'
-import { fetchSports } from '../../redux/reducer';
 
 const crearReserva = ({reserva, setReserva, court}) => {
 
@@ -17,7 +16,7 @@ const crearReserva = ({reserva, setReserva, court}) => {
 
     const onSubmit = async(data) =>{
         try {
-            await axios.post('/reservations', data)
+            await axios.post(`/reservations/${id}`, data)
             
         } catch (error) {
             return error.message
