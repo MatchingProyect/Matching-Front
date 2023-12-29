@@ -1,0 +1,23 @@
+
+.containerHome{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+.containerTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items:center;
+    gap: 1rem;
+    margin: 1rem 1rem;
+}
+
+.containerCards {
+    margin: 1rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
