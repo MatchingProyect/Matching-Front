@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
+import axios from "axios";
 
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
@@ -13,15 +14,24 @@ const Registro = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  
 
-  const onSubmit = ( data ) => {
-    setDatosUser({
-      ...datosUser,
-      nombreApellido: data.nombreApellido,
-      email: data.email,
-      pass: data.contrasenia
-    });
-    alert('Datos guardados');
+
+  const onSubmit = async ( data ) => {
+    // setDatosUser({
+    //   ...datosUser,
+    //   nombreApellido: data.nombreApellido,
+    //   email: data.email,
+    //   pass: data.contrasenia
+    // });
+    // alert('Datos guardados');
+    try {
+      const endpoint = "/register"
+     await axios.post(endpoint, data) 
+    } catch (error) {
+      
+    }
+
   }
 
   return (
