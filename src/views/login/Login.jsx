@@ -1,52 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"; 
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "./firebase";
 import axios from "axios";
+
 const Login = () => {
-  const onSubmit = async (data) => {
-   try {
-     const endpoint = "/login"
-     const result = await axios.post(endpoint, data)
-     if (result) {
-        navigate("/questions")
-      }
-   } catch (error) {
-    
-   }
-  }
-  
-
-
-
-  const [user, setUser] = useState(null);  
-
   const auth = getAuth(app);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
+  const onSubmit = async (data) => {
+    try {
+      const endpoint = "/login";
+      const result = await axios.post(endpoint, data);
+
+      if (result) {
+        const isNewUser = result.data.isNewUser;
+
+        if (isNewUser) {
+          navigate("/questions");
+        } else {
+          navigate("/home");
+        }
       }
-    });
-
-    return unsubscribe;
-  }, []);
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
+  };
 
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    if (result) {
-      navigate("/questions")
+    try {
+      const result = await signInWithPopup(auth, provider);
+  
+      const isNewUser = result?.additionalUserInfo?.isNewUser;
+  
+      if (isNewUser) {
+        navigate("/questions");
+      } else {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión con Google:", error);
     }
-   
   };
-
 
   const {
     handleSubmit,
