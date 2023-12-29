@@ -3,36 +3,37 @@ import styles from './profile.module.css';
 import FriendsContainer from '../../components/friendsContainer/FriendsContainer';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor';
 
 export default function Profile(props) {
     //Info hardcodeada que traeria llamada al back por el user logueado;
     const user = {
+        id: 123,
         name: 'Leonardo',
         lastname: 'Risco',
         gender: 'Masculino',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem accusamus iure asperiores? Ea magni, expedita nam placeat minima dolorem ab blanditiis.',
         dayBirth: '27/01/1999',
         email: '123321@gmail.com',
-        phone:'+69 69696969',
-        avatarImg: 'https://es.dblegends.net/assets/card_icons/BChaIco_0468_GokuSSGSSKAIOU_468.webp',
+        phone:'+123456789',
+        avatarImg: 'https://i.scdn.co/image/ab6761610000e5eb275c91cb36d4206bc657c07c',
         points: 489,
         friends: [
             {
-                image: 'https://i.imgur.com/AzTVKKt.png',
+                image: 'https://yt3.googleusercontent.com/dL1jj3OLGsO5K_Y9kr49l_7J-4vAyFZOD4B4LXTI4ZoFJ2893arCH7JXfbY6JxmiIytgCWEZ2zc=s900-c-k-c0x00ffffff-no-rj',
                 isAvailable: true
             },
             {
-                image: 'https://i.imgur.com/CbpwPx8.png',
+                image: 'https://facts.net/wp-content/uploads/2023/09/22-facts-about-kyle-broflovski-south-park-1694601417.jpg',
                 isAvailable: false
             },
             {
-                image: 'https://i.imgur.com/TgLh7Es.png',
+                image: 'https://pbs.twimg.com/profile_images/858013258870964224/Otio6D4P_400x400.jpg',
                 isAvailable: true
             },
             {
-                image: 'https://i.imgur.com/TgLh7Es.png',
+                image: 'https://tvmedia.ign.com/tv/image/article/107/1076864/80-gogodgo_1268346866.jpg?fit=bounds&width=1280&height=720',
                 isAvailable: true
             }
         ],
@@ -107,7 +108,7 @@ export default function Profile(props) {
                 <FriendsContainer friends = {user.friends} />
             </div>
             <div className = {styles.divThreeProfile}>
-                <Link to = "/profile/edit"><p>Editar</p></Link>
+                <Link to = {`/profile/edit/${user.id}`}><p className = {styles.linksTo}>Editar</p></Link>
                 <div className = {styles.info}>
                     <p className = {styles.dato}>{user.name + ' ' + user.lastname}</p>
                     <p className = {styles.nombreDelDato}>Nombre y Apellido</p>
@@ -172,7 +173,7 @@ export default function Profile(props) {
             <div className = {styles.divThree}>
                     <div className = {styles.divThree2}>
                         <p>Mis Preferencias</p>
-                        <Link to = '/profile/editDepor'>Editar</Link>
+                        <Link to = {`/profile/editDepor/${user.id}`}>Editar</Link>
                     </div>
                     <div className = {styles.divThreeProfile}>
                         <div className = {styles.info}>

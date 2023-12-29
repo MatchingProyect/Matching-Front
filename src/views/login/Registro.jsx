@@ -2,19 +2,41 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
+import axios from "axios";
 
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const { setDatosUser,datosUser } = useUserContext();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  
+
+
+  const onSubmit = async ( data ) => {
+    // setDatosUser({
+    //   ...datosUser,
+    //   nombreApellido: data.nombreApellido,
+    //   email: data.email,
+    //   pass: data.contrasenia
+    // });
+    // alert('Datos guardados');
+    try {
+      const endpoint = "/register"
+     await axios.post(endpoint, data) 
+    } catch (error) {
+      
+    }
+
+  }
 
   return (
-    <form className={ styles.formContainer } onSubmit={handleSubmit((data) => console.log(data))}>
-      
+    <form className={ styles.formContainer } onSubmit={ handleSubmit( onSubmit )}>
+
       <div className={ styles.contentLogo }>
         <img
           src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
@@ -48,11 +70,20 @@ const Registro = () => {
         </span>
       </div>
 
-      <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
+      {
+        datosUser.nombreApellido && datosUser.email && datosUser.pass 
+        ? (
+        <Link to={'/questions'}>
+          <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">COMPLETAR PERFIL</Button>
+        </Link>
+        ) :
+        <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
+      }
 
       <div className={ styles.containerPs }>
         <p className={ styles.pRegister } >¿Ya tienes cuenta? <Link className={ styles.pLogin } to="/login">Inicia sesión</Link></p>
       </div>
+
     </form>
   );
 };

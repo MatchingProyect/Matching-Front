@@ -1,23 +1,27 @@
+.allContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #203144;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #203144;
   width: 100%;
-  height: 100vh;
-  padding: 20px; 
-  position: relative;
+  height: 100%;
+  /* padding: 20px; */
 }
 
-.logo {
+.logoContainer {
   width: 70%;
-  max-width: 294px; 
-  height: auto; 
-  position: absolute;
-  top: 20%; 
-  left: 50%;
-  transform: translateX(-50%);
+  max-width: 294px;
+  height: auto;
 }
 
 .contentFormFields {
@@ -26,25 +30,19 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 400px;
+  height: 100%;
   margin-bottom: -2em;
   margin-top: -2em;
 }
 
 .contentController {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 385px;
-  height: 93px;
   margin-bottom: -1em;
   margin-top: 1em;
 }
 
 .labels {
   font-weight: 700;
-  font-size: 20px;
-  height: 30px;
+  height: 5vh;
 }
 
 .inputEmail {
@@ -64,7 +62,7 @@
   letter-spacing: 0em;
   text-align: left;
 }
-
+/* 
 .inputEmail {
   height: 55px;
   width: 100%;
@@ -78,20 +76,20 @@
   line-height: 30px;
   letter-spacing: 0em;
   outline: transparent;
-}
+} */
 
 .h2Title {
   font-size: 20px;
   font-weight: 700;
 }
 
-.containerTitleLogin{
+.containerTitleLogin {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.titleLogin{
+.titleLogin {
   font-size: 20px;
   font-weight: 700;
   color: white;
@@ -141,11 +139,14 @@
 }
 
 .eyeIcon {
-  width: 20px; /* Ajusta el tamaño según sea necesario */
-  height: 20px; /* Ajusta el tamaño según sea necesario */
+  width: 20px;
+  /* Ajusta el tamaño según sea necesario */
+  height: 20px;
+  /* Ajusta el tamaño según sea necesario */
   color: #203144;
   margin-right: 1.5em;
-  margin-bottom: 4em; /* Ajusta la distancia desde el borde derecho */
+  margin-bottom: 4em;
+  /* Ajusta la distancia desde el borde derecho */
 }
 
 .inputField {
@@ -208,24 +209,24 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .registerText {
   display: flex;
-  margin-top: 24px;
-  width: 152px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
   font-family: Poppins;
-  font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0em;
   text-align: left;
-  width: 388px;
-  color: #f9f9f9f0; /* Color de letra según tu indicación */
+  width: 75%;
+  color: #f9f9f9f0;
+  /* Color de letra según tu indicación */
 }
 
-.loginSendCode{
+.loginSendCode {
   margin-left: 10px;
 }
 
@@ -237,23 +238,27 @@
   letter-spacing: 0em;
   margin-left: 10px;
   text-align: left;
-  color: #0075F8; /* Color de letra según tu indicación */
-  text-decoration: none; /* Para quitar el subrayado del enlace */
+  color: #0075F8;
+  /* Color de letra según tu indicación */
+  text-decoration: none;
+  /* Para quitar el subrayado del enlace */
 }
 
 .registerLink:hover {
-  text-decoration: underline; /* Añade subrayado al pasar el ratón sobre el enlace */
+  text-decoration: underline;
+  /* Añade subrayado al pasar el ratón sobre el enlace */
 }
 
 .forgotPasswordText {
   font-size: 16px;
   line-height: 24px;
-  color: #0075f8; /* Color de letra según tu indicación */
+  color: #0075f8;
+  /* Color de letra según tu indicación */
   text-align: left;
   font-weight: 400;
 }
 
-.sentCode{
+.sentCode {
   margin-top: 24px;
 }
 
@@ -262,12 +267,11 @@
   border-radius: 10px;
   height: 50px;
   /* margin-top: -6em; */
-  width: 388px;
-  color: #ffffff; 
+  width: 20rem;
+  color: #ffffff;
   font-family: Poppins;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 30px;
   letter-spacing: 0em;
   text-align: center;
   cursor: pointer;
@@ -275,7 +279,7 @@
   border: none;
 }
 
-.containerSendCode{
+.containerSendCode {
   margin-top: -18px;
   display: flex;
 }
@@ -338,7 +342,7 @@
   height: 93px;
 }
 
-.contentInfoRestPass{
+.contentInfoRestPass {
   display: flex;
   width: 100%;
   height: 48px;
@@ -380,13 +384,25 @@
       margin-top: 1em;
       margin-bottom: 2em;
     }
+    .formContainer{
+      /* background-color: red; */
+      background-size: cover;
+    }
+  }
+}
+
+@media screen and (max-width: 383px){
+  .formContainer{
+    width: 383px;
+    height: 653px;
+    
   }
 }
 
 @media only screen and (max-width: 768px) {
   .eyeIcon {
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     margin-bottom: 2.3em;
     margin-right: 2em;
   }

@@ -1,4 +1,6 @@
 .contentQuestion{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 550px;
 }
@@ -35,12 +37,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 55px;
+    height: 20%;
 }
 
 .inputDate{
-    height: 100%;
+    height: 55px;
     padding-right: 13px;
     width: 365px;
     border-radius: 20px;
@@ -62,6 +65,7 @@
 .contentLocation{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -76,6 +80,7 @@
     background-color: transparent;
     border: 1px solid white;
     padding-left: 13px;
+    color: white;
 }
 
 .contentNumber{
@@ -109,6 +114,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 16px;
+    color: white;
 }
 
 .inputNumber{
@@ -122,6 +128,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 16px;
+    color: white;
 }
 
 .subtitleQuestion{
@@ -138,4 +145,25 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 20px;
+}
+
+.errors{
+    margin-top: 10px;
+    color: rgba(255, 157, 157, 0.986);
+    font-style: italic;
+    font-size: 14px;
+}
+
+.errorsSpan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.infoSports{
+    margin-top: 35%;
+    margin-left: 16px;
+    width: 90%;
+    color: #0075F8;
 }

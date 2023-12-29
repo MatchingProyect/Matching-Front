@@ -1,13 +1,20 @@
 import { Button } from '@mui/material'
 import styles from './Questions.module.css'
 import { useState } from 'react'
+import { useUserContext } from '../../context/UserProvider';
 
-const QuestionOne = () => {
+export const QuestionOne = () => {
 
     const [ clicked,setClicked ] = useState('');
+    const { datosUser,setDatosUser } = useUserContext();
 
     const handleClickGender = ( event ) => {
         setClicked( event.target.name );
+        setDatosUser({
+            ...datosUser,
+            gender: event.target.name,
+            questionsAnsker: true
+        })
     }
 
     //Esta funcion la cree para no repetir el codigo al tener el estado del boton que selecciona
@@ -70,5 +77,3 @@ const _stylesBtn = {
         }
     }
 }
-
-export default QuestionOne

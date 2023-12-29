@@ -1,10 +1,13 @@
-import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import styles from './ProfileSportQuestion.module.css'
-import CardSport from '../card-sport/CardSport'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useUserContext } from '../../../context/UserProvider';
+import CardSport from '../card-sport/CardSport';
+import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import styles from './ProfileSportQuestion.module.css';
 
 const ProfileSportQuestions = () => {
     
+    const { datosUser,setDatosUser } = useUserContext();
     const [ valuesSelect,setValuesSelect ] = useState({
         horario: '',
         dias: ''
@@ -17,6 +20,34 @@ const ProfileSportQuestions = () => {
             [ event.target.name ]: event.target.value
         })
     }
+
+    useEffect(() => {
+        const { nombreApellido,area,birthday,email,gender,location,pass,phone,sport } = datosUser; 
+        const nombreSplit = nombreApellido.split(' ');
+        const nombre = nombreSplit[0];
+        const apellido = nombreSplit[1];
+        const postUser = async () => {
+            try {
+                const response = await axios.post('/users',{
+                    name: nombre,
+                    lastName: apellido,
+                    gender,
+                    dayBirth: birthday,
+                    email,
+                    phone: phone,
+                    password: pass,
+                    description: location
+            });
+
+            console.log('Respuesta del servidor:', response.data );
+            } catch (error) {
+                console.error('Error al hacer el POST:', error );
+            }
+        }
+
+        postUser();
+    }, [])
+    
 
   return (
     <>

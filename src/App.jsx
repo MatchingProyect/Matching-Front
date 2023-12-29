@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { fetchClubs, fetchLocations, fetchSports, fetchUsers } from './redux/reducer';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import Home from './views/home/home.component';
+import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro'; 
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
 import Questions from './views/questions/Questions';
@@ -17,21 +17,25 @@ import CanjearPuntos from './views/canjearPuntos/CanjearPuntos.jsx';
 import Error from './views/error/Error.jsx';
 import EditDepor from './views/profile/profileEditDepor/EditDepor.jsx';
 import HistorialActividad from './views/historial/HistorialActividad/HistorialActividad.jsx';
-
-import './App.css';
 import UserDetail from './views/userDetail/UserDetail.jsx';
+import ProfileChangeEmail from './views/profile/profileEdit/ProfileChangeEmail/ProfileChangeEmail.jsx';
+import './App.css';
+import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
+import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
+import Help from './views/help/Help.jsx';
+
 
 function App() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.allUsers);
   const sports = useSelector((state) => state.user.allSports);
   const clubs = useSelector((state) => state.user.allClubs);
-  const locations = useSelector((state) => state.user.allLocations);
+  const courts = useSelector((state) => state.user.allcourts);
 
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchClubs());
-    dispatch(fetchLocations());
+    dispatch(fetchCourts());
     dispatch(fetchSports());
   }, []);
 
@@ -40,9 +44,11 @@ function App() {
       <Routes>
         <Route path="/" element={ <LandingPage /> }/>
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} locations={locations} />} />
+        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} courts={courts} />} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
+        <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />
+        <Route path="/profile/edit/resetemail" element={<ProfileChangeEmail />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
         <Route path="/profile/historial" element={<Historial />} />
         <Route path="/profile/historial/actividad" element={<HistorialActividad />} />
@@ -50,9 +56,11 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />
         <Route path="/registro" element={<Registro />} />
+        <Route path='/help' element={<Help/>} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
         <Route path='/user/:id' element={<UserDetail/>} />
+        <Route path='clubs/:id' element={<ClubsDetail/>} />
         <Route path = "*" element = {<Error />} />
       </Routes>
     </div>
