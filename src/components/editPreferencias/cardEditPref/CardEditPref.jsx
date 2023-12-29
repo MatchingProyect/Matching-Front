@@ -82,7 +82,7 @@ function CardEditPref({preferencia}) {
                 </Select>
             </FormControl>
 
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DateRangePicker', 'DateRangePicker']}>
                 <DemoItem label="Uncontrolled picker" component="DateRangePicker">
                   <DateRangePicker
@@ -96,7 +96,7 @@ function CardEditPref({preferencia}) {
                   />
                 </DemoItem>
               </DemoContainer>
-            </LocalizationProvider>
+            </LocalizationProvider> */}
         </div>
     </div>
   );
