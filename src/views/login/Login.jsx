@@ -1,10 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"; 
+import { app } from "./firebase";
+import axios from "axios";
 const Login = () => {
+  const onSubmit = async (data) => {
+   try {
+     const endpoint = "/login"
+     const result = await axios.post(endpoint, data)
+     if (result) {
+        navigate("/questions")
+      }
+   } catch (error) {
+    
+   }
+  }
+  
+
+
+
+  const [user, setUser] = useState(null);  
+
+  const auth = getAuth(app);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    if (result) {
+      navigate("/questions")
+    }
+   
+  };
+
+
   const {
     handleSubmit,
     control,
@@ -104,11 +147,11 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" onClick={onSubmit} className={styles.submitButton}>
           INICIAR SESION
         </button>
 
-        <Button sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
+        <Button onClick ={loginWithGoogle} sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
 
         <div className={styles.container}>
           <p className={styles.registerText}>

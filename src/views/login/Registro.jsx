@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
 import axios from "axios";
 
+
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const { setDatosUser,datosUser } = useUserContext();
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
 
 
   const onSubmit = async ( data ) => {
@@ -27,7 +28,11 @@ const Registro = () => {
     // alert('Datos guardados');
     try {
       const endpoint = "/register"
-     await axios.post(endpoint, data) 
+      const result = await axios.post(endpoint, data) 
+      if (result) {
+        navigate("/questions")
+      }
+      // console.log(data)
     } catch (error) {
       
     }
@@ -70,7 +75,7 @@ const Registro = () => {
         </span>
       </div>
 
-      {
+      {/* {
         datosUser.nombreApellido && datosUser.email && datosUser.pass 
         ? (
         <Link to={'/questions'}>
@@ -78,8 +83,9 @@ const Registro = () => {
         </Link>
         ) :
         <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
-      }
-
+      } */}
+       
+        <Button variant="contained" sx={{ ..._styled.btnRegister }} type="submit">REGISTRARME</Button>
       <div className={ styles.containerPs }>
         <p className={ styles.pRegister } >¿Ya tienes cuenta? <Link className={ styles.pLogin } to="/login">Inicia sesión</Link></p>
       </div>
