@@ -1,0 +1,35 @@
+.changeEmailContainer{
+    background-color: beige;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.divOne{
+    margin-top: 2vh;
+}
+.inputsDiv{
+background-color: blueviolet;
+    height: 70vh;
+    width: 83vw;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-around;
+}
+.emailDivs{
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.labels{
+    background-color: red;
+    margin: 8px;
+    font-size: 18px;
+    font-weight: 500;
+}

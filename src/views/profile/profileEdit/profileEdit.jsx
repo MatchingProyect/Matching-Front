@@ -65,7 +65,7 @@ export default function ProfileEdit() {
             email: user.email, //Confirmacion por correo Electronico
             phone: user.phone,
             creditCardWarranty: user.creaditCardWarranty, //??
-            avatarImg: user.avatarImg, //Input de tipo file para la actualizacion del perfil
+            avatarImg: user.avatarImg, //Input de tipo file para la actualizacion del perfil (Done)
             password: user.password, //Boton de reset Password
             description: user.description,
         }

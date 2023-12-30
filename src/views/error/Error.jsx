@@ -20,7 +20,7 @@ export default function Error() {
                     <Link to='/help'><button className={styles.helpBtn}>Contáctanos</button></Link>
                 </div>
             </div>
-            <NavbarLow />
+            <NavbarLow />       
         </div>
     )
 }

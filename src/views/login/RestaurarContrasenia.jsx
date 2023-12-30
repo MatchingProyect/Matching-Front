@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
-import styles from "./login.module.css";
+import styles from "./RestaurarContrasenia.module.css";
 
 const RestaurarContrasenia = ({ onSubmit }) => {
   const { handleSubmit, control, formState: { errors } } = useForm();
@@ -20,7 +20,7 @@ const RestaurarContrasenia = ({ onSubmit }) => {
         <div className={styles.inputContainer}>
           <h2 className={styles.h2Title}>Restaurar Contraseña</h2>
           <div className={ styles.contentInfoRestPass }>
-            <p className={ styles.infoRestPass } >Introduce tu email y te enviaremos un codigo para que restaures tu contraseña</p>
+            <p className={ styles.infoRestPass } >Introduce tu email para recibir un codigo y restablecer tu contraseña.</p>
           </div>
           <div className={styles.contentController}>
             <label className={`${styles.labels} ${styles.emailLabel}`}>Email</label>
@@ -49,13 +49,12 @@ const RestaurarContrasenia = ({ onSubmit }) => {
               Enviar Código
             </button>
           </Link>
-        </div>
-
-        <div className={styles.containerSendCode }>
+          <div className={styles.containerSendCode }>
           <p className={styles.registerText}>
-            ¿Ya tienes cuenta? <Link className={ styles.loginSendCode } to="/login">Inicia sesión</Link>
+            ¿Ya tienes cuenta? <Link className={ styles.loginSendCode } to="/login">Iniciar sesión</Link>
           </p>
         </div>
+        </div>        
       </form>
     </>
   );
