@@ -1,10 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "./firebase";
+import axios from "axios";
 
 const Login = () => {
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const endpoint = "/login";
+      const result = await axios.post(endpoint, data);
+
+      if (result) {
+        const isNewUser = result.data.isNewUser;
+
+        if (isNewUser) {
+          navigate("/questions");
+        } else {
+          navigate("/home");
+        }
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+  
+      const isNewUser = result?.additionalUserInfo?.isNewUser;
+  
+      if (isNewUser) {
+        navigate("/questions");
+      } else {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión con Google:", error);
+    }
+  };
+
   const {
     handleSubmit,
     control,
@@ -104,11 +146,11 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" onClick={onSubmit} className={styles.submitButton}>
           INICIAR SESION
         </button>
 
-        <Button sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
+        <Button onClick ={loginWithGoogle} sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
 
         <div className={styles.container}>
           <p className={styles.registerText}>

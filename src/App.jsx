@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <LandingPage /> }/>
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} courts={courts} />} />
+        <Route path="/home" element={<Home/>} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />
