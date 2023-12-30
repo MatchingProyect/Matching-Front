@@ -13,11 +13,11 @@ const Questions = () => {
     const [ count,setCount ] = useState( 1 );
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if( !datosUser.nombreApellido || !datosUser.email || !datosUser.pass ){
-            navigate('/login');
-        }
-    }, [ datosUser,history ])
+    // useEffect(() => {
+    //     if( !datosUser.nombreApellido || !datosUser.email || !datosUser.pass ){
+    //         navigate('/login');
+    //     }
+    // }, [ datosUser,history ])
     
 
     const handleCountQuestion = () => {
