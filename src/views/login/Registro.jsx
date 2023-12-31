@@ -6,13 +6,14 @@ import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
 import axios from "axios";
 
-
+// El register ya crea los usuarios en la base de datos 
+// Y tambien te manda a questions si es que se hace exitosamente
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const { setDatosUser,datosUser } = useUserContext();
+  const { setDatosUser,datosUser } = useUserContext(); // Estado global aca :)
   const navigate = useNavigate()
-
+  // esto es para ver o no la pass
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -26,6 +27,8 @@ const Registro = () => {
     //   pass: data.contrasenia
     // });
     // alert('Datos guardados');
+
+    // Si el registro funciona aca te manda a questions
     try {
       const endpoint = "/register"
       const result = await axios.post(endpoint, data) 
@@ -37,7 +40,8 @@ const Registro = () => {
       
     }
 
-  }
+  } 
+  // Aca esta el formulario del registro, no se deberia tocar nada
 
   return (
     <form className={ styles.formContainer } onSubmit={ handleSubmit( onSubmit )}>
