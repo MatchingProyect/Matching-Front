@@ -5,7 +5,8 @@ const initialState = {
     allUsers: [],
     allSports: [],
     allClubs: [],
-    allCourts: []
+    allCourts: [],
+    user: []
 };
 
 export const userSlice = createSlice({
@@ -26,14 +27,26 @@ export const userSlice = createSlice({
        },
        setProfiles: (state, action) =>{
         state.allProfiles = action.payload
+       },
+       setUser: (state, action)=>{
+        state.user = action.payload
        }
     }
 })
 
+export const fetchUser = (id)=>async(dispatch)=>{
+    try {
+        const {data} = await axios(`/users/${id}`)
+        if(data.status) dispatch(setUser(data.userFound))
+    } catch (error) {
+        throw error.message
+    }
+}
+
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
-        //  const {data} = await axios('/profiles')
-        // if(data.status) dispatch(setProfiles(data.allProfiles))
+         const {data} = await axios('/profiles')
+        if(data.status) dispatch(setProfiles(data.allProfiles))
     } catch (error) {
         throw error.message
     }
@@ -41,32 +54,32 @@ export const fetchProfiles = ()=>async(dispatch)=>{
 
 export const fetchUsers = ()=>async(dispatch)=>{
     try {
-        //  const {data} = await axios('/users')
-        // if(data.status) dispatch(setUsers(data.allUsers))
+         const {data} = await axios('/users')
+        if(data.status) dispatch(setUsers(data.allUsers))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchSports = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('/sports')
-        // if(data.status) dispatch(setSports(data.allSports))
+        const {data} = await axios('/sports')
+        if(data.status) dispatch(setSports(data.allSports))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchCourts = ()=>async(dispatch)=>{
     try {
-        // const {data} = await axios('/courts')
-        // if(data.status) dispatch(setCourts(data.allCourts))
+        const {data} = await axios('/courts')
+        if(data.status) dispatch(setCourts(data.allCourts))
     } catch (error) {
         throw error.message
     }
 }
 export const fetchClubs = ()=>async(dispatch)=>{
     try {
-        //  const {data} = await axios('/clubs')
-        //  if(data.status) dispatch(setClubs(data.allClubs))
+         const {data} = await axios('/clubs')
+         if(data.status) dispatch(setClubs(data.allClubs))
     } catch (error) {
         throw error.message
     }

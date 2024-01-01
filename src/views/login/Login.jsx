@@ -6,19 +6,23 @@ import { Button } from "@mui/material";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "./firebase";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "../../redux/reducer";
+
 
 const Login = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
-      const result = await axios.post(endpoint, data);
+      const {data} = await axios.post(endpoint, data);
 
-      if (result) {
-        const isNewUser = result.data.isNewUser;
-
+      if (data) {
+        const isNewUser = data.userLogeado.isNewUser;
+        const id = data.userLogeado.id
+        dispatch(fetchUser(id));
         if (isNewUser) {
           navigate("/questions");
         } else {
