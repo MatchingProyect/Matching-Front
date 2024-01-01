@@ -4,7 +4,8 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: #203144;
+    background-color: black;
+    /* background-color: #203144; */
 }
 
 .logo{

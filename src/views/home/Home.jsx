@@ -6,6 +6,8 @@ import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import NavbarLow from '../../components/navbarLow/navbarLow';
 
 export default function Home() {
     const users = [
@@ -56,8 +58,9 @@ export default function Home() {
             description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
             pais: "Colombia",
             deportes: ["fitness", "nutrición"]
-        }    
+        }
     ];
+    const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Cordova', 'Lima', 'Trujillo', 'Bogota', 'Cali'];
 
     const sports = [
         {
@@ -81,8 +84,32 @@ export default function Home() {
             clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
         }
 
-    ]
- 
+    ];
+
+    const clubs = [
+        {
+            name: "Marriot Tennis",
+            sport: ['Tenis'],
+        },
+        {
+            name: "The Courtyard",
+            sport: ['Fútbol', 'Baloncesto'],
+        },
+        {
+            name: "Country Club",
+            sport: ['Baloncesto'],
+        },
+        {
+            name: "Regis Club",
+            sport: ['Padel'],
+        },
+        {
+            name: "Big Smoke Club",
+            sport: ['Tenis'],
+        }
+
+    ];
+
     const [selectedOption, setSelectedOption] = useState('users');
 
     const handleButtonClick = (option) => {
@@ -92,12 +119,43 @@ export default function Home() {
 
     return (
         <div className={styles.containerHome}>
-            <div className={styles.containerTitle}>
-                <button onClick={() => handleButtonClick('users')}>Users</button>
-                <button onClick={() => handleButtonClick('sports')}>Sports</button>
-                <button onClick={() => handleButtonClick('clubs')}>Clubs</button>
+            <div className={styles.header}>
+                <h1 className={styles.title}>matching</h1>
+                <Link to='/profile'><div className={styles.icon}>
+                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
+                </div></Link>
             </div>
+            <div className={styles.homeComponent}>
+                <div className={styles.buscarReserva}>
+                    <h1 className = {styles.compTitle}>Encuentra una partida</h1>
+                    <div className = {styles.filters}>
+                        <div className = {styles.filter}>
+                        <label>Ciudad</label>
+                            <select>
+                                <option disabled></option>
+                                {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
+                            </select>
+                        </div>
+                        <div className = {styles.filter}>
+                            <label>Deporte</label>
+                            <select>
+                            <option disabled></option>
+                                {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
+                            </select>
+                        </div>
+                    </div>
+                    <button className = {styles.buscarBtn}>Buscar</button>
+                </div>
+                <div className={styles.newReserva}>
+                    <button className = {styles.btnNuevaReserva}>Nueva Reserva</button>
+                </div>
 
+            </div>
+            <div className={styles.containerTitle}>
+                <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
+                <button onClick={() => handleButtonClick('sports')} className={styles.NavBtn}>Sports</button>
+                <button onClick={() => handleButtonClick('clubs')} className={styles.NavBtn}>Clubs</button>
+            </div>
             <div >
                 {selectedOption === 'users' && (
                     <div className={styles.containerCards}>
@@ -114,23 +172,15 @@ export default function Home() {
                         ))}
                     </div>
                 )}
-
-                {/* Agrega más lógica de renderizado para 'clubs' si es necesario */}
+                {selectedOption === 'clubs' && (<div>
+                    {clubs?.map((club) => {
+                        return (
+                            <CardClub club={club} />
+                        )
+                    })}
+                </div>)}
             </div>
-
-{/*            
-            {clubs?.map((club) => {
-                return (
-                    <CardClub club={club} />
-                )
-            })}
-            {courts?.map((court) => {
-                return(
-                    <CardCourt court={court} />
-                )
-            })} */}
-
-
+            <NavbarLow />
         </div>
-    )
-}
+    );
+};

@@ -1,0 +1,85 @@
+.formContainer{
+    background-color: #203144;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logo{
+    width: 20vw;
+    min-width: 400px;
+    height: 10vh;
+    min-height: 100px;
+    margin-bottom: 3vw;
+
+}
+.inputContainer{
+    width: 80vw;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.551);
+}
+
+.h2Title{
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 3vh;
+    margin-top: vh;
+
+}
+
+.contentInfoRestPass{
+    color: white;
+    width: 75vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+.emailLabel{
+    color: white;
+    font-size: 18px;
+    margin-right: 5vw;
+}
+
+.inputEmail{
+    border-radius: 10px;
+    height: 35px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.551);
+
+}
+
+.contentController{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2vh;
+
+}
+
+.submitButton{
+    background-color: none;
+    width: 30vw;
+    height: 5vh;
+    border-radius: 10px;
+    margin-bottom: 2vh;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+
+.registerText{
+    color: white;
+}
+

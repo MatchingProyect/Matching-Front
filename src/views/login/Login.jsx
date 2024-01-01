@@ -17,12 +17,11 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
-      const {data} = await axios.post(endpoint, data);
+      const result = await axios.post(endpoint, data);
 
-      if (data) {
-        const isNewUser = data.userLogeado.isNewUser;
-        const id = data.userLogeado.id
-        dispatch(fetchUser(id));
+      if (result) {
+        const isNewUser = result.data.isNewUser;
+
         if (isNewUser) {
           navigate("/questions");
         } else {
@@ -33,12 +32,23 @@ const Login = () => {
       console.error("Error al iniciar sesión:", error);
     }
   };
-
+  // Esta es la funcion para iniciar con google, aca se hace la logica
+  // Para verificar si el user es nuevo o no y de ahi te manda a questions 
+  // o al home :D Esta logica es la que deberia conectarse con el back,
+  // auntentificar si el usuario existe o es nuevo, si existe va al home,
+  // si es nuevo va a questions (CON GOOGLE RECORDAR) ya que el login normal
+  // manda a /home directo porque ya estaria registrado el user
+  // y en caso de que el user no este registrado directamente lo manda a register
+  // O deberia al menos (tengo la cabeza quemada x samir xd)
+  // Que hay que hacer? la firebase primero, para verificar los inicios con google
+  // luego que esos usuarios se creen en la base de datos, luego
+  // el firebase.js para autentificar esos usuarios
+  // fin
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-  
+      // aca verifica si es nuevo o no
       const isNewUser = result?.additionalUserInfo?.isNewUser;
   
       if (isNewUser) {
@@ -50,7 +60,8 @@ const Login = () => {
       console.error("Error al iniciar sesión con Google:", error);
     }
   };
-
+  // Esto es la config del form y los campos, no habria que tocar nada de aca
+  // para abajo
   const {
     handleSubmit,
     control,

@@ -1,18 +1,41 @@
 
 .containerHome{
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
 }
+.header{
+    background-color: #203144;
+width: 100vw;
+height: 10vh;
+display:flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+}
+
+.title{
+    color: white;
+    font-size: 35px;
+    margin-left: 25px;
+
+}
+.imgIcon{
+ max-width: 45px;
+ max-height: 45px;
+ border-radius: 50%;
+ margin-right: 20px;
+
+}
+
+
 .containerTitle{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items:center;
-    gap: 1rem;
-    margin: 1rem 1rem;
 }
 
 .containerCards {
@@ -20,4 +43,58 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+}
+
+.homeComponent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.buscarReserva{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.compTitle{
+    margin: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.filters{
+    display: flex;
+    flex-direction: row;
+}
+.filter{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    margin-bottom: 15px;
+}
+
+.buscarBtn{
+    margin: 10px;
+    width: 45vw;
+    height: 30px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 5px ;
+    cursor: pointer;
+    background-color: rgb(38, 38, 38);
+    color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
+}
+.btnNuevaReserva{
+    width: 45vw;
+    height: 30px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 5px ;
+    cursor: pointer;
+    margin-bottom: 30px ;
+    background-color: rgb(38, 38, 38);
+    color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
 }
