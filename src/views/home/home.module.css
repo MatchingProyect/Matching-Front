@@ -3,17 +3,20 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;    
     /* align-items: center; */
 }
 .header{
     background-color: #203144;
-width: 100vw;
-height: 10vh;
-display:flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
+    width: 100vw;
+    height: 8vh;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.logoContainer{
+    margin-left: -20px;
 }
 
 .title{
@@ -32,10 +35,32 @@ justify-content: space-between;
 
 
 .containerTitle{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display:grid;
+    grid-template-columns:  1fr 1fr 1fr;
     align-items:center;
+    margin: 1rem 0;
+}
+
+.NavBtn {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.NavBtn::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #E7B04B 0%, #F2E849 100%);
+    display: none;  
+}
+
+.NavBtn.selected::before {
+    display: block;  
 }
 
 .containerCards {

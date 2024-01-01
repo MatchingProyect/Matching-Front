@@ -111,19 +111,34 @@ export default function Home() {
     ];
 
     const [selectedOption, setSelectedOption] = useState('users');
+    const [selectedSection, setSelectedSection] = useState('users');
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
+        setSelectedSection(option);
     };
 
 
     return (
         <div className={styles.containerHome}>
             <div className={styles.header}>
-                <h1 className={styles.title}>matching</h1>
-                <Link to='/profile'><div className={styles.icon}>
-                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
-                </div></Link>
+                <div className={styles.logoContainer}>
+                    <img
+                        src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
+                        alt="Logo"
+                        className={styles.logo}
+                    />
+                </div>
+                <Link to='/profile'>
+                    <div className={styles.icon}>
+                        <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
+                    </div>
+                </Link>
+            </div>
+            <div className={styles.containerTitle}>
+                <button onClick={() => handleButtonClick('users')} className={`${styles.NavBtn} ${selectedSection === 'users' ? styles.selected : ''}`}>Users</button>
+                <button onClick={() => handleButtonClick('sports')} className={`${styles.NavBtn} ${selectedSection === 'sports' ? styles.selected : ''}`}>Sports</button>
+                <button onClick={() => handleButtonClick('clubs')} className={`${styles.NavBtn} ${selectedSection === 'clubs' ? styles.selected : ''}`}>Clubs</button>
             </div>
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
@@ -151,11 +166,7 @@ export default function Home() {
                 </div>
 
             </div>
-            <div className={styles.containerTitle}>
-                <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
-                <button onClick={() => handleButtonClick('sports')} className={styles.NavBtn}>Sports</button>
-                <button onClick={() => handleButtonClick('clubs')} className={styles.NavBtn}>Clubs</button>
-            </div>
+
             <div >
                 {selectedOption === 'users' && (
                     <div className={styles.containerCards}>
