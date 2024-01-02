@@ -125,7 +125,7 @@ const SearchBarUsers = () => {
       <button className={styles.buscarBtn} onClick={handleClickSearch}>
         Buscar
       </button>
-      <button onClick={resetFriends}>💫</button>
+      <button onClick = {resetFriends} className = {styles.resetBtn}>💫</button>
       {/* {userNotFound && (
         <p className={styles.errorText}>No se encontraron usuarios.</p>
       )} */}
