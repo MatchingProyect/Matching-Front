@@ -1,0 +1,11 @@
+.divCardReservation{
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+}
+.compTitle{
+    font-size: 35px;
+    text-align: center;
+    margin: 3vh;
+}
+

@@ -5,8 +5,8 @@ import CardsReservation from '../cards-reservations/CardsReservation';
 export default function CardReservation({reservations}){
     console.log(reservations);
     return(
-        <div>
-            <h1>Reservaciones</h1>
+        <div className = {styles.divCardReservation}>
+            <h1 className = {styles.compTitle}>Reservaciones</h1>
             {reservations?.map((element) => <CardsReservation reservations = {element}/>)}
         </div>
     )

@@ -7,7 +7,6 @@ import { fetchClubs } from '../../redux/reducer'
 
 
 const CardClub = ({club}) => {
-
   const [editClub, setEditClub] = useState(false)
   const [detailClub, setDetailClub] = useState(false)
   const dispatch = useDispatch()

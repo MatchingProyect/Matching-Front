@@ -202,6 +202,7 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "14:00:00"],
             dateTimeEnd: ["31/12/2023", "15:00:00"],
             totalCost: 40,
+            sport: 'Tennis',
             ciudad: 'Santiago de Chile',
             club: 'Marriot Tennis',
             court: 'Tennis Yard 2',
@@ -211,6 +212,7 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "16:00:00"],
             dateTimeEnd: ["31/12/2023", "17:00:00"],
             totalCost: 75,
+            sport: 'Baloncesto',
             ciudad: 'Buenos Aires',
             club: 'Country Club',
             court: 'Basket Field 1',
@@ -220,10 +222,11 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "17:00:00"],
             dateTimeEnd: ["31/12/2023", "18:00:00"],
             totalCost: 80,
+            sport: 'Padel',
             ciudad: 'Lima',
             club: 'Regis Club',
             court: 'Padel Field 1',
-        },
+        }
     ]
 
 
@@ -337,7 +340,7 @@ export default function Home() {
         }
 
     ];
-
+    const [reservToRender, setReservToRender] = useState(reservations);
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
 
@@ -345,6 +348,11 @@ export default function Home() {
         setSelectedOption(option);
         setSelectedSection(option);
     };
+    const handleFilterCiudad = (event) => {
+        let value = event.target.value;
+        let result = reservations.filter((element) => element.ciudad == value);
+        setReservToRender(result);
+    }
 
     return (
         <div className={styles.containerHome}>
@@ -360,7 +368,7 @@ export default function Home() {
                     <div className = {styles.filters}>
                         <div className = {styles.filter}>
                         <label>Ciudad</label>
-                            <select>
+                            <select onChange = {handleFilterCiudad}>
                                 <option disabled></option>
                                 {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
                             </select>
@@ -380,7 +388,7 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                    <button className = {styles.buscarBtn}>Buscar</button>
+                    {/* <button className = {styles.buscarBtn}>Buscar</button> */}
                 </div>
                 <div className={styles.newReserva}>
                     <button className = {styles.btnNuevaReserva}>Nueva Reserva</button>
@@ -388,9 +396,7 @@ export default function Home() {
 
             </div>
             <div className = {styles.reservationsContainer}>
-                <CardReservation reservations = {reservations}/>
-
-
+                <CardReservation reservations = {reservToRender}/>
             </div>
             <div className={styles.containerTitle}>
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
