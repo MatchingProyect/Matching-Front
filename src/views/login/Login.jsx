@@ -54,7 +54,6 @@ const Login = () => {
       console.log("googleAccessToken",googleAccessToken)
 
       const result = await authenticateWithFirebase(googleAccessToken);
-      console.log("result",result)
 
 
     }).catch((error) => {
@@ -73,7 +72,7 @@ const Login = () => {
       console.log("Usuario autenticado en Firebase:");
       await saveUserToFirestore(authResult.user);
 
-      return authResult
+      return true
     } catch (error) {
       console.error("Error al autenticar con Firebase:", error);
     }
@@ -81,23 +80,34 @@ const Login = () => {
   
 
   const saveUserToFirestore = async (user) => {
-    const { uid, email, displayName, photoURL } = user;
-    console.log(uid, email, displayName, photoURL);
+    const { uid, email, displayName } = user;
   
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
   
     try {
-      await setDoc(userRef, {
-        email: email,
-        displayName: displayName,
-      });
+      // Verificar si el usuario ya existe en Firestore
+      const userSnapshot = await getDoc(userRef);
   
-      console.log('Usuario guardado en Firestore con éxito');
+      if (userSnapshot.exists()) {
+        console.log('Usuario ya existe en Firestore');
+        navigate("/home");
+
+      } else {
+        // El usuario no existe, así que procedemos a guardarlo
+        await setDoc(userRef, {
+          email: email,
+          displayName: displayName,
+        });
+        navigate("/questions");
+
+        console.log('Usuario guardado en Firestore con éxito');
+      }
     } catch (error) {
-      console.error('Error al guardar usuario en Firestore:', error);
+      console.error('Error al guardar/verificar usuario en Firestore:', error);
     }
   };
+  
   
 
 

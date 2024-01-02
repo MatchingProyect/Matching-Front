@@ -9,7 +9,6 @@ export default function CardsReservation({reservations}){
             <p className = {styles.reservInfo}>{reservations.ciudad}</p>
             <p className = {styles.reservInfo}>{reservations.dateTimeStart[1]} - {reservations.dateTimeEnd[1]}</p>
             <p className = {styles.reservInfo}>${reservations.totalCost}</p>
-            
         </div>
-    )
-}
+    );
+};
