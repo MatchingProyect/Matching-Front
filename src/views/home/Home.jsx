@@ -8,6 +8,8 @@ import CardCourt from '../cardCourt/CardCourt';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
+import CardReservation from '../../components/card-reservations/CardReservation';
+import Solicitudes from '../solucitudes/Solicitudes';
 
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
@@ -577,7 +579,7 @@ export default function Home() {
                 )}
 
             </div>
-            {/* <NavbarLow /> */}
+            <NavbarLow />
         </div>
     );
 };

@@ -7,7 +7,7 @@ import { app } from './../../FireBase/fireBase.config';
 import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
 import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
-import { fetchUser } from "../../redux/reducer";
+import { fetchUsers } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 
 const Login = () => {
