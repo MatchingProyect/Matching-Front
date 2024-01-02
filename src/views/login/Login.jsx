@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom"; // Actualiza la importación aquí
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import axios from "axios";
 import { app } from './../../FireBase/fireBase.config';
@@ -75,7 +75,6 @@ const Login = () => {
 
       return authResult
     } catch (error) {
-      // Manejar errores de autenticación en Firebase
       console.error("Error al autenticar con Firebase:", error);
     }
   };
@@ -87,13 +86,11 @@ const Login = () => {
   
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
-    console.log(userRef, "userRef");
   
     try {
       await setDoc(userRef, {
         email: email,
         displayName: displayName,
-        // Agrega otros campos según tus necesidades, como 'photoURL'
       });
   
       console.log('Usuario guardado en Firestore con éxito');
@@ -236,7 +233,7 @@ const Login = () => {
 
         <button
           type="button"
-          nClick={handleGoogleLogin}
+          onClick={handleGoogleLoginClick}
           className={styles.googleLoginButton}
         >
           INICIAR SESION CON GOOGLE
