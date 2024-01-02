@@ -6,6 +6,9 @@ const initialState = {
     allSports: [],
     allClubs: [],
     allCourts: [],
+    allFriends: [],
+    allLocations: [],
+    allReservations: [],
     user: []
 };
 
@@ -27,32 +30,33 @@ export const userSlice = createSlice({
        },
        setProfiles: (state, action) =>{
         state.allProfiles = action.payload
+       },
+       setFriends: (state, action) => {
+        state.allFriends = action.payload;
+       },
+       setUser: (state, action) =>{
+        state.user = action.payload;
        }
     }
 })
 
-export const fetchUser = (id)=>async(dispatch)=>{
-    try {
-        const {data} = await axios(`/users/${id}`)
-        if(data.status) dispatch(setUser(data.userFound))
-    } catch (error) {
-        throw error.message
-    }
-}
-
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
          const {data} = await axios('/profiles')
-        if(data.status) dispatch(setProfiles(data.allProfiles))
+        if(data.status) {
+            dispatch(setProfiles(data.allProfiles))
+        }
     } catch (error) {
         throw error.message
     }
 }
 
-export const fetchUsers = ()=>async(dispatch)=>{
+export const fetchUsers = (page)=>async(dispatch)=>{
     try {
-         const {data} = await axios('/users')
-        if(data.status) dispatch(setUsers(data.allUsers))
+        const {data} = await axios(`/users?page=${page}`);
+        if(data.status) {
+            dispatch(setUsers(data.allUsers))
+        }
     } catch (error) {
         throw error.message
     }
@@ -91,6 +95,14 @@ export const fetchClubs = ()=>async(dispatch)=>{
         throw error.message
     }
 }
+export const fetchUser = (id)=>async(dispatch)=>{
+    try {
+        const {data} = await axios(`/users/${id}`)
+        if(data.status) dispatch(setUser(data.userFound))
+    } catch (error) {
+        throw error.message
+    }
+}
 
-export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends } = userSlice.actions;
+export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations, setUser } = userSlice.actions;
 export default userSlice.reducer;

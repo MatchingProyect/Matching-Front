@@ -3,17 +3,33 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;    
     /* align-items: center; */
+}
+.containerHeader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
+    z-index: 1000;
 }
 .header{
     background-color: #203144;
-width: 100vw;
-height: 10vh;
-display:flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
+    width: 100vw;
+    height: 10vh;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerContenido{
+    margin-top: 7.5rem;
+}
+
+.logoContainer{
+    margin-left: -20px;
 }
 
 .title{
@@ -32,14 +48,37 @@ justify-content: space-between;
 
 
 .containerTitle{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display:grid;
+    grid-template-columns:  1fr 1fr 1fr;
     align-items:center;
+    margin: 1rem 0;
+}
+
+.NavBtn {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.NavBtn::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #E7B04B 0%, #F2E849 100%);
+    display: none;  
+}
+
+.NavBtn.selected::before {
+    display: block;  
 }
 
 .containerCards {
     margin: 1rem 1rem;
+    margin-bottom: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -74,18 +113,7 @@ justify-content: space-between;
     margin-bottom: 15px;
 }
 
-.buscarBtn{
-    margin: 10px;
-    width: 45vw;
-    height: 30px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 5px ;
-    cursor: pointer;
-    background-color: rgb(38, 38, 38);
-    color: white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
-}
+
 .btnNuevaReserva{
     width: 45vw;
     height: 30px;

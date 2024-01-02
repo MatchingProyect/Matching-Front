@@ -18,7 +18,7 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     try {
-      const endpoint = "/verifyUser";
+      const endpoint = "/loginGoogle";
       const result = await axios.post(endpoint, { uid: user.uid });
 
       if (result && result.data.isNewUser) {

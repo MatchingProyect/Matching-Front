@@ -1,67 +1,160 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
-import { Button } from "@mui/material";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from "./firebase";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { app } from './../../FireBase/fireBase.config';
+import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
+import {gapi} from 'gapi-script';
+import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { fetchUser } from "../../redux/reducer";
-
+import {useDispatch} from "react-redux";
 
 const Login = () => {
-  const auth = getAuth(app);
+  const [emailValue, setEmailValue] = useState(""); 
+  const [password, setPassword] = useState(""); 
+
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const onSubmit = async (data) => {
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    initializeGoogleAuth();
+
+  }, [])
+
+  const initializeGoogleAuth = () => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: "1061662234396-o558vqrpml1bpo2rut38qufj859kgtpg.apps.googleusercontent.com",
+      });
+    };
+
+    gapi.load("client:auth2", start);
+  };
+
+
+  const handleGoogleLoginClick = () => {
+    // Crear un objeto de autenticación de Google
+    const auth2 = gapi.auth2.getAuthInstance();
+  
+    // Iniciar el proceso de inicio de sesión de Google
+    auth2.signIn().then(async (googleUser) => {
+      console.log('googleUser', googleUser);
+      console.log('isSignedIn', auth2.isSignedIn.get());
+
+      const profile = googleUser.getBasicProfile();
+  
+      const user = {
+        displayName: profile.getName(),
+        email: profile.getEmail(),
+        photoURL: profile.getImageUrl(),
+        uid: profile.getId(),
+      };
+
+      console.log(user)
+      // También puedes obtener el token de acceso de Google
+      const googleAccessToken = googleUser.xc.access_token;
+      console.log("googleAccessToken",googleAccessToken)
+
+      const result = await authenticateWithFirebase(googleAccessToken);
+
+
+    }).catch((error) => {
+      console.error('Error en el inicio de sesión de Google:', error);
+    });
+  };
+
+  const authenticateWithFirebase = async (googleAccessToken) => {
     try {
-      const endpoint = "/login";
-      const result = await axios.post(endpoint, data);
 
+      const auth = getAuth(app);
+      const credential = GoogleAuthProvider.credential(null, googleAccessToken);
+      const authResult = await signInWithCredential(auth, credential);
+
+      // El usuario ha sido autenticado correctamente en Firebase
+      console.log("Usuario autenticado en Firebase:");
+      await saveUserToFirestore(authResult.user);
+
+      return true
+    } catch (error) {
+      console.error("Error al autenticar con Firebase:", error);
+    }
+  };
+  
+
+  const saveUserToFirestore = async (user) => {
+    const { uid, email, displayName } = user;
+  
+    const db = getFirestore(app);
+    const userRef = doc(db, 'users', uid);
+  
+    try {
+      // Verificar si el usuario ya existe en Firestore
+      const userSnapshot = await getDoc(userRef);
+  
+      if (userSnapshot.exists()) {
+        console.log('Usuario ya existe en Firestore');
+        navigate("/home");
+
+      } else {
+        // El usuario no existe, así que procedemos a guardarlo
+        await setDoc(userRef, {
+          email: email,
+          displayName: displayName,
+        });
+
+        onRegister ({
+          email: email,
+          displayName: displayName,
+        })
+
+        console.log('Usuario guardado en Firestore con éxito');
+      }
+    } catch (error) {
+      console.error('Error al guardar/verificar usuario en Firestore:', error);
+    }
+  };
+  
+  
+  const onRegister = async ( data ) => {
+    try {
+      const endpoint = "/users"
+      const result = await axios.post(endpoint, data) 
       if (result) {
-        const isNewUser = result.data.isNewUser;
+        console.log("register success")
+        navigate("/questions")
+      }
+    } catch (error) {
+      throw error.message;
+    }
 
-        if (isNewUser) {
-          navigate("/questions");
-        } else {
-          navigate("/home");
-        }
+  } 
+
+
+  const onSubmit = async () => {
+    try {
+      const user= {
+        email: emailValue,
+        password: password
+      }
+      const endpoint = "/login";
+      const response = await axios.post(endpoint, user);
+      console.log(response)
+
+      if (response.data) {
+        const isNewUser = response.data.isNewUser;
+        
+        const id = response.data.userLogeado.id
+        if(id) dispatch(fetchUser(id))
+
+        navigate("/home")
+        
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
   };
-  // Esta es la funcion para iniciar con google, aca se hace la logica
-  // Para verificar si el user es nuevo o no y de ahi te manda a questions 
-  // o al home :D Esta logica es la que deberia conectarse con el back,
-  // auntentificar si el usuario existe o es nuevo, si existe va al home,
-  // si es nuevo va a questions (CON GOOGLE RECORDAR) ya que el login normal
-  // manda a /home directo porque ya estaria registrado el user
-  // y en caso de que el user no este registrado directamente lo manda a register
-  // O deberia al menos (tengo la cabeza quemada x samir xd)
-  // Que hay que hacer? la firebase primero, para verificar los inicios con google
-  // luego que esos usuarios se creen en la base de datos, luego
-  // el firebase.js para autentificar esos usuarios
-  // fin
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      // aca verifica si es nuevo o no
-      const isNewUser = result?.additionalUserInfo?.isNewUser;
-  
-      if (isNewUser) {
-        navigate("/questions");
-      } else {
-        navigate("/home");
-      }
-    } catch (error) {
-      console.error("Error al iniciar sesión con Google:", error);
-    }
-  };
-  // Esto es la config del form y los campos, no habria que tocar nada de aca
-  // para abajo
+
   const {
     handleSubmit,
     control,
@@ -73,11 +166,12 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+
   return (
     <div className={styles.allContainer}>
       <form
         className={styles.formContainer}
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.logoContainer}>
           <img
@@ -86,7 +180,6 @@ const Login = () => {
             className={styles.logo}
           />
         </div>
-
 
         <div className={styles.inputContainer}>
           <div className={styles.containerTitleLogin}>
@@ -97,7 +190,7 @@ const Login = () => {
               Email
             </label>
             <Controller
-              name="email"
+              name="emailValue"
               control={control}
               rules={{
                 required: "Este campo es requerido",
@@ -113,6 +206,8 @@ const Login = () => {
                     type="email"
                     {...field}
                     inputMode="email"
+                    value={emailValue} // Asigna el valor del estado aquí
+                    onChange={(e) => setEmailValue(e.target.value)} // Actualiza el estado en el cambio
                   />
                   {errors.email && <p>{errors.email.message}</p>}
                 </>
@@ -140,6 +235,8 @@ const Login = () => {
                 <>
                   <input
                     className={styles.inputPass}
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
                     type={showPassword ? "text" : "password"}
                     {...field}
                   />
@@ -161,11 +258,14 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" onClick={onSubmit} className={styles.submitButton}>
-          INICIAR SESION
+        <button
+          type="button"
+          onClick={handleGoogleLoginClick}
+          className={styles.googleLoginButton}
+        >
+          INICIAR SESION CON GOOGLE
         </button>
 
-        <Button onClick ={loginWithGoogle} sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
 
         <div className={styles.container}>
           <p className={styles.registerText}>
@@ -183,11 +283,5 @@ const Login = () => {
     </div>
   );
 };
-
-const _styled = {
-  signWithGoogle: {
-    marginTop: '15px',
-  }
-}
 
 export default Login;

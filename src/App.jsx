@@ -26,18 +26,6 @@ import Help from './views/help/Help.jsx';
 
 
 function App() {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.allUsers);
-  const sports = useSelector((state) => state.user.allSports);
-  const clubs = useSelector((state) => state.user.allClubs);
-  const courts = useSelector((state) => state.user.allcourts);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-    dispatch(fetchClubs());
-    dispatch(fetchCourts());
-    dispatch(fetchSports());
-  }, []);
 
   return (
     <div className="App">
