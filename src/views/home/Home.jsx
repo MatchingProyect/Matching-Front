@@ -1,15 +1,15 @@
-// import React from 'react';
+import React from 'react';
 import styles from './home.module.css';
 import CardUser from '../cardUsers/CardUser';
 import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
-import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import CardReservation from '../../components/card-reservations/CardReservation';
+import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import Solicitudes from '../solucitudes/Solicitudes';
+import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
 
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
@@ -298,60 +298,8 @@ export default function Home() {
             club: 'Regis Club',
             court: 'Campo 2',
         },
-    ]
-
-
-
-    const users = [
-        {
-            name: "John Smith",
-            description: "Apasionado por el deporte en Argentina, disfruta del pádel y el fútbol.",
-            pais: "Argentina",
-            deportes: ["padel", "futbol"]
-        },
-        {
-            name: "Maria García",
-            description: "Fanática del baloncesto en España, practica baloncesto y atletismo con gran entusiasmo.",
-            pais: "España",
-            deportes: ["baloncesto", "atletismo"]
-        },
-        {
-            name: "Carlos Rodríguez",
-            description: "Amante del tennis en México, su pasión incluye el tennis y la natación.",
-            pais: "México",
-            deportes: ["tennis", "natación"]
-        },
-        {
-            name: "Laura Pérez",
-            description: "Entusiasta del ciclismo en Colombia, encuentra alegría en el ciclismo y el yoga.",
-            pais: "Colombia",
-            deportes: ["ciclismo", "yoga"]
-        },
-        {
-            name: "Elena Torres",
-            description: "Aficionada al surf en España, disfruta de las olas y practica yoga para mantenerse en forma.",
-            pais: "España",
-            deportes: ["surf", "yoga"]
-        },
-        {
-            name: "Ricardo Navarro",
-            description: "Entrenador de fútbol en Argentina, apasionado por desarrollar habilidades en jóvenes futbolistas.",
-            pais: "Argentina",
-            deportes: ["fútbol", "entrenamiento"]
-        },
-        {
-            name: "Isabel Jiménez",
-            description: "Amante del senderismo en México, encuentra paz y aventura explorando la naturaleza.",
-            pais: "México",
-            deportes: ["senderismo", "camping"]
-        },
-        {
-            name: "Diego Herrera",
-            description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
-            pais: "Colombia",
-            deportes: ["fitness", "nutrición"]
-        }
     ];
+
     const ciudades = ['La Paz', 'Santiago', 'Rio de Janeiro', 'Buenos Aires', 'Lima', 'Trujillo'];
     
 
@@ -407,17 +355,6 @@ export default function Home() {
         }
 
     ];
-
-    
-    const [userFound, setUserFound] = useState(users);
-    
-    useEffect(() => {
-        setUserFound(users);
-    }, [actualPageUsers])
-
-    const handleSearchResult = (result) => {
-        setUserFound(result);
-    }
 
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
@@ -539,12 +476,7 @@ export default function Home() {
             <div >
                 {selectedOption === 'users' && (
                     <div>
-                        <SearchBar users={users} onSearchResult={handleSearchResult} />
-                        <div className={styles.containerCards}>
-                            {users?.map((user) => (
-                                <CardUser key={user.name} user={user} />
-                            ))}
-                        </div>
+<SearchBarUsers />
                         <div className={styles.buttonUsers}>
                             <button onClick={() => handlePaginateUsers(actualPageUsers - 1)} disabled={actualPageUsers === 1}>Anterior</button>
                             <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={actualPageUsers.length === 0}>Siguiente</button>

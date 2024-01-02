@@ -5,12 +5,13 @@
     flex-direction: column;
     justify-content: center;    
     /* align-items: center; */
+    padding-bottom: 10%;
 }
 .containerHeader{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
     z-index: 1000;
 }
@@ -147,3 +148,18 @@
     color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
 }
+
+.sportsContainer {
+    display: flex;
+    justify-content: space-around; /* Ajusta según tus necesidades de diseño */
+    flex-wrap: wrap; /* Para que los elementos se envuelvan a la siguiente línea si no caben en una sola línea */
+    overflow-y: scroll;
+}
+
+.navbarLow {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+  }
+  
