@@ -123,18 +123,16 @@
     margin-bottom: 15px;
 }
 
-.buscarBtn{
-    margin: 10px;
-    width: 45vw;
-    height: 30px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 5px ;
-    cursor: pointer;
-    background-color: rgb(38, 38, 38);
-    color: white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
+.labelFilter{
+    margin: 1px;
 }
+.selectFilter{
+    width: 60vw;
+    margin: 2px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
 .btnNuevaReserva{
     width: 120px;
     height: 30px;

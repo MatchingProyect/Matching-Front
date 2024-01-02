@@ -5,16 +5,9 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import CardReservation from '../../components/card-reservations/CardReservation';
-import CardReservation from '../../components/card-reservations/CardReservation';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from '../../redux/reducer';
-import Solicitudes from '../solucitudes/Solicitudes';
-import FunctionsAdmin from './FunctionsAdmin'
 
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
@@ -436,7 +429,36 @@ export default function Home() {
         setSelectedOption(option);
         setSelectedSection(option);
     };
+    const handleFilterCiudad = (event) => {
+        let value = event.target.value;
+        let result = reservations.filter((element) => element.ciudad == value);
+        setReservToRender(result);
+        setFilteredReservs(result);
+    };
 
+        let clubsToRender = reservToRender.map((element) => element.club);
+        let clubsNoRepeat = new Set(clubsToRender);
+        let arrayClubs = Array.from(clubsNoRepeat);
+
+    const handleFilterClubs = (event) => {
+        let value = event.target.value;
+        let result = reservToRender.filter((element) => element.club == value);
+        setReservToRender(result);
+    };
+
+    let sportsToRender = reservToRender.map((element) => element.sport);
+    let sportsNoRepeat = new Set(sportsToRender);
+    let arraySports = Array.from(sportsNoRepeat);
+
+    const handleFilterDeporte = (event) => {
+        let value = event.target.value;
+        let result = reservToRender.filter((element) => element.sport == value);
+        setReservToRender(result);
+    };
+
+    const resetHandler = () => {
+        setReservToRender(reservations);
+    }
 
     return (
        
@@ -457,17 +479,24 @@ export default function Home() {
                     <div className = {styles.filters}>
                         <button className = {styles.resetButton} onClick = {resetHandler}>💫</button>
                         <div className = {styles.filter}>
-                        <label>Ciudad</label>
-                            <select>
-                                <option disabled></option>
-                                {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
+                        <label className = {styles.labelFilter}>Ciudad</label>
+                            <select onChange = {handleFilterCiudad} className = {styles.selectFilter}>
+                            <option disabled>Seleccionar Ciudad</option>
+                                {result?.map((ciudad) => <option value={ciudad} key = {ciudad}>{ciudad}</option>)}
                             </select>
                         </div>
-                        <div className = {styles.filter}>
-                            <label>Deporte</label>
-                            <select>
-                            <option disabled></option>
-                                {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
+                        <div className={styles.filter}>
+                            <label className = {styles.labelFilter}>Clubs</label>
+                            <select onChange = {handleFilterClubs} className = {styles.selectFilter}>
+                            <option disabled>Seleccionar Club</option>
+                                {arrayClubs?.map((club) => <option value={club} key = {club}>{club}</option>)}
+                            </select>
+                        </div>
+                        <div className={styles.filter}>
+                            <label className = {styles.labelFilter}>Deporte</label>
+                            <select onChange = {handleFilterDeporte} className = {styles.selectFilter}>
+                                <option disabled>Seleccionar Deporte</option>
+                                {arraySports?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
@@ -484,6 +513,9 @@ export default function Home() {
                     <button className={styles.btnNuevaReserva}>Nueva Reserva</button>
                 </div>
 
+            </div>
+            <div className = {styles.reservationsContainer}>
+                <CardReservation reservations = {reservToRender} />
             </div>
             <div className={styles.containerTitle}>
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
