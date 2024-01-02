@@ -7,6 +7,7 @@ import { app } from './../../FireBase/fireBase.config';
 import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
 import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { fetchUser } from "../../redux/reducer";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
@@ -99,7 +100,11 @@ const Login = () => {
           email: email,
           displayName: displayName,
         });
-        navigate("/questions");
+
+        onRegister ({
+          email: email,
+          displayName: displayName,
+        })
 
         console.log('Usuario guardado en Firestore con éxito');
       }
@@ -109,7 +114,19 @@ const Login = () => {
   };
   
   
+  const onRegister = async ( data ) => {
+    try {
+      const endpoint = "/users"
+      const result = await axios.post(endpoint, data) 
+      if (result) {
+        console.log("register success")
+        navigate("/questions")
+      }
+    } catch (error) {
+      throw error.message;
+    }
 
+  } 
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     setGoogleLoginSuccess(true);
@@ -124,12 +141,16 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
-      const result = await axios.post(endpoint, data);
+      const {data} = await axios.post(endpoint, data);
 
-      if (result) {
-        const isNewUser = result.data.isNewUser;
+      if (data) {
+        const isNewUser = data.isNewUser;
 
-        if (isNewUser || googleLoginSuccess) {
+        const id = data.userLogeado.id
+
+        if(id) dispatch(fetchUser(id))
+
+        if (isNewUser) {
           navigate("/questions");
         } else {
           navigate("/home");
