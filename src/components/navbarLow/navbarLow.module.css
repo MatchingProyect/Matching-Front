@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     background-color: #fff; 
-
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.551);
     display: flex;
     justify-content: space-around;
     align-items: center;

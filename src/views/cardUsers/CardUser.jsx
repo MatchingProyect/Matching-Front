@@ -18,12 +18,12 @@ import axios from 'axios';
 const CardUser = ({ user }) => {
 
   const enviarRequest = async()=>{
-    try {
-      await axios.post('/friendRequest')
+  try {
+  await axios.post('/friendRequest')
 
-    } catch (error) {
-      throw error.message
-    }
+  } catch (error) {
+  throw error.message
+  }
   }
 
   return (

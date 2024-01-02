@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -27,7 +26,7 @@ const Solicitudes = ({solicitudes, setSolicitudes}) => {
     },[])
 
 
-    const agregarAmigo = async({friendRequest, status})=>{
+    const agregarAmigo = async({friendRequest})=>{
         try {
          await axios.post('/addFriend', friendRequest.userQueMando.id, friendRequest.user.id, status= "true" )
 
@@ -61,4 +60,4 @@ const Solicitudes = ({solicitudes, setSolicitudes}) => {
   )
 }
 
-export default Solicitudes;
+export default Solicitudes

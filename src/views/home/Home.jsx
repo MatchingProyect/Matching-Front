@@ -5,13 +5,10 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import CardReservation from '../../components/card-reservations/CardReservation';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchClubs, fetchCourts, fetchLocations, fetchSports, fetchUsers } from '../../redux/reducer';
+import CardReservation from '../../components/card-reservations/CardReservation';
 import Solicitudes from '../solucitudes/Solicitudes';
 
 export default function Home() {
@@ -29,6 +26,7 @@ export default function Home() {
     // const courts = useSelector((state) => state.user.allcourts);
     // const reservations = useSelector((state) => state.user.allReservations);
     
+
   
     // useEffect(() => {
     //   dispatch(fetchUsers(actualPageUsers));
@@ -410,6 +408,17 @@ export default function Home() {
 
     ];
 
+    
+    const [userFound, setUserFound] = useState(users);
+    
+    useEffect(() => {
+        setUserFound(users);
+    }, [actualPageUsers])
+
+    const handleSearchResult = (result) => {
+        setUserFound(result);
+    }
+
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
 
@@ -466,6 +475,7 @@ export default function Home() {
     }
 
     return (
+       
         <div className={styles.containerHome}>
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
@@ -503,8 +513,14 @@ export default function Home() {
                                 {arraySports?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
                             </select>
                         </div>
+                        <div className={styles.filter}>
+                            <label>Clubs</label>
+                            <select>
+                                <option disabled></option>
+                                {clubs?.map((club) => <option value={club.name}>{club.name}</option>)}
+                            </select>
+                        </div>
                     </div>
-                    <SearchBar users={users} />
                 </div>
                 <div className={styles.newReserva}>
                     <button className={styles.btnNuevaReserva}>Nueva Reserva</button>
@@ -523,6 +539,7 @@ export default function Home() {
             <div >
                 {selectedOption === 'users' && (
                     <div>
+                        <SearchBar users={users} onSearchResult={handleSearchResult} />
                         <div className={styles.containerCards}>
                             {users?.map((user) => (
                                 <CardUser key={user.name} user={user} />
