@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Provider } from 'react-redux';
 import { store } from './redux/store.js';
 import { UserProvider } from './context/UserProvider.jsx';
+import './FireBase/fireBase.config.js';
 import axios from 'axios';
 
 const theme = createTheme();

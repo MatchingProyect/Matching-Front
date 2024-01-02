@@ -1,4 +1,9 @@
 .containerNavbar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #fff; 
+
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -8,6 +13,10 @@
     min-height: 8vh;
 }
 .icon{
-    color: aqua;
+    color: #DDDDDD;
+    font-size: 36px;
 }
 
+.activeLink {
+    color: #36424F ; 
+  }

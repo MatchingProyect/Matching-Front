@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from "./firebase";
 import axios from "axios";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from './../../FireBase/fireBase.config';
+import { useDispatch } from "react-redux";
+import { fetchUser } from "../../redux/reducer";
 
 const Login = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Aca se ejecuta el envio del form SIN GOOGLE
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
-      const result = await axios.post(endpoint, data);
-      // De aca hasta el navigate se puede comentar, esta de backup de prueba de google
-      if (result) {
-        const isNewUser = result.data.isNewUser;
+      const response = await axios.post(endpoint, data);
+
+      if (response.data) {
+        const isNewUser = response.data.isNewUser;
+
+        const id = data.userLogeado.id
+
+        if(id) dispatch(fetchUser(id))
 
         if (isNewUser) {
           navigate("/questions");
@@ -42,10 +49,14 @@ const Login = () => {
   // luego que esos usuarios se creen en la base de datos, luego
   // el firebase.js para autentificar esos usuarios
   // fin
+
+
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
+      console.log(auth, provider);
       const result = await signInWithPopup(auth, provider);
+      console.log(result, result.user);
       // aca verifica si es nuevo o no
       const isNewUser = result?.additionalUserInfo?.isNewUser;
   
@@ -58,6 +69,10 @@ const Login = () => {
       console.error("Error al iniciar sesión con Google:", error);
     }
   };
+
+
+
+
   // Esto es la config del form y los campos, no habria que tocar nada de aca
   // para abajo
   const {

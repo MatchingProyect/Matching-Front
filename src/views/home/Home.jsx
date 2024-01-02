@@ -5,34 +5,230 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import React, { useEffect, useState } from 'react';
+import CardReservation from '../../components/card-reservations/CardReservation';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchUsers } from '../../redux/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchClubs, fetchLocations, fetchUsers } from '../../redux/reducer';
+import Solicitudes from '../solucitudes/Solicitudes';
 
-export default function Home() {
+export default function Home({ users, sports, clubs, courts, reservations }) {
     const [selectedOption, setSelectedOption] = useState('users');
+    const [selectedSection, setSelectedSection] = useState('users');
     const [actualPageUsers, setActualPageUsers] = useState(1);
     const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const users = useSelector(state => state.user.allUsers);
-    // const sports = useSelector(state => state.user.allSports);
-    // const clubs = useSelector(state => state.user.allClubs);
+    const [solicitudes, setSolicitudes] = useState(false);
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchUsers(actualPageUsers));
-    }, [actualPageUsers])
 
-    // useEffect(() => {
-    //     dispatch(fetchCourts(actualPageCourts));
-    // }, [actualPageCourts])
+    // const courts = [
+    //     {
+    //         name: 'Cancha 1',
+    //         club: 'Palmeras',
+    //         description: 'Cancha para futbol 7.',
+    //         sport: 'Fútbol',
+    //         priceFee: 50,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Grass Alto',
+    //         lighting: 'Luz Fuerte',
+    //         doorsType: 'Reja de metal',
+    //         wallsType: 'Malla',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Cancha 2',
+    //         club: 'Palmeras',
+    //         sport: 'Fútbol',
+    //         description: 'Cancha para futbol 6.',
+    //         priceFee: 50,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Grass Alto',
+    //         lighting: 'Luz Fuerte',
+    //         doorsType: 'Reja de metal',
+    //         wallsType: 'Malla',
+    //         reputation: 'Buena',
+    //     },
+    //     {
+    //         name: 'Cancha 3',
+    //         club: 'Palmeras',
+    //         description: 'Cancha para futbol 5',
+    //         sport: 'Fútbol',
+    //         priceFee: 50,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Grass Alto',
+    //         lighting: 'Luz Fuerte',
+    //         doorsType: 'Reja de metal',
+    //         wallsType: 'Malla',
+    //         reputation: 'Regular',
+    //     },
+    //     {
+    //         name: 'Tennis Yard 1',
+    //         club: 'Marriot Tennis',
+    //         description: 'Campo profesional de tennis.',
+    //         sport: 'Tenis',
+    //         priceFee: 50,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'No Grass',
+    //         lighting: 'Luz Fuerte',
+    //         doorsType: 'Reja de metal',
+    //         wallsType: 'Concreto',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Tennis Yard 2',
+    //         club: 'Marriot Tennis',
+    //         description: 'Campo amateur de tennis.',
+    //         sport: 'Tenis',
+    //         priceFee: 30,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'No Grass',
+    //         lighting: 'Luz Fuerte',
+    //         doorsType: 'Reja de metal',
+    //         wallsType: 'Malla',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Futbol Court',
+    //         club: "The Courtyard",
+    //         description: 'Campo amateur de futbol.',
+    //         sport: 'Fútbol',
+    //         priceFee: 40,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Loza',
+    //         lighting: 'Luz Media',
+    //         doorsType: 'Entrada directa.',
+    //         wallsType: 'Puertas de concreto.',
+    //         reputation: 'Mala',
+    //     },
+    //     {
+    //         name: 'Basket Court',
+    //         club: "The Courtyard",
+    //         sport: 'Baloncesto',
+    //         description: 'Campo amateur de basket.',
+    //         priceFee: 35,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Loza',
+    //         lighting: 'Luz Alta',
+    //         doorsType: 'Entrada directa.',
+    //         wallsType: 'Puertas de concreto.',
+    //         reputation: 'Media',
+    //     },
+    //     {
+    //         name: 'Basket Field 1',
+    //         club: "Country Club",
+    //         description: 'Campo profesional de basket.',
+    //         sport: 'Baloncesto',
+    //         priceFee: 75,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Parquet',
+    //         lighting: 'Luz Alta',
+    //         doorsType: 'Entrada directa.',
+    //         wallsType: 'Puertas de concreto.',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Basket Field 2',
+    //         club: "Country Club",
+    //         description: 'Campo profesional de basket.',
+    //         sport: 'Baloncesto',
+    //         priceFee: 75,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Parquet',
+    //         lighting: 'Luz Alta',
+    //         doorsType: 'Entrada directa.',
+    //         wallsType: 'Puertas de concreto.',
+    //         reputation: 'Excelente',
+    //     },
 
-    useEffect(() => {
-        dispatch(fetchClubs());
-    }, [actualPageClubs])
+    //     {
+    //         name: 'Padel Field 1',
+    //         club: "Regis Club",
+    //         description: 'Campo profesional de padel.',
+    //         sport: 'Padel',
+    //         priceFee: 80,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Parquet',
+    //         lighting: 'Luz Alta',
+    //         doorsType: 'Entrada indirecta.',
+    //         wallsType: 'Puertas de madera.',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Padel Field 2',
+    //         club: "Regis Club",
+    //         description: 'Campo amateur de padel.',
+    //         sport: 'Padel',
+    //         priceFee: 60,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Parquet',
+    //         lighting: 'Luz Alta',
+    //         doorsType: 'Entrada indirecta.',
+    //         wallsType: 'Puertas de madera.',
+    //         reputation: 'Excelente',
+    //     },
+    //     {
+    //         name: 'Padel Field 3',
+    //         club: "Regis Club",
+    //         description: 'Campo profesional de padel.',
+    //         sport: 'Padel',
+    //         priceFee: 80,
+    //         warrantyReservation: 'Card',
+    //         grassType: 'Parquet',
+    //         lighting: 'Luz media',
+    //         doorsType: 'Entrada indirecta.',
+    //         wallsType: 'Puertas de madera.',
+    //         reputation: 'Excelente',
+    //     },
+
+
+
+    // ]
+
+    // const reservations = [
+    //     {
+    //         id: "0001",
+    //         dateTimeStart: ["30/12/2023", "18:00:00"],
+    //         dateTimeEnd: ["30/12/2023", "19:00:00"],
+    //         totalCost: 40,
+    //         sport: 'Fútbol',
+    //         ciudad: 'La Paz',
+    //         club: 'The Courtyard',
+    //         court: 'Futbol Court',
+
+    //     },
+    //     {
+    //         id: "0002",
+    //         dateTimeStart: ["31/12/2023", "14:00:00"],
+    //         dateTimeEnd: ["31/12/2023", "15:00:00"],
+    //         totalCost: 40,
+    //         ciudad: 'Santiago de Chile',
+    //         club: 'Marriot Tennis',
+    //         court: 'Tennis Yard 2',
+    //     },
+    //     {
+    //         id: "0003",
+    //         dateTimeStart: ["31/12/2023", "16:00:00"],
+    //         dateTimeEnd: ["31/12/2023", "17:00:00"],
+    //         totalCost: 75,
+    //         ciudad: 'Buenos Aires',
+    //         club: 'Country Club',
+    //         court: 'Basket Field 1',
+    //     },
+    //     {
+    //         id: "0004",
+    //         dateTimeStart: ["31/12/2023", "17:00:00"],
+    //         dateTimeEnd: ["31/12/2023", "18:00:00"],
+    //         totalCost: 80,
+    //         ciudad: 'Lima',
+    //         club: 'Regis Club',
+    //         court: 'Padel Field 1',
+    //     },
+    // ]
+
+
 
     // const users = [
     //     {
@@ -84,55 +280,65 @@ export default function Home() {
     //         deportes: ["fitness", "nutrición"]
     //     }
     // ];
-    const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Cordova', 'Lima', 'Trujillo', 'Bogota', 'Cali'];
+    const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Lima', 'Trujillo'];
 
-    const sports = [
-        {
-            name: "Padel",
-            clubs: ["club1", "club2", "club3", "club4"]
-        },
-        {
-            name: "Fútbol",
-            clubs: ["Club A", "Club B", "Club C", "Club D"]
-        },
-        {
-            name: "Baloncesto",
-            clubs: ["Club X", "Club Y", "Club Z"]
-        },
-        {
-            name: "Tenis",
-            clubs: ["Club 1", "Club 2", "Club 3"]
-        },
-        {
-            name: "Ciclismo",
-            clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
-        }
+    // const sports = [
+    //     {
+    //         name: "Padel",
+    //         clubs: ["club1", "club2", "club3", "club4"]
+    //     },
+    //     {
+    //         name: "Fútbol",
+    //         clubs: ["Club A", "Club B", "Club C", "Club D"]
+    //     },
+    //     {
+    //         name: "Baloncesto",
+    //         clubs: ["Club X", "Club Y", "Club Z"]
+    //     },
+    //     {
+    //         name: "Tenis",
+    //         clubs: ["Club 1", "Club 2", "Club 3"]
+    //     },
+    //     {
+    //         name: "Ciclismo",
+    //         clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
+    //     }
 
-    ];
+    // ];
 
-    const clubs = [
-        {
-            name: "Marriot Tennis",
-            sport: ['Tenis'],
-        },
-        {
-            name: "The Courtyard",
-            sport: ['Fútbol', 'Baloncesto'],
-        },
-        {
-            name: "Country Club",
-            sport: ['Baloncesto'],
-        },
-        {
-            name: "Regis Club",
-            sport: ['Padel'],
-        },
-        {
-            name: "Big Smoke Club",
-            sport: ['Tenis'],
-        }
+    // const clubs = [
+    //     {
+    //         name: "Marriot Tennis",
+    //         ciudad: 'Santiago de Chile',
+    //         sport: ['Tenis'],
+    //     },
+    //     {
+    //         name: "The Courtyard",
+    //         ciudad: 'La Paz',
+    //         sport: ['Fútbol', 'Baloncesto'],
+    //     },
+    //     {
+    //         name: "Palmeras",
+    //         ciudad: 'Rio de Janeiro',
+    //         sport: ['Fútbol'],
+    //     },
+    //     {
+    //         name: "Country Club",
+    //         ciudad: 'Buenos Aires',
+    //         sport: ['Baloncesto'],
+    //     },
+    //     {
+    //         name: "Regis Club",
+    //         ciudad: 'Lima',
+    //         sport: ['Padel'],
+    //     },
+    //     {
+    //         name: "Big Smoke Club",
+    //         ciudad: 'Trujillo',
+    //         sport: ['Tenis'],
+    //     }
 
-    ];
+    // ];
 
     const handlePaginateUsers = (newPage) => {
         if (newPage > 0) setActualPageUsers(newPage);
@@ -143,13 +349,13 @@ export default function Home() {
     // }
 
     const handlePaginateClubs = (newPage) => {
-        if (newPage > 0) setActualPageUsers(newPage);
+        if (newPage > 0) setActualPageClubs(newPage);
     }
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
+        setSelectedSection(option);
     };
-
 
     return (
         <div className={styles.containerHome}>
@@ -158,6 +364,10 @@ export default function Home() {
                 <Link to='/profile'><div className={styles.icon}>
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
+                <button onClick={() => {
+                    setSolicitudes(true)
+                }} >solicitudes</button>
+                <Solicitudes solicitudes={solicitudes} setSolicitudes={setSolicitudes} />
             </div>
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
@@ -177,6 +387,13 @@ export default function Home() {
                                 {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
                             </select>
                         </div>
+                        <div className={styles.filter}>
+                            <label>Clubs</label>
+                            <select>
+                                <option disabled></option>
+                                {clubs?.map((club) => <option value={club.name}>{club.name}</option>)}
+                            </select>
+                        </div>
                     </div>
                     <SearchBar users={users} />
                 </div>
@@ -185,10 +402,16 @@ export default function Home() {
                 </div>
 
             </div>
+            <div className={styles.reservationsContainer}>
+                <CardReservation reservations={reservations} />
+
+
+            </div>
             <div className={styles.containerTitle}>
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
                 <button onClick={() => handleButtonClick('sports')} className={styles.NavBtn}>Sports</button>
                 <button onClick={() => handleButtonClick('clubs')} className={styles.NavBtn}>Clubs</button>
+                <button onClick={() => handleButtonClick('courts')} className={styles.NavBtn}>Clubs</button>
             </div>
             <div >
                 {selectedOption === 'users' && (
@@ -198,7 +421,7 @@ export default function Home() {
                                 <CardUser key={user.name} user={user} />
                             ))}
                         </div>
-                        <div>
+                        <div className={styles.buttonUsers}>
                             <button onClick={() => handlePaginateUsers(actualPageUsers - 1)} disabled={actualPageUsers === 1}>Anterior</button>
                             <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={() => actualPageUsers.length === 0}>Siguiente</button>
                         </div>
@@ -227,6 +450,22 @@ export default function Home() {
                         </div>
                     </div>
                 )}
+                {selectedOption === 'courts' && (
+                    <div>
+                        <div>
+                            {courts?.map((court) => {
+                                return (
+                                    <CardCourt court={court} />
+                                )
+                            })}
+                        </div>
+                        <div>
+                            {/* <button onClick={() => handlePaginateClubs(actualPageClubs - 1)} disabled={actualPageClubs === 1}>Anterior</button>
+                            <button onClick={() => handlePaginateClubs(actualPageClubs + 1)} disabled={() => actualPageClubs.length === 0}>Siguiente</button> */}
+                        </div>
+                    </div>
+                )}
+
             </div>
             <NavbarLow />
         </div>
