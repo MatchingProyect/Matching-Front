@@ -6,9 +6,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 
 export default function NavbarLow(){
-
     const location = useLocation();
-    console.log(location.pathname)
     return (
         <div className={styles.containerNavbar}>
             <Link to='/home'>

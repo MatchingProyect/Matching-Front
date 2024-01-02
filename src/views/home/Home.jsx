@@ -21,6 +21,7 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
     const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
     const [solicitudes, setSolicitudes] = useState(false);
+    const [reservToRender, setReservToRender] = useState(reservations);
 
     const dispatch = useDispatch();
 
@@ -356,6 +357,11 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
         setSelectedOption(option);
         setSelectedSection(option);
     };
+    const handleFilterCiudad = (event) => {
+        let value = event.target.value;
+        let result = reservations.filter((element) => element.ciudad == value);
+        setReservToRender(result);
+    }
 
     return (
         <div className={styles.containerHome}>
@@ -371,11 +377,11 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
             </div>
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
-                    <h1 className={styles.compTitle}>Encuentra una partida</h1>
-                    <div className={styles.filters}>
-                        <div className={styles.filter}>
-                            <label>Ciudad</label>
-                            <select>
+                    <h1 className = {styles.compTitle}>Encuentra una partida</h1>
+                    <div className = {styles.filters}>
+                        <div className = {styles.filter}>
+                        <label>Ciudad</label>
+                            <select onChange = {handleFilterCiudad}>
                                 <option disabled></option>
                                 {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
                             </select>
@@ -402,10 +408,8 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
                 </div>
 
             </div>
-            <div className={styles.reservationsContainer}>
-                <CardReservation reservations={reservations} />
-
-
+            <div className = {styles.reservationsContainer}>
+                <CardReservation reservations = {reservToRender}/>
             </div>
             <div className={styles.containerTitle}>
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
