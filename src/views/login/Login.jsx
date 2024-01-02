@@ -132,17 +132,13 @@ const Login = () => {
 
 
   const onSubmit = async (data) => {
-    console.log(data)
-
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
       console.log("response", response)
 
       if (response.data) {
-        const isNewUser = response.data.isNewUser;
-
-        const id = response.data.userLogeado.id
+        const id = response.data.id
         if(id) dispatch(fetchUser(id))
 
         navigate("/home")
