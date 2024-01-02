@@ -13,7 +13,6 @@ import {useDispatch} from "react-redux";
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
   const navigate = useNavigate();
-  const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() =>{
@@ -130,16 +129,20 @@ const Login = () => {
   } 
 
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     try {
-      const endpoint = "/login";
-      const response = await axios.post(endpoint, data);
+      const user= {
+        email: emailValue,
 
-      if (response.data) {
-        const isNewUser = response.data.isNewUser;
+      }
+      const endpoint = "/login";
+      const response = await axios.post(endpoint, user);
+      console.log(response)
+
+      if (user) {
+        const isNewUser = user.isNewUser;
 
         const id = response.data.userLogeado.id
-
         if(id) dispatch(fetchUser(id))
 
         if (isNewUser) {
@@ -188,7 +191,7 @@ const Login = () => {
               Email
             </label>
             <Controller
-              name="email"
+              name="emailValue"
               control={control}
               rules={{
                 required: "Este campo es requerido",
@@ -254,6 +257,10 @@ const Login = () => {
           </div>
         </div>
 
+        <button type="submit" className={styles.submitButton} onClick={onSubmit}>
+          INICIAR SESION
+        </button>
+
         <button
           type="button"
           onClick={handleGoogleLoginClick}
@@ -262,10 +269,6 @@ const Login = () => {
           INICIAR SESION CON GOOGLE
         </button>
 
-        {/* <GoogleLogin
-          onSuccess={handleGoogleLoginSuccess}
-          onError={handleGoogleLoginError}
-        /> */}
 
         <div className={styles.container}>
           <p className={styles.registerText}>
