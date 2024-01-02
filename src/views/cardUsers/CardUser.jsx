@@ -29,10 +29,16 @@ const CardUser = ({ user }) => {
   return (
     <Card 
     sx = {{
-      'width': '80vw',
+      'width': '160px',
+      'height' : '250px',
       'marginBottom' : '2vh',
       'box-shadow': '0px 0px 15px rgba(0, 0, 0, 0.551)',
       'borderRadius': '15px',
+      'display' : 'flex',
+      'flexDirection' : 'column',
+      'alignItems': 'center',
+      'justifyContent' : 'space-between',
+      'margin': '5px',
 
     }}
     >
