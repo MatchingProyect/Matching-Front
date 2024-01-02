@@ -504,7 +504,6 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                    <SearchBar users={users} />
                 </div>
                 <div className={styles.newReserva}>
                     <button className={styles.btnNuevaReserva}>Nueva Reserva</button>
@@ -523,6 +522,7 @@ export default function Home() {
             <div >
                 {selectedOption === 'users' && (
                     <div>
+                        <SearchBar users={users} />
                         <div className={styles.containerCards}>
                             {users?.map((user) => (
                                 <CardUser key={user.name} user={user} />

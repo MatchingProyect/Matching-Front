@@ -136,13 +136,17 @@ const Login = () => {
       const response = await axios.post(endpoint, data);
 
       if (response.data) {
-        
+        const isNewUser = response.data.isNewUser;
+
         const id = response.data.userLogeado.id
 
         if(id) dispatch(fetchUser(id))
 
-        navigate("/home")
-        
+        if (isNewUser) {
+          navigate("/questions");
+        } else {
+          navigate("/home");
+        }
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -249,7 +253,7 @@ const Login = () => {
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
           </div>
         </div>
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" onClick={() => onSubmit(emailValue)} className={styles.submitButton}>
           INICIAR SESION
         </button>
 
