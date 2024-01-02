@@ -1,0 +1,7 @@
+.reservationContainer{
+width: 80vw;
+margin-bottom: 2vh;
+box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.551);
+padding: 2vw;
+border-radius: 10px;
+}

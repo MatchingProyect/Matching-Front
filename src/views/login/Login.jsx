@@ -131,19 +131,17 @@ const Login = () => {
   } 
 
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
+    console.log(data)
+
     try {
-      const user= {
-        email: emailValue,
-        password: password
-      }
       const endpoint = "/login";
-      const response = await axios.post(endpoint, user);
-      console.log(response)
+      const response = await axios.post(endpoint, data);
+      console.log("response", response)
 
       if (response.data) {
         const isNewUser = response.data.isNewUser;
-        
+
         const id = response.data.userLogeado.id
         if(id) dispatch(fetchUser(id))
 
@@ -204,12 +202,10 @@ const Login = () => {
                   <input
                     className={styles.inputEmail}
                     type="email"
-                    {...field}
                     inputMode="email"
-                    value={emailValue} // Asigna el valor del estado aquí
-                    onChange={(e) => setEmailValue(e.target.value)} // Actualiza el estado en el cambio
+                    {...field}
                   />
-                  {errors.email && <p>{errors.email.message}</p>}
+                  {errors.emailValue && <p>{errors.emailValue.message}</p>}
                 </>
               )}
             />
@@ -235,8 +231,6 @@ const Login = () => {
                 <>
                   <input
                     className={styles.inputPass}
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
                     type={showPassword ? "text" : "password"}
                     {...field}
                   />
@@ -257,6 +251,11 @@ const Login = () => {
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
           </div>
         </div>
+
+        <button type="submit" className={styles.submitButton}>
+          INICIAR SESION
+        </button>
+
 
         <button
           type="button"

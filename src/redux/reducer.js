@@ -46,11 +46,15 @@ export const fetchProfiles = ()=>async(dispatch)=>{
         if(data.status) {
             dispatch(setProfiles(data.allProfiles))
         }
+        if(data.status) {
+            dispatch(setProfiles(data.allProfiles))
+        }
     } catch (error) {
         throw error.message
     }
 }
 
+export const fetchUsers = (page)=>async(dispatch)=>{
 export const fetchUsers = (page)=>async(dispatch)=>{
     try {
         const {data} = await axios(`/users?page=${page}`);
@@ -103,6 +107,15 @@ export const fetchUser = (id)=>async(dispatch)=>{
         throw error.message
     }
 }
+export const fetchUser = (id)=>async(dispatch)=>{
+    try {
+        const {data} = await axios(`/users/${id}`)
+        if(data.status) dispatch(setUser(data.userFound))
+    } catch (error) {
+        throw error.message
+    }
+}
 
+export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations, setUser } = userSlice.actions;
 export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations, setUser } = userSlice.actions;
 export default userSlice.reducer;

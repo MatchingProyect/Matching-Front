@@ -1,11 +1,15 @@
 .divCardReservation{
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
 }
 .compTitle{
     font-size: 35px;
     text-align: center;
-    margin: 3vh;
+    margin: 2vh;
 }
 
+.divCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
