@@ -1,26 +1,67 @@
-import  { useState } from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from './../../FireBase/fireBase.config';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-  const auth = getAuth(app);
+  const [emailValue, setEmailValue] = useState(""); 
   const navigate = useNavigate();
+  const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
 
-  // Aca se ejecuta el envio del form SIN GOOGLE
+  const handleGoogleLoginClick = () => {
+    // Crear un objeto de autenticación de Google
+    const auth2 = gapi.auth2.getAuthInstance();
+  
+    // Iniciar el proceso de inicio de sesión de Google
+    auth2.signIn().then((googleUser) => {
+      // Obtener la información del usuario
+      const profile = googleUser.getBasicProfile();
+  
+      // Aquí puedes realizar acciones con la información del usuario
+      console.log('ID: ' + profile.getId()); // ID único del usuario
+      console.log('Nombre: ' + profile.getName()); // Nombre del usuario
+      console.log('Imagen URL: ' + profile.getImageUrl()); // URL de la imagen de perfil
+      console.log('Email: ' + profile.getEmail()); // Email del usuario
+  
+      // También puedes obtener el token de acceso de Google
+      const googleAccessToken = googleUser.getAuthResponse().access_token;
+  
+      // Ahora puedes enviar el token de acceso de Google a tu servidor para la autenticación del usuario
+      // Ejemplo de cómo enviarlo usando axios (puedes ajustarlo según tu stack)
+      // axios.post('/auth/google', { token: googleAccessToken }).then(response => {
+      //   console.log(response.data);
+      // });
+  
+      // Aquí puedes implementar cualquier lógica adicional que necesites después del inicio de sesión con Google
+    }).catch((error) => {
+      console.error('Error en el inicio de sesión de Google:', error);
+    });
+  };
+
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    console.log(credentialResponse);
+    setGoogleLoginSuccess(true);
+    // Puedes realizar acciones adicionales después de un inicio de sesión exitoso
+  };
+
+  const handleGoogleLoginError = () => {
+    console.log('Login Failed');
+    // Manejar errores si es necesario
+  };
+
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
       const result = await axios.post(endpoint, data);
-      // De aca hasta el navigate se puede comentar, esta de backup de prueba de google
+
       if (result) {
         const isNewUser = result.data.isNewUser;
 
-        if (isNewUser) {
+        if (isNewUser || googleLoginSuccess) {
           navigate("/questions");
         } else {
           navigate("/home");
@@ -30,44 +71,7 @@ const Login = () => {
       console.error("Error al iniciar sesión:", error);
     }
   };
-  // Esta es la funcion para iniciar con google, aca se hace la logica
-  // Para verificar si el user es nuevo o no y de ahi te manda a questions 
-  // o al home :D Esta logica es la que deberia conectarse con el back,
-  // auntentificar si el usuario existe o es nuevo, si existe va al home,
-  // si es nuevo va a questions (CON GOOGLE RECORDAR) ya que el login normal
-  // manda a /home directo porque ya estaria registrado el user
-  // y en caso de que el user no este registrado directamente lo manda a register
-  // O deberia al menos (tengo la cabeza quemada x samir xd)
-  // Que hay que hacer? la firebase primero, para verificar los inicios con google
-  // luego que esos usuarios se creen en la base de datos, luego
-  // el firebase.js para autentificar esos usuarios
-  // fin
 
-
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      console.log(auth, provider);
-      const result = await signInWithPopup(auth, provider);
-      console.log(result, result.user);
-      // aca verifica si es nuevo o no
-      const isNewUser = result?.additionalUserInfo?.isNewUser;
-  
-      if (isNewUser) {
-        navigate("/questions");
-      } else {
-        navigate("/home");
-      }
-    } catch (error) {
-      console.error("Error al iniciar sesión con Google:", error);
-    }
-  };
-
-
-
-
-  // Esto es la config del form y los campos, no habria que tocar nada de aca
-  // para abajo
   const {
     handleSubmit,
     control,
@@ -79,11 +83,12 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+
   return (
     <div className={styles.allContainer}>
       <form
         className={styles.formContainer}
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.logoContainer}>
           <img
@@ -92,7 +97,6 @@ const Login = () => {
             className={styles.logo}
           />
         </div>
-
 
         <div className={styles.inputContainer}>
           <div className={styles.containerTitleLogin}>
@@ -119,6 +123,8 @@ const Login = () => {
                     type="email"
                     {...field}
                     inputMode="email"
+                    value={emailValue} // Asigna el valor del estado aquí
+                    onChange={(e) => setEmailValue(e.target.value)} // Actualiza el estado en el cambio
                   />
                   {errors.email && <p>{errors.email.message}</p>}
                 </>
@@ -167,11 +173,18 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" onClick={onSubmit} className={styles.submitButton}>
-          INICIAR SESION
+        <button
+          type="button"
+          onClick={handleGoogleLoginClick}
+          className={styles.googleLoginButton}
+        >
+          INICIAR SESION CON GOOGLE
         </button>
 
-        <Button onClick ={loginWithGoogle} sx={{ ..._styled.signWithGoogle }}>INICIAR SESION CON GOOGLE</Button>
+        <GoogleLogin
+          onSuccess={handleGoogleLoginSuccess}
+          onError={handleGoogleLoginError}
+        />
 
         <div className={styles.container}>
           <p className={styles.registerText}>
