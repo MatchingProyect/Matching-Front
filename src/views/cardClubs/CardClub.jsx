@@ -11,6 +11,8 @@ const CardClub = ({club}) => {
   const [detailClub, setDetailClub] = useState(false)
   const dispatch = useDispatch()
 
+  const user = useSelector((state) => state.user.user);
+
   const deleteClub = async()=>{
     try {
       const deleted = await axios.delete(`/clubs/${club.id}`)
@@ -20,6 +22,7 @@ const CardClub = ({club}) => {
     }
   }
 
+ if(user.admin){
   return (
     <div>
       <button onClick={()=>{
@@ -34,6 +37,19 @@ const CardClub = ({club}) => {
       <DetailClub detailClub={detailClub} setDetailClub={setDetailClub} club={club} />
       
       <AdminFunction editClub={editClub} setEditClub={setEditClub} club={club}/>
+      </div>
+  )
+ }
+
+  return (
+    <div>
+     
+      <h2>{club.name}</h2>
+      <button onClick={()=>{
+        setDetailClub(true)
+      }} >Informacion del Club</button>
+      <DetailClub detailClub={detailClub} setDetailClub={setDetailClub} club={club} />
+      
       </div>
   )
 }

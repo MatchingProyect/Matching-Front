@@ -5,13 +5,10 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import CardReservation from '../../components/card-reservations/CardReservation';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchClubs, fetchCourts, fetchLocations, fetchSports, fetchUsers } from '../../redux/reducer';
+import CardReservation from '../../components/card-reservations/CardReservation';
 import Solicitudes from '../solucitudes/Solicitudes';
 
 export default function Home() {
@@ -478,6 +475,7 @@ export default function Home() {
     }
 
     return (
+       
         <div className={styles.containerHome}>
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
@@ -513,6 +511,13 @@ export default function Home() {
                             <select onChange = {handleFilterDeporte} className = {styles.selectFilter}>
                                 <option disabled>Seleccionar Deporte</option>
                                 {arraySports?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
+                            </select>
+                        </div>
+                        <div className={styles.filter}>
+                            <label>Clubs</label>
+                            <select>
+                                <option disabled></option>
+                                {clubs?.map((club) => <option value={club.name}>{club.name}</option>)}
                             </select>
                         </div>
                     </div>

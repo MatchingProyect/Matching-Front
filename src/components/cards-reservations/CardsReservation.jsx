@@ -1,14 +1,16 @@
 import React from 'react';
-import styles from './CardsReservation.module.css'
+import styles from './CardsReservation.module.css';
 
-export default function CardsReservation({reservations}){
+export default function CardsReservations({reservations}){
     return(
         <div className = {styles.reservationContainer}>
-            <h2 className = {styles.reservTitle}>{reservations.club}</h2>
-            <h4 className = {styles.reservSubTitle}>{reservations.sport}</h4>
-            <p className = {styles.reservInfo}>{reservations.ciudad}</p>
-            <p className = {styles.reservInfo}>{reservations.dateTimeStart[1]} - {reservations.dateTimeEnd[1]}</p>
-            <p className = {styles.reservInfo}>${reservations.totalCost}</p>
+            <h2>{reservations.club}</h2>
+            <h4>{reservations.sport}</h4>
+            <p>{reservations.ciudad}</p>
+            <p>{reservations.dateTimeStart[1]} - {reservations.dateTimeEnd[1]}</p>
+            <p>${reservations.totalCost}</p>
+
         </div>
-    );
-};
+    )
+
+}
