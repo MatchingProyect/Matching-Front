@@ -26,26 +26,13 @@ import Help from './views/help/Help.jsx';
 
 
 function App() {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.allUsers);
-  const sports = useSelector((state) => state.user.allSports);
-  const clubs = useSelector((state) => state.user.allClubs);
-  const courts = useSelector((state) => state.user.allcourts);
-  const reservations = useSelector((state) => state.user.allReservations);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-    dispatch(fetchClubs());
-    dispatch(fetchCourts());
-    dispatch(fetchSports());
-  }, []);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={ <LandingPage /> }/>
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home users={users} sports={sports} clubs={clubs} courts={courts} reservations={reservations} />} />
+        <Route path="/home" element={<Home/>} />
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit/:id" element={<ProfileEdit />} />
         <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />

@@ -11,19 +11,37 @@ import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchClubs, fetchLocations, fetchUsers } from '../../redux/reducer';
+import { fetchClubs, fetchCourts, fetchLocations, fetchSports, fetchUsers } from '../../redux/reducer';
 import Solicitudes from '../solucitudes/Solicitudes';
 
-export default function Home({ users, sports, clubs, courts, reservations }) {
+export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
     const [actualPageUsers, setActualPageUsers] = useState(1);
-    const [actualPageCourts, setActualPageCourts] = useState(1);
+    // const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
     const [solicitudes, setSolicitudes] = useState(false);
-    const [reservToRender, setReservToRender] = useState(reservations);
-
+    
     const dispatch = useDispatch();
+    const users = useSelector((state) => state.user.allUsers);
+    const sports = useSelector((state) => state.user.allSports);
+    const clubs = useSelector((state) => state.user.allClubs);
+    const courts = useSelector((state) => state.user.allcourts);
+    const reservations = useSelector((state) => state.user.allReservations);
+    const [reservToRender, setReservToRender] = useState(reservations);
+  
+    useEffect(() => {
+      dispatch(fetchUsers(actualPageUsers));
+    }, [actualPageUsers]);
+    useEffect(() => {
+      dispatch(fetchClubs());
+    }, []);
+    useEffect(() => {
+      dispatch(fetchCourts());
+    }, []);
+    useEffect(() => {
+      dispatch(fetchSports());
+    }, []);
 
     // const courts = [
     //     {
@@ -415,7 +433,7 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
                 <button onClick={() => handleButtonClick('sports')} className={styles.NavBtn}>Sports</button>
                 <button onClick={() => handleButtonClick('clubs')} className={styles.NavBtn}>Clubs</button>
-                <button onClick={() => handleButtonClick('courts')} className={styles.NavBtn}>Clubs</button>
+                <button onClick={() => handleButtonClick('courts')} className={styles.NavBtn}>Courts</button>
             </div>
             <div >
                 {selectedOption === 'users' && (
@@ -427,7 +445,7 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
                         </div>
                         <div className={styles.buttonUsers}>
                             <button onClick={() => handlePaginateUsers(actualPageUsers - 1)} disabled={actualPageUsers === 1}>Anterior</button>
-                            <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={() => actualPageUsers.length === 0}>Siguiente</button>
+                            <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={actualPageUsers.length === 0}>Siguiente</button>
                         </div>
                     </div>
                 )}
@@ -450,7 +468,7 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
                         </div>
                         <div>
                             <button onClick={() => handlePaginateClubs(actualPageClubs - 1)} disabled={actualPageClubs === 1}>Anterior</button>
-                            <button onClick={() => handlePaginateClubs(actualPageClubs + 1)} disabled={() => actualPageClubs.length === 0}>Siguiente</button>
+                            <button onClick={() => handlePaginateClubs(actualPageClubs + 1)} disabled={actualPageClubs.length === 0}>Siguiente</button>
                         </div>
                     </div>
                 )}
@@ -471,7 +489,7 @@ export default function Home({ users, sports, clubs, courts, reservations }) {
                 )}
 
             </div>
-            <NavbarLow />
+            {/* <NavbarLow /> */}
         </div>
     );
 };
