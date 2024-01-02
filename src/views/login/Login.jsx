@@ -54,8 +54,9 @@ const Login = () => {
       console.log("googleAccessToken",googleAccessToken)
 
       const result = await authenticateWithFirebase(googleAccessToken);
-      console.log("result",result)
-
+      if(result) {
+        navigate("/questions");
+      }
 
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
@@ -73,7 +74,7 @@ const Login = () => {
       console.log("Usuario autenticado en Firebase:");
       await saveUserToFirestore(authResult.user);
 
-      return authResult
+      return true
     } catch (error) {
       console.error("Error al autenticar con Firebase:", error);
     }
@@ -92,19 +93,19 @@ const Login = () => {
   
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
+        navigate("/home");
+
       } else {
         // El usuario no existe, así que procedemos a guardarlo
         await setDoc(userRef, {
           email: email,
           displayName: displayName,
-          // Otros campos según tus necesidades
         });
   
         console.log('Usuario guardado en Firestore con éxito');
       }
     } catch (error) {
       console.error('Error al guardar/verificar usuario en Firestore:', error);
-      // Manejar el error según tus necesidades
     }
   };
   
