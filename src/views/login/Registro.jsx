@@ -31,6 +31,7 @@ const Registro = () => {
     // Si el registro funciona aca te manda a questions
     try {
       const endpoint = "/register"
+      console.log("user", data)
       const result = await axios.post(endpoint, data) 
       if (result) {
         navigate("/questions")
@@ -70,10 +71,10 @@ const Registro = () => {
 
       <div className={ styles.contentDatas }>
         <label className={ styles.labelsDatas } >Contraseña:</label>
-        <input className={ styles.inputsDatas } type={showPassword ? "text" : "password"} {...register('contrasenia', { required: true, minLength: 8, maxLength: 15 })}/>
-        {errors.contrasenia?.type === "required" && <p>Este campo es requerido</p>}
-        {errors.contrasenia?.type === "minLength" && <p>La contraseña debe tener al menos 8 caracteres</p>}
-        {errors.contrasenia?.type === "maxLength" && <p>La contraseña no debe exceder los 15 caracteres</p>}
+        <input className={ styles.inputsDatas } type={showPassword ? "text" : "password"} {...register('password', { required: true, minLength: 8, maxLength: 15 })}/>
+        {errors.password?.type === "required" && <p>Este campo es requerido</p>}
+        {errors.password?.type === "minLength" && <p>La contraseña debe tener al menos 8 caracteres</p>}
+        {errors.password?.type === "maxLength" && <p>La contraseña no debe exceder los 15 caracteres</p>}
         <span onClick={togglePasswordVisibility}>
           {showPassword ? "Ocultar" : "Mostrar"} contraseña
         </span>
