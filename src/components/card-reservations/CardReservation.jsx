@@ -7,7 +7,7 @@ export default function CardReservation({reservations}){
         <div className = {styles.divCardReservation}>
             <h1 className = {styles.compTitle}>Reservaciones</h1>
             <div className = {styles.divCards}>
-            {reservations?.map((element) => <CardsReservation reservations = {element}/>)}
+            {reservations?.map((element) => <CardsReservation reservations = {element} key = {element.id}/>)}
             </div>
         </div>
     );
