@@ -75,32 +75,39 @@ const Login = () => {
 
       return authResult
     } catch (error) {
-      // Manejar errores de autenticación en Firebase
       console.error("Error al autenticar con Firebase:", error);
     }
   };
   
 
   const saveUserToFirestore = async (user) => {
-    const { uid, email, displayName, photoURL } = user;
-    console.log(uid, email, displayName, photoURL);
+    const { uid, email, displayName } = user;
   
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
-    console.log(userRef, "userRef");
   
     try {
-      await setDoc(userRef, {
-        email: email,
-        displayName: displayName,
-        // Agrega otros campos según tus necesidades, como 'photoURL'
-      });
+      // Verificar si el usuario ya existe en Firestore
+      const userSnapshot = await getDoc(userRef);
   
-      console.log('Usuario guardado en Firestore con éxito');
+      if (userSnapshot.exists()) {
+        console.log('Usuario ya existe en Firestore');
+      } else {
+        // El usuario no existe, así que procedemos a guardarlo
+        await setDoc(userRef, {
+          email: email,
+          displayName: displayName,
+          // Otros campos según tus necesidades
+        });
+  
+        console.log('Usuario guardado en Firestore con éxito');
+      }
     } catch (error) {
-      console.error('Error al guardar usuario en Firestore:', error);
+      console.error('Error al guardar/verificar usuario en Firestore:', error);
+      // Manejar el error según tus necesidades
     }
   };
+  
   
 
 
