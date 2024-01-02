@@ -1,13 +1,13 @@
-// import React from 'react';
+import React from 'react';
 import styles from './home.module.css';
 import CardUser from '../cardUsers/CardUser';
 import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import CardCourt from '../cardCourt/CardCourt';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import CardReservation from '../../components/card-reservations/CardReservation';
+import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import Solicitudes from '../solucitudes/Solicitudes';
 import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
 
@@ -355,14 +355,6 @@ export default function Home() {
         }
 
     ];
-    
-    // useEffect(() => {
-    //     setUserFound(users);
-    // }, [actualPageUsers])
-
-    const handleSearchResult = (result) => {
-        setUserFound(result);
-    }
 
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
