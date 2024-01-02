@@ -54,9 +54,7 @@ const Login = () => {
       console.log("googleAccessToken",googleAccessToken)
 
       const result = await authenticateWithFirebase(googleAccessToken);
-      if(result) {
-        navigate("/questions");
-      }
+
 
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
@@ -101,7 +99,8 @@ const Login = () => {
           email: email,
           displayName: displayName,
         });
-  
+        navigate("/questions");
+
         console.log('Usuario guardado en Firestore con éxito');
       }
     } catch (error) {
