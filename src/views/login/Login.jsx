@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Actualiza la importación aquí
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -10,50 +10,46 @@ import { fetchUser } from "../../redux/reducer";
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState(""); 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
+  const navigate = useNavigate(); // Actualiza el uso aquí
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleGoogleLoginClick = () => {
-    // Crear un objeto de autenticación de Google
-    const auth2 = gapi.auth2.getAuthInstance();
-  
-    // Iniciar el proceso de inicio de sesión de Google
-    auth2.signIn().then((googleUser) => {
-      // Obtener la información del usuario
-      const profile = googleUser.getBasicProfile();
-  
-      // Aquí puedes realizar acciones con la información del usuario
-      console.log('ID: ' + profile.getId()); // ID único del usuario
-      console.log('Nombre: ' + profile.getName()); // Nombre del usuario
-      console.log('Imagen URL: ' + profile.getImageUrl()); // URL de la imagen de perfil
-      console.log('Email: ' + profile.getEmail()); // Email del usuario
-  
-      // También puedes obtener el token de acceso de Google
-      const googleAccessToken = googleUser.getAuthResponse().access_token;
-  
-      // Ahora puedes enviar el token de acceso de Google a tu servidor para la autenticación del usuario
-      // Ejemplo de cómo enviarlo usando axios (puedes ajustarlo según tu stack)
-      // axios.post('/auth/google', { token: googleAccessToken }).then(response => {
-      //   console.log(response.data);
-      // });
-  
-      // Aquí puedes implementar cualquier lógica adicional que necesites después del inicio de sesión con Google
-    }).catch((error) => {
-      console.error('Error en el inicio de sesión de Google:', error);
-    });
+  const handleRegularLogin = async () => {
+    try {
+      // Lógica para manejar el inicio de sesión regular con email y contraseña
+      // Puedes utilizar auth.signInWithEmailAndPassword u otra lógica según tu configuración
+
+      // Después de iniciar sesión correctamente, redirige al usuario
+      navigate('/home');
+    } catch (error) {
+      console.error('Error en el inicio de sesión:', error);
+    }
   };
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
-    console.log(credentialResponse);
-    setGoogleLoginSuccess(true);
-    // Puedes realizar acciones adicionales después de un inicio de sesión exitoso
+  const handleGoogleLogin = async () => {
+    try {
+      const auth2 = gapi.auth2.getAuthInstance();
+      const googleUser = await auth2.signIn();
+      const googleProfile = googleUser.getBasicProfile();
+
+      // Aquí debes llamar a tu función para crear el usuario en Firebase
+      await createUserInFirebase(googleProfile.getEmail(), googleProfile.getName());
+
+      // Redirige al usuario después de iniciar sesión correctamente
+      navigate('/questions');
+    } catch (error) {
+      console.error('Error en el inicio de sesión con Google:', error);
+    }
   };
 
-  const handleGoogleLoginError = () => {
-    console.log('Login Failed');
-    // Manejar errores si es necesario
+  // Función para crear usuario en Firebase
+  const createUserInFirebase = async (email, name) => {
+    try {
+      // Lógica para crear el usuario en Firebase usando el email y nombre
+      // Puedes utilizar auth.createUserWithEmailAndPassword u otra lógica según tu configuración
+    } catch (error) {
+      console.error('Error al crear usuario en Firebase:', error);
+    }
   };
 
   const onSubmit = async (data) => {
@@ -178,7 +174,7 @@ const Login = () => {
 
         <button
           type="button"
-          onClick={handleGoogleLoginClick}
+          nClick={handleGoogleLogin}
           className={styles.googleLoginButton}
         >
           INICIAR SESION CON GOOGLE
