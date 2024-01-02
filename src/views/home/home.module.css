@@ -54,6 +54,16 @@
     margin: 1rem 0;
 }
 
+.resetButton{
+    width: 6vh;
+    height: 4vh;
+    font-size: 20px;
+    border-radius: 5px ;
+    cursor: pointer;
+    background-color: rgb(38, 38, 38);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
+}
+
 .NavBtn {
     position: relative;
     background: transparent;
@@ -104,18 +114,27 @@
 
 .filters{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
 }
 .filter{
     display: flex;
     flex-direction: column;
-    margin: 10px;
     margin-bottom: 15px;
 }
 
+.labelFilter{
+    margin: 1px;
+}
+.selectFilter{
+    width: 60vw;
+    margin: 2px;
+    border-style: solid;
+    border-radius: 5px;
+}
 
 .btnNuevaReserva{
-    width: 45vw;
+    width: 120px;
     height: 30px;
     font-size: 17px;
     font-weight: 600;
