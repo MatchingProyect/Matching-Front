@@ -1,4 +1,5 @@
 import axios from 'axios';
+import styles from './SearchBar.module.css';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -26,41 +27,56 @@ const SearchBar = ({users}) => {
                 if(!userByFound.length) setUserNotFound(true);
                 else setUserNotFound(false);
             }
+
+            const endpoint = `/users?name=${userByFound}`;
+            console.log(userByFound)
+            return endpoint;
             
-            const endpoint = `/users?name=${userByFound[0].id}`;
-            const {data} = await axios(endpoint);
-            console.log(userByFound[0].id)
-            console.log(data)
-            if(data.status) return data;
+            //users de dataBase
+            // const endpoint = `/users?name=${userByFound[0].id}`;
+            // const {data} = await axios(endpoint);
+            // console.log(userByFound[0].id)
+            // console.log(data)
+            // if(data.status) return data;
         
     } catch (error) {
         throw error.message
     }
 }
 
-const handleSearch = async(name) => {
+const handleClickSearch = async(name) => {
     name.toLowerCase();
     try {
-        const endpoint = `/users?name=${name.id}`;
-        console.log(userByFound)
-            const {data} = await axios(endpoint);
-            if(data.status)
-            navigate(`/user/${data}`);
-            return data;
-        } catch (error) {
-            throw error.message;
-        }
+        const {data} = axios(`/users?name=${name}`);
+    } catch (error) {
+        
     }
+}
+
+// const handleSearch = async(name) => {
+//     name.toLowerCase();
+//     try {
+//         const endpoint = `/users?name=${name.id}`;
+//         console.log(userByFound)
+//             const {data} = await axios(endpoint);
+//             if(data.status)
+//             navigate(`/user/${data}`);
+//             return data;
+//         } catch (error) {
+//             throw error.message;
+//         }
+//     }
 
   return (
-    <div>
+    <div className={styles.searchBar}>
         <input
+          className={styles.input}
+          type="text"
+          placeholder="Search User by Name"
           onChange={searchByCoincidence}
           value={userName}
-          type="search"
-          placeholder="Search User by Name"
         />
-        <button onClick={() => handleSearch(userName)}>Search</button>
+        <button className={styles.buscarBtn}>Buscar</button>
     </div>
   )
 }

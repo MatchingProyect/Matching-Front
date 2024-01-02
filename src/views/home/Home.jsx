@@ -5,61 +5,85 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchClubs, fetchCourts, fetchUsers } from '../../redux/reducer';
 
 export default function Home() {
-    const users = [
-        {
-            name: "John Smith",
-            description: "Apasionado por el deporte en Argentina, disfruta del pádel y el fútbol.",
-            pais: "Argentina",
-            deportes: ["padel", "futbol"]
-        },
-        {
-            name: "Maria García",
-            description: "Fanática del baloncesto en España, practica baloncesto y atletismo con gran entusiasmo.",
-            pais: "España",
-            deportes: ["baloncesto", "atletismo"]
-        },
-        {
-            name: "Carlos Rodríguez",
-            description: "Amante del tenis en México, su pasión incluye el tenis y la natación.",
-            pais: "México",
-            deportes: ["tenis", "natación"]
-        },
-        {
-            name: "Laura Pérez",
-            description: "Entusiasta del ciclismo en Colombia, encuentra alegría en el ciclismo y el yoga.",
-            pais: "Colombia",
-            deportes: ["ciclismo", "yoga"]
-        },
-        {
-            name: "Elena Torres",
-            description: "Aficionada al surf en España, disfruta de las olas y practica yoga para mantenerse en forma.",
-            pais: "España",
-            deportes: ["surf", "yoga"]
-        },
-        {
-            name: "Ricardo Navarro",
-            description: "Entrenador de fútbol en Argentina, apasionado por desarrollar habilidades en jóvenes futbolistas.",
-            pais: "Argentina",
-            deportes: ["fútbol", "entrenamiento"]
-        },
-        {
-            name: "Isabel Jiménez",
-            description: "Amante del senderismo en México, encuentra paz y aventura explorando la naturaleza.",
-            pais: "México",
-            deportes: ["senderismo", "camping"]
-        },
-        {
-            name: "Diego Herrera",
-            description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
-            pais: "Colombia",
-            deportes: ["fitness", "nutrición"]
-        }
-    ];
+    const [selectedOption, setSelectedOption] = useState('users');
+    const [actualPageUsers, setActualPageUsers] = useState(1);
+    const [actualPageCourts, setActualPageCourts] = useState(1);
+    const [actualPageClubs, setActualPageClubs] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const users = useSelector(state => state.user.allUsers);
+    // const sports = useSelector(state => state.user.allSports);
+    // const clubs = useSelector(state => state.user.allClubs);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchUsers(actualPageUsers));
+    }, [actualPageUsers])
+
+    // useEffect(() => {
+    //     dispatch(fetchCourts(actualPageCourts));
+    // }, [actualPageCourts])
+
+    useEffect(() => {
+        dispatch(fetchClubs());
+    }, [actualPageClubs])
+
+    // const users = [
+    //     {
+    //         name: "John Smith",
+    //         description: "Apasionado por el deporte en Argentina, disfruta del pádel y el fútbol.",
+    //         pais: "Argentina",
+    //         deportes: ["padel", "futbol"]
+    //     },
+    //     {
+    //         name: "Maria García",
+    //         description: "Fanática del baloncesto en España, practica baloncesto y atletismo con gran entusiasmo.",
+    //         pais: "España",
+    //         deportes: ["baloncesto", "atletismo"]
+    //     },
+    //     {
+    //         name: "Carlos Rodríguez",
+    //         description: "Amante del tenis en México, su pasión incluye el tenis y la natación.",
+    //         pais: "México",
+    //         deportes: ["tenis", "natación"]
+    //     },
+    //     {
+    //         name: "Laura Pérez",
+    //         description: "Entusiasta del ciclismo en Colombia, encuentra alegría en el ciclismo y el yoga.",
+    //         pais: "Colombia",
+    //         deportes: ["ciclismo", "yoga"]
+    //     },
+    //     {
+    //         name: "Elena Torres",
+    //         description: "Aficionada al surf en España, disfruta de las olas y practica yoga para mantenerse en forma.",
+    //         pais: "España",
+    //         deportes: ["surf", "yoga"]
+    //     },
+    //     {
+    //         name: "Ricardo Navarro",
+    //         description: "Entrenador de fútbol en Argentina, apasionado por desarrollar habilidades en jóvenes futbolistas.",
+    //         pais: "Argentina",
+    //         deportes: ["fútbol", "entrenamiento"]
+    //     },
+    //     {
+    //         name: "Isabel Jiménez",
+    //         description: "Amante del senderismo en México, encuentra paz y aventura explorando la naturaleza.",
+    //         pais: "México",
+    //         deportes: ["senderismo", "camping"]
+    //     },
+    //     {
+    //         name: "Diego Herrera",
+    //         description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
+    //         pais: "Colombia",
+    //         deportes: ["fitness", "nutrición"]
+    //     }
+    // ];
     const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Cordova', 'Lima', 'Trujillo', 'Bogota', 'Cali'];
 
     const sports = [
@@ -110,7 +134,17 @@ export default function Home() {
 
     ];
 
-    const [selectedOption, setSelectedOption] = useState('users');
+    const handlePaginateUsers = (newPage) => {
+        if (newPage > 0) setActualPageUsers(newPage);
+    }
+
+    // const handlePaginateCourts = (newPage) => {
+    //     if (newPage > 0) setActualPageUsers(newPage);
+    // }
+
+    const handlePaginateClubs = (newPage) => {
+        if (newPage > 0) setActualPageUsers(newPage);
+    }
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
@@ -127,27 +161,27 @@ export default function Home() {
             </div>
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
-                    <h1 className = {styles.compTitle}>Encuentra una partida</h1>
-                    <div className = {styles.filters}>
-                        <div className = {styles.filter}>
-                        <label>Ciudad</label>
+                    <h1 className={styles.compTitle}>Encuentra una partida</h1>
+                    <div className={styles.filters}>
+                        <div className={styles.filter}>
+                            <label>Ciudad</label>
                             <select>
                                 <option disabled></option>
                                 {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
                             </select>
                         </div>
-                        <div className = {styles.filter}>
+                        <div className={styles.filter}>
                             <label>Deporte</label>
                             <select>
-                            <option disabled></option>
+                                <option disabled></option>
                                 {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
                             </select>
                         </div>
                     </div>
-                    <button className = {styles.buscarBtn}>Buscar</button>
+                    <SearchBar users={users} />
                 </div>
                 <div className={styles.newReserva}>
-                    <button className = {styles.btnNuevaReserva}>Nueva Reserva</button>
+                    <button className={styles.btnNuevaReserva}>Nueva Reserva</button>
                 </div>
 
             </div>
@@ -158,10 +192,16 @@ export default function Home() {
             </div>
             <div >
                 {selectedOption === 'users' && (
-                    <div className={styles.containerCards}>
-                        {users?.map((user) => (
-                            <CardUser key={user.name} user={user} />
-                        ))}
+                    <div>
+                        <div className={styles.containerCards}>
+                            {users?.map((user) => (
+                                <CardUser key={user.name} user={user} />
+                            ))}
+                        </div>
+                        <div>
+                            <button onClick={() => handlePaginateUsers(actualPageUsers - 1)} disabled={actualPageUsers === 1}>Anterior</button>
+                            <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={() => actualPageUsers.length === 0}>Siguiente</button>
+                        </div>
                     </div>
                 )}
 
@@ -172,13 +212,21 @@ export default function Home() {
                         ))}
                     </div>
                 )}
-                {selectedOption === 'clubs' && (<div>
-                    {clubs?.map((club) => {
-                        return (
-                            <CardClub club={club} />
-                        )
-                    })}
-                </div>)}
+                {selectedOption === 'clubs' && (
+                    <div>
+                        <div>
+                            {clubs?.map((club) => {
+                                return (
+                                    <CardClub club={club} />
+                                )
+                            })}
+                        </div>
+                        <div>
+                            <button onClick={() => handlePaginateClubs(actualPageClubs - 1)} disabled={actualPageClubs === 1}>Anterior</button>
+                            <button onClick={() => handlePaginateClubs(actualPageClubs + 1)} disabled={() => actualPageClubs.length === 0}>Siguiente</button>
+                        </div>
+                    </div>
+                )}
             </div>
             <NavbarLow />
         </div>

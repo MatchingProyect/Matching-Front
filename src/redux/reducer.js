@@ -37,16 +37,22 @@ export const userSlice = createSlice({
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
          const {data} = await axios('/profiles')
-        if(data.status) dispatch(setProfiles(data.allProfiles))
+        if(data.status) {
+            dispatch(setProfiles(data.allProfiles))
+        }
     } catch (error) {
         throw error.message
     }
 }
 
-export const fetchUsers = ()=>async(dispatch)=>{
+export const fetchUsers = (page)=>async(dispatch)=>{
     try {
-         const {data} = await axios('/users')
-        if(data.status) dispatch(setUsers(data.allUsers))
+        const {data} = await axios(`/users?page=${page}`);
+        const totalPages = data.allUsers.length;
+        if(data.status) {
+            dispatch(setUsers(data.allUsers))
+            return totalPages;
+        }
     } catch (error) {
         throw error.message
     }
