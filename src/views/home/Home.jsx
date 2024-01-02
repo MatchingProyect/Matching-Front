@@ -29,6 +29,7 @@ export default function Home() {
     // const courts = useSelector((state) => state.user.allcourts);
     // const reservations = useSelector((state) => state.user.allReservations);
     
+
   
     // useEffect(() => {
     //   dispatch(fetchUsers(actualPageUsers));
@@ -410,6 +411,17 @@ export default function Home() {
 
     ];
 
+    
+    const [userFound, setUserFound] = useState(users);
+    
+    useEffect(() => {
+        setUserFound(users);
+    }, [actualPageUsers])
+
+    const handleSearchResult = (result) => {
+        setUserFound(result);
+    }
+
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
 
@@ -522,7 +534,7 @@ export default function Home() {
             <div >
                 {selectedOption === 'users' && (
                     <div>
-                        <SearchBar users={users} />
+                        <SearchBar users={users} onSearchResult={handleSearchResult} />
                         <div className={styles.containerCards}>
                             {users?.map((user) => (
                                 <CardUser key={user.name} user={user} />

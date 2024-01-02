@@ -12,8 +12,9 @@ import {useDispatch} from "react-redux";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
+  const [password, setPassword] = useState(""); 
+
   const navigate = useNavigate();
-  const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() =>{
@@ -131,22 +132,22 @@ const Login = () => {
 
 
   const onSubmit = async (data) => {
+    console.log(data)
+
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
+      console.log("response", response)
 
       if (response.data) {
+
         const isNewUser = response.data.isNewUser;
 
         const id = response.data.userLogeado.id
-
         if(id) dispatch(fetchUser(id))
 
-        if (isNewUser) {
-          navigate("/questions");
-        } else {
-          navigate("/home");
-        }
+        navigate("/home")
+        
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -188,7 +189,7 @@ const Login = () => {
               Email
             </label>
             <Controller
-              name="email"
+              name="emailValue"
               control={control}
               rules={{
                 required: "Este campo es requerido",
@@ -202,12 +203,10 @@ const Login = () => {
                   <input
                     className={styles.inputEmail}
                     type="email"
-                    {...field}
                     inputMode="email"
-                    value={emailValue} // Asigna el valor del estado aquí
-                    onChange={(e) => setEmailValue(e.target.value)} // Actualiza el estado en el cambio
+                    {...field}
                   />
-                  {errors.email && <p>{errors.email.message}</p>}
+                  {errors.emailValue && <p>{errors.emailValue.message}</p>}
                 </>
               )}
             />
@@ -253,9 +252,11 @@ const Login = () => {
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
           </div>
         </div>
-        <button type="submit" onClick={() => onSubmit(emailValue)} className={styles.submitButton}>
+
+        <button type="submit" className={styles.submitButton}>
           INICIAR SESION
         </button>
+
 
         <button
           type="button"
@@ -265,10 +266,6 @@ const Login = () => {
           INICIAR SESION CON GOOGLE
         </button>
 
-        {/* <GoogleLogin
-          onSuccess={handleGoogleLoginSuccess}
-          onError={handleGoogleLoginError}
-        /> */}
 
         <div className={styles.container}>
           <p className={styles.registerText}>
