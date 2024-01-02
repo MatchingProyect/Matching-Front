@@ -5,11 +5,14 @@ import styles from "./login.module.css";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { app } from './../../FireBase/fireBase.config';
+import { useDispatch } from "react-redux";
+import { fetchUser } from "../../redux/reducer";
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
 
   const handleGoogleLoginClick = () => {

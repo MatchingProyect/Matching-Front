@@ -78,6 +78,7 @@
 
 .containerCards {
     margin: 1rem 1rem;
+    margin-bottom: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -112,18 +113,7 @@
     margin-bottom: 15px;
 }
 
-.buscarBtn{
-    margin: 10px;
-    width: 45vw;
-    height: 30px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 5px ;
-    cursor: pointer;
-    background-color: rgb(38, 38, 38);
-    color: white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
-}
+
 .btnNuevaReserva{
     width: 45vw;
     height: 30px;

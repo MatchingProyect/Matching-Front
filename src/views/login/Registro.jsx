@@ -37,7 +37,7 @@ const Registro = () => {
       }
       // console.log(data)
     } catch (error) {
-      
+      throw error.message;
     }
 
   } 

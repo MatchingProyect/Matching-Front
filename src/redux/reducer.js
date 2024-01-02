@@ -9,6 +9,7 @@ const initialState = {
     allFriends: [],
     allLocations: [],
     allReservations: [],
+    user: []
 };
 
 export const userSlice = createSlice({
@@ -39,6 +40,9 @@ export const userSlice = createSlice({
        setReservations: (state, action) => {
         state.allReservations = action.payload;
        },
+       setUser: (state, action) =>{
+        state.user = action.payload
+       }
     }
 })
 
@@ -63,16 +67,22 @@ export const fecthReservations = ()=>async(dispatch)=>{
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
          const {data} = await axios('/profiles')
-        if(data.status) dispatch(setProfiles(data.allProfiles))
+        if(data.status) {
+            dispatch(setProfiles(data.allProfiles))
+        }
     } catch (error) {
         throw error.message
     }
 }
 
-export const fetchUsers = ()=>async(dispatch)=>{
+export const fetchUsers = (page)=>async(dispatch)=>{
     try {
-         const {data} = await axios('/users')
-        if(data.status) dispatch(setUsers(data.allUsers))
+        const {data} = await axios(`/users?page=${page}`);
+        const totalPages = data.allUsers.length;
+        if(data.status) {
+            dispatch(setUsers(data.allUsers))
+            return totalPages;
+        }
     } catch (error) {
         throw error.message
     }
@@ -111,6 +121,14 @@ export const fetchClubs = ()=>async(dispatch)=>{
         throw error.message
     }
 }
+export const fetchUser = (id)=>async(dispatch)=>{
+    try {
+        const {data} = await axios(`/users/${id}`)
+        if(data.status) dispatch(setUser(data.userFound))
+    } catch (error) {
+        throw error.message
+    }
+}
 
-export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations } = userSlice.actions;
+export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations, setUser } = userSlice.actions;
 export default userSlice.reducer;
