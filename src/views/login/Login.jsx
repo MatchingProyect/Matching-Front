@@ -3,9 +3,9 @@ import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { Button } from "@mui/material";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from "./firebase";
 import axios from "axios";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from './../../FireBase/fireBase.config';
 
 const Login = () => {
   const auth = getAuth(app);
@@ -42,13 +42,16 @@ const Login = () => {
   // luego que esos usuarios se creen en la base de datos, luego
   // el firebase.js para autentificar esos usuarios
   // fin
+
+
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
+      console.log(result, result.user);
       // aca verifica si es nuevo o no
       const isNewUser = result?.additionalUserInfo?.isNewUser;
-  
+      console.log(isNewUser);  
       if (isNewUser) {
         navigate("/questions");
       } else {
@@ -58,6 +61,10 @@ const Login = () => {
       console.error("Error al iniciar sesión con Google:", error);
     }
   };
+
+
+
+
   // Esto es la config del form y los campos, no habria que tocar nada de aca
   // para abajo
   const {

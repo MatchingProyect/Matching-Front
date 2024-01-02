@@ -6,7 +6,9 @@ const initialState = {
     allSports: [],
     allClubs: [],
     allCourts: [],
-    allFriends: []
+    allFriends: [],
+    allLocations: [],
+    allReservations: [],
 };
 
 export const userSlice = createSlice({
@@ -30,9 +32,33 @@ export const userSlice = createSlice({
        },
        setFriends: (state, action) => {
         state.allFriends = action.payload;
-       }
+       },
+       setLocations: (state, action) => {
+        state.allLocations = action.payload;
+       },
+       setReservations: (state, action) => {
+        state.allReservations = action.payload;
+       },
     }
 })
+
+export const fetchLocations = ()=>async(dispatch)=>{
+    try {
+         const {data} = await axios('/locations')
+        if(data.status) dispatch(setLocations(data.allLocations))
+    } catch (error) {
+        throw error.message
+    }
+}
+
+export const fecthReservations = ()=>async(dispatch)=>{
+    try {
+         const {data} = await axios('/reservations')
+        if(data.status) dispatch(setReservations(data.allReservations))
+    } catch (error) {
+        throw error.message
+    }
+}
 
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
@@ -86,5 +112,5 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
-export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends } = userSlice.actions;
+export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setLocations, setReservations } = userSlice.actions;
 export default userSlice.reducer;
