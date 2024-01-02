@@ -9,6 +9,7 @@ import { store } from './redux/store.js';
 import { UserProvider } from './context/UserProvider.jsx';
 import './FireBase/fireBase.config.js';
 import axios from 'axios';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const theme = createTheme();
 
@@ -18,16 +19,17 @@ axios.defaults.baseURL = 'https://matchingsv.onrender.com'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store = {store}>
-      <ThemeProvider theme = {theme}>
-        <BrowserRouter>
-          <UserProvider>
-            <App />
-          </UserProvider>
-        </BrowserRouter>
-      </ThemeProvider>
+    <Provider store={store}>
+      <GoogleOAuthProvider clientId="1061662234396-o558vqrpml1bpo2rut38qufj859kgtpg.apps.googleusercontent.com">
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <UserProvider>
+              <App />
+            </UserProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </GoogleOAuthProvider>
     </Provider>
   </React.StrictMode>
 );
-
 
