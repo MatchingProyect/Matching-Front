@@ -12,6 +12,8 @@ import {useDispatch} from "react-redux";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
+  const [password, setPassword] = useState(""); 
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -129,15 +131,13 @@ const Login = () => {
   } 
 
 
-  const onSubmit = async () => {
-    try {
-      const user= {
-        email: emailValue,
+  const onSubmit = async (data) => {
+    console.log(data)
 
-      }
+    try {
       const endpoint = "/login";
-      const response = await axios.post(endpoint, user);
-      console.log(response)
+      const response = await axios.post(endpoint, data);
+      console.log("response", response)
 
       if (response.data) {
         const isNewUser = response.data.isNewUser;
@@ -202,12 +202,10 @@ const Login = () => {
                   <input
                     className={styles.inputEmail}
                     type="email"
-                    {...field}
                     inputMode="email"
-                    value={emailValue} // Asigna el valor del estado aquí
-                    onChange={(e) => setEmailValue(e.target.value)} // Actualiza el estado en el cambio
+                    {...field}
                   />
-                  {errors.email && <p>{errors.email.message}</p>}
+                  {errors.emailValue && <p>{errors.emailValue.message}</p>}
                 </>
               )}
             />
@@ -253,6 +251,11 @@ const Login = () => {
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
           </div>
         </div>
+
+        <button type="submit" className={styles.submitButton}>
+          INICIAR SESION
+        </button>
+
 
         <button
           type="button"
