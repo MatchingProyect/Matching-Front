@@ -8,12 +8,13 @@ import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
 import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { fetchUser } from "../../redux/reducer";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
   const navigate = useNavigate();
   const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
-
+  const dispatch = useDispatch();
 
   useEffect(() =>{
     initializeGoogleAuth();
@@ -128,25 +129,16 @@ const Login = () => {
 
   } 
 
-  const handleGoogleLoginSuccess = async (credentialResponse) => {
-    setGoogleLoginSuccess(true);
-    console.log(credentialResponse);
-  };
-  
-  const handleGoogleLoginError = () => {
-    console.log('Login Failed');
-    // Manejar errores si es necesario
-  };
 
   const onSubmit = async (data) => {
     try {
       const endpoint = "/login";
-      const {data} = await axios.post(endpoint, data);
+      const response = await axios.post(endpoint, data);
 
-      if (data) {
-        const isNewUser = data.isNewUser;
+      if (response.data) {
+        const isNewUser = response.data.isNewUser;
 
-        const id = data.userLogeado.id
+        const id = response.data.userLogeado.id
 
         if(id) dispatch(fetchUser(id))
 
