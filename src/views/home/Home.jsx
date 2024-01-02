@@ -223,7 +223,8 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "14:00:00"],
             dateTimeEnd: ["31/12/2023", "15:00:00"],
             totalCost: 40,
-            ciudad: 'Santiago de Chile',
+            sport: 'Tennis',
+            ciudad: 'Santiago',
             club: 'Marriot Tennis',
             court: 'Tennis Yard 2',
         },
@@ -232,6 +233,7 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "16:00:00"],
             dateTimeEnd: ["31/12/2023", "17:00:00"],
             totalCost: 75,
+            sport: 'Baloncesto',
             ciudad: 'Buenos Aires',
             club: 'Country Club',
             court: 'Basket Field 1',
@@ -241,9 +243,20 @@ export default function Home() {
             dateTimeStart: ["31/12/2023", "17:00:00"],
             dateTimeEnd: ["31/12/2023", "18:00:00"],
             totalCost: 80,
+            sport: 'Padel',
             ciudad: 'Lima',
             club: 'Regis Club',
             court: 'Padel Field 1',
+        },
+        {
+            id: "00013",
+            dateTimeStart: ["01/01/2023", "10:00:00"],
+            dateTimeEnd: ["01/01/2023", "12:00:00"],
+            totalCost: 65,
+            sport: 'Futbol',
+            ciudad: 'Lima',
+            club: 'Regis Club',
+            court: 'Campo 1',
         },
     ]
 
@@ -299,8 +312,8 @@ export default function Home() {
             deportes: ["fitness", "nutrición"]
         }
     ];
-    const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Lima', 'Trujillo'];
-    let ciudadesToRender = reservations.map((element)=> element.ciudad);
+    const ciudades = ['La Paz', 'Santiago', 'Rio de Janeiro', 'Buenos Aires', 'Lima', 'Trujillo'];
+    
 
     const sports = [
         {
@@ -329,7 +342,7 @@ export default function Home() {
     const clubs = [
         {
             name: "Marriot Tennis",
-            ciudad: 'Santiago de Chile',
+            ciudad: 'Santiago',
             sport: ['Tenis'],
         },
         {
@@ -372,7 +385,14 @@ export default function Home() {
 
     const handlePaginateClubs = (newPage) => {
         if (newPage > 0) setActualPageClubs(newPage);
-    }
+    };
+
+    let ciudadesToRenderOne = reservations.map((element)=> element.ciudad);
+    let ciudadesNoRepeat = new Set(ciudadesToRenderOne);
+    let result = Array.from(ciudadesNoRepeat);
+
+
+
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
@@ -383,6 +403,26 @@ export default function Home() {
         let result = reservations.filter((element) => element.ciudad == value);
         setReservToRender(result);
     };
+
+    let clubsToRender = reservToRender.map((element) => element.club);
+
+
+    const handleFilterClubs = (event) => {
+        let value = event.target.value;
+        let result = reservToRender.filter((element) => element.club == value);
+        setReservToRender(result);
+    };
+
+    let sportsToRender = reservToRender.map((element) => element.sport);
+    // console.log(clubsToRender,reservToRender, sportsToRender);
+
+    const handleFilterDeporte = (event) => {
+        let value = event.target.value;
+        let result = reservToRender.filter((element) => element.club == value);
+        setReservToRender(result);
+    }
+
+
     const resetHandler = () => {
         setReservToRender(reservations);
     }
@@ -408,21 +448,21 @@ export default function Home() {
                         <label className = {styles.labelFilter}>Ciudad</label>
                             <select onChange = {handleFilterCiudad} className = {styles.selectFilter}>
                                 <option disabled></option>
-                                {ciudadesToRender?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
+                                {result?.map((ciudad) => <option value={ciudad} key = {ciudad}>{ciudad}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Clubs</label>
-                            <select className = {styles.selectFilter}>
+                            <select onChange = {handleFilterClubs} className = {styles.selectFilter}>
                                 <option disabled></option>
-                                {clubs?.map((club) => <option value={club.name}>{club.name}</option>)}
+                                {clubsToRender?.map((club) => <option value={club} key = {club}>{club}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Deporte</label>
-                            <select className = {styles.selectFilter}>
+                            <select onChange = {handleFilterDeporte} className = {styles.selectFilter}>
                                 <option disabled></option>
-                                {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
+                                {sportsToRender?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
                             </select>
                         </div>
                     </div>

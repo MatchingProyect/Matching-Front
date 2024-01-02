@@ -10,5 +10,5 @@ export default function CardReservation({reservations}){
             {reservations?.map((element) => <CardsReservation reservations = {element}/>)}
             </div>
         </div>
-    )
-}
+    );
+};
