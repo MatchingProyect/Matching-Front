@@ -15,7 +15,7 @@ export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
     const [actualPageUsers, setActualPageUsers] = useState(1);
-    // const [actualPageCourts, setActualPageCourts] = useState(1);
+    const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
     const [solicitudes, setSolicitudes] = useState(false);
     
@@ -363,13 +363,21 @@ export default function Home() {
         if (newPage > 0) setActualPageUsers(newPage);
     }
 
-    // const handlePaginateCourts = (newPage) => {
-    //     if (newPage > 0) setActualPageUsers(newPage);
-    // }
+    const handlePaginateCourts = (newPage) => {
+        if (newPage > 0) setActualPageCourts(newPage);
+    }
+    const courtsPerPage = 5;
+    const startCourts = (actualPageCourts - 1) * courtsPerPage;
+    const endCourts = startCourts + courtsPerPage;
+    const courtsToDisplay = courts.slice(startCourts, endCourts);
 
     const handlePaginateClubs = (newPage) => {
         if (newPage > 0) setActualPageClubs(newPage);
     };
+    const clubsPerPage = 5;
+    const start = (actualPageClubs - 1) * clubsPerPage;
+    const end = start + clubsPerPage;
+    const clubsToDisplay = clubs.slice(start, end);
 
     let ciudadesToRenderOne = reservations.map((element)=> element.ciudad);
     let ciudadesNoRepeat = new Set(ciudadesToRenderOne);
@@ -477,10 +485,10 @@ export default function Home() {
                 {selectedOption === 'users' && (
                     <div>
 <SearchBarUsers />
-                        <div className={styles.buttonUsers}>
+                        {/* <div className={styles.buttonUsers}>
                             <button onClick={() => handlePaginateUsers(actualPageUsers - 1)} disabled={actualPageUsers === 1}>Anterior</button>
                             <button onClick={() => handlePaginateUsers(actualPageUsers + 1)} disabled={actualPageUsers.length === 0}>Siguiente</button>
-                        </div>
+                        </div> */}
                     </div>
                 )}
 
@@ -494,7 +502,8 @@ export default function Home() {
                 {selectedOption === 'clubs' && (
                     <div>
                         <div>
-                            {clubs?.map((club) => {
+                            {/* clubs */}
+                            {clubsToDisplay?.map((club) => {
                                 return (
                                     <CardClub club={club} />
                                 )
@@ -509,15 +518,16 @@ export default function Home() {
                 {selectedOption === 'courts' && (
                     <div>
                         <div>
-                            {courts?.map((court) => {
+                            {/* courts */}
+                            {courtsToDisplay?.map((court) => {
                                 return (
                                     <CardCourt court={court} />
                                 )
                             })}
                         </div>
                         <div>
-                            {/* <button onClick={() => handlePaginateClubs(actualPageClubs - 1)} disabled={actualPageClubs === 1}>Anterior</button>
-                            <button onClick={() => handlePaginateClubs(actualPageClubs + 1)} disabled={() => actualPageClubs.length === 0}>Siguiente</button> */}
+                            <button onClick={() => handlePaginateCourts(actualPageCourts - 1)} disabled={actualPageCourts === 1}>Anterior</button>
+                            <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
                         </div>
                     </div>
                 )}
