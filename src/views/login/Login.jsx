@@ -139,7 +139,7 @@ const Login = () => {
 
       if (response.data) {
         const id = response.data.id
-        if(id) dispatch(fetchUser(id))
+        if(id) dispatch(fetchUsers(id))
 
         navigate("/home")
         
