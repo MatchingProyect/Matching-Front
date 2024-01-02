@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import crearReserva from '../reserva/crearReserva'
 import { fetchCourts } from '../../redux/reducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AdminFunction from './AdminFunction'
 import DetailCourt from './DetailCourt'
+import axios from 'axios'
 
 const CardCourt = ({court}) => {
     const [reserva, setReserva] = useState(false)
