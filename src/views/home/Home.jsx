@@ -87,7 +87,7 @@ export default function Home() {
             name: 'Tennis Yard 1',
             club: 'Marriot Tennis',
             description: 'Campo profesional de tennis.',
-            sport: 'Tenis',
+            sport: 'Tennis',
             priceFee: 50,
             warrantyReservation: 'Card',
             grassType: 'No Grass',
@@ -100,7 +100,7 @@ export default function Home() {
             name: 'Tennis Yard 2',
             club: 'Marriot Tennis',
             description: 'Campo amateur de tennis.',
-            sport: 'Tenis',
+            sport: 'Tennis',
             priceFee: 30,
             warrantyReservation: 'Card',
             grassType: 'No Grass',
@@ -219,6 +219,28 @@ export default function Home() {
 
         },
         {
+            id: "0002",
+            dateTimeStart: ["30/12/2023", "18:00:00"],
+            dateTimeEnd: ["30/12/2023", "19:00:00"],
+            totalCost: 45,
+            sport: 'Baloncesto',
+            ciudad: 'La Paz',
+            club: 'The Courtyard',
+            court: 'Cancha Basquet 1',
+
+        },
+        {
+            id: "0003",
+            dateTimeStart: ["30/12/2023", "19:00:00"],
+            dateTimeEnd: ["30/12/2023", "20:00:00"],
+            totalCost: 40,
+            sport: 'Tennis',
+            ciudad: 'La Paz',
+            club: 'El Rancho',
+            court: 'Campo Tennis 1',
+
+        },
+        {
             id: "0004",
             dateTimeStart: ["31/12/2023", "14:00:00"],
             dateTimeEnd: ["31/12/2023", "15:00:00"],
@@ -227,6 +249,16 @@ export default function Home() {
             ciudad: 'Santiago',
             club: 'Marriot Tennis',
             court: 'Tennis Yard 2',
+        },
+        {
+            id: "0005",
+            dateTimeStart: ["31/12/2023", "11:00:00"],
+            dateTimeEnd: ["31/12/2023", "12:00:00"],
+            totalCost: 55,
+            sport: 'Baloncesto',
+            ciudad: 'Santiago',
+            club: 'Baloncesto Unido',
+            court: 'Campo Basket 1',
         },
         {
             id: "0008",
@@ -287,9 +319,9 @@ export default function Home() {
         },
         {
             name: "Carlos Rodríguez",
-            description: "Amante del tenis en México, su pasión incluye el tenis y la natación.",
+            description: "Amante del tennis en México, su pasión incluye el tennis y la natación.",
             pais: "México",
-            deportes: ["tenis", "natación"]
+            deportes: ["tennis", "natación"]
         },
         {
             name: "Laura Pérez",
@@ -339,21 +371,16 @@ export default function Home() {
             clubs: ["Club X", "Club Y", "Club Z"]
         },
         {
-            name: "Tenis",
+            name: "Tennis",
             clubs: ["Club 1", "Club 2", "Club 3"]
-        },
-        {
-            name: "Ciclismo",
-            clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
         }
-
     ];
 
     const clubs = [
         {
             name: "Marriot Tennis",
             ciudad: 'Santiago',
-            sport: ['Tenis'],
+            sport: ['Tennis'],
         },
         {
             name: "The Courtyard",
@@ -378,12 +405,13 @@ export default function Home() {
         {
             name: "Big Smoke Club",
             ciudad: 'Trujillo',
-            sport: ['Tenis'],
+            sport: ['Tennis'],
         }
 
     ];
 
     const [reservToRender, setReservToRender] = useState(reservations);
+    const [filteredReservs, setFilteredReservs] = useState();
 
     const handlePaginateUsers = (newPage) => {
         if (newPage > 0) setActualPageUsers(newPage);
@@ -410,6 +438,7 @@ export default function Home() {
         let value = event.target.value;
         let result = reservations.filter((element) => element.ciudad == value);
         setReservToRender(result);
+        setFilteredReservs(result);
     };
 
         let clubsToRender = reservToRender.map((element) => element.club);
@@ -425,8 +454,6 @@ export default function Home() {
     let sportsToRender = reservToRender.map((element) => element.sport);
     let sportsNoRepeat = new Set(sportsToRender);
     let arraySports = Array.from(sportsNoRepeat);
-    //deberian salir solo los deportes que estan en el estado global;
-    console.log(arraySports);
 
     const handleFilterDeporte = (event) => {
         let value = event.target.value;
@@ -458,18 +485,21 @@ export default function Home() {
                         <div className = {styles.filter}>
                         <label className = {styles.labelFilter}>Ciudad</label>
                             <select onChange = {handleFilterCiudad} className = {styles.selectFilter}>
+                            <option disabled>Seleccionar Ciudad</option>
                                 {result?.map((ciudad) => <option value={ciudad} key = {ciudad}>{ciudad}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Clubs</label>
                             <select onChange = {handleFilterClubs} className = {styles.selectFilter}>
+                            <option disabled>Seleccionar Club</option>
                                 {arrayClubs?.map((club) => <option value={club} key = {club}>{club}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Deporte</label>
                             <select onChange = {handleFilterDeporte} className = {styles.selectFilter}>
+                                <option disabled>Seleccionar Deporte</option>
                                 {arraySports?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
                             </select>
                         </div>
@@ -482,7 +512,7 @@ export default function Home() {
 
             </div>
             <div className = {styles.reservationsContainer}>
-                <CardReservation reservations = {reservToRender}/>
+                <CardReservation reservations = {reservToRender} />
             </div>
             <div className={styles.containerTitle}>
                 <button onClick={() => handleButtonClick('users')} className={styles.NavBtn}>Users</button>
@@ -544,7 +574,7 @@ export default function Home() {
                 )}
 
             </div>
-            {/* <NavbarLow /> */}
+            <NavbarLow />
         </div>
     );
 };
