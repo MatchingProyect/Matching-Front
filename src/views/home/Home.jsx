@@ -253,10 +253,20 @@ export default function Home() {
             dateTimeStart: ["01/01/2023", "10:00:00"],
             dateTimeEnd: ["01/01/2023", "12:00:00"],
             totalCost: 65,
-            sport: 'Futbol',
+            sport: 'Fútbol',
             ciudad: 'Lima',
             club: 'Regis Club',
             court: 'Campo 1',
+        },
+        {
+            id: "00014",
+            dateTimeStart: ["02/01/2023", "08:00:00"],
+            dateTimeEnd: ["03/01/2023", "09:00:00"],
+            totalCost: 55,
+            sport: 'Fútbol',
+            ciudad: 'Lima',
+            club: 'Regis Club',
+            court: 'Campo 2',
         },
     ]
 
@@ -392,8 +402,6 @@ export default function Home() {
     let result = Array.from(ciudadesNoRepeat);
 
 
-
-
     const handleButtonClick = (option) => {
         setSelectedOption(option);
         setSelectedSection(option);
@@ -404,8 +412,9 @@ export default function Home() {
         setReservToRender(result);
     };
 
-    let clubsToRender = reservToRender.map((element) => element.club);
-
+        let clubsToRender = reservToRender.map((element) => element.club);
+        let clubsNoRepeat = new Set(clubsToRender);
+        let arrayClubs = Array.from(clubsNoRepeat);
 
     const handleFilterClubs = (event) => {
         let value = event.target.value;
@@ -414,14 +423,16 @@ export default function Home() {
     };
 
     let sportsToRender = reservToRender.map((element) => element.sport);
-    // console.log(clubsToRender,reservToRender, sportsToRender);
+    let sportsNoRepeat = new Set(sportsToRender);
+    let arraySports = Array.from(sportsNoRepeat);
+    //deberian salir solo los deportes que estan en el estado global;
+    console.log(arraySports);
 
     const handleFilterDeporte = (event) => {
         let value = event.target.value;
-        let result = reservToRender.filter((element) => element.club == value);
+        let result = reservToRender.filter((element) => element.sport == value);
         setReservToRender(result);
-    }
-
+    };
 
     const resetHandler = () => {
         setReservToRender(reservations);
@@ -447,22 +458,19 @@ export default function Home() {
                         <div className = {styles.filter}>
                         <label className = {styles.labelFilter}>Ciudad</label>
                             <select onChange = {handleFilterCiudad} className = {styles.selectFilter}>
-                                <option disabled></option>
                                 {result?.map((ciudad) => <option value={ciudad} key = {ciudad}>{ciudad}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Clubs</label>
                             <select onChange = {handleFilterClubs} className = {styles.selectFilter}>
-                                <option disabled></option>
-                                {clubsToRender?.map((club) => <option value={club} key = {club}>{club}</option>)}
+                                {arrayClubs?.map((club) => <option value={club} key = {club}>{club}</option>)}
                             </select>
                         </div>
                         <div className={styles.filter}>
                             <label className = {styles.labelFilter}>Deporte</label>
                             <select onChange = {handleFilterDeporte} className = {styles.selectFilter}>
-                                <option disabled></option>
-                                {sportsToRender?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
+                                {arraySports?.map((deporte) => <option value={deporte} key = {deporte}>{deporte}</option>)}
                             </select>
                         </div>
                     </div>
