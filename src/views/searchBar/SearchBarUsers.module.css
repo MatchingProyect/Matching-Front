@@ -22,9 +22,16 @@
 }
 
 .cardFriendsContainer{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    margin: 3vh;
+    margin: 3vh; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 1rem;
+    gap: 0rem;
 }
 
 .resetBtn{
