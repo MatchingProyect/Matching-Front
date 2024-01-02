@@ -1,56 +1,111 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
-import { Button } from "@mui/material";
 import axios from "axios";
 import { app } from './../../FireBase/fireBase.config';
-import { useDispatch } from "react-redux";
-import { fetchUser } from "../../redux/reducer";
-import { GoogleLogin } from '@react-oauth/google';
+import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
+import {gapi} from 'gapi-script';
+import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState(""); 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
+
+
+  useEffect(() =>{
+    initializeGoogleAuth();
+
+  }, [])
+
+  const initializeGoogleAuth = () => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: "1061662234396-o558vqrpml1bpo2rut38qufj859kgtpg.apps.googleusercontent.com",
+      });
+    };
+
+    gapi.load("client:auth2", start);
+  };
+
 
   const handleGoogleLoginClick = () => {
     // Crear un objeto de autenticación de Google
     const auth2 = gapi.auth2.getAuthInstance();
   
     // Iniciar el proceso de inicio de sesión de Google
-    auth2.signIn().then((googleUser) => {
-      // Obtener la información del usuario
+    auth2.signIn().then(async (googleUser) => {
+      console.log('googleUser', googleUser);
+      console.log('isSignedIn', auth2.isSignedIn.get());
+
       const profile = googleUser.getBasicProfile();
   
-      // Aquí puedes realizar acciones con la información del usuario
-      console.log('ID: ' + profile.getId()); // ID único del usuario
-      console.log('Nombre: ' + profile.getName()); // Nombre del usuario
-      console.log('Imagen URL: ' + profile.getImageUrl()); // URL de la imagen de perfil
-      console.log('Email: ' + profile.getEmail()); // Email del usuario
-  
+      const user = {
+        displayName: profile.getName(),
+        email: profile.getEmail(),
+        photoURL: profile.getImageUrl(),
+        uid: profile.getId(),
+      };
+
+      console.log(user)
       // También puedes obtener el token de acceso de Google
-      const googleAccessToken = googleUser.getAuthResponse().access_token;
-  
-      // Ahora puedes enviar el token de acceso de Google a tu servidor para la autenticación del usuario
-      // Ejemplo de cómo enviarlo usando axios (puedes ajustarlo según tu stack)
-      // axios.post('/auth/google', { token: googleAccessToken }).then(response => {
-      //   console.log(response.data);
-      // });
-  
-      // Aquí puedes implementar cualquier lógica adicional que necesites después del inicio de sesión con Google
+      const googleAccessToken = googleUser.xc.access_token;
+      console.log("googleAccessToken",googleAccessToken)
+
+      const result = await authenticateWithFirebase(googleAccessToken);
+      console.log("result",result)
+
+
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
     });
   };
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
-    console.log(credentialResponse);
-    setGoogleLoginSuccess(true);
-    // Puedes realizar acciones adicionales después de un inicio de sesión exitoso
-  };
+  const authenticateWithFirebase = async (googleAccessToken) => {
+    try {
 
+      const auth = getAuth(app);
+      const credential = GoogleAuthProvider.credential(null, googleAccessToken);
+      const authResult = await signInWithCredential(auth, credential);
+
+      // El usuario ha sido autenticado correctamente en Firebase
+      console.log("Usuario autenticado en Firebase:");
+      await saveUserToFirestore(authResult.user);
+
+      return authResult
+    } catch (error) {
+      // Manejar errores de autenticación en Firebase
+      console.error("Error al autenticar con Firebase:", error);
+    }
+  };
+  
+
+const saveUserToFirestore = async (uid, email, displayName, photoURL) => {
+  console.log(uid, email, displayName, photoURL);
+  const db = getFirestore(app);
+  const userRef = doc(db, 'users', uid);
+  console.log(userRef, "userRef")
+
+  try {
+    await setDoc(userRef, {
+      email: email,
+      displayName: displayName,
+
+    });
+
+    console.log('Usuario guardado en Firestore con éxito');
+  } catch (error) {
+    console.error('Error al guardar usuario en Firestore:', error);
+  }
+};
+
+
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    setGoogleLoginSuccess(true);
+    console.log(credentialResponse);
+  };
+  
   const handleGoogleLoginError = () => {
     console.log('Login Failed');
     // Manejar errores si es necesario
@@ -184,10 +239,10 @@ const Login = () => {
           INICIAR SESION CON GOOGLE
         </button>
 
-        <GoogleLogin
+        {/* <GoogleLogin
           onSuccess={handleGoogleLoginSuccess}
           onError={handleGoogleLoginError}
-        />
+        /> */}
 
         <div className={styles.container}>
           <p className={styles.registerText}>
@@ -205,11 +260,5 @@ const Login = () => {
     </div>
   );
 };
-
-const _styled = {
-  signWithGoogle: {
-    marginTop: '15px',
-  }
-}
 
 export default Login;
