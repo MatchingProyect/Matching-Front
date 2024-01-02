@@ -6,15 +6,28 @@
     justify-content: center;    
     /* align-items: center; */
 }
+.containerHeader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
+    z-index: 1000;
+}
 .header{
     background-color: #203144;
     width: 100vw;
-    height: 8vh;
+    height: 10vh;
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
+
+.containerContenido{
+    margin-top: 7.5rem;
+}
+
 .logoContainer{
     margin-left: -20px;
 }

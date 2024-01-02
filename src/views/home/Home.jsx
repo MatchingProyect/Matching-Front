@@ -121,75 +121,81 @@ export default function Home() {
 
     return (
         <div className={styles.containerHome}>
-            <div className={styles.header}>
-                <div className={styles.logoContainer}>
-                    <img
-                        src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
-                        alt="Logo"
-                        className={styles.logo}
-                    />
-                </div>
-                <Link to='/profile'>
-                    <div className={styles.icon}>
-                        <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
+            <div className={styles.containerHeader}> 
+                <div className={styles.header}>
+                    <div className={styles.logoContainer}>
+                        <img
+                            src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg"
+                            alt="Logo"
+                            className={styles.logo}
+                        />
                     </div>
-                </Link>
+                    <Link to='/profile'>
+                        <div className={styles.icon}>
+                            <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
+                        </div>
+                    </Link>
+                </div>
+                <div className={styles.containerTitle}>
+                    <button onClick={() => handleButtonClick('users')} className={`${styles.NavBtn} ${selectedSection === 'users' ? styles.selected : ''}`}>Users</button>
+                    <button onClick={() => handleButtonClick('sports')} className={`${styles.NavBtn} ${selectedSection === 'sports' ? styles.selected : ''}`}>Sports</button>
+                    <button onClick={() => handleButtonClick('clubs')} className={`${styles.NavBtn} ${selectedSection === 'clubs' ? styles.selected : ''}`}>Clubs</button>
+                </div>
             </div>
-            <div className={styles.containerTitle}>
-                <button onClick={() => handleButtonClick('users')} className={`${styles.NavBtn} ${selectedSection === 'users' ? styles.selected : ''}`}>Users</button>
-                <button onClick={() => handleButtonClick('sports')} className={`${styles.NavBtn} ${selectedSection === 'sports' ? styles.selected : ''}`}>Sports</button>
-                <button onClick={() => handleButtonClick('clubs')} className={`${styles.NavBtn} ${selectedSection === 'clubs' ? styles.selected : ''}`}>Clubs</button>
-            </div>
-            <div className={styles.homeComponent}>
-                <div className={styles.buscarReserva}>
-                    <h1 className = {styles.compTitle}>Encuentra una partida</h1>
-                    <div className = {styles.filters}>
-                        <div className = {styles.filter}>
-                        <label>Ciudad</label>
-                            <select>
+           
+            <div className= {styles.containerContenido}>
+               
+                {/* <div className={styles.homeComponent}>
+                    <div className={styles.buscarReserva}>
+                        <h1 className = {styles.compTitle}>Encuentra una partida</h1>
+                        <div className = {styles.filters}>
+                            <div className = {styles.filter}>
+                            <label>Ciudad</label>
+                                <select>
+                                    <option disabled></option>
+                                    {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
+                                </select>
+                            </div>
+                            <div className = {styles.filter}>
+                                <label>Deporte</label>
+                                <select>
                                 <option disabled></option>
-                                {ciudades?.map((ciudad) => <option value={ciudad}>{ciudad}</option>)}
-                            </select>
+                                    {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
+                                </select>
+                            </div>
                         </div>
-                        <div className = {styles.filter}>
-                            <label>Deporte</label>
-                            <select>
-                            <option disabled></option>
-                                {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
-                            </select>
+                        <button className = {styles.buscarBtn}>Buscar</button>
+                    </div>
+                    <div className={styles.newReserva}>
+                        <button className = {styles.btnNuevaReserva}>Nueva Reserva</button>
+                    </div>
+
+                </div> */}
+
+                <div >
+                    {selectedOption === 'users' && (
+                        <div className={styles.containerCards}>
+                            {users?.map((user) => (
+                                <CardUser key={user.name} user={user} />
+                            ))}
                         </div>
-                    </div>
-                    <button className = {styles.buscarBtn}>Buscar</button>
+                    )}
+
+                    {selectedOption === 'sports' && (
+                        <div>
+                            {sports?.map((sport) => (
+                                <CardSport key={sport.name} sport={sport} />
+                            ))}
+                        </div>
+                    )}
+                    {selectedOption === 'clubs' && (<div>
+                        {clubs?.map((club) => {
+                            return (
+                                <CardClub club={club} />
+                            )
+                        })}
+                    </div>)}
                 </div>
-                <div className={styles.newReserva}>
-                    <button className = {styles.btnNuevaReserva}>Nueva Reserva</button>
-                </div>
-
-            </div>
-
-            <div >
-                {selectedOption === 'users' && (
-                    <div className={styles.containerCards}>
-                        {users?.map((user) => (
-                            <CardUser key={user.name} user={user} />
-                        ))}
-                    </div>
-                )}
-
-                {selectedOption === 'sports' && (
-                    <div>
-                        {sports?.map((sport) => (
-                            <CardSport key={sport.name} sport={sport} />
-                        ))}
-                    </div>
-                )}
-                {selectedOption === 'clubs' && (<div>
-                    {clubs?.map((club) => {
-                        return (
-                            <CardClub club={club} />
-                        )
-                    })}
-                </div>)}
             </div>
             <NavbarLow />
         </div>
