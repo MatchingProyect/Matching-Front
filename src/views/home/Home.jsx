@@ -339,9 +339,11 @@ export default function Home() {
     ];
 
     const [selectedOption, setSelectedOption] = useState('users');
+    const [selectedSection, setSelectedSection] = useState('users');
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
+        setSelectedSection(option);
     };
 
     return (

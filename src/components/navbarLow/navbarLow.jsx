@@ -1,30 +1,31 @@
 import styles from './navbarLow.module.css';
+import HomeIcon from '@mui/icons-material/Home';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { useLocation, Link } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
 
 export default function NavbarLow(){
 
-
-    return(
+    const location = useLocation();
+    console.log(location.pathname)
+    return (
         <div className={styles.containerNavbar}>
-           
-           <Link to='/home'>
-                    <div className={styles.icon}>
-                        <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702574873/home_wneso4.svg" alt="icono" />
-                    </div>
+            <Link to='/home'>
+            <div className={`${styles.icon} ${location.pathname === '/home' ? styles.activeLink : ''}`}>
+                <HomeIcon />
+            </div>
             </Link>
             <Link to='/help'>
-                <div className={styles.icon}>
-                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702574901/help_okgljh.svg" alt="icono" />
-                </div>
+            <div className={`${styles.icon} ${location.pathname === '/help' ? styles.activeLink : ''}`}>
+                <QuestionMarkIcon />
+            </div>
             </Link>
             <Link to='/profile'>
-                <div className={styles.icon}>
-                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702574922/iconamoon_profile-bold_br6wy2.svg" alt="icono" />
-                </div>
+            <div className={`${styles.icon} ${location.pathname === '/profile' ? styles.activeLink : ''}`}>
+                <PersonOutlineIcon />
+            </div>
             </Link>
-            
-
-        </div>
+      </div>
     )
 } 

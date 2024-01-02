@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
@@ -47,11 +47,12 @@ const Login = () => {
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
+      console.log(auth, provider);
       const result = await signInWithPopup(auth, provider);
       console.log(result, result.user);
       // aca verifica si es nuevo o no
       const isNewUser = result?.additionalUserInfo?.isNewUser;
-      console.log(isNewUser);  
+  
       if (isNewUser) {
         navigate("/questions");
       } else {
