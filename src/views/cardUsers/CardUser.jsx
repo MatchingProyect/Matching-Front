@@ -17,14 +17,14 @@ import axios from 'axios';
 
 const CardUser = ({ user }) => {
 
-  // const enviarRequest = async()=>{
-  // try {
-  // await axios.post('/friendRequest')
+  const enviarRequest = async()=>{
+  try {
+  await axios.post('/friendRequest')
 
-  // } catch (error) {
-  // throw error.message
-  // }
-  // }
+  } catch (error) {
+  throw error.message
+  }
+  }
 
   return (
     <Card 
@@ -62,7 +62,7 @@ const CardUser = ({ user }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton  aria-label="add to favorites">
+        <IconButton onClick={enviarRequest}  aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
