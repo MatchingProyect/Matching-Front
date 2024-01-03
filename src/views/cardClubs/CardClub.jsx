@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AdminFunction from './AdminFunction'
 import DetailClub from './DetailClub'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchClubs } from '../../redux/reducer'
 
 

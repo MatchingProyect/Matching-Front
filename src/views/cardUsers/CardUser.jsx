@@ -17,17 +17,31 @@ import axios from 'axios';
 
 const CardUser = ({ user }) => {
 
-  const enviarRequest = async()=>{
-  try {
-  await axios.post('/friendRequest')
+  // const enviarRequest = async()=>{
+  // try {
+  // await axios.post('/friendRequest')
 
-  } catch (error) {
-  throw error.message
-  }
-  }
+  // } catch (error) {
+  // throw error.message
+  // }
+  // }
 
   return (
-    <Card >
+    <Card 
+    sx = {{
+      'width': '160px',
+      'height' : '250px',
+      'marginBottom' : '2vh',
+      'box-shadow': '0px 0px 15px rgba(0, 0, 0, 0.551)',
+      'borderRadius': '15px',
+      'display' : 'flex',
+      'flexDirection' : 'column',
+      'alignItems': 'center',
+      'justifyContent' : 'space-between',
+      'margin': '5px',
+
+    }}
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -42,19 +56,13 @@ const CardUser = ({ user }) => {
         title={user.displayName}
         subheader={user.pais}
       />
-      <CardMedia
-        component="img"
-        height="100"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {user.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton onClick={enviarRequest} aria-label="add to favorites">
+        <IconButton  aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
