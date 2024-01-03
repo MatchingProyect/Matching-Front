@@ -11,7 +11,7 @@ const CardCourt = ({court}) => {
     const [update, setUpdate] = useState(false)
     const [detail, setDetail] = useState(false)
 
-    const user = useSelector((state) => state.user.user);
+    const user =useSelector((state) =>state.user.user.user)
 
     const dispatch = useDispatch()
 
@@ -24,7 +24,7 @@ const CardCourt = ({court}) => {
         }
     }
 
-    if(user.user.admin){
+    if(user.admin){
         return (
             <div>
                 <button onClick={deleted}>x</button>

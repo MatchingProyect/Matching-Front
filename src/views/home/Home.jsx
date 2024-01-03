@@ -11,6 +11,7 @@ import CardReservation from '../../components/card-reservations/CardReservation.
 import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from '../../redux/reducer.js';
+import FunctionsAdmin from './FunctionsAdmin.jsx';
 
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
@@ -22,6 +23,7 @@ export default function Home() {
     
      const dispatch = useDispatch();
      const users = useSelector((state) => state.user.allUsers);
+     const userLogeado =useSelector((state) =>state.user.user)
     const sports = useSelector((state) => state.user.allSports);
      const clubs = useSelector((state) => state.user.allClubs);
      const courts = useSelector((state) => state.user.allcourts);
@@ -104,6 +106,9 @@ export default function Home() {
     return (
        
         <div className={styles.containerHome}>
+            {
+                userLogeado.admin && <FunctionsAdmin/>
+            }
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
                 <Link to='/profile'><div className={styles.icon}>
@@ -112,7 +117,7 @@ export default function Home() {
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
                 
             </div>
-            <div>
+            <div className={styles.usersContent}>
                 {
                     users?.map(user => (
                         <CardUser user={user}/>
