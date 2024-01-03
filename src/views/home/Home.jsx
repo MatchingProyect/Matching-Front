@@ -25,18 +25,14 @@ export default function Home() {
     const sports = useSelector((state) => state.user.allSports);
      const clubs = useSelector((state) => state.user.allClubs);
      const courts = useSelector((state) => state.user.allcourts);
-    const reservations = useSelector((state) => state.user.allReservations);
-
-    
+    const reservations = useSelector((state) => state.user.allReservations);    
 
     useEffect(()=>{
         dispatch(fetchUsers(actualPageUsers))
         dispatch(fetchClubs());
         dispatch(fetchCourts());
         dispatch(fetchSports());
-    }, [])
-
-   
+    }, []);
 
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
