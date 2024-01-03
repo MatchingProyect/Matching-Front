@@ -7,7 +7,7 @@ import { app } from './../../FireBase/fireBase.config';
 import { getFirestore, doc, getDoc, setDoc  } from 'firebase/firestore';
 import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
-import { fetchUsers } from "../../redux/reducer";
+import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 
 const Login = () => {
@@ -135,11 +135,12 @@ const Login = () => {
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
-      console.log("response", response)
+     
 
       if (response.data) {
         const id = response.data.id
-        if(id) dispatch(fetchUsers(id))
+        if(id) dispatch(fetchUser(id))
+        console.log(id)
 
         navigate("/home")
         

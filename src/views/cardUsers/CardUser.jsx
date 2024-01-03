@@ -17,14 +17,14 @@ import axios from 'axios';
 
 const CardUser = ({ user }) => {
 
-  // const enviarRequest = async()=>{
-  // try {
-  // await axios.post('/friendRequest')
+  const enviarRequest = async()=>{
+  try {
+  await axios.post('/friendRequest')
 
-  // } catch (error) {
-  // throw error.message
-  // }
-  // }
+  } catch (error) {
+  throw error.message
+  }
+  }
 
   return (
     <Card 
@@ -45,7 +45,7 @@ const CardUser = ({ user }) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {user.name}
+            {user.displayName}
           </Avatar>
         }
         action={
@@ -53,7 +53,7 @@ const CardUser = ({ user }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={user.name}
+        title={user.displayName}
         subheader={user.pais}
       />
       <CardContent>
@@ -62,7 +62,7 @@ const CardUser = ({ user }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton  aria-label="add to favorites">
+        <IconButton onClick={enviarRequest}  aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

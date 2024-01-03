@@ -24,7 +24,7 @@ const CardCourt = ({court}) => {
         }
     }
 
-    if(user.admin){
+    if(user.user.admin){
         return (
             <div>
                 <button onClick={deleted}>x</button>

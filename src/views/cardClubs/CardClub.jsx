@@ -22,7 +22,7 @@ const CardClub = ({club}) => {
     }
   }
 
- if(user.admin){
+ if(user.user.admin){
   return (
     <div>
       <button onClick={()=>{

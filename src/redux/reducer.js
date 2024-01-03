@@ -33,9 +33,21 @@ export const userSlice = createSlice({
        },
        setFriends: (state, action) => {
         state.allFriends = action.payload;
+       },
+       setUser: (state, action) =>{
+        state.user = action.payload
        }
     }
 })
+
+export const fetchUser = (id)=>async(dispatch)=>{
+    try {
+        const {data} = await axios(`/users/${id}`)
+        if(data.status) dispatch(setUser(data.userFound))
+    } catch (error) {
+        throw error.message
+    }
+}
 
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
@@ -48,7 +60,7 @@ export const fetchProfiles = ()=>async(dispatch)=>{
 
 export const fetchUsers = ()=>async(dispatch)=>{
     try {
-        const {data} = await axios(`/users?page=${page}`);
+        const {data} = await axios(`/users`);
         if(data.status) {
             dispatch(setUsers(data.allUsers))
         }
@@ -91,5 +103,5 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
-export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends } = userSlice.actions;
+export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setUser } = userSlice.actions;
 export default userSlice.reducer;
