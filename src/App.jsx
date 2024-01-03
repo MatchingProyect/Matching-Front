@@ -23,6 +23,7 @@ import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
+import Solicitudes from './views/solicitudes/Solicitudes.jsx'
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/profile/canjearPuntos" element = {<CanjearPuntos />}/>
         <Route path="/friends" element={<Friends />} />
         <Route path="/questions" element={ <Questions /> } />
+        <Route path='/solicitudes' element={<Solicitudes/>} />
         <Route path="/registro" element={<Registro />} />
         <Route path='/help' element={<Help/>} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />

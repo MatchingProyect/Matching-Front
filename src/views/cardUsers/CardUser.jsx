@@ -31,7 +31,7 @@ const CardUser = ({ user }) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {user.name}
+            {user.displayName}
           </Avatar>
         }
         action={
@@ -39,7 +39,7 @@ const CardUser = ({ user }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={user.name}
+        title={user.displayName}
         subheader={user.pais}
       />
       <CardMedia

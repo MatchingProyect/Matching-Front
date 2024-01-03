@@ -5,119 +5,130 @@ import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import SearchBar from '../searchBar/SearchBar';
 import CardCourt from '../cardCourt/CardCourt';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import Solicitudes from '../solicitudes/Solicitudes';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../../redux/reducer';
+
 
 export default function Home() {
-    const [solicitudes, setSolicitudes] = useState(false) 
+    
 
-    const users = [
-        {
-            name: "John Smith",
-            description: "Apasionado por el deporte en Argentina, disfruta del pádel y el fútbol.",
-            pais: "Argentina",
-            deportes: ["padel", "futbol"]
-        },
-        {
-            name: "Maria García",
-            description: "Fanática del baloncesto en España, practica baloncesto y atletismo con gran entusiasmo.",
-            pais: "España",
-            deportes: ["baloncesto", "atletismo"]
-        },
-        {
-            name: "Carlos Rodríguez",
-            description: "Amante del tenis en México, su pasión incluye el tenis y la natación.",
-            pais: "México",
-            deportes: ["tenis", "natación"]
-        },
-        {
-            name: "Laura Pérez",
-            description: "Entusiasta del ciclismo en Colombia, encuentra alegría en el ciclismo y el yoga.",
-            pais: "Colombia",
-            deportes: ["ciclismo", "yoga"]
-        },
-        {
-            name: "Elena Torres",
-            description: "Aficionada al surf en España, disfruta de las olas y practica yoga para mantenerse en forma.",
-            pais: "España",
-            deportes: ["surf", "yoga"]
-        },
-        {
-            name: "Ricardo Navarro",
-            description: "Entrenador de fútbol en Argentina, apasionado por desarrollar habilidades en jóvenes futbolistas.",
-            pais: "Argentina",
-            deportes: ["fútbol", "entrenamiento"]
-        },
-        {
-            name: "Isabel Jiménez",
-            description: "Amante del senderismo en México, encuentra paz y aventura explorando la naturaleza.",
-            pais: "México",
-            deportes: ["senderismo", "camping"]
-        },
-        {
-            name: "Diego Herrera",
-            description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
-            pais: "Colombia",
-            deportes: ["fitness", "nutrición"]
-        }
-    ];
-    const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Cordova', 'Lima', 'Trujillo', 'Bogota', 'Cali'];
+    //const users = [
+    //     {
+    //         name: "John Smith",
+    //         description: "Apasionado por el deporte en Argentina, disfruta del pádel y el fútbol.",
+    //         pais: "Argentina",
+    //         deportes: ["padel", "futbol"]
+    //     },
+    //     {
+    //         name: "Maria García",
+    //         description: "Fanática del baloncesto en España, practica baloncesto y atletismo con gran entusiasmo.",
+    //         pais: "España",
+    //         deportes: ["baloncesto", "atletismo"]
+    //     },
+    //     {
+    //         name: "Carlos Rodríguez",
+    //         description: "Amante del tenis en México, su pasión incluye el tenis y la natación.",
+    //         pais: "México",
+    //         deportes: ["tenis", "natación"]
+    //     },
+    //     {
+    //         name: "Laura Pérez",
+    //         description: "Entusiasta del ciclismo en Colombia, encuentra alegría en el ciclismo y el yoga.",
+    //         pais: "Colombia",
+    //         deportes: ["ciclismo", "yoga"]
+    //     },
+    //     {
+    //         name: "Elena Torres",
+    //         description: "Aficionada al surf en España, disfruta de las olas y practica yoga para mantenerse en forma.",
+    //         pais: "España",
+    //         deportes: ["surf", "yoga"]
+    //     },
+    //     {
+    //         name: "Ricardo Navarro",
+    //         description: "Entrenador de fútbol en Argentina, apasionado por desarrollar habilidades en jóvenes futbolistas.",
+    //         pais: "Argentina",
+    //         deportes: ["fútbol", "entrenamiento"]
+    //     },
+    //     {
+    //         name: "Isabel Jiménez",
+    //         description: "Amante del senderismo en México, encuentra paz y aventura explorando la naturaleza.",
+    //         pais: "México",
+    //         deportes: ["senderismo", "camping"]
+    //     },
+    //     {
+    //         name: "Diego Herrera",
+    //         description: "Entusiasta del fitness en Colombia, combina entrenamientos intensos con una dieta equilibrada.",
+    //         pais: "Colombia",
+    //         deportes: ["fitness", "nutrición"]
+    //     }
+    // ];
+    // const ciudades = ['La Paz', 'Santiago de Chile', 'Rio de Janeiro', 'Buenos Aires', 'Cordova', 'Lima', 'Trujillo', 'Bogota', 'Cali'];
 
-    const sports = [
-        {
-            name: "Padel",
-            clubs: ["club1", "club2", "club3", "club4"]
-        },
-        {
-            name: "Fútbol",
-            clubs: ["Club A", "Club B", "Club C", "Club D"]
-        },
-        {
-            name: "Baloncesto",
-            clubs: ["Club X", "Club Y", "Club Z"]
-        },
-        {
-            name: "Tenis",
-            clubs: ["Club 1", "Club 2", "Club 3"]
-        },
-        {
-            name: "Ciclismo",
-            clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
-        }
+    // const sports = [
+    //     {
+    //         name: "Padel",
+    //         clubs: ["club1", "club2", "club3", "club4"]
+    //     },
+    //     {
+    //         name: "Fútbol",
+    //         clubs: ["Club A", "Club B", "Club C", "Club D"]
+    //     },
+    //     {
+    //         name: "Baloncesto",
+    //         clubs: ["Club X", "Club Y", "Club Z"]
+    //     },
+    //     {
+    //         name: "Tenis",
+    //         clubs: ["Club 1", "Club 2", "Club 3"]
+    //     },
+    //     {
+    //         name: "Ciclismo",
+    //         clubs: ["Club Cyclist", "Bike Club", "Pedal Power"]
+    //     }
 
-    ];
+    // ];
 
-    const clubs = [
-        {
-            name: "Marriot Tennis",
-            sport: ['Tenis'],
-        },
-        {
-            name: "The Courtyard",
-            sport: ['Fútbol', 'Baloncesto'],
-        },
-        {
-            name: "Country Club",
-            sport: ['Baloncesto'],
-        },
-        {
-            name: "Regis Club",
-            sport: ['Padel'],
-        },
-        {
-            name: "Big Smoke Club",
-            sport: ['Tenis'],
-        }
+    // const clubs = [
+    //     {
+    //         name: "Marriot Tennis",
+    //         sport: ['Tenis'],
+    //     },
+    //     {
+    //         name: "The Courtyard",
+    //         sport: ['Fútbol', 'Baloncesto'],
+    //     },
+    //     {
+    //         name: "Country Club",
+    //         sport: ['Baloncesto'],
+    //     },
+    //     {
+    //         name: "Regis Club",
+    //         sport: ['Padel'],
+    //     },
+    //     {
+    //         name: "Big Smoke Club",
+    //         sport: ['Tenis'],
+    //     }
 
-    ];
+    // ];
+
+    const dispatch = useDispatch()
+
+    const users = useSelector(state => state.user.allUsers)
 
     const [selectedOption, setSelectedOption] = useState('users');
 
     const handleButtonClick = (option) => {
         setSelectedOption(option);
     };
+
+    useEffect(()=>{
+        dispatch(fetchUsers())
+    }, [])
 
 
     return (
@@ -127,16 +138,16 @@ export default function Home() {
                 <Link to='/profile'><div className={styles.icon}>
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
-                <button onClick={()=>{
-                    setSolicitudes(true)
-                }} >solicitudes</button>
-                <Solicitudes solicitudes={solicitudes} setSolicitudes={setSolicitudes} />
+                <Link to='/solicitudes' >
+                <button>solicitudes</button>
+                </Link>
+                
             </div>
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
                     <h1 className = {styles.compTitle}>Encuentra una partida</h1>
                     <div className = {styles.filters}>
-                        <div className = {styles.filter}>
+                        {/* <div className = {styles.filter}>
                         <label>Ciudad</label>
                             <select>
                                 <option disabled></option>
@@ -149,7 +160,7 @@ export default function Home() {
                             <option disabled></option>
                                 {sports?.map((deporte) => <option value={deporte.name}>{deporte.name}</option>)}
                             </select>
-                        </div>
+                        </div> */}
                     </div>
                     <button className = {styles.buscarBtn}>Buscar</button>
                 </div>
@@ -172,20 +183,20 @@ export default function Home() {
                     </div>
                 )}
 
-                {selectedOption === 'sports' && (
-                    <div>
-                        {sports?.map((sport) => (
-                            <CardSport key={sport.name} sport={sport} />
-                        ))}
-                    </div>
-                )}
-                {selectedOption === 'clubs' && (<div>
+                {/* {selectedOption === 'sports' && (
+                    // <div>
+                    //     {sports?.map((sport) => (
+                    //         <CardSport key={sport.name} sport={sport} />
+                    //     ))}
+                    // </div>
+                )} */}
+                {/* {selectedOption === 'clubs' && (<div>
                     {clubs?.map((club) => {
                         return (
                             <CardClub club={club} />
                         )
                     })}
-                </div>)}
+                </div>)} */}
             </div>
             <NavbarLow />
         </div>
