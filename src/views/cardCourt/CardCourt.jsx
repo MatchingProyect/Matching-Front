@@ -8,8 +8,6 @@ import axios from 'axios'
 
 const CardCourt = ({court}) => {
     let exampleImg = 'https://www.italgreen.es/computedimage/campi-da-padel.i13627-kQvmQQH-w1000-h1000-l1-n1.jpg';
-
-    console.log(court);
     // const [reserva, setReserva] = useState(false)
     // const [update, setUpdate] = useState(false)
     // const [detail, setDetail] = useState(false)

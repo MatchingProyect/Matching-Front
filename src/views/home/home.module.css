@@ -34,7 +34,12 @@
 .divCourts{
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 3vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    width: 100vw;
+    background-color: #203144;
 }
 
 .containerContenido{
@@ -177,10 +182,16 @@
   .cardUser{
     height: 20vh;
     width: 100vw;
-    background-color: #ffffff;
+    background-color: #755454;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:baseline;
     align-items: center; /* Ajusta según tus necesidades de diseño */
-    overflow-x:auto;
+    margin-bottom: 4vh;
+  }
+  .userContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:baseline;
+    overflow-x:scroll;
   }

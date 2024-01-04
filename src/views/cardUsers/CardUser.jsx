@@ -31,9 +31,9 @@ const CardUser = ({ user }) => {
   return (
     <Card
       sx={{
-        'width': '30vw',
+        'width': '130px',
         'minWidth': '110px',
-        'height': '18vh',
+        'height': '170px',
         'box-shadow': '0px 0px 5px rgba(0, 0, 0, 0.551)',
         'borderRadius': '15px',
         'display': 'flex',
@@ -41,8 +41,7 @@ const CardUser = ({ user }) => {
         'alignItems': 'center',
         'justifyContent': 'space-around',
         'lineHeight': '110px',
-        'marginRight': '10px',
-
+        'marginLeft': '10px',
       }}
     >
       <Avatar
@@ -68,13 +67,13 @@ const CardUser = ({ user }) => {
       >
         {user.displayName}
       </Typography>
-      <CardActions disableSpacing>
         <Button
           sx={{
             'fontSize': '13px',
             'fontWeight': '600',
-          }}>Agregar</Button>
-      </CardActions>
+          }}
+          onClick = {enviarRequest}
+          >Agregar</Button>
     </Card>
   );
 }
