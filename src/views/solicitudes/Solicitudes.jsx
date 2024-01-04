@@ -20,6 +20,7 @@ const Solicitudes = () => {
             try {
                 console.log('id Soli',id)
                 const { data } = await axios(`/friendRequest/${id}`);
+                console.log("friendRequest", data)
                 if (data.status) {
                     const friendRequestData = data.getFriendRequest;
                     setRequest(friendRequestData)
@@ -62,14 +63,15 @@ const Solicitudes = () => {
     return (
         <div>
             <h2>Solicitudes</h2>
-            {request.map((friendRequest, index) => (
-                <div key={index}>
-                    <h4>{friendRequest.userQueMando.name}</h4>
-                    <button onClick={() => agregarAmigo(friendRequest.userQueMando.id, friendRequest.user.id)}>Aceptar</button>
-                    <button onClick={() => rechazarAmigo(friendRequest.userQueMando.id, friendRequest.user.id)}>Rechazar</button>
+            {request?
+
+                (<div>
+                    <h4>{request.user.UserId}</h4>
+                    <button onClick={() => agregarAmigo(request.user.id, request.user.id)}>Aceptar</button>
+                    <button onClick={() => rechazarAmigo(request.user.id, request.user.id)}>Rechazar</button>
                     <Link to='/home' ><button>x</button></Link>
-                </div>
-            ))}
+                </div>) : null
+            }
         </div>
     );
 };

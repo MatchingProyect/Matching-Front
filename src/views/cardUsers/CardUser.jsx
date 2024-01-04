@@ -63,8 +63,7 @@ const CardUser = ({ user }) => {
         sx={{
           'marginTop': '5px',
           'width': '70px',
-          'height': '70px',
-          'marginTop': '20px',
+          'height': '70px'
         }}
         aria-label="recipe"
         src={user.avatarImg}
