@@ -30,7 +30,7 @@ export default function Home() {
      const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
 
-    console.log(sports, clubs, users, reservations, courts);
+    console.log(userLogeado);
 
     
 
@@ -93,6 +93,9 @@ export default function Home() {
                             <button onClick={() => handlePaginateCourts(actualPageCourts - 1)} disabled={actualPageCourts === 1}>Anterior</button>
                             <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
             </div>
+            </div>
+            <div className = {styles.clubsContainer}>
+                {clubs?.map((club) => <CardClub club = {club} />)}                
             </div>
             <div className = {styles.reservationsContainer}>
                 <CardReservation reservations = {reservations} />
