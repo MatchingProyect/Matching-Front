@@ -1,9 +1,9 @@
-
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import { Button } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -36,56 +36,58 @@ const CardUser = ({ user }) => {
     };
   await axios.post('/friendRequest', requestBody)
 
-  } catch (error) {
-  throw error.message
-  }
-  }
+    // } catch (error) {
+    // throw error.message
+    // }
+  };
 
   return (
-    <Card 
-    sx = {{
-      'width': '160px',
-      'height' : '250px',
-      'marginBottom' : '2vh',
-      'box-shadow': '0px 0px 15px rgba(0, 0, 0, 0.551)',
-      'borderRadius': '15px',
-      'display' : 'flex',
-      'flexDirection' : 'column',
-      'alignItems': 'center',
-      'justifyContent' : 'space-between',
-      'margin': '5px',
+    <Card
+      sx={{
+        'width': '30vw',
+        'minWidth': '110px',
+        'height': '18vh',
+        'box-shadow': '0px 0px 5px rgba(0, 0, 0, 0.551)',
+        'borderRadius': '15px',
+        'display': 'flex',
+        'flexDirection': 'column',
+        'alignItems': 'center',
+        'justifyContent': 'space-around',
+        'lineHeight': '110px',
+        'marginRight': '10px',
 
-    }}
+      }}
     >
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {user.displayName}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={user.displayName}
-        subheader={user.pais}
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {user.description}
-        </Typography>
-      </CardContent>
+      <Avatar
+        sx={{
+          'marginTop': '5px',
+          'width': '70px',
+          'height': '70px',
+          'marginTop': '20px',
+        }}
+        aria-label="recipe"
+        src={user.avatarImg}
+      >
+        {user.displayName}
+      </Avatar>
+      <Typography
+        sx={{
+          'height': '50px',
+          'fontSize': '17px',
+          'fontWeight': '600',
+          'textAlign': 'center',
+          'width': '20vw',
+        }}
+      >
+        {user.displayName}
+      </Typography>
       <CardActions disableSpacing>
-        <IconButton onClick={enviarRequest}  aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-
+        <Button
+          sx={{
+            'fontSize': '13px',
+            'fontWeight': '600',
+          }}>Agregar</Button>
       </CardActions>
-
     </Card>
   );
 }
