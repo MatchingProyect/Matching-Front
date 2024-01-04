@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
-import { useDispatch, useSelector } from 'react-redux';
+
 import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro'; 
 import ProfileEdit from './views/profile/profileEdit/profileEdit';

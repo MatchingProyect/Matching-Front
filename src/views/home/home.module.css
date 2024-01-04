@@ -15,6 +15,11 @@
     background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
     z-index: 1000;
 }
+.usersContent{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0px 0px;
+}
 .header{
     background-color: #203144;
     width: 100vw;
