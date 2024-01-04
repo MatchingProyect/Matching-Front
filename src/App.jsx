@@ -27,27 +27,34 @@ import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 
 function App() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState(() => {
+    const storedUserData = localStorage.getItem('userData');
+    return storedUserData ? JSON.parse(storedUserData) : null;
+  });
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('userData', JSON.stringify(user));
+      localStorage.setItem('currentPath', window.location.pathname);
+    }
+  }, [user]);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
     const storedCurrentPath = localStorage.getItem('currentPath');
-  
+
     if (storedUserData) {
       const parsedUserData = JSON.parse(storedUserData);
-      setUser(parsedUserData);
-  
-      if (storedCurrentPath) {
-        
+
+      if (parsedUserData) {
+        setUser(parsedUserData);
+
+        if (storedCurrentPath) {
+          navigate(storedCurrentPath);
+        }
       }
     }
-  }, []);
+  }, [navigate]);
 
-  useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(user));
-    localStorage.setItem('currentPath', window.location.pathname);
-  }, [user]);
 
 
   return (
