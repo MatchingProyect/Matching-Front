@@ -76,7 +76,7 @@ const Login = () => {
       const authResult = await signInWithCredential(auth, credential);
 
       // El usuario ha sido autenticado correctamente en Firebase
-      console.log("Usuario autenticado en Firebase:");
+      console.log("Usuario autenticado en Firebase:", authResult.user);
       await saveUserToFirestore(authResult.user);
 
       return true
@@ -88,7 +88,8 @@ const Login = () => {
 
   const saveUserToFirestore = async (user) => {
     const { uid, email, displayName } = user;
-  
+    console.log("saveUserToFirestore", user);
+
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
   
@@ -122,8 +123,13 @@ const Login = () => {
   
   const onRegister = async ( data ) => {
     try {
-      const endpoint = "/users"
+
+      console.log("data",data)
+      const endpoint = "/register"
+      console.log("result---------")
+
       const result = await axios.post(endpoint, data) 
+      console.log("result---------",result)
       if (result) {
         console.log("register success")
         navigate("/questions")
