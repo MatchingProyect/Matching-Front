@@ -10,7 +10,7 @@ import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers } from '../../redux/reducer.js';
 import FunctionsAdmin from './FunctionsAdmin.jsx';
 
 export default function Home() {
@@ -32,6 +32,7 @@ export default function Home() {
     
 
     useEffect(()=>{
+        dispatch(fetchUser())
         dispatch(fetchUsers(actualPageUsers))
         dispatch(fetchClubs());
         dispatch(fetchCourts());
@@ -103,13 +104,14 @@ export default function Home() {
         setReservToRender(reservations);
     }
 
-   console.log('holi', userLogeado.admin)
+   console.log('holi',userLogeado?.admin)
+   
 
     return (
        
         <div className={styles.containerHome}>
             {
-                userLogeado.admin && <FunctionsAdmin/>
+                userLogeado?.admin ?  <FunctionsAdmin/> : null
             }
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
@@ -240,3 +242,4 @@ export default function Home() {
         </div>
     );
 };
+
