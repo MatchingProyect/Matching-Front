@@ -13,20 +13,34 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const CardUser = ({ user }) => {
 
-  const enviarRequest = async () => {
-    //Logica para Agregar Amigo, 
-    console.log(`Solicitud de amistad enviada a ${user.displayName}`);
-    // try {
-    // await axios.post('/friendRequest')
+  const idUserQueRecibe = user?.id
 
-    // } catch (error) {
-    // throw error.message
-    // }
+ 
+
+  const userLogeado = useSelector((state) => state.user.user);
+
+  console.log(userLogeado?.user?.id)
+  
+  const idUser = userLogeado?.user?.id
+
+  const enviarRequest = async()=>{
+  try {
+    const requestBody = {
+      UserId: idUser,
+      FriendRId: idUserQueRecibe
+    };
+  await axios.post('/friendRequest', requestBody)
+
+     } catch (error) {
+     throw error.message
+     }
   };
+
 
   return (
     <Card
@@ -48,8 +62,7 @@ const CardUser = ({ user }) => {
         sx={{
           'marginTop': '5px',
           'width': '70px',
-          'height': '70px',
-          'marginTop': '20px',
+          'height': '70px'
         }}
         aria-label="recipe"
         src={user.avatarImg}

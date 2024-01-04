@@ -39,6 +39,29 @@ const CardCourt = ({court}) => {
     //         </div>
     //       )
     // }
+    const deleted = async()=>{
+        try {
+            const deleted = await axios.delete(`/Courts/${court.id}`)
+            if(deleted.status)  dispatch(fetchCourts());
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+console.log("holi",user.admin)
+    if(user.admin){
+        return (
+            <div>
+                <button onClick={deleted}>x</button>
+                <h2>{court.name}</h2>
+                <button onClick={()=>{setReserva(true)}}>reservar</button>
+                <button onClick={()=>{setUpdate(true)}}>update</button>
+                <button onClick={()=>{setDetail(true)}} >detail</button>
+                <crearReserva reserva={reserva} setReserva={setReserva} court={court} />
+                <AdminFunction court={court} update={update} setUpdate={setUpdate} />
+                <DetailCourt court={court} detail={detail} setDetail={setDetail} />
+            </div>
+          )
+    }
 
   return (
     <div className = {styles.cardCourtContainer}>       
