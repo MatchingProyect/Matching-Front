@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import { useState } from 'react';
 import styles from './home.module.css';
+import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import CardUser from '../cardUsers/CardUser';
-import CardSport from '../cardSports/CardSport';
 import CardClub from '../cardClubs/CardClub';
 import CardCourt from '../cardCourt/CardCourt';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import NavbarLow from '../../components/navbarLow/navbarLow';
-import CardReservation from '../../components/card-reservations/CardReservation.jsx';
-import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
+import CardSport from '../cardSports/CardSport';
+import FunctionsAdmin from './FunctionsAdmin.jsx';
 import { useDispatch, useSelector } from 'react-redux';
+import NavbarLow from '../../components/navbarLow/navbarLow';
+import SearchBarUsers from '../searchBar/SearchBarUsers.jsx';
+import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from '../../redux/reducer.js';
+
+
 
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState('users');
@@ -101,9 +104,14 @@ export default function Home() {
         setReservToRender(reservations);
     }
 
+    const userLogeado =useSelector((state) =>state.user.user)
+    console.log(userLogeado.admin);
     return (
        
         <div className={styles.containerHome}>
+            {
+                userLogeado.admin && <FunctionsAdmin/>
+            }
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
                 <Link to='/profile'><div className={styles.icon}>
