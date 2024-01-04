@@ -11,13 +11,12 @@ import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState(""); 
-  const [password, setPassword] = useState(""); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() =>{
+    console.log("initializeGoogleAuth")
     initializeGoogleAuth();
 
   }, [])
@@ -28,15 +27,20 @@ const Login = () => {
         clientId: "1061662234396-o558vqrpml1bpo2rut38qufj859kgtpg.apps.googleusercontent.com",
       });
     };
+    console.log("start", start)
 
     gapi.load("client:auth2", start);
+
+
   };
 
 
   const handleGoogleLoginClick = () => {
     // Crear un objeto de autenticación de Google
+    console.log("auth2", gapi.auth2)
+
     const auth2 = gapi.auth2.getAuthInstance();
-  
+    console.log("auth2", auth2)
     // Iniciar el proceso de inicio de sesión de Google
     auth2.signIn().then(async (googleUser) => {
       console.log('googleUser', googleUser);
@@ -57,7 +61,7 @@ const Login = () => {
       console.log("googleAccessToken",googleAccessToken)
 
       const result = await authenticateWithFirebase(googleAccessToken);
-
+      console.log("authenticateWithFirebase", result)
 
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
