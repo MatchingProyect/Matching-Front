@@ -13,13 +13,28 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const CardUser = ({ user }) => {
 
+  const idUserQueRecibe = user?.id
+
+ 
+
+  const userLogeado = useSelector((state) => state.user.user);
+
+  console.log(userLogeado?.user?.id)
+  
+  const idUser = userLogeado?.user?.id
+
   const enviarRequest = async()=>{
   try {
-  await axios.post('/friendRequest')
+    const requestBody = {
+      UserId: idUser,
+      FriendRId: idUserQueRecibe
+    };
+  await axios.post('/friendRequest', requestBody)
 
   } catch (error) {
   throw error.message

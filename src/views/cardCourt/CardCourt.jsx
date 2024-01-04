@@ -23,7 +23,7 @@ const CardCourt = ({court}) => {
             alert(error.message)
         }
     }
-
+console.log("holi",user.admin)
     if(user.admin){
         return (
             <div>

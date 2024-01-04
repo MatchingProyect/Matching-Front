@@ -8,14 +8,17 @@ const Solicitudes = () => {
     const [request, setRequest] = useState([])
     const user = useSelector((state) => state.user.user.user);
     console.log(user)
-    const id = user.id;
+    const id = user?.id;
 
-    console.log(id)
+    
+
+    
     
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log('id Soli',id)
                 const { data } = await axios(`/friendRequest/${id}`);
                 if (data.status) {
                     const friendRequestData = data.getFriendRequest;
@@ -27,14 +30,14 @@ const Solicitudes = () => {
         };
 
         fetchData();
-    }, [id]);
+    }, []);
 
     const agregarAmigo = async () => {
         try {
             await axios.post('/addFriend', {
                 user1Id: request.userQueMando.id,
                 user2Id: request.user.id,
-                status: true,
+                status: "true",
             });
         } catch (error) {
             throw error.message;
@@ -46,7 +49,7 @@ const Solicitudes = () => {
             await axios.post('/addFriend', {
                 user1Id: request.userQueMando.id,
                 user2Id: request.user.id,
-                status: false,
+                status: "false",
             });
         } catch (error) {
             throw error.message;
