@@ -135,15 +135,16 @@ const Login = () => {
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
-     
-
+  
       if (response.data) {
-        const id = response.data.id
-        if(id) dispatch(fetchUser(id))
-        console.log(id)
-
-        navigate("/home")
-        
+        // Actualizar el estado global o contexto con la información del usuario
+        dispatch(fetchUser(response.data.id));
+  
+        // Guardar la información del usuario en el localStorage
+        localStorage.setItem('userData', JSON.stringify(response.data));
+  
+        // Redirigir al usuario a la ruta deseada después del inicio de sesión
+        navigate("/home");
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

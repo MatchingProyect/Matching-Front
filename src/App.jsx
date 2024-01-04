@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
-import { useDispatch, useSelector } from 'react-redux';
 import Home from './views/home/Home.jsx';
-import Registro from './views/login/Registro'; 
+import Registro from './views/login/Registro';
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
 import Questions from './views/questions/Questions';
 import Friends from './views/friends/friends';
@@ -23,10 +22,33 @@ import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
-import Solicitudes from './views/solicitudes/Solicitudes.jsx'
 
+import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 
 function App() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    const storedCurrentPath = localStorage.getItem('currentPath');
+  
+    if (storedUserData) {
+      const parsedUserData = JSON.parse(storedUserData);
+      setUser(parsedUserData);
+  
+      if (storedCurrentPath) {
+        
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('userData', JSON.stringify(user));
+    localStorage.setItem('currentPath', window.location.pathname);
+  }, [user]);
+
 
   return (
     <div className="App">
