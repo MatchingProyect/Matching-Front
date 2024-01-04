@@ -14,6 +14,8 @@ import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers } from '../
 import FunctionsAdmin from './FunctionsAdmin.jsx';
 
 export default function Home() {
+    const dispatch = useDispatch();
+
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
     const [actualPageUsers, setActualPageUsers] = useState(1);
@@ -21,7 +23,7 @@ export default function Home() {
     const [actualPageClubs, setActualPageClubs] = useState(1);
     
     
-     const dispatch = useDispatch();
+  
      const users = useSelector((state) => state.user.allUsers);
      const userLogeado =useSelector((state) =>state.user.user.user)
     const sports = useSelector((state) => state.user.allSports);
@@ -37,9 +39,9 @@ export default function Home() {
         dispatch(fetchClubs());
         dispatch(fetchCourts());
         dispatch(fetchSports());
-    }, [])
+    }, []);
 
-   
+  
 
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();
@@ -54,7 +56,7 @@ export default function Home() {
     const courtsPerPage = 5;
     const startCourts = (actualPageCourts - 1) * courtsPerPage;
     const endCourts = startCourts + courtsPerPage;
-    //const courtsToDisplay = courts.slice(startCourts, endCourts);
+    // const courtsToDisplay = courts.slice(startCourts, endCourts);
 
     const handlePaginateClubs = (newPage) => {
         if (newPage > 0) setActualPageClubs(newPage);
@@ -121,20 +123,14 @@ export default function Home() {
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
                 
             </div>
-            <div className={styles.usersContent}>
-                {
-                    users?.map(user => (
-                        <CardUser user={user}/>
-                    ))
-                }
-            </div>
-            <div>
+            <div className = {styles.divCourts}>
             {
                     courts?.map(court => (
                         <CardCourt court={court}/>
                     ))
                 }
             </div>
+
             <div className={styles.homeComponent}>
                 <div className={styles.buscarReserva}>
                     <h1 className = {styles.compTitle}>Encuentra una partida</h1>
@@ -220,11 +216,11 @@ export default function Home() {
                     </div>
                 )}
 
-                {selectedOption === 'courts' && (
+{selectedOption === 'courts' && (
                     <div>
                         <div>
                             {/* courts */}
-                            {courtsToDisplay?.map((court) => {
+                            {courts?.map((court) => {
                                 return (
                                     <CardCourt court={court} />
                                 )
@@ -235,11 +231,17 @@ export default function Home() {
                             <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
                         </div>
                     </div>
-                )}
+                        )}
 
+            </div>
+            <div className = {styles.cardUser}>
+                {
+                    users?.map(user => (
+                        <CardUser user={user}/>
+                    ))
+                }
             </div>
             <NavbarLow />
         </div>
     );
 };
-
