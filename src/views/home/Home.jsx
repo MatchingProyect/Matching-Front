@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations } from '../../redux/reducer.js';
 import FunctionsAdmin from './FunctionsAdmin.jsx';
 
 export default function Home() {
@@ -27,17 +27,20 @@ export default function Home() {
      const userLogeado =useSelector((state) =>state.user.user.user)
     const sports = useSelector((state) => state.user.allSports);
      const clubs = useSelector((state) => state.user.allClubs);
-     const courts = useSelector((state) => state.user.allcourts);
+     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
+
+    console.log(sports, clubs, users, reservations, courts);
 
     
 
     useEffect(()=>{
         dispatch(fetchUser())
-        dispatch(fetchUsers(actualPageUsers))
+        dispatch(fetchUsers())
         dispatch(fetchClubs());
         dispatch(fetchCourts());
         dispatch(fetchSports());
+        dispatch(fetchReservations());
     }, []);
 
 
@@ -76,9 +79,11 @@ export default function Home() {
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
                 
             </div>
+            <div className = {styles.friendsContainer}>
             <FriendsContainer friends = {users}/>
+            </div>
             <div className = {styles.divCourts}>
-                <h2>Campos</h2>
+                <h2 className = {styles.courtsTitle}>Campos</h2>
             {
                     courts?.map(court => (
                         <CardCourt court={court}/>

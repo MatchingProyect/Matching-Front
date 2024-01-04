@@ -12,9 +12,9 @@ const CardCourt = ({court}) => {
     // const [update, setUpdate] = useState(false)
     // const [detail, setDetail] = useState(false)
 
-    // const user = useSelector((state) => state.user.user);
+    const user = useSelector((state) => state.user.user);
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     // const deleted = async()=>{
     //     try {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function FriendsContainer({friends}){
-
+    console.log(friends);
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
             return (
@@ -26,8 +26,8 @@ export default function FriendsContainer({friends}){
             <div className = {styles.friendsImages}>
                 {friends.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
-                    <img className = {styles.friendImg} src = {element.image} alt = {element.name}/>
-                    {estadoAvailable(element.isAvailable)}
+                    <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
+                    {estadoAvailable(element.active)}
                 </div>
                 )}
             </div>
