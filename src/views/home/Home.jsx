@@ -23,7 +23,7 @@ export default function Home() {
     const [actualPageClubs, setActualPageClubs] = useState(1);
     
     
-     const dispatch = useDispatch();
+  
      const users = useSelector((state) => state.user.allUsers);
      const userLogeado =useSelector((state) =>state.user.user.user)
     const sports = useSelector((state) => state.user.allSports);
@@ -41,13 +41,7 @@ export default function Home() {
         dispatch(fetchSports());
     }, []);
 
-    const users = useSelector((state) => state.user.allUsers);
-    const userLogeado = useSelector((state) => state.user.user);
-    const sports = useSelector((state) => state.user.allSports);
-    const clubs = useSelector((state) => state.user.allClubs);
-    const courts = useSelector((state) => state.user.allCourts);
-    const reservations = useSelector((state) => state.user.allReservations);
-    console.log(courts);
+  
 
     const [reservToRender, setReservToRender] = useState(reservations);
     const [filteredReservs, setFilteredReservs] = useState();

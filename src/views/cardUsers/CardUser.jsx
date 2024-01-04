@@ -36,10 +36,11 @@ const CardUser = ({ user }) => {
     };
   await axios.post('/friendRequest', requestBody)
 
-    // } catch (error) {
-    // throw error.message
-    // }
+     } catch (error) {
+     throw error.message
+     }
   };
+
 
   return (
     <Card
