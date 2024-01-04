@@ -1,5 +1,4 @@
 .friendsContainer{
-    background-color: #ffffff;
     position: relative;
     /* border-style: solid; */
     border-radius: 10px;
@@ -32,7 +31,7 @@
     margin-right:10px;
     margin-left: 10px;
     justify-content:baseline;
-    overflow-x:scroll;
+    overflow-x:auto;
 }
 
 .friendImg{

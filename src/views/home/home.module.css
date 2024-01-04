@@ -28,6 +28,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.274); 
+
     
 }
 .friendsContainer{
@@ -45,11 +47,11 @@
     padding-bottom: 1vh;
     width: 100vw;
     background-color: #203144;
-    box-shadow: 0px 5px 15px rgb(0, 0, 0); 
+    box-shadow: 0px 0px 15px rgb(0, 0, 0); 
 }
 .courtsTitle{
     color: white;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 
