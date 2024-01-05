@@ -82,7 +82,7 @@ export default function Home() {
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
-                
+
             </div>
             <div className = {styles.friendsContainer}>
             <FriendsContainer friends = {users}/>
