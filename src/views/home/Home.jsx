@@ -11,6 +11,7 @@ import CardReservation from '../../components/card-reservations/CardReservation.
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations } from '../../redux/reducer.js';
 import FunctionsAdmin from './FunctionsAdmin.jsx';
+import axios from 'axios';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -32,10 +33,15 @@ export default function Home() {
      const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
 
-    console.log(users, reservations);
-
-    
-
+    const logout = async () => {
+        try {
+        const endpoint= "/logout"
+        await axios.post(endpoint)
+        console.log(123);
+        } catch (error) {
+            throw error.message
+        }
+    };
     useEffect(()=>{
         dispatch(fetchUser())
         dispatch(fetchUsers())
@@ -82,6 +88,7 @@ export default function Home() {
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
+                <button onClick={logout}>Log Out</button>
                 
             </div>
             <div className = {styles.friendsContainer}>
@@ -116,4 +123,3 @@ export default function Home() {
         </div>
     );
 };
-

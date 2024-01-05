@@ -10,8 +10,10 @@ const CardUser = ({ user }) => {
 
   const idUserQueRecibe = user?.id;
   const userLogeado = useSelector((state) => state.user.user);
-  console.log(userLogeado?.user?.id);
-  const idUser = userLogeado?.user?.id;
+
+  
+  
+  const idUser = userLogeado?.user?.id
 
   const enviarRequest = async()=>{
     
