@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; 
 import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
 import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro';
@@ -22,39 +23,37 @@ import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
+import { fetchUser } from './redux/reducer.js';
+import { useSelector } from 'react-redux';
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 
 function App() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState(() => {
-    const storedUserData = localStorage.getItem('userData');
-    return storedUserData ? JSON.parse(storedUserData) : null;
-  });
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('userData', JSON.stringify(user));
-      localStorage.setItem('currentPath', window.location.pathname);
-    }
-  }, [user]);
+  const user = useSelector(state => state.user.user); // Ajusta esto según tu estructura de estado
+  const storedUserData = localStorage.getItem('userData');
+  if (storedUserData) {
+    const storedUser = JSON.parse(storedUserData);
+    dispatch(fetchUser(storedUser.id));
+  }
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
-    const storedCurrentPath = localStorage.getItem('currentPath');
-
+  
     if (storedUserData) {
-      const parsedUserData = JSON.parse(storedUserData);
-
-      if (parsedUserData) {
-        setUser(parsedUserData);
-
-        if (storedCurrentPath) {
-          navigate(storedCurrentPath);
-        }
+      const storedUser = JSON.parse(storedUserData);
+  
+      // Verifica si el usuario ya está en el estado global de Redux
+      // Si no está, realiza una acción para cargarlo
+      if (!user && storedUser.id) {
+        dispatch(fetchUser(storedUser.id));
       }
     }
-  }, [navigate]);
+  }, [dispatch, user]);
 
+
+  
 
 
   return (

@@ -11,12 +11,13 @@ import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 
 const Login = () => {
+  const [emailValue, setEmailValue] = useState(""); 
+  const [password, setPassword] = useState(""); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() =>{
-    console.log("initializeGoogleAuth")
     initializeGoogleAuth();
 
   }, [])
@@ -27,20 +28,15 @@ const Login = () => {
         clientId: "1061662234396-o558vqrpml1bpo2rut38qufj859kgtpg.apps.googleusercontent.com",
       });
     };
-    console.log("start", start)
 
     gapi.load("client:auth2", start);
-
-
   };
 
 
   const handleGoogleLoginClick = () => {
     // Crear un objeto de autenticación de Google
-    console.log("auth2", gapi.auth2)
-
     const auth2 = gapi.auth2.getAuthInstance();
-    console.log("auth2", auth2)
+  
     // Iniciar el proceso de inicio de sesión de Google
     auth2.signIn().then(async (googleUser) => {
       console.log('googleUser', googleUser);
@@ -61,7 +57,7 @@ const Login = () => {
       console.log("googleAccessToken",googleAccessToken)
 
       const result = await authenticateWithFirebase(googleAccessToken);
-      console.log("authenticateWithFirebase", result)
+
 
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
@@ -70,48 +66,42 @@ const Login = () => {
 
   const authenticateWithFirebase = async (googleAccessToken) => {
     try {
-
       const auth = getAuth(app);
       const credential = GoogleAuthProvider.credential(null, googleAccessToken);
       const authResult = await signInWithCredential(auth, credential);
 
       // El usuario ha sido autenticado correctamente en Firebase
-      console.log("Usuario autenticado en Firebase:", authResult.user);
+      console.log("Usuario autenticado en Firebase:");
       await saveUserToFirestore(authResult.user);
 
-      return true
+      return true;
     } catch (error) {
       console.error("Error al autenticar con Firebase:", error);
     }
   };
-  
 
   const saveUserToFirestore = async (user) => {
     const { uid, email, displayName } = user;
-    console.log("saveUserToFirestore", user);
 
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
-  
+
     try {
-      // Verificar si el usuario ya existe en Firestore
       const userSnapshot = await getDoc(userRef);
-  
+
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
         navigate("/home");
-
       } else {
-        // El usuario no existe, así que procedemos a guardarlo
         await setDoc(userRef, {
           email: email,
           displayName: displayName,
         });
 
-        onRegister ({
+        onRegister({
           email: email,
           displayName: displayName,
-        })
+        });
 
         console.log('Usuario guardado en Firestore con éxito');
       }
@@ -119,27 +109,19 @@ const Login = () => {
       console.error('Error al guardar/verificar usuario en Firestore:', error);
     }
   };
-  
-  
-  const onRegister = async ( data ) => {
+
+  const onRegister = async (data) => {
     try {
-
-      console.log("data",data)
-      const endpoint = "/register"
-      console.log("result---------")
-
-      const result = await axios.post(endpoint, data) 
-      console.log("result---------",result)
+      const endpoint = "/users";
+      const result = await axios.post(endpoint, data);
       if (result) {
         console.log("register success")
-        navigate("/questions")
+        navigate("/questions");
       }
     } catch (error) {
       throw error.message;
     }
-
-  } 
-
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -147,19 +129,18 @@ const Login = () => {
       const response = await axios.post(endpoint, data);
   
       if (response.data) {
-        // Actualizar el estado global o contexto con la información del usuario
-        dispatch(fetchUser(response.data.id));
-  
-        // Guardar la información del usuario en el localStorage
+        const id = response.data.id
+        if (id) dispatch(fetchUser(id))
         localStorage.setItem('userData', JSON.stringify(response.data));
   
-        // Redirigir al usuario a la ruta deseada después del inicio de sesión
+        localStorage.setItem('currentPath', "/home");
         navigate("/home");
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
   };
+  
 
   const {
     handleSubmit,
