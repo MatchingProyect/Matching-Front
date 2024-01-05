@@ -41,10 +41,7 @@ export default function Home() {
         } catch (error) {
             throw error.message
         }
-    }
-    
-    
-
+    };
     useEffect(()=>{
         dispatch(fetchUser())
         dispatch(fetchUsers())
