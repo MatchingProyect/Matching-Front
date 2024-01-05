@@ -45,6 +45,8 @@ export default function Home() {
         dispatch(fetchReservations());
     }, []);
 
+    console.log(admTrue)
+
 
 
     const [reservToRender, setReservToRender] = useState(reservations);
@@ -71,9 +73,7 @@ export default function Home() {
        
         <div className={styles.containerHome}>
             {
-                userLogeado?.admin ?  <button onClick={()=>{
-                    setAdmTrue(true)
-                }}>admin</button> : null
+                userLogeado?.admin ?  <button>admin</button> : null
             }
             <FunctionsAdmin admTrue={admTrue} setAdmTrue={setAdmTrue}/>
             <div className={styles.header}>

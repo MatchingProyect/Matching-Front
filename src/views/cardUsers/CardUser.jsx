@@ -14,17 +14,18 @@ const CardUser = ({ user }) => {
   const idUser = userLogeado?.user?.id;
 
   const enviarRequest = async()=>{
-    alert(`Solicitud de amistad enviada a ${user.displayName}`);
-  // try {
-  //   const requestBody = {
-  //     UserId: idUser,
-  //     FriendRId: idUserQueRecibe
-  //   };
-  // await axios.post('/friendRequest', requestBody)
+    
+  try {
+    const requestBody = {
+      UserId: idUser,
+      FriendRId: idUserQueRecibe
+    };
+  await axios.post('/friendRequest', requestBody)
+  
 
-  //    } catch (error) {
-  //    throw error.message
-  //    }
+     } catch (error) {
+     throw error.message
+     }
   };
 
 

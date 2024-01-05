@@ -8,15 +8,19 @@ const Solicitudes = () => {
     const [request, setRequest] = useState([])
     const [infoSoli, setInfoSoli] = useState([])
     const user = useSelector((state) => state.user.user.user);
-    console.log('hola',user)
+    
     const id = user?.id;
 
     useEffect(() => {
         
             const infoSoliFetch = async () => {
                 try {
-                    const { data } = await axios(`/users/${request?.user?.FriendRId}`);
-                    if (data) setInfoSoli(data.userFound.user);
+                    let allUsers = []
+                    const usersRequest = await Promise.all(request?.map( async(req) =>{
+                        const { data } = await axios(`/users/${req.UserId}`);
+                        if (data) allUsers.push(data)
+                    }))
+                    if(usersRequest) setInfoSoli(allUsers)
                 } catch (error) {
                     throw error.message;
                 }
@@ -25,24 +29,24 @@ const Solicitudes = () => {
         
     }, [request]);
 
-    console.log('aaa',request)
-
-
-
     
+    console.log('holi',infoSoli)
+
+    console.log('request', request)
   
     
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log('id Soli',id)
-                const { data } = await axios(`/friendRequest/${id}`);
-                console.log("friendRequest", data)
+                
+                const { data } = await axios(`/friendRequest/${id}?userType=friend`);
+                
                 if (data.status) {
                     const friendRequestData = data.getFriendRequest;
                     setRequest(friendRequestData)
                 }
+                
             } catch (error) {
                 throw error.message;
             }
@@ -51,11 +55,11 @@ const Solicitudes = () => {
         fetchData();
     }, []);
 
-    const agregarAmigo = async () => {
+    const agregarAmigo = async (friend, user) => {
         try {
             const {data} = await axios.post('/addFriend', {
-                FriendId: request.userQueRecibe.FriendId,
-                UserId: request.user.UserId,
+                FriendId: friend,
+                UserId: user,
                 status: "true",
             });
             if(data.status) console.log('amigo agregado')
@@ -67,8 +71,8 @@ const Solicitudes = () => {
     const rechazarAmigo = async () => {
         try {
             await axios.post('/addFriend', {
-                user1Id: request.userQueRecibe.FriendId,
-                user2Id: request.user.UserId,
+                FriendId: friend,
+                UserId: user,
                 status: "rechazado",
             });
         } catch (error) {
@@ -82,18 +86,25 @@ const Solicitudes = () => {
     return (
         <div>
             <h2>Solicitudes</h2>
-            {request?
-
-                (<div>
-                    <img src={`${infoSoli?.avatarImg}`} alt={infoSoli?.displayName} /> 
-                    <h4>{infoSoli?.displayName}</h4>
-                    <button onClick={() => agregarAmigo(request.user.id, request.user.id)}>Aceptar</button>
-                    <button onClick={() => rechazarAmigo(request.user.id, request.user.id)}>Rechazar</button>
+            {request?.map(request => {
+                const filteredInfo = infoSoli.filter(user => request.UserId === user.userFound.user.id)
+                console.log(filteredInfo)
+                return (
+                    <div>
+                    <img src={`${filteredInfo[0]?.userFound?.user?.avatarImg}`} alt={filteredInfo[0]?.userFound?.user?.displayName} /> 
+                    <h4>{filteredInfo[0]?.userFound?.user?.displayName}</h4>
+                    <button onClick={() => agregarAmigo(request.UserId, request.FriendRId)}>Aceptar</button>
+                    <button onClick={() => rechazarAmigo(request.UserId, request.FriendRId)}>Rechazar</button>
                     <Link to='/home' ><button>x</button></Link>
-                </div>) : null
-            }
+                </div>
+                )
+               
+        })
+}
         </div>
     );
 };
+
+
 
 export default Solicitudes;

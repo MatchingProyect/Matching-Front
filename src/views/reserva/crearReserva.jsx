@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 
-const crearReserva = ({reserva, setReserva, court}) => {
+const CrearReserva = ({reserva, setReserva, court}) => {
 
     const id = court.id
 
@@ -49,4 +49,4 @@ const crearReserva = ({reserva, setReserva, court}) => {
     )
 }
 
-export default crearReserva
+export default CrearReserva
