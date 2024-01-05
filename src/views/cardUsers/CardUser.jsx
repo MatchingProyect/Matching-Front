@@ -32,10 +32,7 @@ const CardUser = ({ user }) => {
     <div className = {styles.userContainer}>
       <img src = {user.avatarImg} alt = {user.displayName} className = {styles.avatarImg}/>
       <h3 className = {styles.nameUser}>{user.displayName}</h3>
-      <Button sx = {{
-        'position':'relative',
-        'bottom':'0px',
-      }}>Agregar</Button>
+      <button className = {styles.btnAgregar} onClick={enviarRequest}>Agregar</button>
     </div>
   );
 }
