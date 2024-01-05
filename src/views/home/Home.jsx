@@ -15,6 +15,8 @@ import FunctionsAdmin from './FunctionsAdmin.jsx';
 export default function Home() {
     const dispatch = useDispatch();
 
+    const [admTrue, setAdmTrue] = useState(false)
+
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
     const [actualPageUsers, setActualPageUsers] = useState(1);
@@ -69,8 +71,11 @@ export default function Home() {
        
         <div className={styles.containerHome}>
             {
-                userLogeado?.admin ?  <FunctionsAdmin/> : null
+                userLogeado?.admin ?  <button onClick={()=>{
+                    setAdmTrue(true)
+                }}>admin</button> : null
             }
+            <FunctionsAdmin admTrue={admTrue} setAdmTrue={setAdmTrue}/>
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
                 <Link to='/profile'><div className={styles.icon}>

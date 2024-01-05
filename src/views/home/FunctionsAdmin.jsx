@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchSports, fetchClubs, fetchCourts } from "../../redux/reducer";
 import { useForm } from 'react-hook-form';
 
-const FunctionsAdmin = ({setAdm, adm}) => {
+const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
 
     const {
         handleSubmit,
@@ -12,6 +12,8 @@ const FunctionsAdmin = ({setAdm, adm}) => {
     } = useForm();
 
     const dispatch = useDispatch();
+
+    if(!admTrue) return null
 
     const onSubmitSports = async (data) => {
         try {
@@ -132,7 +134,7 @@ const FunctionsAdmin = ({setAdm, adm}) => {
             </div>
          <button type="submit" value='enviar'> Create </button>
         </form>
-
+        <button onClick={setAdmTrue(false)}>x</button>
         </div>
     )
 }
