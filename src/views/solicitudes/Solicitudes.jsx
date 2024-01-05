@@ -69,7 +69,7 @@ const Solicitudes = () => {
             await axios.post('/addFriend', {
                 user1Id: request.userQueRecibe.FriendId,
                 user2Id: request.user.UserId,
-                status: "true",
+                status: "rechazado",
             });
         } catch (error) {
             throw error.message;
