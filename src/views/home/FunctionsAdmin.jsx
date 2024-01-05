@@ -15,13 +15,17 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
 
     if(!admTrue) return null
 
+    console.log(admTrue)
+
     const onSubmitSports = async (data) => {
         try {
-            const endPoint = '/sports'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchSports());
-            }
+            //const endPoint = '/sports'
+            // const response = await axios.post(endPoint, data)
+            // if (response.status) {
+            //      dispatch(fetchSports());
+            // }
+
+            console.log('este tmb')
             
         } catch (error) {
             throw error.message;
@@ -30,25 +34,27 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
 
     const onSubmitClubs = async (data) => {
         try {
-            const endPoint = '/clubs'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchClubs());
-            }
-            
+            // const endPoint = '/clubs'
+            // const response = await axios.post(endPoint, data)
+            // if (response.status) {
+            //      dispatch(fetchClubs());
+            // }
+            console.log('tmb funk')
         } catch (error) {
             throw error.message;
         }
     }
-    if(!adm) return null
+
 
     const onSubmitCourts = async (data) => {
         try {
-            const endPoint = '/courts'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchCourts());
-            }
+            // const endPoint = '/courts'
+            // const response = await axios.post(endPoint, data)
+            // if (response.status) {
+            //      dispatch(fetchCourts());
+            // }
+
+            console.log('funk')
             
         } catch (error) {
             throw error.message;

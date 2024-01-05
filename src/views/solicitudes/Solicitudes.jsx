@@ -15,7 +15,7 @@ const Solicitudes = () => {
         
             const infoSoliFetch = async () => {
                 try {
-                    const { data } = await axios(`/users/${request?.user?.UserId}`);
+                    const { data } = await axios(`/users/${request?.user?.FriendRId}`);
                     if (data) setInfoSoli(data.userFound.user);
                 } catch (error) {
                     throw error.message;
@@ -54,8 +54,8 @@ const Solicitudes = () => {
     const agregarAmigo = async () => {
         try {
             const {data} = await axios.post('/addFriend', {
-                user1Id: request.userQueRecibe.FriendId,
-                user2Id: request.user.UserId,
+                FriendId: request.userQueRecibe.FriendId,
+                UserId: request.user.UserId,
                 status: "true",
             });
             if(data.status) console.log('amigo agregado')
