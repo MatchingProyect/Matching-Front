@@ -32,7 +32,7 @@ export default function Home() {
      const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
 
-    console.log(userLogeado);
+    console.log(users, reservations);
 
     
 
@@ -105,7 +105,6 @@ export default function Home() {
             <div className = {styles.reservationsContainer}>
                 <CardReservation reservations = {reservations} />
             </div>
-            <div className={styles.cardUser}>
                 <div className = {styles.userContainer}>
                 {
                     users?.map(user => (
@@ -113,7 +112,6 @@ export default function Home() {
                     ))
                 }
                 </div>
-            </div>
             <NavbarLow />
         </div>
     );
