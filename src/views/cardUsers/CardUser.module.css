@@ -1,5 +1,4 @@
 .userContainer{
-    background-color: #203144;
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -25,12 +24,12 @@
 }
 
 .nameUser{
-    color: rgb(255, 255, 255);
+color: black;
     text-align: center;
     position: relative;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    top:10px;
+    top:15px;
     width: 80%;
     height: 37%;
 }
