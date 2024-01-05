@@ -28,14 +28,34 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.551);
+    box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.274); 
+
     
+}
+.friendsContainer{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .divCourts{
     display: flex;
     flex-direction: column;
-    margin-top: 3vh;
+    align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    width: 100vw;
+    height: 60vh;
+    background-color: #203144;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0);
+    overflow-y:auto;
 }
+.courtsTitle{
+    color: white;
+    font-size: 35px;
+}
+
 
 .containerContenido{
     margin-top: 7.5rem;
@@ -67,15 +87,6 @@
     margin: 1rem 0;
 }
 
-.resetButton{
-    width: 6vh;
-    height: 4vh;
-    font-size: 20px;
-    border-radius: 5px ;
-    cursor: pointer;
-    background-color: rgb(38, 38, 38);
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
-}
 
 .NavBtn {
     position: relative;
@@ -97,6 +108,15 @@
 
 .NavBtn.selected::before {
     display: block;  
+}
+
+.clubsContainer{
+    display: flex;
+    width: 100vw;
+    height: 20vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .containerCards {
@@ -146,19 +166,6 @@
     border-radius: 5px;
 }
 
-.btnNuevaReserva{
-    width: 120px;
-    height: 30px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 5px ;
-    cursor: pointer;
-    margin-bottom: 30px ;
-    background-color: rgb(38, 38, 38);
-    color: white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.551);
-}
-
 .sportsContainer {
     display: flex;
     justify-content: space-around; /* Ajusta según tus necesidades de diseño */
@@ -172,15 +179,21 @@
     width: 100%;
     background-color: #fff;
   }
-  
 
-  .cardUser{
-    height: 20vh;
+  .reservationsContainer{
     width: 100vw;
-    background-color: #ffffff;
+  }
+  
+  .userContainer{
     display: flex;
+    /* height: 210px; */
+    height: 25vh;
+    width: 100vw;
+    min-height: 200px;
+    max-height: 240px;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center; /* Ajusta según tus necesidades de diseño */
-    overflow-x:auto;
+    justify-content:baseline;
+    align-items: center;
+    overflow-x:scroll;
+    margin-top: 20px;
   }

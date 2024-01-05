@@ -1,9 +1,10 @@
 .friendsContainer{
-    background-color: #F9F9F9;
     position: relative;
     /* border-style: solid; */
     border-radius: 10px;
     min-width: 90vw;
+    padding: 10px;
+
     /* border-color: black;
     border: 2px solid transparent; 
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274);  */
@@ -24,11 +25,13 @@
 
 .friendsImages{
     position: relative;
-    max-height: 95px;
+    max-height: 110px;
     display: flex;
     flex-direction: row;
     margin-right:10px;
     margin-left: 10px;
+    justify-content:baseline;
+    overflow-x:auto;
 }
 
 .friendImg{
@@ -42,7 +45,7 @@
     border-width: 2px;
     border-color: black;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274); 
 }
 .friend{
     margin-right: 1vw;

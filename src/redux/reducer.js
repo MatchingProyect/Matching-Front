@@ -59,6 +59,7 @@ export const fetchUser = (id) => async (dispatch) => {
 export const fetchReservations = ()=>async(dispatch)=>{
     try {
         const {data} = await axios(`/reservations`)
+        console.log(data);
         if(data.status) dispatch(setReservations(data.allReservations))
     } catch (error) {
         throw error.message
