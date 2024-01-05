@@ -1,0 +1,29 @@
+.userContainer{
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100px;
+    height: 160px;
+    margin: 10px;
+
+    border-radius: 20px;
+
+}
+.avatarImg{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    position: relative;
+    top:10px;
+}
+
+.nameUser{
+    color: black;
+    text-align: center;
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    top:10px;
+}
