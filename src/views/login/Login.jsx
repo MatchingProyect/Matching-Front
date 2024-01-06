@@ -9,10 +9,10 @@ import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
+import GoogleIcon from '@mui/icons-material/Google';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState(""); 
-  const [password, setPassword] = useState(""); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -154,6 +154,10 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const responseGoogle = () => {
+    console.log("onSuccess");
+    handleGoogleLoginClick()
+  };
 
   return (
     <div className={styles.allContainer}>
@@ -246,20 +250,23 @@ const Login = () => {
           INICIAR SESION
         </button>
 
-
-        <button
-          type="button"
-          onClick={handleGoogleLoginClick}
-          className={styles.googleLoginButton}
-        >
-          INICIAR SESION CON GOOGLE
-        </button>
-
+        <div className={styles.containerGoogle }>
+          <button
+            type="button"
+            onClick={handleGoogleLoginClick}
+            className={styles.submitButton }
+          >
+          <div className={styles.textGoogle }>
+              <div className={styles.iconGoogle }><GoogleIcon></GoogleIcon></div>
+              Iniciar sesión con Google
+            </div>
+          </button>
+        </div>
 
         <div className={styles.container}>
           <p className={styles.registerText}>
             ¿No tienes cuenta? <br />
-            <Link to="/registro" className={styles.registerLink}>
+            <Link to="/registro" className={styles.registerLink }>
               Regístrate
             </Link>
           </p>

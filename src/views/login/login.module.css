@@ -408,7 +408,18 @@
   }
 }
 
+.containerGoogle{
+  margin-top: 1rem;
+}
+.textGoogle{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
-.googleLoginButton {
-
+.iconGoogle {
+  border: white;
+  margin-top: 3px;
+  margin-right: 5px;
 }
