@@ -33,10 +33,12 @@ function App() {
   const navigate = useNavigate();
   const user = useSelector(state => state.user.user); // Ajusta esto según tu estructura de estado
   const storedUserData = localStorage.getItem('userData');
+  console.log("storedUserData", storedUserData)
   if (storedUserData) {
     console.log("Apppppp")
     const storedUser = JSON.parse(storedUserData);
-    storedUser?dispatch(fetchUser(storedUser.id)) : null;
+    console.log("storedUser",storedUser)
+    // storedUser?dispatch(fetchUser(storedUser.id)) : null ;
   }
 
   useEffect(() => {
