@@ -13,7 +13,7 @@ const CardClub = ({club}) => {
   const dispatch = useDispatch()
 
   const user =useSelector((state) =>state.user.user.user)
-  console.log(club);
+  // console.log(club);
 
   const deleteClub = async()=>{
     try {

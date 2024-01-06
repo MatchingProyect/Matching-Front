@@ -16,7 +16,7 @@ import axios from 'axios';
 export default function Home() {
     const dispatch = useDispatch();
 
-    const [admTrue, setAdmTrue] = useState(false)
+    
 
     const [selectedOption, setSelectedOption] = useState('users');
     const [selectedSection, setSelectedSection] = useState('users');
@@ -35,9 +35,10 @@ export default function Home() {
 
     const logout = async () => {
         try {
-            const endpoint = "/logout"
-            await axios.post(endpoint)
-            console.log(123);
+        const endpoint= "/logout"
+        const response = await axios.post(endpoint)
+        console.log("logout",response)
+        return response
         } catch (error) {
             throw error.message
         }
@@ -49,9 +50,10 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchSports());
         dispatch(fetchReservations());
+        console.log("homeee")
     }, []);
 
-    console.log(admTrue)
+  
 
 
 
@@ -79,9 +81,9 @@ export default function Home() {
 
         <div className={styles.containerHome}>
             {
-                userLogeado?.admin ? <button onClick={() => setAdmTrue(true)}>admin</button> : null
+                userLogeado?.admin ?  <Link to='/functionsAdm'><button >admin</button></Link> : null
             }
-            <FunctionsAdmin admTrue={admTrue} setAdmTrue={setAdmTrue} />
+            
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
                 <Link to='/profile'><div className={styles.icon}>
@@ -97,26 +99,26 @@ export default function Home() {
             <div className={styles.divCourts}>
                 <h2 className={styles.courtsTitle}>Campos</h2>
                 {
-                    courts
-                        ?.filter(court => court.estado === true) // Filtra los tribunales activos
-                        .map(filteredCourt => (
-                            <CardCourt key={filteredCourt.id} court={filteredCourt} /> // Renderiza cada tribunal filtrado usando el componente CardCourt
-                        ))
-                }
-
-                <div>
-                    <button onClick={() => handlePaginateCourts(actualPageCourts - 1)} disabled={actualPageCourts === 1}>Anterior</button>
-                    <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
-                </div>
+  courts
+    ?.filter(court => court.estado === true)
+    .map(filteredCourt => (
+      <CardCourt key={filteredCourt.id} court={filteredCourt} /> 
+    ))
+}
+                
+            <div>
+                            <button onClick={() => handlePaginateCourts(actualPageCourts - 1)} disabled={actualPageCourts === 1}>Anterior</button>
+                            <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
             </div>
-            <div className={styles.clubsContainer}>
-                {
-                    clubs
-                        ?.filter(club => club.estado === true) // Filtra los clubes activos
-                        .map(filteredClub => (
-                            <CardClub key={filteredClub.id} club={filteredClub} /> // Renderiza cada club filtrado usando el componente CardClub
-                        ))
-                }
+            </div>
+            <div className = {styles.clubsContainer}>
+            {
+  clubs
+    ?.filter(club => club.estado === true) 
+    .map(filteredClub => (
+      <CardClub key={filteredClub.id} club={filteredClub} /> 
+    ))
+}            
             </div>
             <div className={styles.reservationsContainer}>
                 <CardReservation reservations={reservations} />

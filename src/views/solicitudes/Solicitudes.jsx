@@ -30,9 +30,7 @@ const Solicitudes = () => {
     }, [request]);
 
     
-    console.log('holi',infoSoli)
 
-    console.log('request', request)
   
     
 

@@ -1,23 +1,30 @@
 import { useEffect,useState } from 'react'
 import { Button } from '@mui/material'
-import { useNavigate } from "react-router-dom";
 import { useUserContext } from '../../context/UserProvider'
 import { QuestionOne,QuestionTwo,QuestionThree,QuestionFour } from '../../components/questions'
 import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
 import logo from '../../assets/logo-matching.svg'
 import styles from './Questions.module.css'
+import { useSelector } from 'react-redux';
 
 const Questions = () => {
 
     const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
-    const navigate = useNavigate();
+    const user = useSelector(state => state.user.user); 
+    console.log("user",user)
 
-    // useEffect(() => {
-    //     if( !datosUser.nombreApellido || !datosUser.email || !datosUser.pass ){
-    //         navigate('/login');
-    //     }
-    // }, [ datosUser,history ])
+
+    useEffect(() => {
+        if (user.email)
+        setDatosUser({
+            ...datosUser,
+            email: user?.user?.email,
+            nombreApellido: user?.user?.displayName
+        })
+
+
+      }, [user]);
     
 
     const handleCountQuestion = () => {
@@ -28,6 +35,8 @@ const Questions = () => {
                 questionsAnsker: false
             })
         }
+
+        console.log("datosUserasdasdasd", datosUser)
     }
 
     const handleRenderQuestion = () => {

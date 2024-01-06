@@ -127,10 +127,12 @@ const Login = () => {
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
-  
+      console.log("onSubmit")
       if (response.data) {
         const id = response.data.id
+        console.log("onSubmit")
         if (id) dispatch(fetchUser(id))
+        
         localStorage.setItem('userData', JSON.stringify(response.data));
   
         localStorage.setItem('currentPath', "/home");

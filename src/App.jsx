@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect,  } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux'; 
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
 import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro';
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
@@ -24,33 +23,28 @@ import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePass
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
 import { fetchUser } from './redux/reducer.js';
-import { useSelector } from 'react-redux';
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
+import FunctionsAdmin from './views/home/FunctionsAdmin.jsx';
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector(state => state.user.user); // Ajusta esto según tu estructura de estado
+
   const storedUserData = localStorage.getItem('userData');
   if (storedUserData) {
     const storedUser = JSON.parse(storedUserData);
-    dispatch(fetchUser(storedUser.id));
+    console.log("storedUser",storedUser)
   }
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
-  
     if (storedUserData) {
       const storedUser = JSON.parse(storedUserData);
-  
-      // Verifica si el usuario ya está en el estado global de Redux
-      // Si no está, realiza una acción para cargarlo
-      if (!user && storedUser.id) {
+      if (storedUser.id) {
         dispatch(fetchUser(storedUser.id));
       }
     }
-  }, [dispatch, user]);
+  }, []);
 
 
   
@@ -79,6 +73,7 @@ function App() {
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
         <Route path='/user/:id' element={<UserDetail/>} />
         <Route path='clubs/:id' element={<ClubsDetail/>} />
+        <Route path='/functionsAdm' element={<FunctionsAdmin/>} />
         
         <Route path = "*" element = {<Error />} />
       </Routes>
