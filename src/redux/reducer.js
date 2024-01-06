@@ -52,7 +52,8 @@ export const fetchUser = (id) => async (dispatch) => {
         return data.userFound; // Devuelve el usuario recuperado
       }
     } catch (error) {
-      throw error.message;
+        console.log("asddddddddd")
+        throw error.message;
     }
   };
 

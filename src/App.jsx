@@ -34,13 +34,14 @@ function App() {
   const user = useSelector(state => state.user.user); // Ajusta esto según tu estructura de estado
   const storedUserData = localStorage.getItem('userData');
   if (storedUserData) {
+    console.log("Apppppp")
     const storedUser = JSON.parse(storedUserData);
-    dispatch(fetchUser(storedUser.id));
+    storedUser?dispatch(fetchUser(storedUser.id)) : null;
   }
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
-  
+    console.log("storedUserData", user)
     if (storedUserData) {
       const storedUser = JSON.parse(storedUserData);
   
@@ -50,7 +51,7 @@ function App() {
         dispatch(fetchUser(storedUser.id));
       }
     }
-  }, [dispatch, user]);
+  }, []);
 
 
   

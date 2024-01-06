@@ -13,12 +13,8 @@ const Questions = () => {
     const [ count,setCount ] = useState( 1 );
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if( !datosUser.nombreApellido || !datosUser.email || !datosUser.pass ){
-    //         navigate('/login');
-    //     }
-    // }, [ datosUser,history ])
-    
+
+
 
     const handleCountQuestion = () => {
         if( count <= 4 && datosUser.questionsAnsker ){
@@ -28,6 +24,10 @@ const Questions = () => {
                 questionsAnsker: false
             })
         }
+
+        console.log("datosUserasdasdasd", datosUser)
+
+
     }
 
     const handleRenderQuestion = () => {

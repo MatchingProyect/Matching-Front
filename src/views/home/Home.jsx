@@ -49,6 +49,7 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchSports());
         dispatch(fetchReservations());
+        console.log("homeee")
     }, []);
 
     console.log(admTrue)
