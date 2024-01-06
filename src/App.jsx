@@ -31,7 +31,7 @@ import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(state => state.user.user); // Ajusta esto según tu estructura de estado
+  const user = useSelector(state => state.user); // Ajusta esto según tu estructura de estado
   const storedUserData = localStorage.getItem('userData');
   console.log("storedUserData", storedUserData)
   if (storedUserData) {
