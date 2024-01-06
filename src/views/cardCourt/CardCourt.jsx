@@ -15,9 +15,11 @@ const CardCourt = ({ court }) => {
   const userLogeado = useSelector((state) => state.user.user.user);
   const dispatch = useDispatch();
 
+  
+
   const deleted = async () => {
     try {
-      const deleted = await axios.delete(`/Courts/${court.id}`);
+      const deleted = await axios.put(`/courtEstado/${court.id}`, {estado: false});
       if (deleted.status) dispatch(fetchCourts());
     } catch (error) {
       alert(error.message);
@@ -31,10 +33,10 @@ const CardCourt = ({ court }) => {
       <div className={styles.cardCourtContainer}>
         <button onClick={deleted}>Eliminar</button>
         <h2 className={styles.courtTitleAdm}>{court.name}</h2>
-        <button onClick={() => { setReserva(true) }}>reservar</button>
+        
         <button onClick={() => { setUpdate(true) }}>update</button>
         <button onClick={() => { setDetail(true) }}>detail</button>
-        <CrearReserva reserva={reserva} setReserva={setReserva} court={court} />
+        
         <AdminFunction court={court} update={update} setUpdate={setUpdate} />
         <DetailCourt court={court} detail={detail} setDetail={setDetail} />
       </div>

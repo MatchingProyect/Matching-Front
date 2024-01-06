@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './CardUser.module.css';
+import { fetchUsers } from '../../redux/reducer';
 
 
 const CardUser = ({ user }) => {
@@ -14,6 +15,15 @@ const CardUser = ({ user }) => {
   
   
   const idUser = userLogeado?.user?.id
+
+  const deleteUser = async()=>{
+    try {
+      const deleted = await axios.put(`/userEstado/${userLogeado?.id}`, {estado: false});
+      if(deleted.status)  dispatch(fetchUsers());
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   const enviarRequest = async()=>{
     
@@ -30,6 +40,19 @@ const CardUser = ({ user }) => {
      }
   };
 
+  if(userLogeado?.admin){
+    return (
+      <div>
+        
+        <button onClick={deleteUser}>Suspender Usuario</button>
+       
+        <h2>{userLogeado?.displayName}</h2>
+        
+        
+        
+        </div>
+    )
+   }
 
   return (
     <div className = {styles.userContainer}>
