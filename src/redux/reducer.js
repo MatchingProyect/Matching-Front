@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { da } from 'date-fns-jalali/locale';
 
 const initialState = {
     allUsers: [],
@@ -50,10 +49,9 @@ export const fetchUser = (id) => async (dispatch) => {
       console.log("fetchUser",data)
       if (data.status) {
         dispatch(setUser(data.userFound));
-        return data.userFound; // Devuelve el usuario recuperado
+        return data.userFound;
       }
     } catch (error) {
-        console.log("asddddddddd")
         throw error.message;
     }
   };

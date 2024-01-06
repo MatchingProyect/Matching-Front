@@ -26,7 +26,6 @@ const CardCourt = ({ court }) => {
     }
   };
 
-  console.log("holi", userLogeado?.admin);
 
   if (userLogeado?.admin) {
     return (
