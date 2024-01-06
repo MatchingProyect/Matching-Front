@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 
 const AdminFunction = ({club, setEditClub, editClub}) => {
 
+    
+
     const {
         handleSubmit,
         formState: { errors },
@@ -34,6 +36,8 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
             }
         fetchData()
     }, [])
+
+  
 
 
     const onSubmitClubs = async() =>{
@@ -80,6 +84,14 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
         <input type="text" {...register('security', {required: true, maxLength: 20})}/>
         {errors.name?.type === "required" && <p>This field is required</p>}
         {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        <label htmlFor="locationSelect">Select Location:</label>
+      <select id="locationSelect">
+        {location?.map(location => (
+          <option key={location.id} value={location.id}>
+            {location.name}
+          </option>
+        ))}
+      </select>
     </div>
  <button type="submit" value='enviar'> Create </button>
 </form>

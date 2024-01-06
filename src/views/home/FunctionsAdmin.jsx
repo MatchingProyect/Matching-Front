@@ -5,12 +5,17 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from "react";
 import CardUser from "../cardUsers/CardUser";
 import { Link } from "react-router-dom";
+import CardClub from "../cardClubs/CardClub";
+import CardCourt from "../cardCourt/CardCourt";
+import { fetchCourts, fetchUsers } from "../../redux/reducer";
 
 const FunctionsAdmin = () => {
 
 
     const [usersDeshabilitados, setUsersDeshabilitados] = useState(false)
-    const [location, setLocation] = useState([])
+    const [clubDeshabilitados, setClubsDeshabilitados] = useState(false)
+    const [courtsDeshabilitados, setCourtsDeshabilitados] = useState(false)
+   
 
     const {
         handleSubmit,
@@ -23,6 +28,8 @@ const FunctionsAdmin = () => {
     const sports = useSelector((state) => state.user.allSports);
      const clubs = useSelector((state) => state.user.allClubs);
      const courts = useSelector((state) => state.user.allCourts);
+     const location = useSelector((state) => state.user.allLocations);
+
 
     const dispatch = useDispatch();
 
@@ -30,13 +37,7 @@ const FunctionsAdmin = () => {
 
     
 
-    useEffect(()=>{
-        const fetchData = async()=>{
-            const allLocations = await axios('/locations')
-            if(allLocations)setLocation(allLocations.allLocations)
-        }
-    fetchData()
-    })
+    
 
     const onSubmitSports = async (data) => {
         try {
@@ -46,7 +47,7 @@ const FunctionsAdmin = () => {
                  dispatch(fetchSports());
             }
 
-            console.log('este tmb')
+            
             
         } catch (error) {
             throw error.message;
@@ -60,7 +61,7 @@ const FunctionsAdmin = () => {
             if (response.status) {
                  dispatch(fetchClubs());
             }
-            console.log('tmb funk')
+           
         } catch (error) {
             throw error.message;
         }
@@ -75,13 +76,39 @@ const FunctionsAdmin = () => {
                  dispatch(fetchCourts());
             }
 
-            console.log('funk')
+            
             
         } catch (error) {
             throw error.message;
         }
     }
 
+    const reactivarClub = async(id) =>{
+      try {
+        const deleted = await axios.put(`/clubEstado/${id}`, {estado: true});
+        if(deleted.status)  dispatch(fetchClubs());
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+
+    const reactivarCourt = async(id) =>{
+      try {
+        const deleted = await axios.put(`/courtEstado/${id}`, {estado: true});
+        if(deleted.status)  dispatch(fetchCourts());
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+
+    const reactivarUsuario = async(id) =>{
+      try {
+        const deleted = await axios.put(`/usuarioEstado/${id}`, {estado: true});
+        if(deleted.status)  dispatch(fetchUsers());
+      } catch (error) {
+        alert(error.message)
+      }
+    }
 
 
 
@@ -93,17 +120,34 @@ const FunctionsAdmin = () => {
             <div>
                 <div>
                     {usersDeshabilitados === true && users?.filter(user => user.estado === false) 
-    .map(filteredUser => (
-        <CardUser user={filteredUser} />
-    ))
+                      .map(filteredUser => (
+                        <div key={filteredUser.id}>
+                        <CardCourt court={filteredUser} />
+                        <button onClick={()=> reactivarUsuario(filteredUser.id)} >Activar Usuario</button>
+                    </div>
+                      ))
                     }
                     <button onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button>
                 </div>
                 <div>
-                    <button>Mostrar canchas deshabilitadas</button>
+                {courtsDeshabilitados === true && courts?.filter(court => court.estado === false) 
+                      .map(filteredCourt => (
+                          <div key={filteredCourt.id}>
+                              <CardCourt court={filteredCourt} />
+                              <button onClick={()=> reactivarCourt(filteredCourt.id)} >Activar Court</button>
+                          </div>
+                ))}
+                    <button onClick={()=> setCourtsDeshabilitados(true)}>Mostrar canchas deshabilitadas</button>
                 </div>
                 <div>
-                    <button>Mostrar clubes deshabilitados</button>
+                {clubDeshabilitados === true && clubs?.filter(club => club.estado === false) 
+                      .map(filteredClub => (
+                          <div key={filteredClub.id}>
+                              <CardClub club={filteredClub} />
+                              <button onClick={()=> reactivarClub(filteredClub.id)} >Activar Club</button>
+                          </div>
+                ))}
+                    <button onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubes deshabilitados</button>
                 </div>
             </div>
         <form onSubmit={handleSubmit(onSubmitSports)}>
