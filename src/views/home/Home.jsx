@@ -79,7 +79,7 @@ export default function Home() {
        
         <div className={styles.containerHome}>
             {
-                userLogeado?.admin ?  <button>admin</button> : null
+                userLogeado?.admin ?  <button onClick={()=> setAdmTrue(true)}>admin</button> : null
             }
             <FunctionsAdmin admTrue={admTrue} setAdmTrue={setAdmTrue}/>
             <div className={styles.header}>
@@ -96,28 +96,38 @@ export default function Home() {
             </div>
             <div className = {styles.divCourts}>
                 <h2 className = {styles.courtsTitle}>Campos</h2>
-            {
-                    courts?.map(court => (
-                        <CardCourt court={court}/>
-                    ))
-                }
+                {
+  courts
+    ?.filter(court => court.estado === true) // Filtra los tribunales activos
+    .map(filteredCourt => (
+      <CardCourt key={filteredCourt.id} court={filteredCourt} /> // Renderiza cada tribunal filtrado usando el componente CardCourt
+    ))
+}
+                
             <div>
                             <button onClick={() => handlePaginateCourts(actualPageCourts - 1)} disabled={actualPageCourts === 1}>Anterior</button>
                             <button onClick={() => handlePaginateCourts(actualPageCourts + 1)} disabled={actualPageCourts.length === 0}>Siguiente</button>
             </div>
             </div>
             <div className = {styles.clubsContainer}>
-                {clubs?.map((club) => <CardClub club = {club} />)}                
+            {
+  clubs
+    ?.filter(club => club.estado === true) // Filtra los clubes activos
+    .map(filteredClub => (
+      <CardClub key={filteredClub.id} club={filteredClub} /> // Renderiza cada club filtrado usando el componente CardClub
+    ))
+}            
             </div>
             <div className = {styles.reservationsContainer}>
                 <CardReservation reservations = {reservations} />
             </div>
                 <div className = {styles.userContainer}>
                 {
-                    users?.map(user => (
-                        <CardUser user={user} />
-                    ))
-                }
+  users?.filter(user => user.estado === true && user.id !== userLogeado?.id) 
+    .map(filteredUser => (
+      <CardUser key={filteredUser.id} user={filteredUser} /> 
+    ))
+}
                 </div>
             <NavbarLow />
         </div>
