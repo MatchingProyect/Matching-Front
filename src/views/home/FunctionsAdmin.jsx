@@ -1,9 +1,16 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { fetchSports, fetchClubs, fetchCourts } from "../../redux/reducer";
-import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from "react-redux";
 
-const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from "react";
+import CardUser from "../cardUsers/CardUser";
+import { Link } from "react-router-dom";
+
+const FunctionsAdmin = () => {
+
+
+    const [usersDeshabilitados, setUsersDeshabilitados] = useState(false)
+    const [location, setLocation] = useState([])
 
     const {
         handleSubmit,
@@ -11,19 +18,33 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
         register
     } = useForm();
 
+    const users = useSelector((state) => state.user.allUsers);
+     const userLogeado =useSelector((state) =>state.user.user.user)
+    const sports = useSelector((state) => state.user.allSports);
+     const clubs = useSelector((state) => state.user.allClubs);
+     const courts = useSelector((state) => state.user.allCourts);
+
     const dispatch = useDispatch();
 
-    if(!admTrue) return null
+    if(!userLogeado?.admin) return null
 
-    console.log(admTrue)
+    
+
+    useEffect(()=>{
+        const fetchData = async()=>{
+            const allLocations = await axios('/locations')
+            if(allLocations)setLocation(allLocations.allLocations)
+        }
+    fetchData()
+    })
 
     const onSubmitSports = async (data) => {
         try {
-            //const endPoint = '/sports'
-            // const response = await axios.post(endPoint, data)
-            // if (response.status) {
-            //      dispatch(fetchSports());
-            // }
+            const endPoint = '/sports'
+            const response = await axios.post(endPoint, data)
+            if (response.status) {
+                 dispatch(fetchSports());
+            }
 
             console.log('este tmb')
             
@@ -34,11 +55,11 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
 
     const onSubmitClubs = async (data) => {
         try {
-            // const endPoint = '/clubs'
-            // const response = await axios.post(endPoint, data)
-            // if (response.status) {
-            //      dispatch(fetchClubs());
-            // }
+            const endPoint = '/clubs'
+            const response = await axios.post(endPoint, data)
+            if (response.status) {
+                 dispatch(fetchClubs());
+            }
             console.log('tmb funk')
         } catch (error) {
             throw error.message;
@@ -48,11 +69,11 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
 
     const onSubmitCourts = async (data) => {
         try {
-            // const endPoint = '/courts'
-            // const response = await axios.post(endPoint, data)
-            // if (response.status) {
-            //      dispatch(fetchCourts());
-            // }
+            const endPoint = '/courts'
+            const response = await axios.post(endPoint, data)
+            if (response.status) {
+                 dispatch(fetchCourts());
+            }
 
             console.log('funk')
             
@@ -61,8 +82,30 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
         }
     }
 
+
+
+
+
     return(
+
+//Sports
         <div>
+            <div>
+                <div>
+                    {usersDeshabilitados === true && users?.filter(user => user.estado === false) 
+    .map(filteredUser => (
+        <CardUser user={filteredUser} />
+    ))
+                    }
+                    <button onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button>
+                </div>
+                <div>
+                    <button>Mostrar canchas deshabilitadas</button>
+                </div>
+                <div>
+                    <button>Mostrar clubes deshabilitados</button>
+                </div>
+            </div>
         <form onSubmit={handleSubmit(onSubmitSports)}>
             <div>
                 <label>Name:</label>
@@ -72,6 +115,8 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
             </div>
          <button type="submit" value='enviar'> Create </button>
         </form>
+
+//Clubs
 
         <form onSubmit={handleSubmit(onSubmitClubs)}>
             <div>
@@ -95,9 +140,20 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
                 <input type="text" {...register('security', {required: true, maxLength: 20})}/>
                 {errors.name?.type === "required" && <p>This field is required</p>}
                 {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+
+                <label htmlFor="locationSelect">Select Location:</label>
+      <select id="locationSelect">
+        {location?.map(location => (
+          <option key={location.id} value={location.id}>
+            {location.name}
+          </option>
+        ))}
+      </select>
             </div>
          <button type="submit" value='enviar'> Create </button>
         </form>
+
+//Courts
 
         <form onSubmit={handleSubmit(onSubmitCourts)}>
             <div>
@@ -137,10 +193,40 @@ const FunctionsAdmin = ({admTrue, setAdmTrue}) => {
                 <input type="text" {...register('reputation', {required: true, maxLength: 100})}/>
                 {errors.name?.type === "required" && <p>This field is required</p>}
                 {errors.name?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
+
+                <label htmlFor="clubSelect">Select Club:</label>
+      <select id="clubSelect">
+        {clubs?.map(club => (
+          <option key={club.id} value={club.id}>
+            {club.name}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="sportSelect">Select Sport:</label>
+      <select id="sportSelect">
+        {sports?.map(sport => (
+          <option key={sport.id} value={sport.id}>
+            {sport.name}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="locationSelect">Select Location:</label>
+      <select id="locationSelect">
+        {location?.map(location => (
+          <option key={location.id} value={location.id}>
+            {location.name}
+          </option>
+        ))}
+      </select>
+
+
+
             </div>
          <button type="submit" value='enviar'> Create </button>
         </form>
-        <button onClick={setAdmTrue(false)}>x</button>
+        <Link to='/home'><button>x</button></Link>
         </div>
     )
 }

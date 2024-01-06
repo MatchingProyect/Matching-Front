@@ -27,6 +27,7 @@ import { fetchUser } from './redux/reducer.js';
 import { useSelector } from 'react-redux';
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
+import FunctionsAdmin from './views/home/FunctionsAdmin.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ function App() {
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
         <Route path='/user/:id' element={<UserDetail/>} />
         <Route path='clubs/:id' element={<ClubsDetail/>} />
+        <Route path='/functionsAdm' element={<FunctionsAdmin/>} />
         
         <Route path = "*" element = {<Error />} />
       </Routes>

@@ -13,29 +13,29 @@ const AdminFunction = ({court, update, setUpdate}) => {
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        const fetchData = async() =>{
-            try {
-                const {data} = await axios(`/court/${court.id}`)
-                if(data.status){
-                    reset({
-                       name: data.court.name,
-                       description: data.court.description,
-                       priceFee: data.court.priceFee,
-                       warrantyReservation: data.court.warrantyReservation,
-                       grassType: data.court.grassType,
-                       lighting: data.court.lighting,
-                       doorsType: data.court.doorsType,wallsType: data.court.wallsType,
-                       reputation: data.court.reputation
-                    })
-                }
+    // useEffect(()=>{
+    //     const fetchData = async() =>{
+    //         try {
+    //             const {data} = await axios(`/court/${court.id}`)
+    //             if(data.status){
+    //                 reset({
+    //                    name: data.court.name,
+    //                    description: data.court.description,
+    //                    priceFee: data.court.priceFee,
+    //                    warrantyReservation: data.court.warrantyReservation,
+    //                    grassType: data.court.grassType,
+    //                    lighting: data.court.lighting,
+    //                    doorsType: data.court.doorsType,wallsType: data.court.wallsType,
+    //                    reputation: data.court.reputation
+    //                 })
+    //             }
              
-            } catch (error) {
-                return error.message
-            }
-            }
-        fetchData()
-    }, [])
+    //         } catch (error) {
+    //             return error.message
+    //         }
+    //         }
+    //     fetchData()
+    // }, [])
 
 
     const onSubmitCourt = async() =>{
