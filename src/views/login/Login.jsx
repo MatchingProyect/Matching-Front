@@ -9,10 +9,10 @@ import {gapi} from 'gapi-script';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
+import GoogleIcon from '@mui/icons-material/Google';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState(""); 
-  const [password, setPassword] = useState(""); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,16 +32,17 @@ const Login = () => {
     gapi.load("client:auth2", start);
   };
 
-
   const handleGoogleLoginClick = () => {
     // Crear un objeto de autenticación de Google
+    console.log("auth2", gapi.auth2)
+
     const auth2 = gapi.auth2.getAuthInstance();
-  
+
+    console.log("auth2", auth2)
     // Iniciar el proceso de inicio de sesión de Google
     auth2.signIn().then(async (googleUser) => {
       console.log('googleUser', googleUser);
       console.log('isSignedIn', auth2.isSignedIn.get());
-
       const profile = googleUser.getBasicProfile();
   
       const user = {
@@ -50,7 +51,6 @@ const Login = () => {
         photoURL: profile.getImageUrl(),
         uid: profile.getId(),
       };
-
       console.log(user)
       // También puedes obtener el token de acceso de Google
       const googleAccessToken = googleUser.xc.access_token;
@@ -58,23 +58,24 @@ const Login = () => {
 
       const result = await authenticateWithFirebase(googleAccessToken);
 
+      console.log("authenticateWithFirebase", result)
 
     }).catch((error) => {
       console.error('Error en el inicio de sesión de Google:', error);
     });
   };
 
+
+
   const authenticateWithFirebase = async (googleAccessToken) => {
     try {
       const auth = getAuth(app);
       const credential = GoogleAuthProvider.credential(null, googleAccessToken);
       const authResult = await signInWithCredential(auth, credential);
-
       // El usuario ha sido autenticado correctamente en Firebase
       console.log("Usuario autenticado en Firebase:");
       await saveUserToFirestore(authResult.user);
-
-      return true;
+      return true
     } catch (error) {
       console.error("Error al autenticar con Firebase:", error);
     }
@@ -82,27 +83,27 @@ const Login = () => {
 
   const saveUserToFirestore = async (user) => {
     const { uid, email, displayName } = user;
-
+  
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
-
+  
     try {
+      // Verificar si el usuario ya existe en Firestore
       const userSnapshot = await getDoc(userRef);
-
+  
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
         navigate("/home");
       } else {
+        // El usuario no existe, así que procedemos a guardarlo
         await setDoc(userRef, {
           email: email,
           displayName: displayName,
         });
-
-        onRegister({
+        onRegister ({
           email: email,
           displayName: displayName,
-        });
-
+        })
         console.log('Usuario guardado en Firestore con éxito');
       }
     } catch (error) {
@@ -127,12 +128,10 @@ const Login = () => {
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
-      console.log("onSubmit")
+  
       if (response.data) {
         const id = response.data.id
-        console.log("onSubmit")
         if (id) dispatch(fetchUser(id))
-        
         localStorage.setItem('userData', JSON.stringify(response.data));
   
         localStorage.setItem('currentPath', "/home");
@@ -155,6 +154,10 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const responseGoogle = () => {
+    console.log("onSuccess");
+    handleGoogleLoginClick()
+  };
 
   return (
     <div className={styles.allContainer}>
@@ -247,20 +250,23 @@ const Login = () => {
           INICIAR SESION
         </button>
 
-
-        <button
-          type="button"
-          onClick={handleGoogleLoginClick}
-          className={styles.googleLoginButton}
-        >
-          INICIAR SESION CON GOOGLE
-        </button>
-
+        <div className={styles.containerGoogle }>
+          <button
+            type="button"
+            onClick={handleGoogleLoginClick}
+            className={styles.submitButton }
+          >
+          <div className={styles.textGoogle }>
+              <div className={styles.iconGoogle }><GoogleIcon></GoogleIcon></div>
+              Iniciar sesión con Google
+            </div>
+          </button>
+        </div>
 
         <div className={styles.container}>
           <p className={styles.registerText}>
             ¿No tienes cuenta? <br />
-            <Link to="/registro" className={styles.registerLink}>
+            <Link to="/registro" className={styles.registerLink }>
               Regístrate
             </Link>
           </p>

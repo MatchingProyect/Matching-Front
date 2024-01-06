@@ -23,14 +23,14 @@ export default function Home() {
     const [actualPageUsers, setActualPageUsers] = useState(1);
     const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
-    
-    
-  
-     const users = useSelector((state) => state.user.allUsers);
-     const userLogeado =useSelector((state) =>state.user.user.user)
+
+
+
+    const users = useSelector((state) => state.user.allUsers);
+    const userLogeado = useSelector((state) => state.user.user.user)
     const sports = useSelector((state) => state.user.allSports);
-     const clubs = useSelector((state) => state.user.allClubs);
-     const courts = useSelector((state) => state.user.allCourts);
+    const clubs = useSelector((state) => state.user.allClubs);
+    const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
 
     const logout = async () => {
@@ -43,7 +43,7 @@ export default function Home() {
             throw error.message
         }
     };
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(fetchUser())
         dispatch(fetchUsers())
         dispatch(fetchClubs());
@@ -78,7 +78,7 @@ export default function Home() {
 
 
     return (
-       
+
         <div className={styles.containerHome}>
             {
                 userLogeado?.admin ?  <Link to='/functionsAdm'><button >admin</button></Link> : null
@@ -91,13 +91,13 @@ export default function Home() {
                 </div></Link>
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
                 <button onClick={logout}>Log Out</button>
-                
+
             </div>
-            <div className = {styles.friendsContainer}>
-            <FriendsContainer friends = {users}/>
+            <div className={styles.friendsContainer}>
+                <FriendsContainer friends={users} />
             </div>
-            <div className = {styles.divCourts}>
-                <h2 className = {styles.courtsTitle}>Campos</h2>
+            <div className={styles.divCourts}>
+                <h2 className={styles.courtsTitle}>Campos</h2>
                 {
   courts
     ?.filter(court => court.estado === true)
@@ -120,17 +120,17 @@ export default function Home() {
     ))
 }            
             </div>
-            <div className = {styles.reservationsContainer}>
-                <CardReservation reservations = {reservations} />
+            <div className={styles.reservationsContainer}>
+                <CardReservation reservations={reservations} />
             </div>
-                <div className = {styles.userContainer}>
+            <div className={styles.userContainer}>
                 {
-  users?.filter(user => user.estado === true && user.id !== userLogeado?.id) 
-    .map(filteredUser => (
-      <CardUser key={filteredUser.id} user={filteredUser} /> 
-    ))
-}
-                </div>
+                    users?.filter(user => user.estado === true && user.id !== userLogeado?.id)
+                        .map(filteredUser => (
+                            <CardUser key={filteredUser.id} user={filteredUser} />
+                        ))
+                }
+            </div>
             <NavbarLow />
         </div>
     );
