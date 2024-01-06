@@ -36,8 +36,9 @@ export default function Home() {
     const logout = async () => {
         try {
         const endpoint= "/logout"
-        await axios.post(endpoint)
-        console.log(123);
+        const response = await axios.post(endpoint)
+        console.log("logout",response)
+        return response
         } catch (error) {
             throw error.message
         }

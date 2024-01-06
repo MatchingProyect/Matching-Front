@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect,  } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux'; 
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers } from './redux/reducer';
 import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro';
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
@@ -24,32 +23,23 @@ import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePass
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
 import { fetchUser } from './redux/reducer.js';
-import { useSelector } from 'react-redux';
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector(state => state.user); // Ajusta esto según tu estructura de estado
+
   const storedUserData = localStorage.getItem('userData');
-  console.log("storedUserData", storedUserData)
   if (storedUserData) {
-    console.log("Apppppp")
     const storedUser = JSON.parse(storedUserData);
     console.log("storedUser",storedUser)
-    // storedUser?dispatch(fetchUser(storedUser.id)) : null ;
   }
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
-    console.log("storedUserData", user)
     if (storedUserData) {
       const storedUser = JSON.parse(storedUserData);
-  
-      // Verifica si el usuario ya está en el estado global de Redux
-      // Si no está, realiza una acción para cargarlo
-      if (!user && storedUser.id) {
+      if (storedUser.id) {
         dispatch(fetchUser(storedUser.id));
       }
     }
