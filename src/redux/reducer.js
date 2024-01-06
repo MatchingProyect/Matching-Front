@@ -48,7 +48,7 @@ export const fetchUser = (id) => async (dispatch) => {
     try {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
-        dispatch(setUser(data.userFound));
+        // dispatch(setUser(data.userFound));
         return data.userFound; // Devuelve el usuario recuperado
       }
     } catch (error) {
