@@ -23,7 +23,6 @@ export const QuestionTwo = () => {
             birthday: date,
             questionsAnsker: true
         })
-        alert('Fecha Guardada');
     }
 
   return (
