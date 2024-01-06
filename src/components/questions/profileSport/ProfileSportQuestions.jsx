@@ -4,38 +4,76 @@ import { useUserContext } from '../../../context/UserProvider';
 import CardSport from '../card-sport/CardSport';
 import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styles from './ProfileSportQuestion.module.css';
+import { Link, useNavigate } from "react-router-dom";
 
 const ProfileSportQuestions = () => {
     
-    const { datosUser,setDatosUser } = useUserContext();
-    const [ valuesSelect,setValuesSelect ] = useState({
+    const datosUser = useUserContext();
+    const [valuesSelect, setValuesSelect] = useState({
         horario: '',
-        dias: ''
+        dias: '',
+        lateralidad: '',
+        ladoCancha: '',
+        tipoJuego: '',
+        categoria: ''    
     });
 
-    const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
-    const handleChange = ( event ) => {
+    const navigate = useNavigate();
+
+    const handleAnswerClick = (question, answer) => {
+        console.log("handleAnswerClick")
         setValuesSelect({
             ...valuesSelect,
-            [ event.target.name ]: event.target.value
-        })
+            [question]: answer,
+        });
+    };
+
+    
+    const handleChange = (event) => {
+        setValuesSelect({
+            ...valuesSelect,
+            [event.target.name]: event.target.value,
+        });
+        console.log("datosUser",datosUser)
+    };
+
+
+
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post(`/profiles`,{
+                laterality: valuesSelect.lateralidad,
+                courtSide: valuesSelect.ladoCancha,
+                matchType: valuesSelect.tipoJuego,
+                dayPreference: valuesSelect.dias,
+                timePreference: valuesSelect.horario,
+                categoryLvl: valuesSelect.categoria,
+                UserId: datosUser.datosUser.id
+        });
+            console.log('Profile creado:', response.data );
+            navigate("/home");
+
+
+
+        } catch (error) {
+            console.error('Error al hacer el POST:', error );
+        }
     }
 
+    const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
+
     useEffect(() => {
-        const { nombreApellido,area,birthday,email,gender,location,pass,phone,sport } = datosUser; 
-        const nombreSplit = nombreApellido.split(' ');
-        const nombre = nombreSplit[0];
-        const apellido = nombreSplit[1];
+        const { nombreApellido,birthday,email,gender,location,phone, id } = datosUser; 
+
         const postUser = async () => {
             try {
-                const response = await axios.post('/users',{
-                    name: nombre,
-                    lastName: apellido,
+                const response = await axios.put(`/users/${id}`,{
+                    displayName: nombreApellido,
                     gender,
                     dayBirth: birthday,
                     email,
                     phone: phone,
-                    password: pass,
                     description: location
             });
 
@@ -46,7 +84,7 @@ const ProfileSportQuestions = () => {
         }
 
         postUser();
-    }, [])
+    }, [datosUser])
     
 
   return (
@@ -70,33 +108,99 @@ const ProfileSportQuestions = () => {
             <div className={ styles.contentQuestions }>
                 <p className={ styles.pQuestions } >¿Cuál es tu lateralidad?</p>
                 <div className={ styles.contentAnswers }>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Diestro</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Zurdo</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Ambas</Button>
+                    <Button  sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.lateralidad === 'Diestro' && _styled.selectedButton),
+                            }} variant="outlined" onClick={() => handleAnswerClick('lateralidad', 'Diestro')}>
+                        Diestro
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.lateralidad === 'Zurdo' && _styled.selectedButton),
+                            }}  variant="outlined" onClick={() => handleAnswerClick('lateralidad', 'Zurdo')}>
+                        Zurdo
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.lateralidad === 'Ambas' && _styled.selectedButton),
+                            }}  variant="outlined" onClick={() => handleAnswerClick('lateralidad', 'Ambas')}>
+                        Ambas
+                    </Button>
                 </div>
                 <p className={ styles.pQuestions } >¿Tu lado de la cancha?</p>
                 <div className={ styles.contentAnswers }>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Reves</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Derecho</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Ambas</Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.ladoCancha === 'Reves' && _styled.selectedButton),
+                            }}  variant="outlined" onClick={() => handleAnswerClick('ladoCancha', 'Reves')}>
+                        Reves
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.ladoCancha === 'Derecho' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('ladoCancha', 'Derecho')}>
+                        Derecho
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.ladoCancha === 'Ambas' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('ladoCancha', 'Ambas')}>
+                        Ambas
+                    </Button>
+
                 </div>
                 <p className={ styles.pQuestions } >¿Tipo de juego?</p>
                 <div className={ styles.contentAnswers }>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Competitivo</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Amistoso</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Ambas</Button>
+                <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.tipoJuego === 'Competitivo' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('tipoJuego', 'Competitivo')}>
+                    Competitivo
+                </Button>
+                <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.tipoJuego === 'Amistoso' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('tipoJuego', 'Amistoso')}>
+                    Amistoso
+                </Button>
+                <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.tipoJuego === 'Ambas' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('tipoJuego', 'Ambas')}>
+                    Ambas
+                </Button>
+                    
                 </div>
                 <p className={ styles.pQuestions } >¿A que categoria perteneces?</p>
                 <div className={ styles.contentAnswers }>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Principiante</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Intermedio</Button>
-                    <Button sx={ { ..._styled.buttons } } variant='outlined'>Avanzado</Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.categoria === 'Principiante' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('categoria', 'Principiante')}>
+                        Principiante
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.categoria === 'Intermedio' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('categoria', 'Intermedio')}>
+                        Intermedio
+                    </Button>
+                    <Button sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.categoria === 'Avanzado' && _styled.selectedButton),
+                            }}   variant="outlined" onClick={() => handleAnswerClick('categoria', 'Avanzado')}>
+                        Avanzado
+                    </Button>
                 </div>
                 <p className={ styles.pQuestions } >¿Horario de juego preferido?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
-                        <InputLabel sx={ { ..._styled.inputLabel } } id='selectHorario' >Horario</InputLabel>
-                        <Select sx={ { ..._styled.select } } name={ 'horario' } onChange={ handleChange } value={ valuesSelect.horario } labelId='selectHorario' label='Selecciona'>
+                        <InputLabel sx={{
+                                ..._styled.buttons}}  id='selectHorario' >Horario</InputLabel>
+                        <Select sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.horario && _styled.selectedButton),
+                            }}  name={ 'horario' } onChange={ handleChange } value={ valuesSelect.horario } labelId='selectHorario' label='Selecciona'>
                             <MenuItem value={ 'Mañana' } >Mañana</MenuItem>
                             <MenuItem value={ 'Tarde' } >Tarde</MenuItem>
                             <MenuItem value={ 'Noche' } >Noche</MenuItem>
@@ -106,8 +210,12 @@ const ProfileSportQuestions = () => {
                 <p className={ styles.pQuestions } >¿Que dias prefieres para jugar?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
-                        <InputLabel sx={ { ..._styled.inputLabel } } id='selectDias' >Dias</InputLabel>
-                        <Select sx={ { ..._styled.select } } name={ 'dias' } onChange={ handleChange } value={ valuesSelect.dias } labelId='selectDias' label='Selecciona'>
+                        <InputLabel sx={{
+                                ..._styled.buttons }}  id='selectDias' >Dias</InputLabel>
+                        <Select sx={{
+                                ..._styled.buttons,
+                                ...(valuesSelect.dias  && _styled.selectedButton),
+                            }} name={ 'dias' } onChange={ handleChange } value={ valuesSelect.dias } labelId='selectDias' label='Selecciona'>
                             <MenuItem value={ 'Entre semana' } >Entre semana</MenuItem>
                             <MenuItem value={ 'Fines de semana' } >Fines de semana</MenuItem>
                         </Select>
@@ -115,7 +223,13 @@ const ProfileSportQuestions = () => {
                 </div>
             </div>
             <div className={ styles.contentSubmit }>
-                <Button sx={ { ..._styled.submit } } variant='contained'>Siguiente</Button>
+            <Button
+                        sx={{ ..._styled.submit }}
+                        variant="contained"
+                        onClick={handleSubmit}
+                    >
+                Siguiente
+            </Button>
             </div>
         </Container>
     </>
@@ -153,7 +267,11 @@ const _styled = {
     },
     inputLabel: {
         color: '#676666'
-    }
+    },
+
+    selectedButton: {
+        border: '1px solid #1976d2',
+    },
 }
 
 export default ProfileSportQuestions

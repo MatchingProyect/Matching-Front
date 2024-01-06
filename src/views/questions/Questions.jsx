@@ -12,15 +12,16 @@ const Questions = () => {
     const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
     const user = useSelector(state => state.user.user); 
-    console.log("user",user)
-
 
     useEffect(() => {
-        if (user.email)
+        if (user)
         setDatosUser({
             ...datosUser,
             email: user?.user?.email,
-            nombreApellido: user?.user?.displayName
+            nombreApellido: user?.user?.displayName,
+            pass: user?.user?.password,
+            id: user?.user?.id,
+
         })
 
 
