@@ -10,7 +10,6 @@ import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth
 import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 import GoogleIcon from '@mui/icons-material/Google';
-import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
 

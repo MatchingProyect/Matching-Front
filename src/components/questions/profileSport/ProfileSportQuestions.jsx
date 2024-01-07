@@ -4,7 +4,10 @@ import { useUserContext } from '../../../context/UserProvider';
 import CardSport from '../card-sport/CardSport';
 import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styles from './ProfileSportQuestion.module.css';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../redux/reducer'; 
+import { useSelector } from 'react-redux';
 
 const ProfileSportQuestions = () => {
     
@@ -17,8 +20,12 @@ const ProfileSportQuestions = () => {
         tipoJuego: '',
         categoria: ''    
     });
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const userLogeado = useSelector((state) => state.user.user);
+
+
 
     const handleAnswerClick = (question, answer) => {
         console.log("handleAnswerClick")
@@ -76,10 +83,18 @@ const ProfileSportQuestions = () => {
                     phone: phone,
                     description: location
                 }
-                console.log("userSend",userSend);
-                const response = await axios.put(`/users/${id}`,userSend);
+                const response = await axios.put(`/users/${id}`,userSend);      
+                console.log('Respuesta del servidor:', response.data );
 
-            console.log('Respuesta del servidor:', response.data );
+                const userDis = { ...userLogeado.user, ...response.data.userUpdated };
+                console.log("userDis",userDis)
+
+                dispatch(setUser({
+                    user: {
+                        ...userDis                    
+                    }
+                }));
+
             } catch (error) {
                 console.error('Error al hacer el POST:', error );
             }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -7,6 +7,7 @@ import { setUser } from '../../redux/reducer';
 import styles from './Registro.module.css';
 import axios from "axios";
 import emailjs from '@emailjs/browser';
+import { fetchUser } from '../../redux/reducer.js';
 
 // El register ya crea los usuarios en la base de datos 
 // Y tambien te manda a questions si es que se hace exitosamente
@@ -16,11 +17,19 @@ const Registro = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const logout = dispatch(fetchUser([null]))
+    if(logout){
+     
+     localStorage.removeItem('userData');
+    }
+}, []);
+
+
   // esto es para ver o no la pass
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
 
   const onSubmit = async ( data ) => {
     try {
@@ -29,7 +38,8 @@ const Registro = () => {
       const result = await axios.post(endpoint, data) 
       if (result) {
         dispatch(setUser({
-          user:result.data.response}));
+          user:result.data.response
+        }));
 
         console.log("register",result)
         navigate("/questions")
