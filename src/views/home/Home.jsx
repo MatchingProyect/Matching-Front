@@ -89,14 +89,14 @@ export default function Home() {
                 <div>
                     <label>Ciudades</label>
                     <select onChange = {courtsFilterByLocations}>
-                        <option diabled = {true}>Ciudades</option>
+                        <option disabled = "true">Ciudades</option>
                         {locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
                 <div>
                     <label>Clubes</label>
                     <select onChange = {courtsFilterByClubs}>
-                        <option disabled = {true}>Clubes</option>
+                        <option disabled = "true">Clubes</option>
                         {clubs.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                     </select>
                 </div>

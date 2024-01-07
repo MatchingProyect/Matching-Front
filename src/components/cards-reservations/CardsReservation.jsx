@@ -6,6 +6,7 @@ import emailjs from '@emailjs/browser';
 
 export default function CardsReservations({ reservations }) {
     let [preferenceId, setPreferenceId] = useState('');
+    console.log(reservations);
 
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
 
@@ -45,7 +46,7 @@ export default function CardsReservations({ reservations }) {
             <h4>{reservations.sport}</h4>
             <p>{reservations.ciudad}</p>
             <p>
-                {reservations.dateTimeStart[1]} - {reservations.dateTimeEnd[1]}
+                {reservations.dateTimeStart} - {reservations.dateTimeEnd}
             </p>
             <p>${reservations.totalCost}</p>
             <button
