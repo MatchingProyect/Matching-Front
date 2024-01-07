@@ -15,14 +15,16 @@ import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReser
 export default function Home() {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.user.allUsers);
-    const userLogeado = useSelector((state) => state.user?.user?.user)
+    const userLogeado = useSelector((state) => state.user?.user?.user);
     const sports = useSelector((state) => state.user.allSports);
     const clubs = useSelector((state) => state.user.allClubs);
     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
     const locations = useSelector((state) => state.user.allLocations);
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    const [filteredCourts, setFilteredCourts] = useState([]);
+    const [filteredClubs, setFilteredClubs] = useState([]);
     
     useEffect(() => {
         dispatch(fetchUsers())
@@ -31,9 +33,9 @@ export default function Home() {
         dispatch(fetchSports());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
-        //dispatch(setFilteredCourts(courts));
-        //dispatch(setFilteredClubs(clubs));
     }, []);
+
+    console.log(userLogeado);
     
 
 
@@ -90,20 +92,24 @@ export default function Home() {
                 <div>
                     <label>Ciudades</label>
                     <select onChange = {courtsFilterByLocations}>
-                        <option disabled = "true">Ciudades</option>
+                        <option disabled >Ciudades</option>
                         {locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
                 <div>
                     <label>Clubes</label>
                     <select onChange = {courtsFilterByClubs}>
-                        <option disabled = "true">Clubes</option>
+                        <option disabled >Clubes</option>
+                        <option>Todos los Clubes</option>
                         {clubs.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                     </select>
                 </div>
                 {
-                    courts
-                        ?.filter(court => court.estado === true)
+                    filteredCourts.length > 0 ? 
+                        filteredCourts.filter(court => court.estado === true)
+                        .map(filteredCourt => (
+                            <CardCourt key={filteredCourt.id} court={filteredCourt} />
+                        )) : courts.filter(court => court.estado === true)
                         .map(filteredCourt => (
                             <CardCourt key={filteredCourt.id} court={filteredCourt} />
                         ))
@@ -122,8 +128,11 @@ export default function Home() {
 
             </div>
                 {
-                    clubs
-                        ?.filter(club => club.estado === true)
+                    filteredClubs.length > 0 ?
+                        filteredClubs.filter(club => club.estado === true)
+                        .map(filteredClub => (
+                            <CardClub key={filteredClub.id} club={filteredClub} />
+                        )) : clubs.filter(club => club.estado === true)
                         .map(filteredClub => (
                             <CardClub key={filteredClub.id} club={filteredClub} />
                         ))
