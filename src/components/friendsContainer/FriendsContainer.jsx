@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 
 export default function FriendsContainer({friends}){
-    console.log(friends);
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
             return (
