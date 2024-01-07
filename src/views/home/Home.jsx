@@ -42,6 +42,7 @@ export default function Home() {
     const logout = () => {
        const logout = dispatch(fetchUser([null]))
        if(logout){
+        
         localStorage.removeItem('userData');
         navigate('/login')
        } 
