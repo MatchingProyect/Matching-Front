@@ -10,7 +10,7 @@ import { fetchUsers } from '../../redux/reducer';
 const CardUser = ({ user }) => {
 
   const idUserQueRecibe = user?.id;
-  const userLogeado = useSelector((state) => state.user.user);
+  const userLogeado = useSelector((state) => state.user?.user?.user);
 
   
   
@@ -18,10 +18,28 @@ const CardUser = ({ user }) => {
 
   const deleteUser = async()=>{
     try {
-      const deleted = await axios.put(`/userEstado/${userLogeado?.id}`, {estado: false});
+      const deleted = await axios.put(`/userEstado/${user?.id}`, {estado: false});
       if(deleted.status)  dispatch(fetchUsers());
     } catch (error) {
       alert(error.message)
+    }
+  }
+
+  const ascenderAAdm = async()=>{
+    try {
+      const usuarioAscendido = await axios.put(`/volverAdm/${user?.id}`, {admin: true})
+      if(usuarioAscendido.status)  dispatch(fetchUsers());
+    } catch (error) {
+      
+    }
+  }
+
+  const activarUser = async() =>{
+    try {
+      const usuarioReactivado = await axios.put(`/userEstado/${user?.id}`, {estado: true})
+      if(usuarioReactivado.status) dispatch(fetchUsers()) 
+    } catch (error) {
+      
     }
   }
 
@@ -40,13 +58,17 @@ const CardUser = ({ user }) => {
      }
   };
 
+  console.log(userLogeado?.admin)
+
   if(userLogeado?.admin){
     return (
-      <div>
-        
-        <button onClick={deleteUser}>Suspender Usuario</button>
+      <div className = {styles.userContainer}>
+        {user.estado === true ?  <button onClick={deleteUser}>Suspender Usuario</button> :  <button onClick={activarUser}>Reactivar Usuario</button>}
        
-        <h2>{userLogeado?.displayName}</h2>
+       <button onClick={ascenderAAdm}>Volver Admin</button>
+        <h2 className = {styles.nameUser}>{user?.displayName}</h2>
+        
+        <img className = {styles.avatarImg} src={user?.avatarImg} alt="" />
         
         
         

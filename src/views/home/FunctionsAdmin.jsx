@@ -94,17 +94,6 @@ const FunctionsAdmin = () => {
       }
     }
 
-    const reactivarUsuario = async(id) =>{
-      try {
-        const deleted = await axios.put(`/usuarioEstado/${id}`, {estado: true});
-        if(deleted.status)  dispatch(fetchUsers());
-      } catch (error) {
-        alert(error.message)
-      }
-    }
-
-
-
 
     return(
 
@@ -115,22 +104,24 @@ const FunctionsAdmin = () => {
                     {usersDeshabilitados === true && users?.filter(user => user.estado === false) 
                       .map(filteredUser => (
                         <div key={filteredUser.id}>
-                        <CardCourt court={filteredUser} />
-                        <button onClick={()=> reactivarUsuario(filteredUser.id)} >Activar Usuario</button>
+                        <CardUser user={filteredUser} />
+                        
+                        
                     </div>
                       ))
                     }
-                    <button onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button>
+                    {usersDeshabilitados === false ? <button onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button> : <button onClick={()=> setUsersDeshabilitados(false)}>ocultar usuarios deshabilitados</button>}
+                    
                 </div>
                 <div>
                 {courtsDeshabilitados === true && courts?.filter(court => court.estado === false) 
                       .map(filteredCourt => (
                           <div key={filteredCourt.id}>
                               <CardCourt court={filteredCourt} />
-                              <button onClick={()=> reactivarCourt(filteredCourt.id)} >Activar Court</button>
+                              
                           </div>
                 ))}
-                    <button onClick={()=> setCourtsDeshabilitados(true)}>Mostrar canchas deshabilitadas</button>
+                    {courtsDeshabilitados === false ? <button onClick={()=> setCourtsDeshabilitados(true)}>Mostrar courts deshabilitados</button> : <button onClick={()=> setCourtsDeshabilitados(false)}>ocultar courts deshabilitados</button>}
                 </div>
                 <div>
                 {clubDeshabilitados === true && clubs?.filter(club => club.estado === false) 
@@ -140,7 +131,7 @@ const FunctionsAdmin = () => {
                               <button onClick={()=> reactivarClub(filteredClub.id)} >Activar Club</button>
                           </div>
                 ))}
-                    <button onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubes deshabilitados</button>
+                    {clubDeshabilitados === false ? <button onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubs deshabilitados</button> : <button onClick={()=> setClubsDeshabilitados(false)}>ocultar clubs deshabilitados</button>}
                 </div>
             </div>
         <form onSubmit={handleSubmit(onSubmitSports)}>
