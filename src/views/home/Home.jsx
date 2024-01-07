@@ -5,7 +5,7 @@ import FriendsContainer from '../../components/friendsContainer/FriendsContainer
 import CardClub from '../cardClubs/CardClub';
 import CardCourt from '../cardCourt/CardCourt';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ export default function Home() {
     const [actualPageCourts, setActualPageCourts] = useState(1);
     const [actualPageClubs, setActualPageClubs] = useState(1);
 
-
+    const navigate = useNavigate()
 
     const users = useSelector((state) => state.user.allUsers);
     const userLogeado = useSelector((state) => state.user.user.user)
@@ -33,15 +33,9 @@ export default function Home() {
     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
 
-    const logout = async () => {
-        try {
-        const endpoint= "/logout"
-        const response = await axios.post(endpoint)
-        console.log("logout",response)
-        return response
-        } catch (error) {
-            throw error.message
-        }
+    const logout = () => {
+       const logout = dispatch(fetchUser([]))
+       if(logout) navigate('/login')
     };
     useEffect(() => {
         dispatch(fetchUser())
