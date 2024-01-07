@@ -10,17 +10,17 @@ import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
-import FunctionsAdmin from './FunctionsAdmin.jsx';
-import axios from 'axios';
+
 
 export default function Home() {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.user.allUsers);
-    const userLogeado = useSelector((state) => state.user.user.user)
+    const userLogeado = useSelector((state) => state.user?.user?.user)
     const sports = useSelector((state) => state.user.allSports);
     const clubs = useSelector((state) => state.user.allClubs);
     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
+    const locations = useSelector((state) => state.user.allLocations);
 
     const navigate = useNavigate()
     
@@ -31,15 +31,18 @@ export default function Home() {
         dispatch(fetchSports());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
-        setFilteredCourts(courts);
-        setFilteredClubs(clubs);
+        //dispatch(setFilteredCourts(courts));
+        //dispatch(setFilteredClubs(clubs));
     }, []);
     
 
 
     const logout = () => {
-       const logout = dispatch(fetchUser([]))
-       if(logout) navigate('/login')
+       const logout = dispatch(fetchUser([null]))
+       if(logout){
+        localStorage.removeItem('userData');
+        navigate('/login')
+       } 
     };
 
 
@@ -99,7 +102,7 @@ export default function Home() {
                     </select>
                 </div>
                 {
-                    filteredCourts
+                    courts
                         ?.filter(court => court.estado === true)
                         .map(filteredCourt => (
                             <CardCourt key={filteredCourt.id} court={filteredCourt} />
@@ -119,7 +122,7 @@ export default function Home() {
 
             </div>
                 {
-                    filteredClubs
+                    clubs
                         ?.filter(club => club.estado === true)
                         .map(filteredClub => (
                             <CardClub key={filteredClub.id} club={filteredClub} />

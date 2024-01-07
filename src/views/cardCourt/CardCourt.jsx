@@ -12,7 +12,7 @@ const CardCourt = ({ court }) => {
   const [update, setUpdate] = useState(false);
   const [detail, setDetail] = useState(false);
 
-  const userLogeado = useSelector((state) => state.user.user.user);
+  const userLogeado = useSelector((state) => state.user?.user?.user);
   const dispatch = useDispatch();
 
   
