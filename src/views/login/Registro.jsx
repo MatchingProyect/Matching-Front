@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { useUserContext } from "../../context/UserProvider";
 import styles from './Registro.module.css';
 import axios from "axios";
+import emailjs from '@emailjs/browser';
 
 // El register ya crea los usuarios en la base de datos 
 // Y tambien te manda a questions si es que se hace exitosamente
@@ -35,6 +36,28 @@ const Registro = () => {
       const result = await axios.post(endpoint, data) 
       if (result) {
         navigate("/questions")
+        
+        const defaultValues = {
+          user_name: `${data.nombreApellido}`,
+          user_email: `${data.email}`,
+          message:
+              `${data.nombreApellido},
+              
+              Bienvenido a Proyect Matching!
+              Hemos visto que te has registrado exitosamente a nuestra aplicación.
+              Esperamos que puedas disfrutar de tus partidos y sacarle el máximo provecho al sistema que hemos implementado!`,
+      };
+
+      emailjs
+          .send('service_dfonkqh', 'template_j9l4qgp', defaultValues, 'AOct4aYGtYkYpPDCn')
+          .then(
+              (result) => {
+                  console.log(result.text);
+              },
+              (error) => {
+                  console.log(error.text);
+              }
+          );
       }
       // console.log(data)
     } catch (error) {

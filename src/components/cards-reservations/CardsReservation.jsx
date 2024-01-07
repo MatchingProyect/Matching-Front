@@ -3,9 +3,15 @@ import styles from './CardsReservation.module.css';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import emailjs from '@emailjs/browser';
+import { useSelector } from 'react-redux';
 
 export default function CardsReservations({ reservations }) {
+
+    const userLogeado = useSelector((state) => state.user?.user?.user);
+    console.log(userLogeado.displayName)
+
     let [preferenceId, setPreferenceId] = useState('');
+
 
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
 
@@ -21,10 +27,14 @@ export default function CardsReservations({ reservations }) {
 
     const sendEmail = () => {
         const defaultValues = {
-            user_name: 'Lucas',
-            user_email: 'mellalucas.v@gmail.com',
+            user_name: `${userLogeado.displayName}`,
+            user_email: `${userLogeado.email}`,
             message:
-                'Hemos detectado que quieres realizar una reserva. Al completarse el pago, verás en tu bandeja de entrada la información del mismo.',
+                `${userLogeado.displayName},
+                
+                Hemos detectado que quieres realizar una reserva de una cancha.
+                Al completarse el pago, verás reflejada en tu bandeja de entrada la información del mismo.
+                Muchas gracias!`,
         };
 
         emailjs
