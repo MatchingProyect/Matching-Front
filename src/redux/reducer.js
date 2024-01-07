@@ -21,6 +21,7 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action) => {
         state.allLocations = action.payload
+        console.log(state.user);
        },
        setSports: (state, action)=>{
         state.allSports = action.payload
