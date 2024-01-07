@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
 import { fetchCourts } from '../../redux/reducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 const AdminFunction = ({court, update, setUpdate}) => {
+
+  
+    const sports = useSelector((state) => state.user.allSports);
+     const clubs = useSelector((state) => state.user.allClubs);
+     const location = useSelector((state) => state.user.allLocations)
+    
     const {
         handleSubmit,
         formState: { errors },
@@ -12,6 +18,8 @@ const AdminFunction = ({court, update, setUpdate}) => {
     } = useForm();
 
     const dispatch = useDispatch();
+
+    
 
     // useEffect(()=>{
     //     const fetchData = async() =>{
@@ -37,10 +45,12 @@ const AdminFunction = ({court, update, setUpdate}) => {
     //     fetchData()
     // }, [])
 
+   
+
 
     const onSubmitCourt = async() =>{
         try {
-            const endPoint =  `/court/${club.id}`
+            const endPoint =  `/court/${court.id}`
             const response = await axios.put(endPoint, data)
             if(response.status){
                 dispatch(fetchCourts())
@@ -98,6 +108,34 @@ const AdminFunction = ({court, update, setUpdate}) => {
         <input type="text" {...register('reputation', {required: true, maxLength: 20})}/>
         {errors.name?.type === "required" && <p>This field is required</p>}
         {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+
+
+        <label htmlFor="clubSelect">Select Club:</label>
+      <select id="clubSelect">
+        {clubs?.map(club => (
+          <option key={club.id} value={club.id}>
+            {club.name}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="sportSelect">Select Sport:</label>
+      <select id="sportSelect">
+        {sports?.map(sport => (
+          <option key={sport.id} value={sport.id}>
+            {sport.name}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="locationSelect">Select Location:</label>
+      <select id="locationSelect">
+        {location?.map(location => (
+          <option key={location.id} value={location.id}>
+            {location.name}
+          </option>
+        ))}
+      </select>
     </div>
  <button type="submit" value='enviar'> Create </button>
 </form>
