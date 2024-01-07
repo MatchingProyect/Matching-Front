@@ -43,6 +43,9 @@ export const userSlice = createSlice({
        setReservations: (state, action) => {
         state.allReservations = action.payload;
        },
+       setLocations: (state, action) => {
+        state.allReservations = action.payload;
+       },
     },
 });
 
@@ -116,6 +119,16 @@ export const fetchSports = ()=>async(dispatch)=>{
         throw error.message
     }
 }
+
+export const fetchLocations = ()=>async(dispatch)=>{
+    try {
+        const {data} = await axios('/locations')
+        if(data.status) dispatch(setLocations(data.allLocations))
+    } catch (error) {
+        throw error.message
+    }
+}
+
 export const fetchCourts = ()=>async(dispatch)=>{
     try {
         const {data} = await axios('/courts')
