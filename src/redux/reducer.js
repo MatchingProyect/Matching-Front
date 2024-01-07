@@ -19,10 +19,6 @@ export const userSlice = createSlice({
        setUsers: (state, action) =>{
         state.allUsers = action.payload
        },
-       setLocations: (state, action) => {
-        state.allLocations = action.payload
-        console.log(state.user);
-       },
        setSports: (state, action)=>{
         state.allSports = action.payload
        },
@@ -36,7 +32,12 @@ export const userSlice = createSlice({
         state.allProfiles = action.payload
        },
        setFriends: (state, action) => {
-        state.allFriends = action.payload;
+        let result = state.allFriends?.find((element) => element.id == action.payload.id);
+        if(result == undefined){
+            state.allFriends.push(action.payload);
+        } else {
+            return state.allFriends;
+        };
        },
        setUser: (state, action) =>{
         state.user = action.payload
@@ -69,8 +70,8 @@ export const fetchReservations = ()=>async(dispatch)=>{
         if(data.status) dispatch(setReservations(data.allReservations))
     } catch (error) {
         throw error.message
-    }
-}
+    };
+};
 
 export const fetchProfiles = ()=>async(dispatch)=>{
     try {
@@ -89,17 +90,17 @@ export const fetchUsers = ()=>async(dispatch)=>{
         }
     } catch (error) {
         throw error.message
-    }
-}
+    };
+};
 
-export const fetchFriends = () => async(dispatch) => {
+export const fetchFriends = (id) => async(dispatch) => {
     try {
-        const {data} = await axios('/users')
-       if(data.status) dispatch(setFriends(data.allUsers))
+        const {data} = await axios(`/users/${id}`)
+       if(data.status) dispatch(setFriends(data.userFound.user))
    } catch (error) {
        throw error.message
-   }
-}
+   };
+};
 
 export const fetchSports = ()=>async(dispatch)=>{
     try {

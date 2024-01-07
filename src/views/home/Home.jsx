@@ -9,36 +9,35 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, fetchFriends } from '../../redux/reducer.js';
 
 
 export default function Home() {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.user.allUsers);
-    const userLogeado = useSelector((state) => state.user?.user?.user);
-    const sports = useSelector((state) => state.user.allSports);
-    const clubs = useSelector((state) => state.user.allClubs);
-    const courts = useSelector((state) => state.user.allCourts);
-    const reservations = useSelector((state) => state.user.allReservations);
-    const locations = useSelector((state) => state.user.allLocations);
-    const navigate = useNavigate();
-
-    const [filteredCourts, setFilteredCourts] = useState([]);
-    const [filteredClubs, setFilteredClubs] = useState([]);
-    
     useEffect(() => {
         dispatch(fetchUsers())
         dispatch(fetchClubs());
         dispatch(fetchCourts());
-        dispatch(fetchSports());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
-    }, []);
+    },[]);
 
-    console.log(userLogeado);
+    const users = useSelector((state) => state.user.allUsers);
+    const clubs = useSelector((state) => state.user.allClubs);
+    const courts = useSelector((state) => state.user.allCourts);
+    const reservations = useSelector((state) => state.user.allReservations);
+    const locations = useSelector((state) => state.user.allLocations);
+    const estadoFriends = useSelector((state) => state.user.allFriends);
+    const friends = useSelector(state => state.user?.user?.friends);
+    const userLogeado = useSelector(state =>  state.user?.user?.user);
+
+    friends?.map((element) => element.FriendId).forEach((element) => dispatch(fetchFriends(element)));
     
+    const [filteredCourts, setFilteredCourts] = useState([]);
+    const [filteredClubs, setFilteredClubs] = useState([]);
 
 
+    const navigate = useNavigate();
     const logout = () => {
        const logout = dispatch(fetchUser([null]))
        if(logout){
@@ -46,8 +45,6 @@ export default function Home() {
         navigate('/login')
        } 
     };
-
-
 
   const courtsFilterByLocations = function(event){
     let value = event.target.value;
@@ -68,6 +65,9 @@ export default function Home() {
   };
 
 
+
+
+
     return (
 
         <div className={styles.containerHome}>
@@ -85,7 +85,7 @@ export default function Home() {
 
             </div>
             <div className={styles.friendsContainer}>
-                <FriendsContainer friends={users} />
+                <FriendsContainer friends={estadoFriends} />
             </div>
             <div className={styles.divCourts}>
                 <h2 className={styles.courtsTitle}>Campos</h2>
@@ -122,7 +122,7 @@ export default function Home() {
                     <select onChange = {clubsFilterByLocations}>
                         <option disabled>Ciudades</option>
                         <option>Todos los Clubs</option>
-                        {locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
+                        {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
 

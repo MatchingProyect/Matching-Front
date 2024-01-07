@@ -6,13 +6,8 @@ import emailjs from '@emailjs/browser';
 import { useSelector } from 'react-redux';
 
 export default function CardsReservations({ reservations }) {
-
     const userLogeado = useSelector((state) => state.user?.user?.user);
-    console.log(userLogeado.displayName)
-
     let [preferenceId, setPreferenceId] = useState('');
-
-
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
 
     const createOrder = async (idReservation) => {
