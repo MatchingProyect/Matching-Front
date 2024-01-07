@@ -64,18 +64,20 @@ const ProfileSportQuestions = () => {
     const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
 
     useEffect(() => {
-        const { nombreApellido,birthday,email,gender,location,phone, id } = datosUser; 
+        const { nombreApellido,birthday,email,gender,location,phone, id } = datosUser.datosUser; 
 
         const postUser = async () => {
             try {
-                const response = await axios.put(`/users/${id}`,{
+                const userSend = {
                     displayName: nombreApellido,
                     gender,
                     dayBirth: birthday,
                     email,
                     phone: phone,
                     description: location
-            });
+                }
+                console.log("userSend",userSend);
+                const response = await axios.put(`/users/${id}`,userSend);
 
             console.log('Respuesta del servidor:', response.data );
             } catch (error) {
