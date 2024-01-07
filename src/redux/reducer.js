@@ -49,17 +49,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const fetchLocations = () => async (dispatch) => {
-    try {
-      const { data } = await axios(`/locations`);
-      if (data.status) {
-        dispatch(setLocations(data.allLocations));
-        return data.allLocations;
-      }
-    } catch (error) {
-        throw error.message;
-    }
-  };
 
 export const fetchUser = (id) => async (dispatch) => {
     try {
