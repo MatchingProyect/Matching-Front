@@ -15,7 +15,6 @@ import axios from 'axios';
 
 export default function Home() {
     const dispatch = useDispatch();
-
     const users = useSelector((state) => state.user.allUsers);
     const userLogeado = useSelector((state) => state.user.user.user)
     const sports = useSelector((state) => state.user.allSports);
@@ -23,8 +22,9 @@ export default function Home() {
     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
     const locations = useSelector((state) => state.user.allLocations);
+
     let [filteredCourts, setFilteredCourts] = useState(courts);
-    console.log(locations);
+    let [filteredClubs, setFilteredClubs] = useState(clubs);
 
     useEffect(() => {
         dispatch(fetchUsers())
@@ -34,6 +34,7 @@ export default function Home() {
         dispatch(fetchLocations());
         dispatch(fetchReservations());
         setFilteredCourts(courts);
+        setFilteredClubs(clubs);
     }, []);
     
 
@@ -49,22 +50,25 @@ export default function Home() {
         }
     };
 
+
+
   const courtsFilterByLocations = function(event){
     let value = event.target.value;
     let courtsFilteredByLocations = courts.filter((element) => element.LocationId == value);
     return setFilteredCourts(courtsFilteredByLocations);
-  }
+  };
 
   const courtsFilterByClubs = function(event){
     let value = event.target.value;
     let courtsFilteredByClubs = courts.filter((element) => element.ClubId == value);
     return setFilteredCourts(courtsFilteredByClubs);
-  }
+  };
 
   const clubsFilterByLocations = function(event){
     let value = event.target.value;
-    console.log(clubs);
-  }
+    let clubsFilteredByLocations = clubs.filter((element) => element.LocationId == value);
+    return setFilteredClubs(clubsFilteredByLocations);
+  };
 
 
     return (
@@ -116,13 +120,14 @@ export default function Home() {
                     <label>Ciudades</label>
                     <select onChange = {clubsFilterByLocations}>
                         <option disabled>Ciudades</option>
+                        <option>Todos los Clubs</option>
                         {locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
 
             </div>
                 {
-                    clubs
+                    filteredClubs
                         ?.filter(club => club.estado === true)
                         .map(filteredClub => (
                             <CardClub key={filteredClub.id} club={filteredClub} />
