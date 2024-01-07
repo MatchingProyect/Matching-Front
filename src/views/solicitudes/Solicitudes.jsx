@@ -66,7 +66,7 @@ const Solicitudes = () => {
         }
     };
 
-    const rechazarAmigo = async () => {
+    const rechazarAmigo = async (friend, user) => {
         try {
             await axios.post('/addFriend', {
                 FriendId: friend,
