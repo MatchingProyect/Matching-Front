@@ -44,7 +44,7 @@ export const userSlice = createSlice({
         state.allReservations = action.payload;
        },
        setLocations: (state, action) => {
-        state.allReservations = action.payload;
+        state.allLocations = action.payload;
        },
     },
 });

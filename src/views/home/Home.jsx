@@ -24,6 +24,7 @@ export default function Home() {
     const reservations = useSelector((state) => state.user.allReservations);
     const locations = useSelector((state) => state.user.allLocations);
     let [filteredCourts, setFilteredCourts] = useState(courts);
+    console.log(locations);
 
     useEffect(() => {
         dispatch(fetchUsers())
@@ -32,6 +33,7 @@ export default function Home() {
         dispatch(fetchSports());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
+        setFilteredCourts(courts);
     }, []);
     
 
