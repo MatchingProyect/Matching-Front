@@ -35,20 +35,13 @@ const FunctionsAdmin = () => {
 
     if(!userLogeado?.admin) return null
 
-    
-
-    
-
     const onSubmitSports = async (data) => {
         try {
             const endPoint = '/sports'
             const response = await axios.post(endPoint, data)
             if (response.status) {
                  dispatch(fetchSports());
-            }
-
-            
-            
+            }            
         } catch (error) {
             throw error.message;
         }
