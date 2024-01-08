@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import AdminFunction from './AdminFunction';
 import DetailCourt from './DetailCourt';
 import axios from 'axios';
-import CrearReserva from '../reserva/CrearReserva';
 
 const CardCourt = ({ court }) => {
   const [reserva, setReserva] = useState(false);
