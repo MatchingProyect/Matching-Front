@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import CardClub from "../cardClubs/CardClub";
 import CardCourt from "../cardCourt/CardCourt";
 import { fetchCourts, fetchUsers } from "../../redux/reducer";
+import CrearSport from "../../components/crearSport/CrearSport";
+import CrearClub from "../../components/crearClub/CrearClub";
+import CrearCourts from "../../components/crearCourts/CrearCourts";
 
 const FunctionsAdmin = () => {
 
@@ -15,6 +18,9 @@ const FunctionsAdmin = () => {
     const [usersDeshabilitados, setUsersDeshabilitados] = useState(false)
     const [clubDeshabilitados, setClubsDeshabilitados] = useState(false)
     const [courtsDeshabilitados, setCourtsDeshabilitados] = useState(false)
+    const [crearSport, setCrearSport] = useState(false)
+    const [crearClub, setCrearClub] = useState(false)
+    const [crearCourt, setCrearCourt] = useState(false)
    
 
     const {
@@ -35,46 +41,12 @@ const FunctionsAdmin = () => {
 
     if(!userLogeado?.admin) return null
 
-    const onSubmitSports = async (data) => {
-        try {
-            const endPoint = '/sports'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchSports());
-            }            
-        } catch (error) {
-            throw error.message;
-        }
-    }
+    
 
-    const onSubmitClubs = async (data) => {
-        try {
-            const endPoint = '/clubs'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchClubs());
-            }
-           
-        } catch (error) {
-            throw error.message;
-        }
-    }
+    
 
 
-    const onSubmitCourts = async (data) => {
-        try {
-            const endPoint = '/courts'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchCourts());
-            }
-
-            
-            
-        } catch (error) {
-            throw error.message;
-        }
-    }
+   
 
     const reactivarClub = async(id) =>{
       try {
@@ -134,126 +106,20 @@ const FunctionsAdmin = () => {
                     {clubDeshabilitados === false ? <button onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubs deshabilitados</button> : <button onClick={()=> setClubsDeshabilitados(false)}>ocultar clubs deshabilitados</button>}
                 </div>
             </div>
-        <form onSubmit={handleSubmit(onSubmitSports)}>
-            <div>
-                <label>Name:</label>
-                <input type="text" {...register('name', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-            </div>
-         <button type="submit" value='enviar'> Create </button>
-        </form>
+      <button onClick={()=> setCrearSport(true)}>crear Sport</button>
+      <CrearSport crearSport={crearSport} setCrearSport={setCrearSport} />
 
 //Clubs
-
-        <form onSubmit={handleSubmit(onSubmitClubs)}>
-            <div>
-                <label>Name:</label>
-                <input type="text" {...register('name', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Showers:</label>
-                <input type="text" {...register('showers', {required: true, maxLength: 20})}/>
-                {errors.showers?.type === "required" && <p>This field is required</p>}
-                {errors.showers?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Grills:</label>
-                <input type="text" {...register('grills', {required: true, maxLength: 20})}/>
-                {errors.grills?.type === "required" && <p>This field is required</p>}
-                {errors.grills?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Parking:</label>
-                <input type="text" {...register('parking', {required: true, maxLength: 20})}/>
-                {errors.parking?.type === "required" && <p>This field is required</p>}
-                {errors.parking?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Security:</label>
-                <input type="text" {...register('security', {required: true, maxLength: 20})}/>
-                {errors.security?.type === "required" && <p>This field is required</p>}
-                {errors.security?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-
-                <label htmlFor="locationSelect">Select Location:</label>
-      <select id="locationSelect">
-        {location?.map(location => (
-          <option key={location.id} value={location.id}>
-            {location.name}
-          </option>
-        ))}
-      </select>
-            </div>
-         <button type="submit" value='enviar'> Create </button>
-        </form>
+      
+        <button onClick={()=>setCrearClub(true)}>crear Club</button>
+        <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} />
 
 //Courts
-
-        <form onSubmit={handleSubmit(onSubmitCourts)}>
-            <div>
-                <label>Name:</label>
-                <input type="text" {...register('name', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Description:</label>
-                <input type="text" {...register('description', {required: true, maxLength: 100})}/>
-                {errors.description?.type === "required" && <p>This field is required</p>}
-                {errors.description?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
-                <label>PriceFee:</label>
-                <input type="text" {...register('pricefee', {required: true, maxLength: 20})}/>
-                {errors.pricefee?.type === "required" && <p>This field is required</p>}
-                {errors.pricefee?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>WarrantyReservation:</label>
-                <input type="text" {...register('warranty', {required: true, maxLength: 20})}/>
-                {errors.warranty?.type === "required" && <p>This field is required</p>}
-                {errors.warranty?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>GrassType:</label>
-                <input type="text" {...register('grasstype', {required: true, maxLength: 20})}/>
-                {errors.grasstype?.type === "required" && <p>This field is required</p>}
-                {errors.grasstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Lighting:</label>
-                <input type="text" {...register('lighting', {required: true, maxLength: 20})}/>
-                {errors.lighting?.type === "required" && <p>This field is required</p>}
-                {errors.lighting?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>DoorsType:</label>
-                <input type="text" {...register('doorstype', {required: true, maxLength: 20})}/>
-                {errors.doorstype?.type === "required" && <p>This field is required</p>}
-                {errors.doorstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>WallsType:</label>
-                <input type="text" {...register('wallstype', {required: true, maxLength: 20})}/>
-                {errors.wallstype?.type === "required" && <p>This field is required</p>}
-                {errors.wallstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                <label>Reputation:</label>
-                <input type="text" {...register('reputation', {required: true, maxLength: 100})}/>
-                {errors.reputation?.type === "required" && <p>This field is required</p>}
-                {errors.reputation?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
-
-                <label htmlFor="clubSelect">Select Club:</label>
-      <select id="clubSelect">
-        {clubs?.map(club => (
-          <option key={club.id} value={club.id}>
-            {club.name}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="sportSelect">Select Sport:</label>
-      <select id="sportSelect">
-        {sports?.map(sport => (
-          <option key={sport.id} value={sport.id}>
-            {sport.name}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="locationSelect">Select Location:</label>
-      <select id="locationSelect">
-        {location?.map(location => (
-          <option key={location.id} value={location.id}>
-            {location.name}
-          </option>
-        ))}
-      </select>
+        <button onClick={()=>setCrearCourt(true)}>crear courts</button>
+        <CrearCourts setCrearCourt={setCrearCourt} crearCourt={crearCourt} />
 
 
-
-            </div>
-         <button type="submit" value='enviar'> Create </button>
-        </form>
+        
         <Link to='/home'><button>x</button></Link>
         </div>
     )
