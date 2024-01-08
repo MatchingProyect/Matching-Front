@@ -70,7 +70,7 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path='/help' element={<Help/>} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
-        <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo />} />
+        <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo/>} />
         <Route path='/user/:id' element={<UserDetail/>} />
         <Route path='clubs/:id' element={<ClubsDetail/>} />
         <Route path='/functionsAdm' element={<FunctionsAdmin/>} />

@@ -1,10 +1,54 @@
-import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./RestaurarContraseniaConCodigo.module.css";
+import { useLocation } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const RestaurarContraseniaCodigo = ({ onSubmit }) => {
+const RestaurarContraseniaCodigo = () => {
   const { handleSubmit, control, formState: { errors } } = useForm();
+
+  const location = useLocation();
+  const codigo = location.state?.codigo || "";
+  const email = location.state?.email || "";
+  const navigate = useNavigate()
+
+  const onSubmit = async (data)=>{
+    console.log(data)
+    if (codigo == data.codigo){
+      if (data.nuevaContrasenia == data.repetirContrasenia){
+        console.log("EL CODIGO ES CORRECTO")
+        await putPassword(data.nuevaContrasenia)
+        navigate( "/login");
+
+      }
+      else{
+        console.log("LAS CONTRASEÑAS NO COINCIDEN")
+
+      }
+
+    }
+    else {
+      console.log("EL CODIGO ES INCORRECTO")
+    }
+  }
+
+  const putPassword = async (password) => {
+    try {
+        const userSend = {
+          email: email,
+          password: password
+        }
+        console.log("userSend",userSend)
+        const response = await axios.put(`/restartPassword`,userSend);      
+        console.log('Respuesta del servidor:', response.data );
+
+    } catch (error) {
+        console.error('Error al hacer el POST:', error );
+    }
+}
+
+
 
   return (
     <>
