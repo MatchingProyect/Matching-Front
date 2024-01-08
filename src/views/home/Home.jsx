@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
 
 
 export default function Home() {
@@ -37,13 +37,15 @@ export default function Home() {
 
 
     const navigate = useNavigate();
-    const logout = () => {
-       const logout = dispatch(fetchUser([null]))
-       if(logout){
+
+
+    const desloguearte = () => {
+       dispatch(logout())
+       localStorage.removeItem('userData');
+       navigate('/login')
+      
         
-        localStorage.removeItem('userData');
-        navigate('/login')
-       } 
+       
     };
 
     
@@ -79,7 +81,7 @@ export default function Home() {
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={()=>desloguearte()}>Log Out</button>
 
             </div>
             <div className={styles.friendsContainer}>
@@ -87,20 +89,23 @@ export default function Home() {
             </div>
             <div className={styles.divCourts}>
                 <h2 className={styles.courtsTitle}>Campos</h2>
-                <div>
-                    <label>Ciudades</label>
-                    <select onChange = {courtsFilterByLocations}>
+                <div className = {styles.filtroContainer}>
+                <div className = {styles.filtrosDiv}>
+                    <label className = {styles.filterLabel}>Ciudades</label>
+                    <select onChange = {courtsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled >Ciudades</option>
+                        <option>Todos los Clubes</option>
                         {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
-                <div>
-                    <label>Clubes</label>
-                    <select onChange = {courtsFilterByClubs}>
+                <div className = {styles.filtrosDiv}>
+                    <label className = {styles.filterLabel}>Clubes</label>
+                    <select onChange = {courtsFilterByClubs} className = {styles.selectFiltros}>
                         <option disabled >Clubes</option>
                         <option>Todos los Clubes</option>
                         {clubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                     </select>
+                </div>
                 </div>
                 {
                     filteredCourts.length > 0 ? 
@@ -114,17 +119,15 @@ export default function Home() {
                 }
             </div>
             <div className={styles.clubsContainer}>
-            <div>
-                <div>
+                <div className = {styles.divFiltro}>
                     <label>Ciudades</label>
-                    <select onChange = {clubsFilterByLocations}>
+                    <select onChange = {clubsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled>Ciudades</option>
                         <option>Todos los Clubs</option>
                         {locations?.length > 0 && locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
-
-            </div>
+                <div className = {styles.divCards}>
                 {
                     filteredClubs.length > 0 ?
                         filteredClubs.filter(club => club.estado === true)
@@ -135,6 +138,7 @@ export default function Home() {
                             <CardClub key={filteredClub.id} club={filteredClub} />
                         ))
                 }
+                </div>
 
             </div>
             <div className={styles.reservationsContainer}>

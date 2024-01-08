@@ -14,7 +14,9 @@ const CardUser = ({ user }) => {
 
   
   
-  const idUser = userLogeado?.user?.id
+  const idUser = userLogeado?.id
+
+  console.log(idUser)
 
   const deleteUser = async()=>{
     try {
@@ -78,7 +80,7 @@ const CardUser = ({ user }) => {
     <div className = {styles.userContainer}>
       <img src = {user.avatarImg} alt = {user.displayName} className = {styles.avatarImg}/>
       <h3 className = {styles.nameUser}>{user.displayName}</h3>
-      <button className = {styles.btnAgregar} onClick={enviarRequest}>Agregar</button>
+      <button className = {styles.btnAgregar} onClick={()=> enviarRequest()}>Agregar</button>
     </div>
   );
 }

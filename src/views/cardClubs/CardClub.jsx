@@ -26,16 +26,17 @@ const CardClub = ({club}) => {
 
  if(user?.admin){
   return (
-    <div>
+    <div className = {styles.compAdmin}>
+      <div className = {styles.cardHeader}>
       <button onClick={()=>{
         setEditClub(true)
-      }}>editar club</button>
-      <button onClick={deleteClub}>x</button>
-     
-      <h2>{club.name}</h2>
+      }} className = {styles.editBtn}>Editar</button>
+      <button onClick={deleteClub} className = {styles.deleteBtn}>❌</button>
+      </div>
+      <label className = {styles.clubLabel}>{club.name}</label>
       <button onClick={()=>{
         setDetailClub(true)
-      }} >Informacion del Club</button>
+      }} className = {styles.btnInfo}>Informacion</button>
       <DetailClub detailClub={detailClub} setDetailClub={setDetailClub} club={club} />
       
       <AdminFunction editClub={editClub} setEditClub={setEditClub} club={club}/>

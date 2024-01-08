@@ -25,8 +25,10 @@ export default function FriendsContainer({friends}){
             <div className = {styles.friendsImages}>
                 {friends?.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
+                    
                     <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
                     {estadoAvailable(element.active)}
+                    <label className = {styles.label}>{element.displayName}</label>
                 </div>
                 )}
             </div>

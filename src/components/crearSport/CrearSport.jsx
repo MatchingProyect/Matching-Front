@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import axios from 'axios'
+import styles from './CrearSport.module.css';
 
 const CrearSport = ({crearSport, setCrearSport}) => {
 
@@ -29,18 +30,16 @@ const CrearSport = ({crearSport, setCrearSport}) => {
     }
 
   return (
-    <>
-    <form onSubmit={handleSubmit(onSubmitSports)}>
-    <div>
-        <label>Name:</label>
-        <input type="text" {...register('name', {required: true, maxLength: 20})}/>
+    <div className = {styles.holeCompContainer}>
+    <form onSubmit={handleSubmit(onSubmitSports)} className = {styles.formContainer}>
+        <label className = {styles.label}>Name</label>
+        <input className = {styles.input} type="text" {...register('name', {required: true, maxLength: 20})}/>
         {errors.name?.type === "required" && <p>This field is required</p>}
         {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-    </div>
-    <button type="submit" value='enviar'> Create </button>
+    <button className = {styles.btnSubmit} type="submit" value='enviar'> Create </button>
     </form>
-    <button onClick={()=> setCrearSport(false)}>cerrar</button>
-    </>
+    <button onClick={()=> setCrearSport(false)} className = {styles.close} >Cerrar</button>
+    </div>
   )
 }
 

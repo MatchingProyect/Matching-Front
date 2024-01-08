@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
+import styles from './FunctionsAdmin.module.css';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from "react";
 import CardUser from "../cardUsers/CardUser";
@@ -11,6 +11,7 @@ import { fetchCourts, fetchUsers } from "../../redux/reducer";
 import CrearSport from "../../components/crearSport/CrearSport";
 import CrearClub from "../../components/crearClub/CrearClub";
 import CrearCourts from "../../components/crearCourts/CrearCourts";
+import NavbarLow from "../../components/navbarLow/navbarLow";
 
 const FunctionsAdmin = () => {
 
@@ -70,9 +71,9 @@ const FunctionsAdmin = () => {
     return(
 
 //Sports
-        <div>
-            <div>
-                <div>
+        <div className ={styles.holeContainer}>
+            <div className = {styles.registrosDeshabilitados}>
+                <div className = {styles.divDesabilitados}>
                     {usersDeshabilitados === true && users?.filter(user => user.estado === false) 
                       .map(filteredUser => (
                         <div key={filteredUser.id}>
@@ -82,45 +83,45 @@ const FunctionsAdmin = () => {
                     </div>
                       ))
                     }
-                    {usersDeshabilitados === false ? <button onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button> : <button onClick={()=> setUsersDeshabilitados(false)}>ocultar usuarios deshabilitados</button>}
+                    {usersDeshabilitados === false ? <button className = {styles.btnDesabilitados} onClick={()=> setUsersDeshabilitados(true)}>Mostrar usuarios deshabilitados</button> : <button className = {styles.btnDesabilitados} onClick={()=> setUsersDeshabilitados(false)}>Ocultar users deshabilitados</button>}
                     
                 </div>
-                <div>
+                <div className = {styles.divDesabilitados}>
                 {courtsDeshabilitados === true && courts?.filter(court => court.estado === false) 
                       .map(filteredCourt => (
-                          <div key={filteredCourt.id}>
+                          <div key={filteredCourt.id} className = {styles.courtDivDesabilitadas}>
                               <CardCourt court={filteredCourt} />
                               
                           </div>
                 ))}
-                    {courtsDeshabilitados === false ? <button onClick={()=> setCourtsDeshabilitados(true)}>Mostrar courts deshabilitados</button> : <button onClick={()=> setCourtsDeshabilitados(false)}>ocultar courts deshabilitados</button>}
+                    {courtsDeshabilitados === false ? <button className = {styles.btnDesabilitados} onClick={()=> setCourtsDeshabilitados(true)}>Mostrar courts deshabilitados</button> : <button className = {styles.btnDesabilitados} onClick={()=> setCourtsDeshabilitados(false)}>Ocultar courts deshabilitados</button>}
                 </div>
-                <div>
+                <div className = {styles.divDesabilitados}>
                 {clubDeshabilitados === true && clubs?.filter(club => club.estado === false) 
                       .map(filteredClub => (
-                          <div key={filteredClub.id}>
+                          <div key={filteredClub.id} className = {styles.clubesDes}>
                               <CardClub club={filteredClub} />
                               <button onClick={()=> reactivarClub(filteredClub.id)} >Activar Club</button>
                           </div>
                 ))}
-                    {clubDeshabilitados === false ? <button onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubs deshabilitados</button> : <button onClick={()=> setClubsDeshabilitados(false)}>ocultar clubs deshabilitados</button>}
+                    {clubDeshabilitados === false ? <button className = {styles.btnDesabilitados} onClick={()=> setClubsDeshabilitados(true)}>Mostrar clubs deshabilitados</button> : <button className = {styles.btnDesabilitados} onClick={()=> setClubsDeshabilitados(false)}>Ocultar clubs deshabilitados</button>}
                 </div>
             </div>
-      <button onClick={()=> setCrearSport(true)}>crear Sport</button>
+            <div className = {styles.crearDiv}>
+              <div className = {styles.individualDivCrear}>
+      <button onClick={()=> setCrearSport(true)} className = {styles.btnCrear}>Crear Sport</button>
       <CrearSport crearSport={crearSport} setCrearSport={setCrearSport} />
-
-//Clubs
-      
-        <button onClick={()=>setCrearClub(true)}>crear Club</button>
+      </div>
+      <div className = {styles.individualDivCrear}>
+        <button onClick={()=>setCrearClub(true)} className = {styles.btnCrear}>Crear Club</button>
         <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} />
-
-//Courts
-        <button onClick={()=>setCrearCourt(true)}>crear courts</button>
+        </div>
+        <div className = {styles.individualDivCrearLast}>
+        <button onClick={()=>setCrearCourt(true)} className = {styles.btnCrear}>Crear Courts</button>
         <CrearCourts setCrearCourt={setCrearCourt} crearCourt={crearCourt} />
-
-
-        
-        <Link to='/home'><button>x</button></Link>
+        </div>
+        </div>
+        <NavbarLow />
         </div>
     )
 }
