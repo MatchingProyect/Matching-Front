@@ -87,20 +87,23 @@ export default function Home() {
             </div>
             <div className={styles.divCourts}>
                 <h2 className={styles.courtsTitle}>Campos</h2>
-                <div>
-                    <label>Ciudades</label>
-                    <select onChange = {courtsFilterByLocations}>
+                <div className = {styles.filtroContainer}>
+                <div className = {styles.filtrosDiv}>
+                    <label className = {styles.filterLabel}>Ciudades</label>
+                    <select onChange = {courtsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled >Ciudades</option>
+                        <option>Todos los Clubes</option>
                         {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
-                <div>
-                    <label>Clubes</label>
-                    <select onChange = {courtsFilterByClubs}>
+                <div className = {styles.filtrosDiv}>
+                    <label className = {styles.filterLabel}>Clubes</label>
+                    <select onChange = {courtsFilterByClubs} className = {styles.selectFiltros}>
                         <option disabled >Clubes</option>
                         <option>Todos los Clubes</option>
                         {clubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                     </select>
+                </div>
                 </div>
                 {
                     filteredCourts.length > 0 ? 
@@ -114,17 +117,15 @@ export default function Home() {
                 }
             </div>
             <div className={styles.clubsContainer}>
-            <div>
-                <div>
+                <div className = {styles.divFiltro}>
                     <label>Ciudades</label>
-                    <select onChange = {clubsFilterByLocations}>
+                    <select onChange = {clubsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled>Ciudades</option>
                         <option>Todos los Clubs</option>
                         {locations?.length > 0 && locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
-
-            </div>
+                <div className = {styles.divCards}>
                 {
                     filteredClubs.length > 0 ?
                         filteredClubs.filter(club => club.estado === true)
@@ -135,6 +136,7 @@ export default function Home() {
                             <CardClub key={filteredClub.id} club={filteredClub} />
                         ))
                 }
+                </div>
 
             </div>
             <div className={styles.reservationsContainer}>
