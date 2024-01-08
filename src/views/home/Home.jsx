@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
 
 
 export default function Home() {
@@ -37,13 +37,15 @@ export default function Home() {
 
 
     const navigate = useNavigate();
-    const logout = () => {
-       const logout = dispatch(fetchUser([null]))
-       if(logout){
+
+
+    const desloguearte = () => {
+       dispatch(logout())
+       localStorage.removeItem('userData');
+       navigate('/login')
+      
         
-        localStorage.removeItem('userData');
-        navigate('/login')
-       } 
+       
     };
 
     
@@ -79,7 +81,7 @@ export default function Home() {
                     <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
                 </div></Link>
                 <Link to='/solicitudes'><button>solicitudes</button></Link>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={()=>desloguearte()}>Log Out</button>
 
             </div>
             <div className={styles.friendsContainer}>

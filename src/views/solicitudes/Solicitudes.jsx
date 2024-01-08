@@ -20,28 +20,27 @@ const Solicitudes = () => {
 
     useEffect(() => {
         
-        const infoSoliFetch = async () => {
-            try {
-                let allUsers = [];
-                for (const req of request) {
-                    try {
-                        const { data } = await axios(`/users/${req.UserId}`);
-                        console.log('rrr', data);
-                        if (data) {
-                            allUsers.push(data);
-                        }
-                    } catch (error) {
-                        console.error('Error fetching user:', error);
+            const infoSoliFetch = async () => {
+                try {
+                    let allUsers = []
+                    console.log('abcd', request)
+                    if(request.length > 0){
+                        const usersRequest = await Promise.all(request?.map( async(req) =>{
+                            console.log('luisito',req.UserId)
+                            const { data } = await axios(`/users/${req.UserId}`);
+                            
+                            console.log('rrr',data)
+                            if (data) allUsers.push(data)
+                        }))
+                    console.log('bb',usersRequest)
+                        if(usersRequest) setInfoSoli(allUsers)
                         
                     }
+                } catch (error) {
+                    throw error.message;
                 }
-                setInfoSoli(allUsers);
-            } catch (error) {
-                console.error('Error in infoSoliFetch:', error);
-            }
-        };
-        
-        infoSoliFetch();
+            };
+            infoSoliFetch();
         
     }, [request]);
 
@@ -105,7 +104,7 @@ const Solicitudes = () => {
         }
     };
 
-    
+    console.log('luquitas',infoSoli)
     //
 
     return (
@@ -113,7 +112,7 @@ const Solicitudes = () => {
             <h2>Solicitudes</h2>
             {request?.map(request => {
                 const filteredInfo = infoSoli.filter(user => request.UserId === user.userFound.user.id)
-                
+                {console.log('xd',request.UserId)}
                 return (
                     <div>
                     <img src={`${filteredInfo[0]?.userFound?.user?.avatarImg}`} alt={filteredInfo[0]?.userFound?.user?.displayName} /> 
@@ -126,7 +125,7 @@ const Solicitudes = () => {
                
         })
 }
-    <NavbarLow />
+    
         </div>
     );
 };

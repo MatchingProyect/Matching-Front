@@ -49,7 +49,17 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action) => {
         state.allLocations = action.payload;
-       }
+       },
+       resetState: (state) => {
+        state.allUsers = [];
+        state.allSports = [];
+        state.allClubs = [];
+        state.allCourts = [];
+        state.allFriends = [];
+        state.allLocations = [];
+        state.allReservations = [];
+        state.user = [];
+    },
     },
 });
 
@@ -142,5 +152,9 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
-export const { setClubs, setCourts, setUsers, setSports, setProfiles, setFriends, setUser, setReservations, setLocations } = userSlice.actions;
+export const logout = () => (dispatch) => {
+    dispatch(resetState()); 
+};
+
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfiles, setFriends, setUser, setReservations, setLocations } = userSlice.actions;
 export default userSlice.reducer;
