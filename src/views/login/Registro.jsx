@@ -1,40 +1,47 @@
-import React, { useState } from "react";
+import { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useUserContext } from "../../context/UserProvider";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/reducer'; 
 import styles from './Registro.module.css';
 import axios from "axios";
 import emailjs from '@emailjs/browser';
+import { fetchUser } from '../../redux/reducer.js';
 
 // El register ya crea los usuarios en la base de datos 
 // Y tambien te manda a questions si es que se hace exitosamente
 const Registro = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const { setDatosUser,datosUser } = useUserContext(); // Estado global aca :)
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const logout = dispatch(fetchUser([null]))
+    if(logout){
+     
+     localStorage.removeItem('userData');
+    }
+}, []);
+
+
   // esto es para ver o no la pass
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
   const onSubmit = async ( data ) => {
-    // setDatosUser({
-    //   ...datosUser,
-    //   nombreApellido: data.nombreApellido,
-    //   email: data.email,
-    //   pass: data.contrasenia
-    // });
-    // alert('Datos guardados');
-
-    // Si el registro funciona aca te manda a questions
     try {
       const endpoint = "/register"
       console.log("user", data)
       const result = await axios.post(endpoint, data) 
       if (result) {
+        dispatch(setUser({
+          user:result.data.response
+        }));
+
+        console.log("register",result)
         navigate("/questions")
         
         const defaultValues = {
@@ -63,10 +70,9 @@ const Registro = () => {
     } catch (error) {
       throw error.message;
     }
-
   } 
-  // Aca esta el formulario del registro, no se deberia tocar nada
 
+  
   return (
     <form className={ styles.formContainer } onSubmit={ handleSubmit( onSubmit )}>
 
@@ -103,16 +109,6 @@ const Registro = () => {
         </span>
       </div>
 
-      {/* {
-        datosUser.nombreApellido && datosUser.email && datosUser.pass 
-        ? (
-        <Link to={'/questions'}>
-          <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">COMPLETAR PERFIL</Button>
-        </Link>
-        ) :
-        <Button variant="contained" sx={ { ..._styled.btnRegister } } type="submit">REGISTRARME</Button>
-      } */}
-       
         <Button variant="contained" sx={{ ..._styled.btnRegister }} type="submit">REGISTRARME</Button>
       <div className={ styles.containerPs }>
         <p className={ styles.pRegister } >¿Ya tienes cuenta? <Link className={ styles.pLogin } to="/login">Inicia sesión</Link></p>

@@ -43,10 +43,7 @@ export const userSlice = createSlice({
        },
        setReservations: (state, action) => {
         state.allReservations = action.payload;
-       },
-       setLocations: (state, action) => {
-        state.allLocations = action.payload;
-       },
+       }
     },
 });
 
@@ -55,6 +52,7 @@ export const fetchUser = (id) => async (dispatch) => {
     try {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
+        console.log("data.userFound",data.userFound)
         dispatch(setUser(data.userFound));
         return data.userFound;
       }

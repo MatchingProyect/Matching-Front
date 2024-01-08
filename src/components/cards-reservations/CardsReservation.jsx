@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 export default function CardsReservations({ reservations }) {
 
     const userLogeado = useSelector((state) => state.user?.user?.user);
-    console.log(userLogeado.displayName)
+    console.log("userLogeado",userLogeado?.displayName)
 
     let [preferenceId, setPreferenceId] = useState('');
 
