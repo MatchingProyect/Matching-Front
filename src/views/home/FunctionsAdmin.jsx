@@ -154,20 +154,20 @@ const FunctionsAdmin = () => {
                 {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Showers:</label>
                 <input type="text" {...register('showers', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.showers?.type === "required" && <p>This field is required</p>}
+                {errors.showers?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Grills:</label>
                 <input type="text" {...register('grills', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.grills?.type === "required" && <p>This field is required</p>}
+                {errors.grills?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Parking:</label>
                 <input type="text" {...register('parking', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.parking?.type === "required" && <p>This field is required</p>}
+                {errors.parking?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Security:</label>
                 <input type="text" {...register('security', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.security?.type === "required" && <p>This field is required</p>}
+                {errors.security?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
 
                 <label htmlFor="locationSelect">Select Location:</label>
       <select id="locationSelect">
@@ -191,36 +191,36 @@ const FunctionsAdmin = () => {
                 {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Description:</label>
                 <input type="text" {...register('description', {required: true, maxLength: 100})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
+                {errors.description?.type === "required" && <p>This field is required</p>}
+                {errors.description?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
                 <label>PriceFee:</label>
                 <input type="text" {...register('pricefee', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.pricefee?.type === "required" && <p>This field is required</p>}
+                {errors.pricefee?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>WarrantyReservation:</label>
                 <input type="text" {...register('warranty', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.warranty?.type === "required" && <p>This field is required</p>}
+                {errors.warranty?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>GrassType:</label>
                 <input type="text" {...register('grasstype', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.grasstype?.type === "required" && <p>This field is required</p>}
+                {errors.grasstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Lighting:</label>
                 <input type="text" {...register('lighting', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.lighting?.type === "required" && <p>This field is required</p>}
+                {errors.lighting?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>DoorsType:</label>
                 <input type="text" {...register('doorstype', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.doorstype?.type === "required" && <p>This field is required</p>}
+                {errors.doorstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>WallsType:</label>
                 <input type="text" {...register('wallstype', {required: true, maxLength: 20})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                {errors.wallstype?.type === "required" && <p>This field is required</p>}
+                {errors.wallstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
                 <label>Reputation:</label>
                 <input type="text" {...register('reputation', {required: true, maxLength: 100})}/>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
+                {errors.reputation?.type === "required" && <p>This field is required</p>}
+                {errors.reputation?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
 
                 <label htmlFor="clubSelect">Select Club:</label>
       <select id="clubSelect">

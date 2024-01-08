@@ -21,7 +21,7 @@ const CardUser = ({ user }) => {
       const deleted = await axios.put(`/userEstado/${user?.id}`, {estado: false});
       if(deleted.status)  dispatch(fetchUsers());
     } catch (error) {
-      alert(error.message)
+      console.log(error.message)
     }
   }
 
@@ -51,14 +51,14 @@ const CardUser = ({ user }) => {
       FriendRId: idUserQueRecibe
     };
   await axios.post('/friendRequest', requestBody)
-  
+  console.log('se mando')
 
      } catch (error) {
      throw error.message
      }
   };
 
-  console.log(userLogeado?.admin)
+  
 
   if(userLogeado?.admin){
     return (

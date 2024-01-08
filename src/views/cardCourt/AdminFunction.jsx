@@ -21,49 +21,48 @@ const AdminFunction = ({court, update, setUpdate}) => {
 
     
 
-    // useEffect(()=>{
-    //     const fetchData = async() =>{
-    //         try {
-    //             const {data} = await axios(`/court/${court.id}`)
-    //             if(data.status){
-    //                 reset({
-    //                    name: data.court.name,
-    //                    description: data.court.description,
-    //                    priceFee: data.court.priceFee,
-    //                    warrantyReservation: data.court.warrantyReservation,
-    //                    grassType: data.court.grassType,
-    //                    lighting: data.court.lighting,
-    //                    doorsType: data.court.doorsType,wallsType: data.court.wallsType,
-    //                    reputation: data.court.reputation
-    //                 })
-    //             }
+    useEffect(()=>{
+        const fetchData = async() =>{
+            try {
+                const {data} = await axios(`/court/${court.id}`)
+                if(data.status){
+                    reset({
+                       name: data.court.name,
+                       description: data.court.description,
+                       priceFee: data.court.priceFee,
+                       warrantyReservation: data.court.warrantyReservation,
+                       grassType: data.court.grassType,
+                       lighting: data.court.lighting,
+                       doorsType: data.court.doorsType,wallsType: data.court.wallsType,
+                       reputation: data.court.reputation
+                    })
+                }
              
-    //         } catch (error) {
-    //             return error.message
-    //         }
-    //         }
-    //     fetchData()
-    // }, [])
+            } catch (error) {
+                return error.message
+            }
+            }
+        fetchData()
+    }, [])
 
    
 
 
-    const onSubmitCourt = async() =>{
-        try {
-            const endPoint =  `/court/${court.id}`
-            const response = await axios.put(endPoint, data)
-            if(response.status){
-                dispatch(fetchCourts())
-                setUpdate(false)
-                
-            }else{
-                alert(response.message)
-            }
-            
-        } catch (error) {
-            alert(error.message)
-        }
-    }
+    const onSubmitCourt = async (formData) => {
+      try {
+          const endPoint = `/courts/${court.id}`;
+          const response = await axios.put(endPoint, formData); 
+          if (response.status) {
+              dispatch(fetchCourts());
+              setUpdate(false);
+          } else {
+              alert(response.message);
+          }
+      } catch (error) {
+        console.log(error); 
+          alert(error.message);
+      }
+  };
 
 
 
@@ -137,7 +136,7 @@ const AdminFunction = ({court, update, setUpdate}) => {
         ))}
       </select>
     </div>
- <button type="submit" value='enviar'> Create </button>
+ <button type="submit" value='enviar'> Actualizar </button>
 </form>
   )
 

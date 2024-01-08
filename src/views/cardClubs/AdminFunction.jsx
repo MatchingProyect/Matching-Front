@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchClubs} from "../../redux/reducer";
 import { useForm } from 'react-hook-form';
 
@@ -13,6 +13,8 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
         formState: { errors },
         register
     } = useForm();
+
+    const locations = useSelector((state) => state.user.allLocations);
 
     const dispatch = useDispatch();
 
@@ -40,22 +42,20 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
   
 
 
-    const onSubmitClubs = async() =>{
-        try {
-            const endPoint =  `/clubs/${club.id}`
-            const response = await axios.put(endPoint, data)
-            if(response.status){
-                dispatch(fetchClubs())
-                setEditClub(false)
-                
-            }else{
-                alert(response.message)
-            }
-            
-        } catch (error) {
-            alert(error.message)
-        }
-    }
+    const onSubmitClubs = async (formData) => {
+      try {
+          const endPoint = `/clubs/${club.id}`;
+          const response = await axios.put(endPoint, formData);
+          if (response.status) {
+              dispatch(fetchClubs());
+              setEditClub(false);
+          } else {
+              alert(response.message);
+          }
+      } catch (error) {
+          alert(error.message);
+      }
+  };
 
 
 
@@ -86,14 +86,14 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
         {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
         <label htmlFor="locationSelect">Select Location:</label>
       <select id="locationSelect">
-        {location?.map(location => (
+        {locations?.map(location => (
           <option key={location.id} value={location.id}>
             {location.name}
           </option>
         ))}
       </select>
     </div>
- <button type="submit" value='enviar'> Create </button>
+ <button type="submit" value='enviar'> Actualizar </button>
 </form>
   )
 }
