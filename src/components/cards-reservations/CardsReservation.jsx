@@ -28,7 +28,10 @@ export default function CardsReservations({ reservations }) {
             message:
                 `${userLogeado.displayName},
                 
-                Hemos detectado que quieres realizar una reserva de una cancha.
+                Hemos detectado que quieres realizar la reserva de una cancha.
+                ** RESERVA: ${reservations.dateTimeStart} -- ${reservations.dateTimeEnd}
+                ** COSTO TOTAL: ${reservations.totalCost}
+                
                 Al completarse el pago, verás reflejada en tu bandeja de entrada la información del mismo.
                 Muchas gracias!`,
         };
