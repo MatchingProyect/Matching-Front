@@ -1,0 +1,56 @@
+.holeCompContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh;
+    height: auto;
+    width: 90%;
+}
+.inputContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    width: 90%;
+    margin: 3px;
+}
+.label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.input{
+    font-size: 17px;
+    font-weight: 500;
+    width: 60%;
+    border-radius: 8px;
+}
+
+.close{
+    height: 40px;
+    width: 120px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(29, 29, 29);
+}
+.btnSubmit{
+    margin-top: 2vh;
+    height: 40px;
+    width: 120px;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 10px;
+}
