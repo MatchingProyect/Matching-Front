@@ -19,11 +19,11 @@ export default function FriendsContainer({friends}){
     return(
         <div className = {styles.friendsContainer}>
             <div className = {styles.infoGeneral}>
-                <p className = {styles.text1}>Amigos conectados: {friends.length}</p>
+                <p className = {styles.text1}>Amigos conectados: {friends?.length}</p>
                 <Link to = '/friends'> <p className = {styles.verTodos}>Ver Todos</p> </Link>
             </div>
             <div className = {styles.friendsImages}>
-                {friends.map((element) => 
+                {friends?.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
                     <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
                     {estadoAvailable(element.active)}

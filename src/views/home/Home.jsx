@@ -9,42 +9,44 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, fetchFriends } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
 
 
 export default function Home() {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchUsers())
-        dispatch(fetchClubs());
-        dispatch(fetchCourts());
-        dispatch(fetchLocations());
-        dispatch(fetchReservations());
-    },[]);
-
     const users = useSelector((state) => state.user.allUsers);
     const clubs = useSelector((state) => state.user.allClubs);
     const courts = useSelector((state) => state.user.allCourts);
     const reservations = useSelector((state) => state.user.allReservations);
     const locations = useSelector((state) => state.user.allLocations);
     const estadoFriends = useSelector((state) => state.user.allFriends);
-    const friends = useSelector(state => state.user?.user?.friends);
     const userLogeado = useSelector(state =>  state.user?.user?.user);
 
-    friends?.map((element) => element.FriendId).forEach((element) => dispatch(fetchFriends(element)));
+    useEffect(() => {
+        dispatch(fetchUsers());
+        dispatch(fetchClubs());
+        dispatch(fetchCourts());
+        dispatch(fetchLocations());
+        dispatch(fetchReservations());
+    }, []);
     
     const [filteredCourts, setFilteredCourts] = useState([]);
     const [filteredClubs, setFilteredClubs] = useState([]);
+
+
 
 
     const navigate = useNavigate();
     const logout = () => {
        const logout = dispatch(fetchUser([null]))
        if(logout){
+        
         localStorage.removeItem('userData');
         navigate('/login')
        } 
     };
+
+    
 
   const courtsFilterByLocations = function(event){
     let value = event.target.value;
@@ -63,10 +65,6 @@ export default function Home() {
     let clubsFilteredByLocations = clubs.filter((element) => element.LocationId == value);
     return setFilteredClubs(clubsFilteredByLocations);
   };
-
-
-
-
 
     return (
 
@@ -93,7 +91,7 @@ export default function Home() {
                     <label>Ciudades</label>
                     <select onChange = {courtsFilterByLocations}>
                         <option disabled >Ciudades</option>
-                        {locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
+                        {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
                 <div>
@@ -101,7 +99,7 @@ export default function Home() {
                     <select onChange = {courtsFilterByClubs}>
                         <option disabled >Clubes</option>
                         <option>Todos los Clubes</option>
-                        {clubs.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
+                        {clubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                     </select>
                 </div>
                 {
@@ -109,7 +107,7 @@ export default function Home() {
                         filteredCourts.filter(court => court.estado === true)
                         .map(filteredCourt => (
                             <CardCourt key={filteredCourt.id} court={filteredCourt} />
-                        )) : courts.filter(court => court.estado === true)
+                        )) : courts?.filter(court => court.estado === true)
                         .map(filteredCourt => (
                             <CardCourt key={filteredCourt.id} court={filteredCourt} />
                         ))
@@ -122,7 +120,7 @@ export default function Home() {
                     <select onChange = {clubsFilterByLocations}>
                         <option disabled>Ciudades</option>
                         <option>Todos los Clubs</option>
-                        {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
+                        {locations?.length > 0 && locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
 
@@ -132,7 +130,7 @@ export default function Home() {
                         filteredClubs.filter(club => club.estado === true)
                         .map(filteredClub => (
                             <CardClub key={filteredClub.id} club={filteredClub} />
-                        )) : clubs.filter(club => club.estado === true)
+                        )) : clubs?.filter(club => club.estado === true)
                         .map(filteredClub => (
                             <CardClub key={filteredClub.id} club={filteredClub} />
                         ))

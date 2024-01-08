@@ -12,6 +12,8 @@ const initialState = {
     user: []
 };
 
+
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -34,9 +36,9 @@ export const userSlice = createSlice({
        setFriends: (state, action) => {
         let result = state.allFriends?.find((element) => element.id == action.payload.id);
         if(result == undefined){
-            state.allFriends.push(action.payload);
+            state.allFriends = [ ...state.allFriends, action.payload];
         } else {
-            return state.allFriends;
+            return ;
         };
        },
        setUser: (state, action) =>{
@@ -47,7 +49,7 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action) => {
         state.allLocations = action.payload;
-       },
+       }
     },
 });
 
@@ -57,6 +59,9 @@ export const fetchUser = (id) => async (dispatch) => {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
         dispatch(setUser(data.userFound));
+        data.userFound.friends?.map((element) => {
+            dispatch(fetchFriends(element.FriendId));
+        });
         return data.userFound;
       }
     } catch (error) {
@@ -113,7 +118,7 @@ export const fetchSports = ()=>async(dispatch)=>{
 
 export const fetchLocations = ()=>async(dispatch)=>{
     try {
-        const {data} = await axios('/locations')
+        const {data} = await axios('/locations');
         if(data.status) dispatch(setLocations(data.allLocations))
     } catch (error) {
         throw error.message
