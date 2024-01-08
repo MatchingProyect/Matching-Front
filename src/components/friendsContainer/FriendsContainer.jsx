@@ -28,7 +28,7 @@ export default function FriendsContainer({friends}){
                     
                     <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
                     {estadoAvailable(element.active)}
-                    <h2>{element.displayName}</h2>
+                    <label className = {styles.label}>{element.displayName}</label>
                 </div>
                 )}
             </div>
