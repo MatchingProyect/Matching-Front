@@ -3,11 +3,14 @@ import { fr } from 'date-fns-jalali/locale';
 import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { fetchUser } from '../../redux/reducer';
 
 const Solicitudes = () => {
     const [request, setRequest] = useState([])
     const [infoSoli, setInfoSoli] = useState([])
     const user = useSelector((state) => state.user.user.user);
+
+    const dispatch = useDispatch()
     
     const id = user?.id;
 
@@ -60,7 +63,7 @@ const Solicitudes = () => {
                 UserId: user,
                 status: "true",
             });
-            if(data.status) console.log('amigo agregado')
+            if(data.status) dispatch(fetchUser())
         } catch (error) {
             throw error.message;
         }
@@ -68,11 +71,12 @@ const Solicitudes = () => {
 
     const rechazarAmigo = async (friend, user) => {
         try {
-            await axios.post('/addFriend', {
+            const rechazado = await axios.post('/addFriend', {
                 FriendId: friend,
                 UserId: user,
                 status: "rechazado",
             });
+            if(rechazado) dispatch(fetchUser())
         } catch (error) {
             throw error.message;
         }
