@@ -158,12 +158,14 @@
         align-items: center;
 }
 .divCards{
-    width: 90vw;
-    height: 20vh;
+    width: 100vw;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: baseline;
+    overflow-x: scroll;
+    padding: 20px;
 }
 
 .containerCards {
