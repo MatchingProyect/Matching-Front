@@ -53,7 +53,7 @@ export default function CardsReservations({ reservations, courts }) {
     return (
         <div className={styles.reservationContainer}>
             <div>
-                <p>{bringCourtName()}</p>            
+                <p>{courts.length > 0 && bringCourtName()}</p>
                 <p>
                 {reservations.dateTimeStart} - {reservations.dateTimeEnd}
             </p>

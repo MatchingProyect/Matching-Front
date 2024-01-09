@@ -16,7 +16,8 @@
 
 .text1 {
     color: black;
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: 500;
     margin: 4px;
 }
 
@@ -63,8 +64,14 @@
 
 }
 .verTodos{
+    background-color: rgb(55, 55, 255);
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
     position: relative;
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 700;
     margin: 5px;
 }
 .label{

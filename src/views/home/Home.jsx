@@ -169,7 +169,7 @@ export default function Home() {
                     <label className = {styles.filterLabel}>Ciudades</label>
                     <select onChange = {courtsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled >Ciudades</option>
-                        <option>Todos los Clubes</option>
+                        <option>Todas las Ciudades</option>
                         {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                     </select>
                 </div>
