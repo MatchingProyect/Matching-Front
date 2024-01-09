@@ -125,44 +125,32 @@
   position: relative;
 }
 
-.eyeButton {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 475px;
-  right: 10px;
-  transform: translateY(-50%);
-  padding: 0;
+
+.arregloBtn{
+  width: 100%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
-
-.eyeIcon {
-  width: 20px;
-  /* Ajusta el tamaño según sea necesario */
-  height: 20px;
-  /* Ajusta el tamaño según sea necesario */
-  color: #203144;
-  margin-right: 1.5em;
-  margin-bottom: 4em;
-  /* Ajusta la distancia desde el borde derecho */
-}
-
-.inputField {
-  width: 100%;
+.eyeButton {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-left: 10px;
+  width: 15%;
   height: 55px;
-  padding: 13px 19px;
   border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  background-color: #ffffff;
-  outline: transparent;
-  font-family: Poppins;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
-  letter-spacing: 0em;
-  text-align: left;
+  font-size: 25px;
+  background-color: #282828;
+}
+.pPass{
+  margin-top: 2px;
+  padding: 5px;
+  color: white;
 }
 
 .inputPass {
@@ -260,6 +248,23 @@
 
 .sentCode {
   margin-top: 24px;
+}
+.submitButtonLogin {
+  background: #0075f8;
+  border-radius: 10px;
+  height: 50px;
+  /* margin-top: -6em; */
+  width: 20rem;
+  color: #ffffff;
+  font-family: Poppins;
+  margin-top: 3vh;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0em;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .submitButton {

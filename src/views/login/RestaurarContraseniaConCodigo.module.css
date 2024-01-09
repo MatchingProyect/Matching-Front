@@ -4,7 +4,7 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: #203144;
     /* background-color: #203144; */
 }
 
@@ -50,6 +50,7 @@
 
 .inputField{
     height: 55px;
+    width: 90%;
     border-radius: 10px;
     outline: transparent;
     padding: 13px 19px 13px 19px;
@@ -62,6 +63,7 @@
 
 .inputPass{
     margin-top: 8px;
+    width: 90%;
     height: 55px;
     border-radius: 10px;
     outline: transparent;
@@ -104,4 +106,10 @@
 .linkSesion{
     font-weight: 700;
     color: #0075F8;
+}
+.errorss{
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 0.5vh;
 }

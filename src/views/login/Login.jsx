@@ -198,14 +198,16 @@ const Login = () => {
                     inputMode="email"
                     {...field}
                   />
-                  {errors.emailValue && <p>{errors.emailValue.message}</p>}
+                  {errors.emailValue && <p className={styles.pPass}>{errors.emailValue.message}</p>}
                 </>
               )}
             />
           </div>
 
           <div className={styles.contentController}>
-            <label className={styles.labelsPass}>Contraseña:</label>
+            <label className={styles.labelsPass}>Contraseña</label>
+          <div className = {styles.arregloBtn}>
+
             <Controller
               name="password"
               control={control}
@@ -221,31 +223,27 @@ const Login = () => {
                 },
               }}
               render={({ field }) => (
-                <>
                   <input
                     className={styles.inputPass}
                     type={showPassword ? "text" : "password"}
                     {...field}
                   />
-                </>
               )}
             />
             <button
               type="button"
               className={styles.eyeButton}
-              onClick={togglePasswordVisibility}
-            >
-              <img
-                src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702489357/eye.slash_vthsb6.svg"
-                alt="Mostrar/Ocultar contraseña"
-                className={styles.eyeIcon}
-              />
+              onClick={togglePasswordVisibility}>
+                👁️
             </button>
+            
+            
+            </div>
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
           </div>
         </div>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={styles.submitButtonLogin}>
           INICIAR SESION
         </button>
 

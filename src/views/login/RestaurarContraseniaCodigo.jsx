@@ -71,7 +71,7 @@ const RestaurarContraseniaCodigo = () => {
               render={({ field }) => (
                 <>
                   <input className={styles.inputField} type="text" {...field} />
-                  {errors.codigo && <p>{errors.codigo.message}</p>}
+                  {errors.codigo && <p className = {styles.errorss}>{errors.codigo.message}</p>}
                 </>
               )}
             />
@@ -85,7 +85,7 @@ const RestaurarContraseniaCodigo = () => {
               render={({ field }) => (
                 <>
                   <input className={styles.inputPass} type="password" {...field} />
-                  {errors.nuevaContrasenia && <p>{errors.nuevaContrasenia.message}</p>}
+                  {errors.nuevaContrasenia && <p className = {styles.errorss}>{errors.nuevaContrasenia.message}</p>}
                 </>
               )}
             />
@@ -99,7 +99,7 @@ const RestaurarContraseniaCodigo = () => {
               render={({ field }) => (
                 <>
                   <input className={styles.inputPass} type="password" {...field} />
-                  {errors.repetirContrasenia && <p>{errors.repetirContrasenia.message}</p>}
+                  {errors.repetirContrasenia && <p className = {styles.errorss}>{errors.repetirContrasenia.message}</p>}
                 </>
               )}
             />
