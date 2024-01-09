@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './CardUser.module.css';
-import { fetchUsers } from '../../redux/reducer';
+import { fetchUser, fetchUsers } from '../../redux/reducer';
 
 
 const CardUser = ({ user }) => {
@@ -52,8 +52,8 @@ const CardUser = ({ user }) => {
       UserId: idUser,
       FriendRId: idUserQueRecibe
     };
-  await axios.post('/friendRequest', requestBody)
-  console.log('se mando')
+  const agregado = await axios.post('/friendRequest', requestBody)
+  if(agregado) dispatch(fetchUser())
 
      } catch (error) {
      throw error.message
