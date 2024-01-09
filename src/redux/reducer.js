@@ -9,7 +9,7 @@ const initialState = {
     allFriends: [],
     allLocations: [],
     allReservations: [],
-    user: []
+    datauser: []
 };
 
 
@@ -34,16 +34,10 @@ export const userSlice = createSlice({
         state.allProfiles = action.payload
        },
        setFriends: (state, action) => {
-        // let result = state.allFriends?.find((element) => element.id == action.payload.id);
-        // if(result == undefined){
-        //     state.allFriends = [ ...state.allFriends, action.payload];
-        // } else {
-        //     return ;
-        // };
         state.allFriends = action.payload
        },
-       setUser: (state, action) =>{
-        state.user = action.payload
+       setDataUser: (state, action) =>{
+        state.datauser = action.payload
        },
        setReservations: (state, action) => {
         state.allReservations = action.payload;
@@ -51,6 +45,7 @@ export const userSlice = createSlice({
        setLocations: (state, action) => {
         state.allLocations = action.payload;
        },
+       
        resetState: (state) => {
         state.allUsers = [];
         state.allSports = [];
@@ -59,7 +54,7 @@ export const userSlice = createSlice({
         state.allFriends = [];
         state.allLocations = [];
         state.allReservations = [];
-        state.user = [];
+        state.datauser = [];
     },
     },
 });
@@ -69,14 +64,9 @@ export const fetchUser = (id) => async (dispatch) => {
     try {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
-        dispatch(setUser(data.userFound));
-        // data.userFound.friends?.map((element) => {
-        //     dispatch(fetchFriends(element.FriendId));
-        // });
-        // return data.userFound;
-        console.log('ccc',data.userFound.user.id)
+        dispatch(setDataUser(data.userFound));
+        console.log('fetchUser',data.userFound)
         const friends = await axios(`/friends/${data.userFound.user.id}`)
-        
         if(friends) dispatch(setFriends(friends.data.friends))
         
       }
@@ -100,7 +90,7 @@ export const fetchReservations = ()=>async(dispatch)=>{
         if(data.status) dispatch(setReservations(data.allReservations))
     } catch (error) {
         throw error.message
-    };
+    }
 };
 
 export const fetchProfiles = ()=>async(dispatch)=>{
@@ -120,7 +110,7 @@ export const fetchUsers = ()=>async(dispatch)=>{
         }
     } catch (error) {
         throw error.message
-    };
+    }
 };
 
 
@@ -164,5 +154,5 @@ export const logout = () => (dispatch) => {
     dispatch(resetState()); 
 };
 
-export const { setClubs,resetState, setCourts, setUsers, setSports, setProfiles, setFriends, setUser, setReservations, setLocations } = userSlice.actions;
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfiles, setFriends, setDataUser, setReservations, setLocations } = userSlice.actions;
 export default userSlice.reducer;

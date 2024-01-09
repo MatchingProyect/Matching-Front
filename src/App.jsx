@@ -1,6 +1,5 @@
 import { useEffect,  } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux'; 
 import Home from './views/home/Home.jsx';
 import Registro from './views/login/Registro';
 import ProfileEdit from './views/profile/profileEdit/profileEdit';
@@ -22,7 +21,8 @@ import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
-import { fetchUser } from './redux/reducer.js';
+import { setDataUser } from './redux/reducer.js';
+import { useDispatch } from 'react-redux'; 
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 import FunctionsAdmin from './views/home/FunctionsAdmin.jsx';
@@ -30,20 +30,19 @@ import FunctionsAdmin from './views/home/FunctionsAdmin.jsx';
 function App() {
   const dispatch = useDispatch();
 
-  const storedUserData = localStorage.getItem('userData');
-  if (storedUserData) {
-    const storedUser = JSON.parse(storedUserData);
-    console.log("storedUser",storedUser)
-  }
 
   useEffect(() => {
+    console.log("APP INICIADA")
+
     const storedUserData = localStorage.getItem('userData');
-    if (storedUserData) {
-      const storedUser = JSON.parse(storedUserData);
-      if (storedUser.id) {
-        dispatch(fetchUser(storedUser.id));
-      }
+    if(storedUserData){
+      const userDataObject = JSON.parse(storedUserData);
+      dispatch(setDataUser({
+          user: userDataObject
+      }));
     }
+
+
   }, []);
 
 

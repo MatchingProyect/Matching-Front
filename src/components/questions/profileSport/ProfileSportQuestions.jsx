@@ -6,7 +6,7 @@ import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@m
 import styles from './ProfileSportQuestion.module.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/reducer'; 
+import { setDataUser } from '../../../redux/reducer'; 
 import { useSelector } from 'react-redux';
 
 const ProfileSportQuestions = () => {
@@ -90,7 +90,7 @@ const ProfileSportQuestions = () => {
                 const userDis = { ...userLogeado.user, ...response.data.userUpdated };
                 console.log("userDis",userDis)
 
-                dispatch(setUser({
+                dispatch(setDataUser({
                     user: {
                         ...userDis                    
                     }

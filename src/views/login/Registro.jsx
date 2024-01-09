@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/reducer'; 
+import { setDataUser } from '../../redux/reducer'; 
 import styles from './Registro.module.css';
 import axios from "axios";
 import emailjs from '@emailjs/browser';
@@ -37,7 +37,7 @@ const Registro = () => {
       console.log("user", data)
       const result = await axios.post(endpoint, data) 
       if (result) {
-        dispatch(setUser({
+        dispatch(setDataUser({
           user:result.data.response
         }));
 
