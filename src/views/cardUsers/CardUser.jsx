@@ -63,15 +63,14 @@ const CardUser = ({ user }) => {
   if(userLogeado?.admin){
     return (
       <div className = {styles.userContainer}>
-        {user.estado === true ?  <button onClick={deleteUser}>Suspender Usuario</button> :  <button onClick={activarUser}>Reactivar Usuario</button>}
-       
-       <button onClick={ascenderAAdm}>Volver Admin</button>
         <h2 className = {styles.nameUser}>{user?.displayName}</h2>
         
         <img className = {styles.avatarImg} src={user?.avatarImg} alt="" />
-        
-        
-        
+        <div className = {styles.btnUserDiv}>
+        {user.estado === true ?  <button className = {styles.btnAgregar} onClick={deleteUser}>Suspender</button> :  <button onClick={activarUser}>Reactivar</button>}
+       
+       <button onClick={ascenderAAdm} className = {styles.btnAgregar}>Volver Admin</button>
+       </div>
         </div>
     )
    }

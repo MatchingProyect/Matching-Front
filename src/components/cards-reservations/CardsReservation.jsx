@@ -5,12 +5,11 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import emailjs from '@emailjs/browser';
 import { useSelector } from 'react-redux';
 
-export default function CardsReservations({ reservations }) {
+export default function CardsReservations({ reservations, courts }) {
     const userLogeado = useSelector((state) => state.user?.user?.user);
-
+    console.log(reservations);
     let [preferenceId, setPreferenceId] = useState('');
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
-
     const createOrder = async (idReservation) => {
         try {
             const endpoint = '/createOrder';
@@ -20,7 +19,6 @@ export default function CardsReservations({ reservations }) {
             throw error.message;
         }
     };
-
     const sendEmail = () => {
         const defaultValues = {
             user_name: `${userLogeado.displayName}`,
@@ -35,7 +33,6 @@ export default function CardsReservations({ reservations }) {
                 Al completarse el pago, verás reflejada en tu bandeja de entrada la información del mismo.
                 Muchas gracias!`,
         };
-
         emailjs
             .send('service_dfonkqh', 'template_j9l4qgp', defaultValues, 'AOct4aYGtYkYpPDCn')
             .then(
@@ -48,17 +45,27 @@ export default function CardsReservations({ reservations }) {
             );
     };
 
+    const bringCourtName = function(){
+            let courtToSearch = reservations.CourtId;
+            let theOne = courts.find((element) => element.id == courtToSearch);
+            return theOne.name;
+    }
+
     return (
         <div className={styles.reservationContainer}>
-            <p>
+            <div>
+                <p>{bringCourtName()}</p>            
+                <p>
                 {reservations.dateTimeStart} - {reservations.dateTimeEnd}
             </p>
             <p>${reservations.totalCost}</p>
+            </div>            
             <button
                 onClick={() => {
                     createOrder(reservations.id);
                     sendEmail();
                 }}
+                className = {styles.btnReservar}
             >
                 Reservar
             </button>

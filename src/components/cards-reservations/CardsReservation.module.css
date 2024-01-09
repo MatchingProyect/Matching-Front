@@ -1,8 +1,27 @@
 .reservationContainer{
 width: 80vw;
+height: auto;
 margin-bottom: 2vh;
-box-shadow: 0px 0px 13px 1px rgb(235, 233, 233);
+box-shadow: 0px 0px 12px 0px rgb(235, 233, 233);
 padding: 2vw;
 border-radius: 10px;
 color: white;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+.btnReservar{
+    background-color: transparent;
+    color: rgb(0, 255, 0);
+    border-style: solid;
+    border-color: rgb(0, 169, 0);
+    border-width: 3px;
+    box-shadow: 0px 0px 12px 0px green;
+    border-radius: 10px;
+    width: 20%;
+    min-width: 90px;
+    height: 60%;
+    min-height: 30px;
+
 }

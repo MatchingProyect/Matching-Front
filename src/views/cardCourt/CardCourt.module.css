@@ -2,15 +2,30 @@
     width: 80vw;
     height: 130px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 20px;
     margin: 15px;
     border-radius: 10px;
     box-shadow: 0px 0px 30px rgb(0, 0, 0);
     background-color: white;
 }
+.cardCourtAdmin{
+    width: 80vw;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
+    margin: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px rgb(0, 0, 0);
+    background-color:white;
+}
+
+
 
 .img{
     position: relative;
@@ -26,6 +41,23 @@
     align-items: baseline;
 color: black;
 }
+.cardBody{
+    display: flex;
+    width: 97%;
+    height: 100%;
+    margin-bottom: 3px;
+    z-index: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.divButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: -20px;
+}
 
 .courtTitle{
     font-size: 17px;
@@ -33,10 +65,20 @@ color: black;
 }
 .courtTitleAdm{
     color: black;
-    font-size: 17px;
-    font-weight: 800;
+    height: 120%;
+    min-width: 100px;
+    width: 60%;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 .courtText{
     font-size: 12px;
     font-weight: 500;
+}
+.textTxt{
+    font-size: 14px;
+
 }

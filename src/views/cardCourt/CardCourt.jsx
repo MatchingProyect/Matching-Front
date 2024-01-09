@@ -3,8 +3,11 @@ import styles from './CardCourt.module.css';
 import { fetchCourts } from '../../redux/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminFunction from './AdminFunction';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import DetailCourt from './DetailCourt';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 const CardCourt = ({ court }) => {
   const [reserva, setReserva] = useState(false);
@@ -28,13 +31,63 @@ const CardCourt = ({ court }) => {
 
   if (userLogeado?.admin) {
     return (
-      <div className={styles.cardCourtContainer}>
-        <button onClick={deleted}>Eliminar</button>
-        <h2 className={styles.courtTitleAdm}>{court.name}</h2>
-        
-        <button onClick={() => { setUpdate(true) }}>update</button>
-        <button onClick={() => { setDetail(true) }}>detail</button>
-        
+      <div className={styles.cardCourtAdmin}>
+        <div className = {styles.cardBody}>
+        <div className={styles.courtTitleAdm}><p className = {styles.textTxt}>{court.name}</p></div>
+        <div className = {styles.divButtons}>
+        <Button 
+        sx = {{
+          'borderStyle' : 'solid',
+          'borderWidth' : '4px',
+          'borderColor': '#203144',
+          'backgroundColor':'#203144',
+  'borderRadius': '5px',
+  'fontSize': '12px',
+  'fontWeight': '700',
+  'color':'white',
+  'height':'30px',
+  'width': '10%',
+  'boxShadow': '0px 0px 4px 0px rgb(0, 0, 0)',
+  'marginRight':'5px',
+
+
+        }}
+        variant="outlined" onClick={() => { setUpdate(true) }}>Update</Button>
+        <Button 
+        sx = {{
+          'backgroundColor':'white',
+  'borderRadius': '5px',
+  'borderStyle':'none',
+  'fontSize': '12px',
+  'fontWeight': '700',
+  'color':'#203144',
+  'height':'30px',
+  'width': '10%',
+  'boxShadow': '0px 0px 4px 0px rgb(0, 0, 0)',
+  'marginRight':'5px',
+
+        }}
+        variant="outlined" onClick={() => { setDetail(true) }}>Detail</Button>
+        <Button
+        onClick={deleted}
+        sx = {{
+          'backgroundColor':'rgb(178, 0, 0)',
+  'borderRadius': '5px',
+  'borderStyle':'none',
+  'fontSize': '12px',
+  'fontWeight': '700',
+  'color':'white',
+  'height':'30px',
+  'width': '10%',
+  'boxShadow': '0px 0px 4px 0px rgb(0, 0, 0)',
+  'marginRight':'5px',
+
+        }}
+        >
+          Delete
+        </Button>
+        </div>
+        </div>
         <AdminFunction court={court} update={update} setUpdate={setUpdate} />
         <DetailCourt court={court} detail={detail} setDetail={setDetail} />
       </div>

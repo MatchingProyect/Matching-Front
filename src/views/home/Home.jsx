@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './home.module.css';
 import CardUser from '../cardUsers/CardUser';
 import FriendsContainer from '../../components/friendsContainer/FriendsContainer.jsx';
+import Button from '@mui/material/Button';
 import CardClub from '../cardClubs/CardClub';
 import CardCourt from '../cardCourt/CardCourt';
 import IconButton from '@mui/material/IconButton';
@@ -12,6 +13,7 @@ import CardReservation from '../../components/card-reservations/CardReservation.
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
 
@@ -77,7 +79,31 @@ export default function Home() {
 
         <div className={styles.containerHome}>
             {
-                userLogeado?.admin ?  <Link to='/functionsAdm'><button >admin</button></Link> : null
+                userLogeado?.admin ?
+                <div className = {styles.dropdownAdmin}>
+                <Link to='/functionsAdm'>
+                    <Button startIcon = {<ManageAccountsIcon 
+                        sx = {{
+                            'color':'black',
+                            'width': '80px',
+                            'height':'35px',
+                            'marginLeft':'-10px'
+                            
+                        }}
+                        />}
+                        sx = {{
+                            'color':'black',                            
+                            'backgroundColor': 'transparent',                            
+                            'margin': '10px',
+                            'borderStyle' : 'solid',
+                            'borderWidth' : '4px',
+                            'borderColor': 'black',
+                            'borderRadius':'10px',
+                            'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                        }}><h1 className = {styles.btnLabelAdmin}>Admin</h1>
+                    </Button>
+            </Link>
+            </div> : null
             }
             
             <div className={styles.header}>
