@@ -4,10 +4,14 @@ import CardUser from '../cardUsers/CardUser';
 import FriendsContainer from '../../components/friendsContainer/FriendsContainer.jsx';
 import CardClub from '../cardClubs/CardClub';
 import CardCourt from '../cardCourt/CardCourt';
+import IconButton from '@mui/material/IconButton';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
 
@@ -32,6 +36,7 @@ export default function Home() {
     
     const [filteredCourts, setFilteredCourts] = useState([]);
     const [filteredClubs, setFilteredClubs] = useState([]);
+    console.log(userLogeado);
 
 
 
@@ -77,12 +82,61 @@ export default function Home() {
             
             <div className={styles.header}>
                 <h1 className={styles.title}>matching</h1>
-                <Link to='/profile'><div className={styles.icon}>
-                    <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1704001242/iconjpeg_icix8f.jpg" alt="icono" className={styles.imgIcon} />
-                </div></Link>
-                <Link to='/solicitudes'><button>solicitudes</button></Link>
-                <button onClick={()=>desloguearte()}>Log Out</button>
-
+                <div className = {styles.navBarFunctions}>
+                <Link to = '/profile'>
+                <IconButton
+                sx = {{
+                    'backgroundColor': 'rgb(26, 26, 26)',
+                    'borderRadius': '5px',
+                    'marginRight': '10px',
+                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                }}
+                onClick={()=>desloguearte()}
+                >
+                <PersonIcon sx = {{
+                    'color':'white',
+                    'width': '35px',
+                    'height':'35px',
+                }}>
+                </PersonIcon>
+                </IconButton>
+                </Link>
+                <Link to='/solicitudes'>
+                <IconButton
+                sx = {{
+                    'backgroundColor': 'rgb(26, 26, 26)',
+                    'borderRadius': '5px',
+                    'marginRight': '10px',
+                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                }}
+                >
+                <NotificationsNoneIcon sx = {{
+                    'color':'white',
+                    'width': '35px',
+                    'height':'35px',
+                    
+                }}>
+                
+                </NotificationsNoneIcon>                
+                </IconButton>
+                </Link>
+                <IconButton
+                sx = {{
+                    'backgroundColor': 'rgb(26, 26, 26)',
+                    'borderRadius': '5px',
+                    'marginRight': '10px',
+                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                }}
+                onClick={()=>desloguearte()}
+                >
+                <LogoutIcon sx = {{
+                    'color':'white',
+                    'width': '35px',
+                    'height':'35px',
+                }}>
+                </LogoutIcon>
+                </IconButton>
+                </div>
             </div>
             <div className={styles.friendsContainer}>
                 <FriendsContainer friends={estadoFriends} />

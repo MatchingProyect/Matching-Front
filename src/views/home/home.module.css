@@ -23,15 +23,19 @@
 .header{
     background-color: #203144;
     width: 100vw;
-    height: 10vh;
+    height: 90px;
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.274); 
-
-    
 }
+
+.btnSolicitudes{
+    width: 100%;
+    height: 70%
+}
+
 .friendsContainer{
     width: 100vw;
     height: auto;

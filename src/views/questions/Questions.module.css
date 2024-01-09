@@ -21,6 +21,9 @@
 .contentQuestionInfo{
     width: 100%;
 }
+.btnSolicitudes{
+    width: 100px;
+}
 
 .questionInfo{
     margin-top: 20px;
