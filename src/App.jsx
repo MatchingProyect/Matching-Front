@@ -37,7 +37,6 @@ function App() {
     const storedUserData = localStorage.getItem('userData');
     if(storedUserData){
       const userDataObject = JSON.parse(storedUserData);
-      console.log("userDataObject", userDataObject)
       dispatch(setDataUser({
           user: userDataObject
       }));
