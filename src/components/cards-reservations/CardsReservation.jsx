@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 export default function CardsReservations({ reservations, courts }) {
     const userLogeado = useSelector((state) => state.user?.user?.user);
-    console.log(reservations);
     let [preferenceId, setPreferenceId] = useState('');
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
     const createOrder = async (idReservation) => {
@@ -46,8 +45,8 @@ export default function CardsReservations({ reservations, courts }) {
     };
 
     const bringCourtName = function(){
-            let courtToSearch = reservations.CourtId;
-            let theOne = courts.find((element) => element.id == courtToSearch);
+            let courtToSearch = reservations?.CourtId;
+            let theOne = courts?.find((element) => element.id == courtToSearch);
             return theOne.name;
     }
 

@@ -75,7 +75,7 @@
 }
 .filterLabel{
     color: white;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
 
 }
@@ -89,11 +89,10 @@
 .selectFiltros{
     width: 43vw;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 7px;
     font-size: 15px;
     font-weight: 500;
-    box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.274);
-    box-shadow: 0px 0px 35px 0px rgb(0, 0, 0);
+    box-shadow: 0px 0px 12px -4px rgb(0, 0, 0);
 }
 .divCourts{
     display: flex;
@@ -111,7 +110,10 @@
     color: white;
     font-size: 35px;
 }
-
+.labelFiltros{
+    font-size: 22px;
+    font-weight: 500;
+}
 
 .containerContenido{
     margin-top: 7.5rem;
@@ -181,6 +183,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        margin-top: 2vh;
 }
 .divCards{
     width: 100vw;

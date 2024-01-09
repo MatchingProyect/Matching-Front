@@ -47,9 +47,7 @@ const CardClub = ({club}) => {
   return (
     <div className = {styles.cardClub}>
       <img src = {club.imgClub} alt = {club.name} className = {styles.imgClub}/>
-      <div className = {styles.clubInfo}>
         <h2 className = {styles.clubName}>{club.name}</h2>
-      </div>
     </div>
   )
 }

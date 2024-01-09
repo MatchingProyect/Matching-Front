@@ -1,8 +1,8 @@
 .cardCourtContainer{
     width: 80vw;
-    height: 130px;
+    height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-around;
     padding: 20px;
@@ -25,8 +25,6 @@
     background-color:white;
 }
 
-
-
 .img{
     position: relative;
     height: 129.5px;
@@ -38,8 +36,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
+    text-align: center;
 color: black;
+width: 60%;
 }
 .cardBody{
     display: flex;
@@ -60,8 +60,8 @@ color: black;
 }
 
 .courtTitle{
-    font-size: 17px;
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: 600;
 }
 .courtTitleAdm{
     color: black;
@@ -75,10 +75,10 @@ color: black;
     justify-content: center;
 }
 .courtText{
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
 }
 .textTxt{
-    font-size: 14px;
+    font-size: 16px;
 
 }

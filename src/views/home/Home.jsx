@@ -38,13 +38,8 @@ export default function Home() {
     
     const [filteredCourts, setFilteredCourts] = useState([]);
     const [filteredClubs, setFilteredClubs] = useState([]);
-    console.log(userLogeado);
-
-
-
 
     const navigate = useNavigate();
-
 
     const desloguearte = () => {
        dispatch(logout())
@@ -200,7 +195,7 @@ export default function Home() {
             </div>
             <div className={styles.clubsContainer}>
                 <div className = {styles.divFiltro}>
-                    <label>Ciudades</label>
+                    <label className = {styles.labelFiltros}>Ciudades</label>
                     <select onChange = {clubsFilterByLocations} className = {styles.selectFiltros}>
                         <option disabled>Ciudades</option>
                         <option>Todos los Clubs</option>
@@ -222,7 +217,7 @@ export default function Home() {
 
             </div>
             <div className={styles.reservationsContainer}>
-                <CardReservation reservations={reservations} />
+                <CardReservation reservations={reservations} courts = {courts} />
             </div>
             <div className={styles.userContainer}>
                 {
