@@ -104,57 +104,56 @@ export default function Home() {
                 <h1 className={styles.title}>matching</h1>
                 <div className = {styles.navBarFunctions}>
                 <Link to = '/profile'>
-                <IconButton
-                sx = {{
-                    'backgroundColor': 'rgb(26, 26, 26)',
-                    'borderRadius': '5px',
-                    'marginRight': '10px',
-                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
-                }}
-                onClick={()=>desloguearte()}
-                >
-                <PersonIcon sx = {{
-                    'color':'white',
-                    'width': '35px',
-                    'height':'35px',
-                }}>
-                </PersonIcon>
-                </IconButton>
+                    <IconButton
+                    sx = {{
+                        'backgroundColor': 'rgb(26, 26, 26)',
+                        'borderRadius': '5px',
+                        'marginRight': '10px',
+                        'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                    }}
+                    >
+                    <PersonIcon sx = {{
+                        'color':'white',
+                        'width': '35px',
+                        'height':'35px',
+                    }}>
+                    </PersonIcon>
+                    </IconButton>
                 </Link>
                 <Link to='/solicitudes'>
-                <IconButton
-                sx = {{
-                    'backgroundColor': 'rgb(26, 26, 26)',
-                    'borderRadius': '5px',
-                    'marginRight': '10px',
-                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
-                }}
-                >
-                <NotificationsNoneIcon sx = {{
-                    'color':'white',
-                    'width': '35px',
-                    'height':'35px',
+                    <IconButton
+                    sx = {{
+                        'backgroundColor': 'rgb(26, 26, 26)',
+                        'borderRadius': '5px',
+                        'marginRight': '10px',
+                        'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                    }}
+                    >
+                    <NotificationsNoneIcon sx = {{
+                        'color':'white',
+                        'width': '35px',
+                        'height':'35px',
+                        
+                    }}>
                     
-                }}>
-                
-                </NotificationsNoneIcon>                
-                </IconButton>
+                    </NotificationsNoneIcon>                
+                    </IconButton>
                 </Link>
                 <IconButton
-                sx = {{
-                    'backgroundColor': 'rgb(26, 26, 26)',
-                    'borderRadius': '5px',
-                    'marginRight': '10px',
-                    'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
-                }}
-                onClick={()=>desloguearte()}
-                >
-                <LogoutIcon sx = {{
-                    'color':'white',
-                    'width': '35px',
-                    'height':'35px',
-                }}>
-                </LogoutIcon>
+                    sx = {{
+                        'backgroundColor': 'rgb(26, 26, 26)',
+                        'borderRadius': '5px',
+                        'marginRight': '10px',
+                        'boxShadow': '0px 0px 8px 0px rgb(0, 0, 0)',
+                    }}
+                    onClick={()=>desloguearte()}
+                    >
+                    <LogoutIcon sx = {{
+                        'color':'white',
+                        'width': '35px',
+                        'height':'35px',
+                    }}>
+                    </LogoutIcon>
                 </IconButton>
                 </div>
             </div>
