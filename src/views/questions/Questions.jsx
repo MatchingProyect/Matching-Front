@@ -37,7 +37,7 @@ const Questions = () => {
             })
         }
 
-        console.log("datosUserasdasdasd", datosUser)
+        console.log('DatosUser', datosUser)
     }
 
     const handleRenderQuestion = () => {

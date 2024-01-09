@@ -56,7 +56,8 @@ const ProfileSportQuestions = () => {
                 dayPreference: valuesSelect.dias,
                 timePreference: valuesSelect.horario,
                 categoryLvl: valuesSelect.categoria,
-                UserId: datosUser.datosUser.id
+                UserId: datosUser.datosUser.id,
+                SportId:'b4d6e54a-8236-4df5-990e-5d2c3bb9ddfe',
         });
             console.log('Profile creado:', response.data );
             navigate("/home");
@@ -102,6 +103,8 @@ const ProfileSportQuestions = () => {
 
         postUser();
     }, [datosUser])
+
+    console.log(valuesSelect);
     
 
   return (
