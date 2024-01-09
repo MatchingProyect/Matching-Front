@@ -87,24 +87,24 @@ const Registro = () => {
       <div className={ styles.contentDatas } >
         <label className={ styles.labelsDatas } >Nombre y apellido:</label>
         <input className={ styles.inputsDatas } type="text" {...register('nombreApellido', { required: true, maxLength: 40 })}/>
-        {errors.nombreApellido?.type === "required" && <p>Este campo es requerido</p>}
-        {errors.nombreApellido?.type === "maxLength" && <p>El máximo en el campo es 40 caracteres</p>}
+        {errors.nombreApellido?.type === "required" && <p className = {styles.error}>Este campo es requerido</p>}
+        {errors.nombreApellido?.type === "maxLength" && <p className = {styles.error}>El máximo en el campo es 40 caracteres</p>}
       </div>
 
       <div className={ styles.contentDatas } >
         <label className={ styles.labelsDatas } >Correo electrónico:</label>
         <input className={ styles.inputsDatas } type="email" {...register('email', { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}/>
-        {errors.email?.type === "required" && <p>Este campo es requerido</p>}
-        {errors.email?.type === "pattern" && <p>Dirección de correo electrónico no válida</p>}
+        {errors.email?.type === "required" && <p className = {styles.error}>Este campo es requerido</p>}
+        {errors.email?.type === "pattern" && <p className = {styles.error} >Dirección de correo electrónico no válida</p>}
       </div>
 
       <div className={ styles.contentDatas }>
         <label className={ styles.labelsDatas } >Contraseña:</label>
         <input className={ styles.inputsDatas } type={showPassword ? "text" : "password"} {...register('password', { required: true, minLength: 8, maxLength: 15 })}/>
-        {errors.password?.type === "required" && <p>Este campo es requerido</p>}
-        {errors.password?.type === "minLength" && <p>La contraseña debe tener al menos 8 caracteres</p>}
-        {errors.password?.type === "maxLength" && <p>La contraseña no debe exceder los 15 caracteres</p>}
-        <span onClick={togglePasswordVisibility}>
+        {errors.password?.type === "required" && <p className = {styles.error}>Este campo es requerido</p>}
+        {errors.password?.type === "minLength" && <p className = {styles.error}>La contraseña debe tener al menos 8 caracteres</p>}
+        {errors.password?.type === "maxLength" && <p className = {styles.error}>La contraseña no debe exceder los 15 caracteres</p>}
+        <span onClick={togglePasswordVisibility} className = {styles.mostrarPass}>
           {showPassword ? "Ocultar" : "Mostrar"} contraseña
         </span>
       </div>

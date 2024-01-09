@@ -36,6 +36,7 @@
 
 .inputsDatas{
     height: 55px;
+    width: 90%;
     border-radius: 10px;
     outline: transparent;
     padding-left: 13px;
@@ -61,4 +62,17 @@
     font-size: 16px;
     font-weight: 700;
     margin-left: 8px;
+}
+.mostrarPass{
+    color: white;
+    margin-top: 1vh;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.error{
+    color: white;
+    margin-top: 1vh;
+    font-size: 17px;
+    font-weight: 500;
 }
