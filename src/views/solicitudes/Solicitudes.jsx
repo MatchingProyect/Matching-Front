@@ -48,7 +48,7 @@ const Solicitudes = () => {
     
 
   
-    
+    console.log(request)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -116,6 +116,8 @@ const Solicitudes = () => {
             </div>
             
             {request?.map(request => {
+                {console.log('solicitudes',request.status)}
+                if(request.estado === "true" || request.estado === "rechazado") return (<h2>No hay Solicitudes</h2>)
                 const filteredInfo = infoSoli.filter(user => request.UserId === user.userFound.user.id)
                 {console.log('xd',request.UserId)}
                 return (

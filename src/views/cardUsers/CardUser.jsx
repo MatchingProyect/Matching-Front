@@ -16,7 +16,7 @@ const CardUser = ({ user }) => {
   
   const idUser = userLogeado?.id
 
-  console.log(idUser)
+  
 
   const deleteUser = async()=>{
     try {

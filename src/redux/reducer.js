@@ -34,12 +34,13 @@ export const userSlice = createSlice({
         state.allProfiles = action.payload
        },
        setFriends: (state, action) => {
-        let result = state.allFriends?.find((element) => element.id == action.payload.id);
-        if(result == undefined){
-            state.allFriends = [ ...state.allFriends, action.payload];
-        } else {
-            return ;
-        };
+        // let result = state.allFriends?.find((element) => element.id == action.payload.id);
+        // if(result == undefined){
+        //     state.allFriends = [ ...state.allFriends, action.payload];
+        // } else {
+        //     return ;
+        // };
+        state.allFriends = action.payload
        },
        setUser: (state, action) =>{
         state.user = action.payload
@@ -69,15 +70,29 @@ export const fetchUser = (id) => async (dispatch) => {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
         dispatch(setUser(data.userFound));
-        data.userFound.friends?.map((element) => {
-            dispatch(fetchFriends(element.FriendId));
-        });
-        return data.userFound;
+        // data.userFound.friends?.map((element) => {
+        //     dispatch(fetchFriends(element.FriendId));
+        // });
+        // return data.userFound;
+        console.log('ccc',data.userFound.user.id)
+        const friends = await axios(`/friends/${data.userFound.user.id}`)
+        
+        if(friends) dispatch(setFriends(friends.data.friends))
+        
       }
     } catch (error) {
         throw error.message;
     }
   };
+
+//   export const fetchFriends = (id) => async(dispatch) => {
+//     try {
+//         const {data} = await axios(`/users/${id}`)
+//        if(data.status) dispatch(setFriends(data.userFound.user))
+//    } catch (error) {
+//        throw error.message
+//    };
+// };
 
 export const fetchReservations = ()=>async(dispatch)=>{
     try {
@@ -108,14 +123,7 @@ export const fetchUsers = ()=>async(dispatch)=>{
     };
 };
 
-export const fetchFriends = (id) => async(dispatch) => {
-    try {
-        const {data} = await axios(`/users/${id}`)
-       if(data.status) dispatch(setFriends(data.userFound.user))
-   } catch (error) {
-       throw error.message
-   };
-};
+
 
 export const fetchSports = ()=>async(dispatch)=>{
     try {
