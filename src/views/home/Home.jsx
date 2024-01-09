@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './home.module.css';
 import CardUser from '../cardUsers/CardUser';
 import FriendsContainer from '../../components/friendsContainer/FriendsContainer.jsx';
@@ -15,8 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUser, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
-
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -26,7 +25,8 @@ export default function Home() {
     const reservations = useSelector((state) => state.user.allReservations);
     const locations = useSelector((state) => state.user.allLocations);
     const estadoFriends = useSelector((state) => state.user.allFriends);
-    const userLogeado = useSelector(state =>  state.user?.user?.user);
+    const userLogeado = useSelector(state =>  state.user?.datauser?.user);
+
 
     useEffect(() => {
         dispatch(fetchUsers());
@@ -34,6 +34,8 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
+        dispatch(fetchSports());
+
     }, []);
     
     const [filteredCourts, setFilteredCourts] = useState([]);
@@ -45,9 +47,6 @@ export default function Home() {
        dispatch(logout())
        localStorage.removeItem('userData');
        navigate('/login')
-      
-        
-       
     };
 
     
@@ -230,4 +229,4 @@ export default function Home() {
             <NavbarLow />
         </div>
     );
-};
+}

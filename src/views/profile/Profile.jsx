@@ -1,14 +1,15 @@
 import styles from './profile.module.css';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import ProfileDeportivo from './ProfileDeportivo'
 import MiPerfil from './MiPerfil'
+import {  useSelector } from 'react-redux';
 
 export default function Profile() {
-    const userProfile = useSelector((state) => state.user.user.user);
+    const userProfile = useSelector((state) => state.user?.datauser?.user);
     const [ profileOrSportProfile, setProfile ] = useState(true);
 
+    console.log(userProfile)
     function miperfilHandler(){
         setProfile(true)
     }
@@ -16,7 +17,8 @@ export default function Profile() {
         setProfile(false)
     }
 
-//Componente final
+
+
     return(
         <div className = {styles.completeComponent}>
             <div className = {styles.divButtons}>
