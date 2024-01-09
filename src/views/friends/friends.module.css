@@ -73,6 +73,8 @@
     justify-content: flex-start; 
     margin: 0 10px;
     color: #203144;
+    margin-bottom: 50%;
+    margin-top: 15%;
 }
 .flexContainer img{
     min-width: 18px;
