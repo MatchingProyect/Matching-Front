@@ -1,15 +1,20 @@
 import styles from './profile.module.css';
 import NavbarLow from '../../components/navbarLow/navbarLow';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProfileDeportivo from './ProfileDeportivo'
 import MiPerfil from './MiPerfil'
-import {  useSelector } from 'react-redux';
+import {  useSelector, useDispatch } from 'react-redux';
+import { fetchProfile } from '../../redux/reducer';
 
 export default function Profile() {
+    const dispatch = useDispatch();
     const userProfile = useSelector((state) => state.user?.datauser?.user);
-    const [ profileOrSportProfile, setProfile ] = useState(true);
+    useEffect(() => {
+        dispatch(fetchProfile(userProfile?.id));
+    }, []);
 
-    console.log(userProfile)
+    const perfilDeportivo = useSelector((state) => state.user?.datauser?.profile);    
+    const [ profileOrSportProfile, setProfile ] = useState(true);
     function miperfilHandler(){
         setProfile(true)
     }
@@ -29,7 +34,7 @@ export default function Profile() {
             </div>
             </div>
 
-        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo userProfile = {userProfile}/>}
+        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo perfilDeportivo = {perfilDeportivo}/>}
         <NavbarLow></NavbarLow>
         </div>
 

@@ -30,8 +30,8 @@ export const userSlice = createSlice({
        setCourts: (state, action)=>{
         state.allCourts = action.payload;
        },
-       setProfiles: (state, action) =>{
-        state.allProfiles = action.payload
+       setProfile: (state, action) =>{
+        state.datauser.profile = action.payload
        },
        setFriends: (state, action) => {
         state.allFriends = action.payload
@@ -65,15 +65,26 @@ export const fetchUser = (id) => async (dispatch) => {
       const { data } = await axios(`/users/${id}`);
       if (data.status) {
         dispatch(setDataUser(data.userFound));
-        console.log('fetchUser',data.userFound)
         const friends = await axios(`/friends/${data.userFound.user.id}`)
         if(friends) dispatch(setFriends(friends.data.friends))
-        
+        const profilesDeport = await axios(`/userProfiles/${data.userFound.user.id}`)
+    if(profilesDeport) dispatch(setProfile(profilesDeport.theOne))
       }
     } catch (error) {
         throw error.message;
     }
   };
+
+  export const fetchProfile = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios(`/userProfiles/${id}`);
+        if (data.status){
+            dispatch(setProfile(data.theOne));
+        }
+    } catch (error) {
+        throw error.message;
+    }
+  }
 
 //   export const fetchFriends = (id) => async(dispatch) => {
 //     try {
@@ -154,5 +165,5 @@ export const logout = () => (dispatch) => {
     dispatch(resetState()); 
 };
 
-export const { setClubs,resetState, setCourts, setUsers, setSports, setProfiles, setFriends, setDataUser, setReservations, setLocations } = userSlice.actions;
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser, setReservations, setLocations } = userSlice.actions;
 export default userSlice.reducer;

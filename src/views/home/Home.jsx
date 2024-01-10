@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations, logout } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations, logout, fetchProfile } from '../../redux/reducer.js';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -35,7 +35,6 @@ export default function Home() {
         dispatch(fetchLocations());
         dispatch(fetchReservations());
         dispatch(fetchSports());
-
     }, []);
     
     const [filteredCourts, setFilteredCourts] = useState([]);
