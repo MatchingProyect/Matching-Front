@@ -8,6 +8,7 @@ const initialState = {
     allCourts: [],
     allFriends: [],
     allLocations: [],
+    allProfiles: [],
     allReservations: [],
     datauser: []
 };
@@ -44,6 +45,9 @@ export const userSlice = createSlice({
        },
        setLocations: (state, action) => {
         state.allLocations = action.payload;
+       },
+       setProfiles: (state, action) => {
+        state.allProfiles = action.payload;
        },
        
        resetState: (state) => {
@@ -165,5 +169,5 @@ export const logout = () => (dispatch) => {
     dispatch(resetState()); 
 };
 
-export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser, setReservations, setLocations } = userSlice.actions;
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser, setReservations, setLocations, setProfiles } = userSlice.actions;
 export default userSlice.reducer;
