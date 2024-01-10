@@ -23,12 +23,12 @@ const ProfileSportQuestions = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const userLogeado = useSelector((state) => state.user.user);
+    const userLogeado = useSelector((state) => state.user?.datauser);
 
 
 
     const handleAnswerClick = (question, answer) => {
-        console.log("handleAnswerClick")
+        console.log("valuesSelect", valuesSelect)
         setValuesSelect({
             ...valuesSelect,
             [question]: answer,
@@ -84,6 +84,8 @@ const ProfileSportQuestions = () => {
                     phone: phone,
                     description: location
                 }
+                console.log('userSend', userSend );
+
                 const response = await axios.put(`/users/${id}`,userSend);      
                 console.log('Respuesta del servidor:', response.data );
 
@@ -104,7 +106,6 @@ const ProfileSportQuestions = () => {
         postUser();
     }, [datosUser])
 
-    console.log(valuesSelect);
     
 
   return (

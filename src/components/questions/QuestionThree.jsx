@@ -2,7 +2,6 @@ import { useUserContext } from '../../context/UserProvider';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import styles from './Questions.module.css'
-import { useEffect } from 'react';
 
 export const QuestionThree = () => {
 
@@ -18,7 +17,6 @@ export const QuestionThree = () => {
             phone,
             questionsAnsker: true
         })
-        alert('Informacion guardada');
     }
 
   return (

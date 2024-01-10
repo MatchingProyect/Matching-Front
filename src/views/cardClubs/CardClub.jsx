@@ -12,7 +12,7 @@ const CardClub = ({club}) => {
   const [detailClub, setDetailClub] = useState(false)
   const dispatch = useDispatch()
 
-  const user =useSelector((state) =>state.user?.user?.user)
+  const user =useSelector((state) =>state.user?.dataUser?.user)
   // console.log(club);
 
   const deleteClub = async()=>{
