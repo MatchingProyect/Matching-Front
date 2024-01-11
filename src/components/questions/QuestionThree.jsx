@@ -1,13 +1,14 @@
 import { useUserContext } from '../../context/UserProvider';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import styles from './Questions.module.css'
-import { useEffect } from 'react';
+import styles from './QuestionThree.module.css';
+import { useState } from 'react';
 
 export const QuestionThree = () => {
 
     const { register,handleSubmit,formState: { errors } } = useForm();
     const { datosUser,setDatosUser } = useUserContext();
+    const [confirma, setConfirma] = useState('');
     
     const onSubmit = ( data ) => {
         const { adress,area,phone } = data;
@@ -18,11 +19,17 @@ export const QuestionThree = () => {
             phone,
             questionsAnsker: true
         })
-        alert('Informacion guardada');
+        setConfirma('Información guardada exitosamente');
     }
 
   return (
     <>
+    <div className={styles.contentBar}>
+              <div className={styles.bar}>
+                  <div className={styles.barProgress} />
+              </div>
+              <p className={styles.cuenta}>3/5</p>
+          </div>
         <div className={ styles.contentQuestion } >
             <p className={ styles.titleQuestion } >Completa con tu dirección:</p>
             <form className={ styles.contentFormLocation } onSubmit={ handleSubmit( onSubmit ) }>
@@ -37,18 +44,20 @@ export const QuestionThree = () => {
                 </div>
                 <p className={ styles.titleQuestion } >Tu numero de teléfono:</p>
                 <div className={ styles.contentNumber } >
-                    <div className={ styles.contentAreasNumber }>
-                        <label className={ styles.labelArea } >Área</label>
+                    <div className={ styles.contentAreasNumberCode }>
+                        <label className={ styles.labelInputs } >Área</label>
                         <input 
                             className={ styles.inputArea } 
                             type="number"
+                            placeholder='+'
                             { ...register ( 'area', { required: 'Este campo no puede ir vacio' } ) }
                         />
                     </div>
                     <div className={ styles.contentAreasNumber }>
-                        <label className={ styles.labelNumber } >Número</label>
+                        <label className={ styles.labelInputs } >Número</label>
                         <input 
                             className={ styles.inputNumber } 
+                            placeholder='Numero'
                             type="tel"
                             { ...register ( 'phone', { required: 'El numero de telefono no puede estar vacio' } ) }
                         />
@@ -57,7 +66,18 @@ export const QuestionThree = () => {
                 <span className={ styles.errorsSpan }>
                     { errors.phone && <p className={ styles.errors } >{ errors.phone.message }</p> }
                 </span>
-                <Button type='submit'>Guardar datos</Button>
+                <Button type='submit'
+                sx = {{
+                    backgroundColor: 'white',
+                        width: '40%',
+                        height: '40%',
+                        fontWeight: '700',
+                        fontFamily: 'poppins',
+                        boxShadow: '0px 0px 15px 1px black',
+                        marginTop: '20px',
+                }}
+                >Guardar datos</Button>
+                <span className = {styles.alertSpan}>{confirma}</span>
             </form>
         </div>
     </>

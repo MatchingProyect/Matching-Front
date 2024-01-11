@@ -1,42 +1,36 @@
-.contentQuestions{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.contentQuestion{
     width: 100vw;
-    height: 100vh;
-    background-color: #203144;
-}
-
-.contentLogo{
+    height: 40vh;
+    max-height: 400px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 95px;
-    width: 100%;
-    height: 20%;
-    max-height: 200px;
-}
-
-.logo{
-    max-width: 100%;
-    max-height: 100%;
-    height: 70%;
-    width: 90%;
 
 }
-
-.contentQuestionInfo{
-    width: 100%;
-}
-
-
-.questionInfo{
-    text-align: center;
+.titleQuestion{
     color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
 }
-
-
+.contentForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 60%;
+    width: 90%;
+}
+.inputDate{
+    width: 80%;
+    height: 35%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 3px black;
+    font-size: 19px;
+    padding: 20px 10px 20px 10px;
+}
 .contentBar{
     margin-top: 20px;
     display: flex;
@@ -59,11 +53,10 @@
 }
 
 .barProgress{
-    width: 68px;
-    height: 4px;
+    width: 126px;
+    height: 5px;
     background: linear-gradient(91deg, #F2AE32 0%, #F3B928 100%)
 }
-
 .cuenta{
     width: 41px;
     height: 29px;
@@ -72,12 +65,4 @@
     line-height: 19px;
     text-align: center;
     color: white;
-}
-
-.bottomComp{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80%;
 }

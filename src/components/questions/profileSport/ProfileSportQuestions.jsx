@@ -18,7 +18,7 @@ const ProfileSportQuestions = () => {
         lateralidad: '',
         ladoCancha: '',
         tipoJuego: '',
-        categoria: ''    
+        categoria: '',
     });
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ const ProfileSportQuestions = () => {
                 timePreference: valuesSelect.horario,
                 categoryLvl: valuesSelect.categoria,
                 UserId: datosUser.datosUser.id,
-                SportId:'b4d6e54a-8236-4df5-990e-5d2c3bb9ddfe',
+                SportId: valuesSelect.sport,
         });
             console.log('Profile creado:', response.data );
             navigate("/home");
@@ -109,6 +109,12 @@ const ProfileSportQuestions = () => {
 
   return (
     <>
+    <div className={styles.contentBar}>
+              <div className={styles.bar}>
+                  <div className={styles.barProgress} />
+              </div>
+              <p className={styles.cuenta}>5/5</p>
+    </div>
         <Container sx={ {  ..._styled.container } }>
             <div className={ styles.contentLogo }>
                 <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702586530/logoMin_eyv6zj.svg" alt="logo Matching" />

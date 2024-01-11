@@ -67,3 +67,39 @@
     height: 100px;
     margin-top: 24px;
 }
+
+.contentBar{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 20vh;
+}
+
+.bar{
+    width: 316px;
+    height: 4px;
+    background: black;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-left: 22px;
+}
+
+.barProgress{
+    width: 316px;
+    height: 5px;
+    background: linear-gradient(91deg, #F2AE32 0%, #F3B928 100%)
+}
+.cuenta{
+    width: 41px;
+    height: 29px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+    color: white;
+}

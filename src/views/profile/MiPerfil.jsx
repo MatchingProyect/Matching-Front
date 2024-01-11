@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 export default function MiPerfil() {
-    const userProfile = useSelector((state) => state.user.datauser.user);
+    const userProfile = useSelector((state) => state.user.datauser?.user);
 
     return(
         <div className = {styles.divProfile}>
