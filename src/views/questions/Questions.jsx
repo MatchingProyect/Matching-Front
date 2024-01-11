@@ -3,7 +3,6 @@ import { Button } from '@mui/material'
 import { useUserContext } from '../../context/UserProvider'
 import { QuestionOne,QuestionTwo,QuestionThree,QuestionFour } from '../../components/questions'
 import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
-import logo from '../../assets/logo-matching.svg'
 import styles from './Questions.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSports } from '../../redux/reducer';
@@ -60,7 +59,7 @@ const Questions = () => {
             ? (
                 <div className={ styles.contentQuestions }>
                     <div className={ styles.contentLogo }>
-                        <img className={ styles.logo } src={ logo } alt="Logo matching" />
+                        <img className={ styles.logo } src='https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg' />
                     </div>
                     <div className={ styles.contentQuestionInfo}>
                         <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>

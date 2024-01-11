@@ -109,31 +109,22 @@ const ProfileSportQuestions = () => {
     
 
   return (
-    <>
+    <>    
+        <div className = {styles.holeProfileQuestionsDiv}>
+    <div className={ styles.contentLogo }>
+                <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg" alt="logo Matching" className = {styles.logo} />
+            </div>
     <div className={styles.contentBar}>
               <div className={styles.bar}>
                   <div className={styles.barProgress} />
               </div>
               <p className={styles.cuenta}>5/5</p>
     </div>
-        <Container sx={ {  ..._styled.container } }>
-            <div className={ styles.contentLogo }>
-                <img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702586530/logoMin_eyv6zj.svg" alt="logo Matching" />
-            </div>
             <div className={ styles.contentTitle }>
-                <p className={ styles.title }>Perfil deportivo</p>
-            </div>
-            <div className={ styles.carrousel } >
-                <CardSport iconSport={ `${ urlIcons }/v1702540814/emojione-monotone_tennis_almief.svg` } nameSport={ 'Pádel' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541735/tenis_cyo2ka.svg` } nameSport={ 'Tenis' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541734/futbol_isrkf2.svg` } nameSport={ 'Football' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541734/golf_t9uvge.svg` } nameSport={ 'Golf' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541734/basquet_bqbqrl.svg` } nameSport={ 'Basquet' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541734/hokey_upskgq.svg` } nameSport={ 'Hockey' }/>
-                <CardSport iconSport={ `${ urlIcons }/v1702541735/squash_hjiwwz.svg` } nameSport={ 'Squash' }/>
+                <p className={ styles.title }>Vamos a registrar tu primer perfil deportivo</p>
             </div>
             <div className={ styles.contentQuestions }>
-                <p className={ styles.pQuestions } >¿Cuál es tu lateralidad?</p>
+                <p className={ styles.pQuestions } >¿Lateralidad?</p>
                 <div className={ styles.contentAnswers }>
                     <Button  sx={{
                                 ..._styled.buttons,
@@ -154,7 +145,7 @@ const ProfileSportQuestions = () => {
                         Ambas
                     </Button>
                 </div>
-                <p className={ styles.pQuestions } >¿Tu lado de la cancha?</p>
+                <p className={ styles.pQuestions } >¿Lado de la cancha?</p>
                 <div className={ styles.contentAnswers }>
                     <Button sx={{
                                 ..._styled.buttons,
@@ -176,7 +167,7 @@ const ProfileSportQuestions = () => {
                     </Button>
 
                 </div>
-                <p className={ styles.pQuestions } >¿Tipo de juego?</p>
+                <p className={ styles.pQuestions } >¿Tipo de juego preferido?</p>
                 <div className={ styles.contentAnswers }>
                 <Button sx={{
                                 ..._styled.buttons,
@@ -198,7 +189,7 @@ const ProfileSportQuestions = () => {
                 </Button>
                     
                 </div>
-                <p className={ styles.pQuestions } >¿A que categoria perteneces?</p>
+                <p className={ styles.pQuestions } >¿Nivel de juego?</p>
                 <div className={ styles.contentAnswers }>
                     <Button sx={{
                                 ..._styled.buttons,
@@ -219,13 +210,13 @@ const ProfileSportQuestions = () => {
                         Avanzado
                     </Button>
                 </div>
-                <p className={ styles.pQuestions } >¿Horario de juego preferido?</p>
+                <p className={ styles.pQuestions } >¿Horario preferido?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
                         <InputLabel sx={{
-                                ..._styled.buttons}}  id='selectHorario' >Horario</InputLabel>
+                                ..._styled.inputLabel}}  id='selectHorario' >Horario</InputLabel>
                         <Select sx={{
-                                ..._styled.buttons,
+                                ..._styled.select,
                                 ...(valuesSelect.horario && _styled.selectedButton),
                             }}  name={ 'horario' } onChange={ handleChange } value={ valuesSelect.horario } labelId='selectHorario' label='Selecciona'>
                             <MenuItem value={ 'Mañana' } >Mañana</MenuItem>
@@ -234,13 +225,13 @@ const ProfileSportQuestions = () => {
                         </Select>
                     </FormControl>
                 </div>
-                <p className={ styles.pQuestions } >¿Que dias prefieres para jugar?</p>
+                <p className={ styles.pQuestions } >¿Dias preferidos?</p>
                 <div className={ styles.contentAnswers }>
                     <FormControl>
                         <InputLabel sx={{
-                                ..._styled.buttons }}  id='selectDias' >Dias</InputLabel>
+                                ..._styled.inputLabel }}  id='selectDias' >Dias</InputLabel>
                         <Select sx={{
-                                ..._styled.buttons,
+                                ..._styled.select,
                                 ...(valuesSelect.dias  && _styled.selectedButton),
                             }} name={ 'dias' } onChange={ handleChange } value={ valuesSelect.dias } labelId='selectDias' label='Selecciona'>
                             <MenuItem value={ 'Entre semana' } >Entre semana</MenuItem>
@@ -258,31 +249,26 @@ const ProfileSportQuestions = () => {
                 Siguiente
             </Button>
             </div>
-        </Container>
+        </div>
     </>
   )
 }
 
 const _styled = {
-    container: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: '#203144',
-        width: '100vw',
-    },
     buttons: {
         marginLeft: '8px',
-        color: '#676666',
-        border: '1px solid #676666',
-        borderRadius: '20px',
+        color: 'white',
+        border: '2px solid #676666',
+        borderRadius: '10px',
+        fontSize:'13px',
+        fontFamily: 'Poppins',
     },
     select: {
-        width: '171px',
+        width: '180px',
+        height: '55px',
         borderRadius: '10px',
-        color: '#676666',
-        border: '1px solid #676666'
+        color: 'white',
+        border: '2px solid #676666'
     },
     submit: {
         height: '50px',
@@ -293,7 +279,8 @@ const _styled = {
         fontWeight: '600',
     },
     inputLabel: {
-        color: '#676666'
+        color: 'white',
+        width: '100px',
     },
 
     selectedButton: {
