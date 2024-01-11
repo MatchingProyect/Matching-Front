@@ -37,9 +37,7 @@ function App() {
     const storedUserData = localStorage.getItem('userData');
     if(storedUserData){
       const userDataObject = JSON.parse(storedUserData);
-      dispatch(setDataUser({
-          user: userDataObject
-      }));
+      dispatch(setDataUser(userDataObject));
     }
 
 

@@ -50,6 +50,12 @@ export const userSlice = createSlice({
         state.allProfiles = action.payload;
        },
        
+       setFriend: (state, action) => {
+        const friend = action.payload;
+        state.datauser.user.FriendRequests.push(friend);
+         
+       },
+
        resetState: (state) => {
         state.allUsers = [];
         state.allSports = [];
@@ -67,12 +73,17 @@ export const userSlice = createSlice({
 export const fetchUser = (id) => async (dispatch) => {
     try {
       const { data } = await axios(`/users/${id}`);
+      console.log("fetchUser", data)
       if (data.status) {
+
+        localStorage.setItem('userData', JSON.stringify(data.userFound));   //local storage solo almacena tipo texto
         dispatch(setDataUser(data.userFound));
+
         const friends = await axios(`/friends/${data.userFound.user.id}`)
         if(friends) dispatch(setFriends(friends.data.friends))
+
         const profilesDeport = await axios(`/userProfiles/${data.userFound.user.id}`)
-    if(profilesDeport) dispatch(setProfile(profilesDeport.theOne))
+        if(profilesDeport) dispatch(setProfile(profilesDeport.theOne))
       }
     } catch (error) {
         throw error.message;
@@ -90,14 +101,6 @@ export const fetchUser = (id) => async (dispatch) => {
     }
   }
 
-//   export const fetchFriends = (id) => async(dispatch) => {
-//     try {
-//         const {data} = await axios(`/users/${id}`)
-//        if(data.status) dispatch(setFriends(data.userFound.user))
-//    } catch (error) {
-//        throw error.message
-//    };
-// };
 
 export const fetchReservations = ()=>async(dispatch)=>{
     try {
@@ -165,9 +168,20 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
+export const fetchUpdateFriend = (userFriend)=>async(dispatch)=>{
+    try {
+        console.log("userFriend", userFriend)
+         if(userFriend) dispatch(setFriend(userFriend))
+    } catch (error) {
+        throw error.message
+    }
+}
+
+
+
 export const logout = () => (dispatch) => {
     dispatch(resetState()); 
 };
 
-export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser, setReservations, setLocations, setProfiles } = userSlice.actions;
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser,setFriend, setReservations, setLocations, setProfiles } = userSlice.actions;
 export default userSlice.reducer;

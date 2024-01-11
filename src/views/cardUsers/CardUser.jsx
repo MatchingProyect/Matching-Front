@@ -2,14 +2,14 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './CardUser.module.css';
-import { fetchUser, fetchUsers } from '../../redux/reducer';
+import { fetchUpdateFriend, fetchUsers } from '../../redux/reducer';
 import { useDispatch } from 'react-redux'; 
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useEffect } from 'react';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -19,8 +19,19 @@ const CardUser = ({ user }) => {
 
   const dispatch = useDispatch()
   const idUserQueRecibe = user?.id;
-  const userLogeado = useSelector((state) => state.user?.datauser?.user);
+  const userInfo = useSelector((state) => state.user?.datauser?.user);
   const [open, setOpen] = React.useState(false);
+  const [sendSolicitud, setSend] = React.useState(false);
+
+  useEffect(() => {
+    userInfo?.FriendRequests?.map(userFriend => {
+      if (userFriend.FriendRId == user.id){
+        setSend(true)
+      }
+
+    })
+  },[userInfo])
+
 
   const handleClick = () => {
     setOpen(true);
@@ -64,23 +75,22 @@ const CardUser = ({ user }) => {
   const enviarRequest = async()=>{
     try {
       const requestBody = {
-        UserId: userLogeado.id,
+        UserId: userInfo.id,
         FriendRId: idUserQueRecibe
       };
       console.log("requestBody", requestBody)
-      const agregado = await axios.post('/friendRequest', requestBody)
-      if(agregado) {
-        console.log("agregado",agregado)
-        handleClick()
-        dispatch(fetchUser())
-      }
-
+      const {data} = await axios.post('/friendRequest', requestBody)
+      if(data) {
+          handleClick()
+          dispatch(fetchUpdateFriend(data.request))
+        }
       } catch (error) {
+        console.log(error)
       throw error.message
       }
   };
 
-  if(userLogeado?.admin){
+  if(userInfo?.admin){
     return (
       <div className = {styles.userContainer}>
         <h2 className = {styles.nameUser}>{user?.displayName}</h2>
@@ -99,7 +109,15 @@ const CardUser = ({ user }) => {
     <div className = {styles.userContainer}>
       <img src = {user.avatarImg} alt = {user.displayName} className = {styles.avatarImg}/>
       <h3 className = {styles.nameUser}>{user.displayName}</h3>
-      <button className = {styles.btnAgregar} onClick={()=> enviarRequest()}>Agregar</button>
+      {sendSolicitud? 
+        (
+          <div>
+            Solicitud Enviada
+          </div>
+        ) : 
+        (
+        <button className = {styles.btnAgregar} onClick={()=> enviarRequest()}>Agregar</button>
+      )}
 
       <Stack spacing={2}>
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>

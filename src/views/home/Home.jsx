@@ -35,6 +35,7 @@ export default function Home() {
         dispatch(fetchLocations());
         dispatch(fetchReservations());
         dispatch(fetchSports());
+        
     }, []);
     
     const [filteredCourts, setFilteredCourts] = useState([]);
@@ -71,7 +72,6 @@ export default function Home() {
     return (
 
         <div className={styles.containerHome}>
-            {console.log("userLogeado",userLogeado)}
            {
                 userLogeado?.admin ?
                 <div className = {styles.dropdownAdmin}>
