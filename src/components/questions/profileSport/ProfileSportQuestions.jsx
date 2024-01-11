@@ -6,7 +6,7 @@ import { Button, Container, FormControl, InputLabel, MenuItem, Select } from '@m
 import styles from './ProfileSportQuestion.module.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/reducer'; 
+import { setDataUser } from '../../../redux/reducer'; 
 import { useSelector } from 'react-redux';
 
 const ProfileSportQuestions = () => {
@@ -23,12 +23,12 @@ const ProfileSportQuestions = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const userLogeado = useSelector((state) => state.user.user);
+    const userLogeado = useSelector((state) => state.user?.datauser);
 
 
 
     const handleAnswerClick = (question, answer) => {
-        console.log("handleAnswerClick")
+        console.log("valuesSelect", valuesSelect)
         setValuesSelect({
             ...valuesSelect,
             [question]: answer,
@@ -56,7 +56,8 @@ const ProfileSportQuestions = () => {
                 dayPreference: valuesSelect.dias,
                 timePreference: valuesSelect.horario,
                 categoryLvl: valuesSelect.categoria,
-                UserId: datosUser.datosUser.id
+                UserId: datosUser.datosUser.id,
+                SportId:'b4d6e54a-8236-4df5-990e-5d2c3bb9ddfe',
         });
             console.log('Profile creado:', response.data );
             navigate("/home");
@@ -83,13 +84,15 @@ const ProfileSportQuestions = () => {
                     phone: phone,
                     description: location
                 }
+                console.log('userSend', userSend );
+
                 const response = await axios.put(`/users/${id}`,userSend);      
                 console.log('Respuesta del servidor:', response.data );
 
                 const userDis = { ...userLogeado.user, ...response.data.userUpdated };
                 console.log("userDis",userDis)
 
-                dispatch(setUser({
+                dispatch(setDataUser({
                     user: {
                         ...userDis                    
                     }
@@ -102,6 +105,7 @@ const ProfileSportQuestions = () => {
 
         postUser();
     }, [datosUser])
+
     
 
   return (

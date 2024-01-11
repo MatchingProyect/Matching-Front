@@ -8,8 +8,9 @@ const initialState = {
     allCourts: [],
     allFriends: [],
     allLocations: [],
+    allProfiles: [],
     allReservations: [],
-    user: []
+    datauser: []
 };
 
 
@@ -30,20 +31,14 @@ export const userSlice = createSlice({
        setCourts: (state, action)=>{
         state.allCourts = action.payload;
        },
-       setProfiles: (state, action) =>{
-        state.allProfiles = action.payload
+       setProfile: (state, action) =>{
+        state.datauser.profile = action.payload
        },
        setFriends: (state, action) => {
-        // let result = state.allFriends?.find((element) => element.id == action.payload.id);
-        // if(result == undefined){
-        //     state.allFriends = [ ...state.allFriends, action.payload];
-        // } else {
-        //     return ;
-        // };
         state.allFriends = action.payload
        },
-       setUser: (state, action) =>{
-        state.user = action.payload
+       setDataUser: (state, action) =>{
+        state.datauser = action.payload
        },
        setReservations: (state, action) => {
         state.allReservations = action.payload;
@@ -51,6 +46,16 @@ export const userSlice = createSlice({
        setLocations: (state, action) => {
         state.allLocations = action.payload;
        },
+       setProfiles: (state, action) => {
+        state.allProfiles = action.payload;
+       },
+       
+       setFriend: (state, action) => {
+        const friend = action.payload;
+        state.datauser.user.FriendRequests.push(friend);
+         
+       },
+
        resetState: (state) => {
         state.allUsers = [];
         state.allSports = [];
@@ -59,7 +64,7 @@ export const userSlice = createSlice({
         state.allFriends = [];
         state.allLocations = [];
         state.allReservations = [];
-        state.user = [];
+        state.datauser = [];
     },
     },
 });
@@ -68,31 +73,34 @@ export const userSlice = createSlice({
 export const fetchUser = (id) => async (dispatch) => {
     try {
       const { data } = await axios(`/users/${id}`);
+      console.log("fetchUser", data)
       if (data.status) {
-        dispatch(setUser(data.userFound));
-        // data.userFound.friends?.map((element) => {
-        //     dispatch(fetchFriends(element.FriendId));
-        // });
-        // return data.userFound;
-        console.log('ccc',data.userFound.user.id)
+
+        localStorage.setItem('userData', JSON.stringify(data.userFound));   //local storage solo almacena tipo texto
+        dispatch(setDataUser(data.userFound));
+
         const friends = await axios(`/friends/${data.userFound.user.id}`)
-        
         if(friends) dispatch(setFriends(friends.data.friends))
-        
+
+        const profilesDeport = await axios(`/userProfiles/${data.userFound.user.id}`)
+        if(profilesDeport) dispatch(setProfile(profilesDeport.theOne))
       }
     } catch (error) {
         throw error.message;
     }
   };
 
-//   export const fetchFriends = (id) => async(dispatch) => {
-//     try {
-//         const {data} = await axios(`/users/${id}`)
-//        if(data.status) dispatch(setFriends(data.userFound.user))
-//    } catch (error) {
-//        throw error.message
-//    };
-// };
+  export const fetchProfile = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios(`/userProfiles/${id}`);
+        if (data.status){
+            dispatch(setProfile(data.theOne));
+        }
+    } catch (error) {
+        throw error.message;
+    }
+  }
+
 
 export const fetchReservations = ()=>async(dispatch)=>{
     try {
@@ -100,7 +108,7 @@ export const fetchReservations = ()=>async(dispatch)=>{
         if(data.status) dispatch(setReservations(data.allReservations))
     } catch (error) {
         throw error.message
-    };
+    }
 };
 
 export const fetchProfiles = ()=>async(dispatch)=>{
@@ -120,7 +128,7 @@ export const fetchUsers = ()=>async(dispatch)=>{
         }
     } catch (error) {
         throw error.message
-    };
+    }
 };
 
 
@@ -160,9 +168,20 @@ export const fetchClubs = ()=>async(dispatch)=>{
     }
 }
 
+export const fetchUpdateFriend = (userFriend)=>async(dispatch)=>{
+    try {
+        console.log("userFriend", userFriend)
+         if(userFriend) dispatch(setFriend(userFriend))
+    } catch (error) {
+        throw error.message
+    }
+}
+
+
+
 export const logout = () => (dispatch) => {
     dispatch(resetState()); 
 };
 
-export const { setClubs,resetState, setCourts, setUsers, setSports, setProfiles, setFriends, setUser, setReservations, setLocations } = userSlice.actions;
+export const { setClubs,resetState, setCourts, setUsers, setSports, setProfile, setFriends, setDataUser,setFriend, setReservations, setLocations, setProfiles } = userSlice.actions;
 export default userSlice.reducer;

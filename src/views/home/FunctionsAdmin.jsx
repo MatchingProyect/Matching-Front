@@ -31,7 +31,7 @@ const FunctionsAdmin = () => {
     } = useForm();
 
     const users = useSelector((state) => state.user.allUsers);
-     const userLogeado =useSelector((state) =>state.user.user.user)
+     const userLogeado =useSelector((state) =>state.user.dataUser.user)
     const sports = useSelector((state) => state.user.allSports);
      const clubs = useSelector((state) => state.user.allClubs);
      const courts = useSelector((state) => state.user.allCourts);

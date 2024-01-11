@@ -18,6 +18,7 @@ const Login = () => {
 
   useEffect(() =>{
     initializeGoogleAuth();
+    localStorage.removeItem('userData');
 
   }, [])
 
@@ -33,15 +34,11 @@ const Login = () => {
 
   const handleGoogleLoginClick = () => {
     // Crear un objeto de autenticación de Google
-    console.log("auth2", gapi.auth2)
 
     const auth2 = gapi.auth2.getAuthInstance();
 
-    console.log("auth2", auth2)
     // Iniciar el proceso de inicio de sesión de Google
     auth2.signIn().then(async (googleUser) => {
-      console.log('googleUser', googleUser);
-      console.log('isSignedIn', auth2.isSignedIn.get());
       const profile = googleUser.getBasicProfile();
   
       const user = {
@@ -127,12 +124,10 @@ const Login = () => {
     try {
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
-  
+      console.log("onSubmit",response)
       if (response.data) {
         const id = response.data.id
         if (id) dispatch(fetchUser(id))
-        localStorage.setItem('userData', JSON.stringify(response.data));
-  
         localStorage.setItem('currentPath', "/home");
         navigate("/home");
       }
@@ -141,7 +136,6 @@ const Login = () => {
     }
   };
   
-
   const {
     handleSubmit,
     control,
@@ -153,10 +147,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const responseGoogle = () => {
-    console.log("onSuccess");
-    handleGoogleLoginClick()
-  };
 
   return (
     <div className={styles.allContainer}>

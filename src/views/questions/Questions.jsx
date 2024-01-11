@@ -11,7 +11,7 @@ const Questions = () => {
 
     const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
-    const user = useSelector(state => state.user.user); 
+    const user = useSelector(state => state.user.dataUser); 
 
     useEffect(() => {
         if (user)
@@ -37,7 +37,7 @@ const Questions = () => {
             })
         }
 
-        console.log("datosUserasdasdasd", datosUser)
+        console.log('DatosUser', datosUser)
     }
 
     const handleRenderQuestion = () => {
