@@ -1,7 +1,10 @@
-.divCardReservation{
-    display: flex;
-    flex-direction: column;
+.reservationsContainer{
+    width: 100vw;
+    background-color: rgb(28, 28, 28);
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    height: 100vh;
 }
+  
 .compTitle{
     font-size: 35px;
     text-align: center;
@@ -14,3 +17,4 @@
     flex-direction: column;
     align-items: center;
 }
+

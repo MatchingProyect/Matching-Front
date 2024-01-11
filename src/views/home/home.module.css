@@ -5,80 +5,17 @@
     flex-direction: column;
     justify-content: center;    
     align-items: center;
-    padding-bottom: 10%;
+    margin-top: 100px;
+    margin-bottom:60px ;
 }
-.containerHeader{
+
+.navBarContainer {
     position: fixed;
-    top: 0;
+    top: 0; 
     left: 0;
-    width: 100vw;
-    background-color: #fff; /* Ajusta el color de fondo según tus preferencias */
-    z-index: 1000;
-}
-.usersContent{
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0px 0px;
-}
-.header{
-    background-color: #203144;
-    width: 100vw;
-    height: 90px;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.274); 
-    color: rgb(26, 26, 26);
+    z-index: 1000; 
 }
 
-.btnSolicitudes{
-    width: 100%;
-    height: 70%
-}
-
-.friendsContainer{
-    width: 100vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.btnLabelAdmin{
-    color:black;
-    font-family: 'Poppins';
-    font-size:15px;
-    font-weight: 700;
-    margin-left: -20px;
-
-
-
-}
-.filtroContainer{
-    min-height: 8vh;
-    width: 78vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.filtrosDiv{
-    font-family:sans-serif;
-    width: 75vw;
-    height: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.filterLabel{
-    color: white;
-    font-size: 22px;
-    font-weight: 500;
-
-}
 .dropdownAdmin{
     width: 100vw;
     background-color: #F2E849;
@@ -86,192 +23,44 @@
     flex-direction: row;
     justify-content: center;
 }
-.selectFiltros{
-    width: 43vw;
-    height: 30px;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: 500;
-    box-shadow: 0px 0px 12px -4px rgb(0, 0, 0);
-}
-.divCourts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    width: 100vw;
-    height: 60vh;
-    background-color: #203144;
-    box-shadow: 0px 0px 15px rgb(0, 0, 0);
-    overflow-y:auto;
-}
-.courtsTitle{
-    color: white;
-    font-size: 35px;
-}
-.labelFiltros{
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.containerContenido{
-    margin-top: 7.5rem;
-}
-
-.logoContainer{
-    margin-left: -20px;
-}
-
-.title{
-    color: white;
-    font-size: 35px;
-    margin-left: 25px;
-
-}
-.imgIcon{
- max-width: 45px;
- max-height: 45px;
- border-radius: 50%;
- margin-right: 20px;
-
-}
-
-
-.containerTitle{
-    display:grid;
-    grid-template-columns:  1fr 1fr 1fr;
-    align-items:center;
-    margin: 1rem 0;
-}
-
-
-.NavBtn {
-    position: relative;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.NavBtn::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, #E7B04B 0%, #F2E849 100%);
-    display: none;  
-}
-
-.NavBtn.selected::before {
-    display: block;  
-}
-
-.clubsContainer{
-    display: flex;
-    width: 100vw;
-    height: auto;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.divFiltro{
-        width: 75vw;
-        height: 5vh;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 2vh;
-}
-.divCards{
-    width: 100vw;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: baseline;
-    overflow-x: scroll;
-    padding: 20px;
-}
-
-.containerCards {
-    margin: 1rem 1rem;
-    margin-bottom: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.homeComponent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.buscarReserva{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.compTitle{
-    margin: 20px;
-    font-size: 40px;
-    text-align: center;
-}
-
-.filters{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.filter{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.labelFilter{
-    margin: 1px;
-}
-.selectFilter{
-    width: 60vw;
-    margin: 2px;
-    border-style: solid;
-    border-radius: 5px;
-}
-
-.sportsContainer {
-    display: flex;
-    justify-content: space-around; /* Ajusta según tus necesidades de diseño */
-    flex-wrap: wrap; /* Para que los elementos se envuelvan a la siguiente línea si no caben en una sola línea */
-    overflow-y: scroll;
-}
-
-.navbarLow {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-  }
-
-  .reservationsContainer{
-    width: 100vw;
-    height: auto;
-    background-color: rgb(28, 28, 28);
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  .manageAccountsIcon {
+    color: black;
+    width: 80px;
+    height: 35px;
   }
   
-  .userContainer{
+  .customButton {
+    color: black;
+    background-color: transparent;
+    margin: 10px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgb(0, 0, 0);
     display: flex;
-    height: auto;
-    width: 100vw;
-    min-height: 200px;
-    flex-direction: row;
-    justify-content:baseline;
-    align-items: center;
-    overflow-x:scroll;
-    margin-bottom: 20px;
+    justify-content: center;
+    padding: 5px;
+    
   }
+  
+  .btnLabelAdmin{
+    color:black;
+    font-family: 'Poppins';
+    font-size:15px;
+    font-weight: 700;
+}
+
+
+.friendsContainer{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+

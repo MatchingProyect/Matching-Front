@@ -1,6 +1,6 @@
-import React from 'react';
 import styles from './FriendsContainer.module.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 export default function FriendsContainer({friends}){
@@ -14,7 +14,7 @@ export default function FriendsContainer({friends}){
                 <h1 className = {styles.status}></h1>
             )
         }
-    };
+    }
 
     return(
         <div className = {styles.friendsContainer}>
@@ -35,3 +35,7 @@ export default function FriendsContainer({friends}){
         </div>
     )
 }
+
+FriendsContainer.propTypes = {
+    friends: PropTypes.object.isRequired,
+  };

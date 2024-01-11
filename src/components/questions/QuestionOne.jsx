@@ -2,19 +2,26 @@ import { Button } from '@mui/material'
 import styles from './QuestionOne.module.css'
 import { useState } from 'react'
 import { useUserContext } from '../../context/UserProvider';
+import { useSelector } from 'react-redux';
 
 export const QuestionOne = () => {
 
     const [ clicked,setClicked ] = useState('');
     const { datosUser,setDatosUser } = useUserContext();
 
+    const userLogeado = useSelector((state) => state.user?.datauser);
+
     const handleClickGender = ( event ) => {
+
         setClicked( event.target.name );
         setDatosUser({
-            ...datosUser,
+            id: userLogeado?.user.id,
+            email: userLogeado?.user.email,
+            nombreApellido: userLogeado?.user.displayName,
             gender: event.target.name,
             questionsAnsker: true
         })
+        console.log("datosUser", datosUser)
     }
 
     //Esta funcion la cree para no repetir el codigo al tener el estado del boton que selecciona
@@ -43,7 +50,6 @@ export const QuestionOne = () => {
                 <Button onClick={ handleClickGender } sx={{ ..._stylesBtn.btn }} variant='outlined' name='Femenino' >
                     Femenino
                     {
-                        // Esta validacion es la que hago para que si el estado es igual al name del boton al que hago click, se muestre el svg
                         clicked === 'Femenino' && handleShowCheck()
                     }
                 </Button>
@@ -65,7 +71,6 @@ export const QuestionOne = () => {
   )
 }
 
-// Estilos que ajuste para los componentes por defecto del material UI
 const _stylesBtn = {
     btn: {
         borderRadius: '15px',

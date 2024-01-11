@@ -1,0 +1,6 @@
+.formContainer{
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
