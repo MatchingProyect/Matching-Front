@@ -1,20 +1,43 @@
-.reservationsContainer{
-    width: 100vw;
-    background-color: rgb(28, 28, 28);
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
-    height: 100vh;
-}
+.cardReservationContainer {
+    border: 1px solid #4CAF50;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+  }
   
-.compTitle{
-    font-size: 35px;
-    text-align: center;
-    margin: 2vh;
-    color: white;
-}
-
-.divCards{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+  .cardReservationContainer:hover {
+    transform: scale(1.05);
+  }
+  
+  .cardReservationContainer h2,
+  .cardReservationContainer h3 {
+    margin: 5px 0;
+    color: #4CAF50;
+  }
+  
+  .cardReservationContainer h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .cardReservationContainer h3 {
+    font-size: 16px;
+  }
+  
+  .cardReservationContainer br {
+    display: none;
+  }
+  
+  .cardReservationContainer:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cardReservationContainer:active {
+    transform: scale(0.95);
+  }
+  

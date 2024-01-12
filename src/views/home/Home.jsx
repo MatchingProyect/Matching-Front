@@ -16,11 +16,9 @@ import Cards from './Cards/Cards.jsx'
 
 export default function Home() {
     const dispatch = useDispatch();
-    const courts = useSelector((state) => state.user?.allCourts);
-    const reservations = useSelector((state) => state.user?.allReservations);
-    const estadoFriends = useSelector((state) => state.user?.allFriends);
+    const courts = useSelector((state) => state.user.allCourts);
+    const estadoFriends = useSelector((state) => state.user.allFriends);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
-    const perfiles = useSelector (state => state.user?.allProfiles);
 
     const [activeComponent, setActiveComponent] = useState('campos');
 
@@ -29,7 +27,6 @@ export default function Home() {
         dispatch(fetchClubs());
         dispatch(fetchCourts());
         dispatch(fetchLocations());
-        dispatch(fetchReservations());
         dispatch(fetchSports());
         if(userLogeado) dispatch(fetchProfiles(userLogeado.id));
 
@@ -70,7 +67,7 @@ export default function Home() {
             <div>
                 {activeComponent === 'campos' && <Campos />}
                 {activeComponent === 'reservations' && (
-                    <CardReservation reservations={reservations} courts = {courts} />
+                    <CardReservation courts = {courts} />
                 )}
                 {activeComponent === 'user' && (
                     <Cards />

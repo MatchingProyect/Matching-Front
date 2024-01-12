@@ -139,6 +139,9 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     <form onSubmit={handleSumbit} className={styles.formContainer}>
 
                         <div className={styles.modalContainer}>
+                            <label>Court: {court?.name}</label>
+                            <br />
+
                             <label>teamMatch:</label>
                             <input type="text" name='teamMatch' value={dataReservation.teamMatch} onChange={handleChange} />
                             <br />
@@ -157,10 +160,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
 
                             <label>dateTimeEnd:</label>
                             <input type="text" name="dateTimeEnd" value={dataReservation.dateTimeEnd} onChange={handleChange} />
-                            <br />
-
-                            <label>CourtId:</label>
-                            <input type="text" name="CourtId" value={dataReservation.CourtId} onChange={handleChange} />
                             <br />
 
                             <label>totalCost: {court?.priceFee}</label>
