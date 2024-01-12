@@ -1,150 +1,190 @@
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import emailjs from '@emailjs/browser';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './CrearReserva.module.css';
 
 const CrearReserva = ({ court, reserva, setReserva }) => {
-    const userLogeado = useSelector((state) => state.user?.datauser?.user);
-    const allFriends = useSelector((state) => state.user.allFriends);
-    let [preferenceId, setPreferenceId] = useState('');
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
+    const userLogeado = useSelector((state) => state.user?.datauser?.user);
+    const allFriends = useSelector((state) => state.user?.allFriends);
+    const [preferenceId, setPreferenceId] = useState('');
+    
+    const [dataReservation, setDataReservation] = useState({
+        dateTimeStart: '',
+        dateTimeEnd: '',
+        totalCost: court?.priceFee,
+        teamMatch: '',
+        UserId: userLogeado?.id,
+        CourtId: court?.id,
+        MatchTypeId: '',
+        FriendsId: []
+    })
 
-    const {
-        handleSubmit,
-        formState: { errors },
-        register
-    } = useForm();
+    // const [errors, setErrors] = useState({
+    //     dateTimeStart: '',
+    //     dateTimeEnd: '',
+    //     totalCost: '',
+    //     teamMatch: '',
+    //     UserId: '',
+    //     CourtId: '',
+    //     MatchTypeId: '',
+    //     FriendsId: []
+    // })
 
-    if (!reserva) return null;
+    const handleChange = (event) => {
+        const friendName = event.target.name;
+        setDataReservation({
+            ...dataReservation,
+            [friendName]: event.target.value
+        })
+        if (event.target.name === 'FriendsId') {
+            const friendId = event.target.value;
+            const friendSelected = dataReservation.FriendsId.includes(friendId);
+            if(friendSelected){
+                const deselectFriend = dataReservation.FriendsId.filter((friend) => friend !== friendId);
+                setDataReservation({
+                    ...dataReservation,
+                    FriendsId: deselectFriend
+                })
+            }
+            else setDataReservation({
+                ...dataReservation,
+                FriendsId: [...dataReservation.FriendsId, friendId]
+            });
+            // setErrors(validations({
+            //     ...dataReservation,
+            //     [event.target.name]: event.target.value
+            // }))
+        }
+            
+    }
 
-    const sendEmail = (reservations) => {
-        const defaultValues = {
-            user_name: `${userLogeado.displayName}`,
-            user_email: `${userLogeado.email}`,
-            message:
-                `${userLogeado.displayName},
+        if (!reserva){
+            if(preferenceId) setPreferenceId('');
+            return null;
+        }
+
+        const crearReserva = async () => {
+            try {
+                const endpoint = '/reservations';
+                const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
+
+                const { data } = await axios.post(endpoint, {
+                    dateTimeStart,
+                    dateTimeEnd,
+                    totalCost,
+                    teamMatch,
+                    UserId,
+                    CourtId,
+                    MatchTypeId,
+                    FriendsId
+                });
+
+                console.log(data.addReservation);
+
+                if (data.status) {
+                    const reservations = data.addReservation;
+                    const endpoint = '/createOrder';
+                    const response = await axios.post(endpoint, { id: reservations.id });
+                    //*Con esto se abre el botón MP
+                    setPreferenceId(response.data.id);
+                    sendEmail(reservations);
+                }
+            } catch (error) {
+                throw error.message;
+            }
+        };
+
+        const sendEmail = (reservations) => {
+            const defaultValues = {
+                user_name: `${userLogeado.displayName}`,
+                user_email: `${userLogeado.email}`,
+                message: `${userLogeado.displayName},
                 
                 Hemos detectado que quieres realizar la reserva de una cancha.
-                ** RESERVA: ${reservations.dataValues.dateTimeStart} -- ${reservations.dataValues.dateTimeEnd}
-                ** COSTO TOTAL: ${reservations.dataValues.totalCost}
+                ** RESERVA: ${reservations.dateTimeStart} -- ${reservations.dateTimeEnd}
+                ** COSTO TOTAL: ${reservations.totalCost}
                 
                 Al completarse el pago, verás reflejada en tu bandeja de entrada la información del mismo.
                 Muchas gracias!`,
+            };
+            emailjs
+                .send('service_dfonkqh', 'template_j9l4qgp', defaultValues, 'AOct4aYGtYkYpPDCn')
+                .then(
+                    (result) => {
+                        console.log(result.text);
+                    },
+                    (error) => {
+                        console.log(error.text);
+                    }
+                );
         };
-        emailjs
-            .send('service_dfonkqh', 'template_j9l4qgp', defaultValues, 'AOct4aYGtYkYpPDCn')
-            .then(
-                (result) => {
-                    console.log(result.text);
-                },
-                (error) => {
-                    console.log(error.text);
-                }
-            );
+
+        const handleSumbit = async (event) => {
+            try {
+                event.preventDefault();
+                await crearReserva();
+            } catch (error) {
+                console.error(error)
+                throw error.message
+            }
+        }
+
+        return (
+            <>
+                <div className={styles.allContainer}>
+                    <button onClick={() => setReserva(false)}>X</button>
+                    <form onSubmit={handleSumbit} className={styles.formContainer}>
+
+                        <div className={styles.modalContainer}>
+                            <label>Court: {court?.name}</label>
+                            <br />
+
+                            <label>teamMatch:</label>
+                            <input type="text" name='teamMatch' value={dataReservation.teamMatch} onChange={handleChange} />
+                            <br />
+
+                            <label>MatchTypeId:</label>
+                            <select name="MatchTypeId" value={dataReservation.MatchTypeId} onChange={handleChange}>
+                                <option>Selecciona un tipo de partido:</option>
+                                <option value="d28f18de-2b03-41de-9434-43f0e605ef7d">Privado</option>
+                                <option value="d5d9b0cd-18f2-4911-b332-4a8a1cbba689">Público</option>
+                            </select>
+                            <br />
+
+                            <label>dateTimeStart:</label>
+                            <input type="text" name="dateTimeStart" value={dataReservation.dateTimeStart} onChange={handleChange} />
+                            <br />
+
+                            <label>dateTimeEnd:</label>
+                            <input type="text" name="dateTimeEnd" value={dataReservation.dateTimeEnd} onChange={handleChange} />
+                            <br />
+
+                            <label>totalCost: {court?.priceFee}</label>
+
+                            <label>Friends Id:</label>
+                            <select
+                                name="FriendsId"
+                                value={dataReservation.FriendsId}
+                                onChange={(event) => handleChange(event)}
+                                multiple  // Permite seleccionar múltiples opciones
+                            >
+                                <option value="" disabled>Selecciona amigos:</option>
+                                {allFriends.map((friend) => (
+                                    <option key={friend.id} value={friend.id}>{friend.displayName}</option>
+                                    ))}
+                            </select>
+                                    <br />
+
+                            <button type="submit">Crear Reserva</button>
+                            {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
+                        </div>
+                    </form>
+                </div>
+            </>
+        );
     };
 
-    const crearReserva = async (data) => {
-        try {
-            console.log('holi',data)
-            const endpoint = '/reservations';
-            const response = await axios.post(endpoint, data)
-            console.log(response.data.addReservation)
-
-            // if (response.data.status) {
-            //     const endpoint = '/createOrder';
-            //     const response = await axios.post(endpoint, { id: response.data.addReservation.dataValues.id });
-            //     //*Con esto se abre el botón MP
-            //     setPreferenceId(response.data.id);
-            // }
-            const reservations = response.addReservation;
-
-            sendEmail(reservations);
-        } catch (error) {
-            console.error(error)
-            throw error.message;
-        }
-    }
-
-    return (
-        <form onSubmit={handleSubmit(crearReserva)} className={styles.formContainer}>
-            <div className={styles.modalContainer}>
-                <label>Name:</label>
-                <input type="text" {...register('teamMatch', { required: true, maxLength: 20 })} />
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-
-                <select id="UserId" aria-placeholder='Selecciona a tus amigos...' {...register('UserId', { required: true, maxLength: 20 })}>
-                    {allFriends?.map(friends => (
-                        <option key={friends.id} value={friends.id}>
-                            {friends.displayName}
-                        </option>
-                    ))}
-                </select>
-
-
-                <select id="MatchTypeId" aria-placeholder='Selecciona el tipo de juego...' {...register('MatchTypeId', { required: true, maxLength: 20 })}>
-
-                    <option value={'fd0d0ab9-3408-43be-a5cc-2e35f0e4740f'} >
-                        Partido Público
-                    </option>
-
-                    <option value={'d3568da1-e683-44ef-b4fd-b7de4ba10825'}>
-                        Partido Privado
-                    </option>
-                </select>
-
-                <label>Inicio:</label>
-                <input type="text" {...register('dateTimeStart', { required: true, maxLength: 20 })} />
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-
-                <label>Fin:</label>
-                <input type="text" {...register('dateTimeEnd', { required: true, maxLength: 20 })} />
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-
-                {/* <label>Precio:</label> */}
-                {/* <input type="text" {...register('totalCost', { required: true, maxLength: 20 })} />
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>} */}
-
-                <select id="CourtId" {...register('CourtId', { required: true, maxLength: 20 })} >
-
-                    <option value={court.id}>
-                        {court.name}
-                    </option>
-                </select>
-
-                <select id="ReservationTypeId" {...register('ReservationTypeId', { required: true, maxLength: 20 })}>
-
-                    <option value={true}>
-                        ReservationType
-                    </option>
-                </select>
-
-                <select id="UserId"  {...register('UserId', { required: true, maxLength: 20 })}>
-
-                    <option value={userLogeado.id}>
-                        {userLogeado.displayName}
-                    </option>
-                </select>
-
-                <select id="totalCost"  {...register('totalCost', { required: true, maxLength: 20 })}>
-
-                    <option value={court.priceFee}>
-                        {court.priceFee}
-                    </option>
-                </select>
-
-                <button type="submit" value='enviar'> Crear Reserva </button>
-                {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
-            </div>
-
-        </form>
-    )
-}
-
-export default CrearReserva;
+    export default CrearReserva;

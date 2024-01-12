@@ -1,23 +1,19 @@
 import styles from './profile.module.css';
 import { useState } from 'react';
 import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor';
-
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 export default function ProfileDeportivo({perfilDeportivo}) {
-    console.log(perfilDeportivo);
-    const firstProfile = perfilDeportivo[0];
-    const  [ depProfile, setDepProfile ] = useState(firstProfile);
+    const  [ depProfile, setDepProfile ] = useState(perfilDeportivo);
     const stats = null;//Aca puede ir un hardcodeo
 
     function handlerProfileChange (event){
         let buttonValue = event.target.value;
         let selectedProfile = perfilDeportivo.find((element) => element.sport == buttonValue);
         setDepProfile(selectedProfile);
-    }
+    };
 
-    
     return(
         <div className = {styles.perfilesDeportivosContainer}>
             <div className = {styles.divOne}>

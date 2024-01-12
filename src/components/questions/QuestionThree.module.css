@@ -1,0 +1,157 @@
+.contentQuestion{
+
+    width: 90vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleQuestion{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    
+}
+
+.contentFormLocation{
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.contentLocation{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3vh;
+
+}
+.inputLocation{
+    width: 85%;
+    max-width: 450px;
+    height: 50px;
+    padding: 20px 10px 20px 10px;
+    border-radius: 20px;
+    color: white;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0px 0px 10px 3px black;
+    border-style: solid;
+    border-color: black;
+}
+
+.contentNumber{
+    width: 100%;
+    max-width: 500px;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 3vh;
+}
+.contentAreasNumberCode{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentAreasNumber{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.inputArea{
+    width: 90%;
+    height: 50px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 20px;
+    color: white;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0px 0px 10px 3px black;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+.inputNumber{
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 20px;
+    color: white;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0px 0px 10px 3px black;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.labelInputs{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2vh;
+}
+.alertSpan{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-top: 2vh;
+}
+.contentBar{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 20vh;
+}
+
+.bar{
+    width: 316px;
+    height: 4px;
+    background: black;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-left: 22px;
+}
+
+.barProgress{
+    width: 190px;
+    height: 5px;
+    background: linear-gradient(91deg, #F2AE32 0%, #F3B928 100%)
+}
+.cuenta{
+    width: 41px;
+    height: 29px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+    color: white;
+}

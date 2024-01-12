@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import styles from './Questions.module.css'
+import styles from './QuestionOne.module.css'
 import { useState } from 'react'
 import { useUserContext } from '../../context/UserProvider';
 import { useSelector } from 'react-redux';
@@ -37,10 +37,17 @@ export const QuestionOne = () => {
 
   return (
     <>
+          <div className={styles.contentBar}>
+              <div className={styles.bar}>
+                  <div className={styles.barProgress} />
+              </div>
+              <p className={styles.cuenta}>1/5</p>
+          </div>
+    
         <div className={ styles.contentQuestion } >
             <p className={ styles.titleQuestion } >¿Cúal es tu genero?</p>
             <div className={ styles.contentOptions }>
-                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Femenino' >
+                <Button onClick={ handleClickGender } sx={{ ..._stylesBtn.btn }} variant='outlined' name='Femenino' >
                     Femenino
                     {
                         clicked === 'Femenino' && handleShowCheck()
@@ -52,10 +59,10 @@ export const QuestionOne = () => {
                         clicked === 'Masculino' && handleShowCheck()
                     }
                 </Button>
-                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='No' >
+                <Button onClick={ handleClickGender } sx={ { ..._stylesBtn.btn } } variant='outlined' name='Prefiero no decirlo' >
                     Prefiero no decirlo
                     {
-                        clicked === 'No' && handleShowCheck()
+                        clicked === 'Prefiero no decirlo' && handleShowCheck()
                     }
                 </Button>
             </div>
@@ -67,7 +74,7 @@ export const QuestionOne = () => {
 const _stylesBtn = {
     btn: {
         borderRadius: '15px',
-        width: '100%',
+        width: '90vw',
         height: '55px',
         color: '#676666',
         border: '1px solid #676666',
@@ -77,6 +84,7 @@ const _stylesBtn = {
         fontSize: '16px',
         fontWeight: '400',
         lineHeight: '24px',
+        boxShadow: '0px 0px 15px 1px black',
         '&:focus': {
             color: 'white',
         }

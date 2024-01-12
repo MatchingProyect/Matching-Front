@@ -3,12 +3,12 @@ import { Button } from '@mui/material'
 import { useUserContext } from '../../context/UserProvider'
 import { QuestionOne,QuestionTwo,QuestionThree,QuestionFour } from '../../components/questions'
 import ProfileSportQuestions from '../../components/questions/profileSport/ProfileSportQuestions'
-import logo from '../../assets/logo-matching.svg'
 import styles from './Questions.module.css'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSports } from '../../redux/reducer';
 
 const Questions = () => {
-
+    const dispatch = useDispatch();
     const { datosUser,setDatosUser } = useUserContext();
     const [ count,setCount ] = useState( 1 );
     const user = useSelector(state => state.user.dataUser); 
@@ -21,10 +21,10 @@ const Questions = () => {
             nombreApellido: user?.user?.displayName,
             pass: user?.user?.password,
             id: user?.user?.id,
+            
 
-        })
-
-
+        });
+        dispatch(fetchSports());
       }, [user]);
     
 
@@ -58,21 +58,16 @@ const Questions = () => {
             count < 5 
             ? (
                 <div className={ styles.contentQuestions }>
-                    <div id={ styles.contentLogo }>
-                        <img id={ styles.logo } src={ logo } alt="Logo matching" />
+                    <div className={ styles.contentLogo }>
+                        <img className={ styles.logo } src='https://res.cloudinary.com/dbffmtz0y/image/upload/v1702491179/Matching_rlj4xk.svg' />
                     </div>
                     <div className={ styles.contentQuestionInfo}>
                         <h2 className={ styles.questionInfo } >Ayudanos a completar tu perfil</h2>
                     </div>
-                    <div className={ styles.contentBar }>
-                        <div className={ styles.bar }>
-                            <div className={ styles.barProgress } />
-                        </div>
-                        <p className={ styles.cuenta }>{ count }/4</p>
-                    </div>
                     {
                         handleRenderQuestion()
                     }
+                    <div className = {styles.bottomComp}>
 
                     {
                         datosUser.questionsAnsker 
@@ -82,7 +77,7 @@ const Questions = () => {
                             <Button onClick={ handleCountQuestion } sx={ { ..._styled.nextBtnOff } } variant='contained' >Siguiente</Button>
                         )
                     }
-
+                    </div>
                 </div>
             )
             : (
@@ -101,6 +96,7 @@ const _styled = {
         fontSize: '20px',
         fontWeight: '600',
         lineHeight: '30px',
+        boxShadow: '0px 0px 10px 0px black',
     },
     nextBtnOff: {
         width: '338px',

@@ -1,0 +1,79 @@
+.contentBar{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 20vh;
+}
+.check{
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+}
+
+
+.bar{
+    width: 316px;
+    height: 4px;
+    background: black;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-left: 22px;
+}
+
+.barProgress{
+    width: 253px;
+    height: 4px;
+    background: linear-gradient(91deg, #F2AE32 0%, #F3B928 100%)
+}
+.cuenta{
+    width: 41px;
+    height: 29px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+    color: white;
+}
+.contentQuestion{
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.divTextos{
+    width: 80%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2vh;
+}
+
+.contentSports{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+    height: 75%;
+}
+.btnSport{
+    width: 150px;
+    height: 45px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0px 0px 10px 2px black;
+}
