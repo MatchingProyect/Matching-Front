@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations, fetchProfiles } from '../../redux/reducer.js';
 
 import Campos from './CamposComponent/Campos.jsx'
 import NavBar from './navBar/navBar.jsx'
@@ -16,20 +16,22 @@ import Cards from './Cards/Cards.jsx'
 
 export default function Home() {
     const dispatch = useDispatch();
-    const courts = useSelector((state) => state.user.allCourts);
-    const reservations = useSelector((state) => state.user.allReservations);
-    const estadoFriends = useSelector((state) => state.user.allFriends);
+    const courts = useSelector((state) => state.user?.allCourts);
+    const reservations = useSelector((state) => state.user?.allReservations);
+    const estadoFriends = useSelector((state) => state.user?.allFriends);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
+    const perfiles = useSelector (state => state.user?.allProfiles);
 
     const [activeComponent, setActiveComponent] = useState('campos');
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        dispatch(fetchUsers());   
         dispatch(fetchClubs());
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchReservations());
         dispatch(fetchSports());
+        if(userLogeado) dispatch(fetchProfiles(userLogeado.id));
 
     }, []);
     
