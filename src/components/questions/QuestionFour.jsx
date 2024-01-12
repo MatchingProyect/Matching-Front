@@ -9,7 +9,7 @@ export const QuestionFour = () => {
   const [ clicked,setClicked ] = useState('');
   const { datosUser,setDatosUser } = useUserContext();
 
-  console.log(sports);
+  console.log(datosUser);
 
 
   function playground (event){
@@ -50,7 +50,7 @@ export const QuestionFour = () => {
           </div>
           <div className={ styles.contentSports }>
             {
-              sports?.map((element) => <Button id = {element.id} sx={{ ..._stylesBtn.btn }} variant='outlined' value = {element.id} onClick = {playground}>
+              sports?.map((element) => <Button key = {element.id} sx={{ ..._stylesBtn.btn }} variant='outlined' value = {element.id} onClick = {playground}>
                 {element.name}
                 {
                         clicked === element.id && handleShowCheck()

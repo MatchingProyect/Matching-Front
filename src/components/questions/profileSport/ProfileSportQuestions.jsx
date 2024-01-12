@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 const ProfileSportQuestions = () => {
     
     const datosUser = useUserContext();
+    const { sport } = datosUser.datosUser;
     const [valuesSelect, setValuesSelect] = useState({
         horario: '',
         dias: '',
@@ -41,7 +42,6 @@ const ProfileSportQuestions = () => {
             ...valuesSelect,
             [event.target.name]: event.target.value,
         });
-        console.log("datosUser",datosUser)
     };
 
 
@@ -57,7 +57,7 @@ const ProfileSportQuestions = () => {
                 timePreference: valuesSelect.horario,
                 categoryLvl: valuesSelect.categoria,
                 UserId: datosUser.datosUser.id,
-                SportId: valuesSelect.sport,
+                SportId: sport,
         });
             console.log('Profile creado:', response.data );
             navigate("/home");
@@ -68,8 +68,6 @@ const ProfileSportQuestions = () => {
             console.error('Error al hacer el POST:', error );
         }
     }
-
-    const urlIcons = `https://res.cloudinary.com/dbffmtz0y/image/upload/`;
 
     useEffect(() => {
         const { nombreApellido,birthday,email,gender,location,phone, id } = datosUser.datosUser; 
