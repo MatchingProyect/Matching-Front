@@ -47,8 +47,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     };
 
     const crearReserva = async (data) => {
-        console.log(data)
         try {
+            console.log('holi',data)
             const endpoint = '/reservations';
             const response = await axios.post(endpoint, data)
             console.log(response.data.addReservation)
@@ -83,6 +83,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                         </option>
                     ))}
                 </select>
+
 
                 <select id="MatchTypeId" aria-placeholder='Selecciona el tipo de juego...' {...register('MatchTypeId', { required: true, maxLength: 20 })}>
 
