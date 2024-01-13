@@ -14,7 +14,10 @@ export default function MiPerfil() {
                 <h3 className = {styles.description}>{userProfile?.description}</h3>
             </div>
             <div className = {styles.divTwoProfile}>
-                <FriendsContainer friends = {userProfile?.friends} />
+                {
+                    userProfile.length > 0 && <FriendsContainer friends = {userProfile?.friends} />
+                }
+                
             </div>
             <div className = {styles.divThreeProfile}>
                 <Link to = {`/profile/edit/${userProfile?.id}`}><p className = {styles.linksTo}>Editar</p></Link>

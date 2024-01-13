@@ -14,6 +14,7 @@ const CardCourt = ({ court }) => {
   const [reserva, setReserva] = useState(false);
   const [update, setUpdate] = useState(false);
   const [detail, setDetail] = useState(false);
+  console.log(court);
 
   const userLogeado = useSelector((state) => state.user?.dataUser?.user);
   const dispatch = useDispatch();
@@ -98,8 +99,8 @@ const CardCourt = ({ court }) => {
   return (
     <div className={styles.cardCourtContainer}>
       <div className={styles.courtInfo}>
-        <h2 className={styles.courtTitle}>{court.name}</h2>
-        <h4 className={styles.courtText}>Reputation: {court.reputation}</h4>
+        <h2 className={styles.courtTitle}>Cancha: {court.name}</h2>
+        <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
         <h3 className={styles.courtText}>{court.priceFee}$</h3>
       </div>
       <img src={court.imgClub} alt={court.name} className={styles.img} />
