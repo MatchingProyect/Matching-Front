@@ -36,14 +36,12 @@ export default function CardReservation() {
     useEffect(() => {
         const fetchReservationsInfo = async () => {
             try {
-               
                 const promises = teamMatch?.map(async (teamMatch) => {
                     const endpoint = `/reservationTeamMatch/${teamMatch.TeamMatchId}`;
                     const { data } = await axios(endpoint);
                     return data.reservation[0];
                 });
-                const reservaFiltrado = promises.filter(prom => prom.id !== promises.id)
-                const allInfoReservation = await Promise.all(reservaFiltrado);
+                const allInfoReservation = await Promise.all(promises);
                 setInfoReservation(allInfoReservation);
             } catch (error) {
                 throw error.message;
