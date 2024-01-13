@@ -98,14 +98,14 @@ const CardCourt = ({ court }) => {
 
   return (
     <div className={styles.cardCourtContainer}>
+      <img src={court.imgClub} alt={court.name} className={styles.img} />
       <div className={styles.courtInfo}>
-        <h2 className={styles.courtTitle}>Cancha: {court.name}</h2>
+        <h2 className={styles.courtTitle}>{court.name}</h2>
         <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
         <h3 className={styles.courtText}>{court.priceFee}$</h3>
-      </div>
-      <img src={court.imgClub} alt={court.name} className={styles.img} />
+      </div>      
       <CrearReserva court={court} reserva={reserva} setReserva={setReserva} />
-      <button onClick={() => setReserva(true)}>Reservar</button>
+      <button onClick={() => setReserva(true)} className = {styles.openModalBtn}>Reservar</button>
     </div>
   )
 }

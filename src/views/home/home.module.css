@@ -10,8 +10,11 @@
 
 .navBarContainer {
     position: fixed;
+    width: 100vw;
+    height: 90px;
     top: 0; 
     left: 0;
+    right: 0;
     z-index: 1000; 
 }
 

@@ -64,7 +64,7 @@ export default function Home() {
             </div>
 
 
-            <div>
+            <div className = {styles.principalDiv}>
                 {activeComponent === 'campos' && <Campos />}
                 {activeComponent === 'reservations' && (
                     <CardReservation courts = {courts} />
