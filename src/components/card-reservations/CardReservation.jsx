@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 
-export default function CardReservation({ courts }) {
+export default function CardReservation() {
     const [infoReservation, setInfoReservation] = useState([]);
     const [infoUser, setInfoUser] = useState([]);
     const [teamMatch, setTeamMatch] = useState([]);
@@ -31,15 +31,19 @@ export default function CardReservation({ courts }) {
         fetchTeamMatch();
     }, []);
 
+    console.log('bbcita', infoReservation)
+
     useEffect(() => {
         const fetchReservationsInfo = async () => {
             try {
+               
                 const promises = teamMatch?.map(async (teamMatch) => {
                     const endpoint = `/reservationTeamMatch/${teamMatch.TeamMatchId}`;
                     const { data } = await axios(endpoint);
                     return data.reservation[0];
                 });
-                const allInfoReservation = await Promise.all(promises);
+                const reservaFiltrado = promises.filter(prom => prom.id !== promises.id)
+                const allInfoReservation = await Promise.all(reservaFiltrado);
                 setInfoReservation(allInfoReservation);
             } catch (error) {
                 throw error.message;

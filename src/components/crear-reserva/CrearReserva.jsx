@@ -2,7 +2,7 @@ import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import emailjs from '@emailjs/browser';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './CrearReserva.module.css';
 
 const CrearReserva = ({ court, reserva, setReserva }) => {
@@ -11,6 +11,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     const allFriends = useSelector((state) => state.user?.allFriends);
     const [preferenceId, setPreferenceId] = useState('');
     
+    console.log('holi',userLogeado)
+
     const [dataReservation, setDataReservation] = useState({
         dateTimeStart: '',
         dateTimeEnd: '',
@@ -21,6 +23,15 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         MatchTypeId: '',
         FriendsId: []
     })
+
+    useEffect(()=>{
+        setDataReservation({
+            ...dataReservation,
+            UserId: userLogeado?.id,
+            totalCost: court?.priceFee,
+            CourtId: court?.id
+        })
+    }, [userLogeado])
 
     // const [errors, setErrors] = useState({
     //     dateTimeStart: '',
@@ -70,11 +81,11 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             try {
                 const endpoint = '/reservations';
                 const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
-
+                console.log(dataReservation);
                 const { data } = await axios.post(endpoint, {
                     dateTimeStart,
                     dateTimeEnd,
-                    totalCost,
+                    totalCost: Number(totalCost),
                     teamMatch,
                     UserId,
                     CourtId,
@@ -93,7 +104,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     sendEmail(reservations);
                 }
             } catch (error) {
-                throw error.message;
+               alert(error.message);
             }
         };
 
@@ -149,8 +160,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                             <label>MatchTypeId:</label>
                             <select name="MatchTypeId" value={dataReservation.MatchTypeId} onChange={handleChange}>
                                 <option>Selecciona un tipo de partido:</option>
-                                <option value="d28f18de-2b03-41de-9434-43f0e605ef7d">Privado</option>
-                                <option value="d5d9b0cd-18f2-4911-b332-4a8a1cbba689">Público</option>
+                                <option value="ca221323-2fac-450f-8b6e-f8edc9f14e5d">Privado</option>
+                                <option value="d81fe1b8-345a-4b4c-97b9-6e64b1116aec">Público</option>
                             </select>
                             <br />
 
