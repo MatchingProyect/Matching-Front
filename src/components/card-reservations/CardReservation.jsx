@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import ValorarUsuarios from '../valorarUsuarios/ValorarUsuarios';
 
 
 export default function CardReservation() {
@@ -11,6 +12,7 @@ export default function CardReservation() {
     const [infoUser, setInfoUser] = useState([]);
     const [teamMatch, setTeamMatch] = useState([]);
     const [teamName, setTeamName] = useState([]);
+    const [valorarUsuarios, setValorarUsuarios] = useState(false)
     const userLogeado = useSelector((state) => state.user?.datauser?.user);
 
     useEffect(() => {
@@ -85,6 +87,8 @@ export default function CardReservation() {
         fetchTeamMatchName()
     }, [teamMatch])
 
+    console.log('xd',infoReservation)
+
     return (
         <div>
             {infoReservation?.map((reservation, index) => (
@@ -95,6 +99,9 @@ export default function CardReservation() {
                     <h3>Tiempo Fin: {reservation?.dateTimeEnd || 'No disponible'}</h3>
                     <h3>Precio Total: {reservation?.totalCost || 'No disponible'}</h3>
                     <br />
+                    <ValorarUsuarios teamMatch={reservation.TeamMatchId
+} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}/>
+                    <button onClick={()=> setValorarUsuarios(true)} >Juego Terminado</button>
                 </div>
             ))}
         </div>
