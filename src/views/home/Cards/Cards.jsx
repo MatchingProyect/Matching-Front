@@ -1,4 +1,4 @@
-
+import styles from './Cards.module.css';
 import { useSelector } from 'react-redux';
 import CardUser from '../../cardUsers/CardUser';
 
@@ -8,7 +8,7 @@ export default function Cards() {
 
     return (
             
-        <div>
+        <div className = {styles.cardsContainer}>
              {users?.filter(user => user.estado === true && user.id !== userLogeado?.id)
                 .map(filteredUser => (
                     <CardUser key={filteredUser.id} user={filteredUser} />

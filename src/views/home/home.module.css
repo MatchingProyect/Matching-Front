@@ -15,7 +15,7 @@
     top: 0; 
     left: 0;
     right: 0;
-    z-index: 1000; 
+    z-index: 100; 
 }
 
 .dropdownAdmin{
@@ -118,4 +118,14 @@
   border-radius: 0% 20px 20px 0%;
 }
 
+.principalDiv{
+background-color: aquamarine;
+width: 100vw;
+height: auto;
+overflow-x: auto;
+display: flex;
+flex-direction: row;
+justify-content: start;
+align-items: center;
 
+}

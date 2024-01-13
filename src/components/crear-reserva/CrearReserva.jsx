@@ -140,57 +140,61 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         console.log(userLogeado)
 
         return (
-            <>
+            <div className = {styles.holeModal}>
                 <div className={styles.allContainer}>
-                    <button onClick={() => setReserva(false)}>X</button>
+                    <div className = {styles.modalHeader}>
+                        <label className = {styles.labelTop}>Crear Reserva</label>
+                    <button onClick={() => setReserva(false)} className = {styles.closeBtn}>x</button>
+                    </div>
                     <form onSubmit={handleSumbit} className={styles.formContainer}>
-
                         <div className={styles.modalContainer}>
-                            <label>Court: {court?.name}</label>
-                            <br />
-
-                            <label>teamMatch:</label>
-                            <input type="text" name='teamMatch' value={dataReservation.teamMatch} onChange={handleChange} />
-                            <br />
-
-                            <label>MatchTypeId:</label>
-                            <select name="MatchTypeId" value={dataReservation.MatchTypeId} onChange={handleChange}>
-                                <option>Selecciona un tipo de partido:</option>
+                            <label className = {styles.labelModal}>Cancha</label>
+                            <label className = {styles.labelModal}>{court?.name}</label>
+                        </div>
+                        <div className={styles.modalContainer}>
+                        <label className = {styles.labelModal}>Nombre Equipo</label>
+                        <input type="text" name='teamMatch' value={dataReservation.teamMatch} onChange={handleChange} className = {styles.modalInput}/>
+                        </div>
+                        <div className={styles.modalContainer}>
+                        <label className = {styles.labelModal}>Tipo Partido</label>
+                            <select name="MatchTypeId" value={dataReservation.MatchTypeId} onChange={handleChange} className = {styles.modalInput}>
+                                <option>Tipos</option>
                                 <option value="ca221323-2fac-450f-8b6e-f8edc9f14e5d">Privado</option>
                                 <option value="d81fe1b8-345a-4b4c-97b9-6e64b1116aec">Público</option>
                             </select>
-                            <br />
-
-                            <label>dateTimeStart:</label>
-                            <input type="text" name="dateTimeStart" value={dataReservation.dateTimeStart} onChange={handleChange} />
-                            <br />
-
-                            <label>dateTimeEnd:</label>
-                            <input type="text" name="dateTimeEnd" value={dataReservation.dateTimeEnd} onChange={handleChange} />
-                            <br />
-
-                            <label>totalCost: {court?.priceFee}</label>
-
-                            <label>Friends Id:</label>
+                        </div>
+                        <div className={styles.modalContainer}>
+                        <label className = {styles.labelModal}>Hora Inicio</label>
+                            <input type="text" name="dateTimeStart" value={dataReservation.dateTimeStart} onChange={handleChange} className = {styles.modalInput}/>
+                        </div>
+                        <div className={styles.modalContainer}>
+                        <label className = {styles.labelModal}>Hora Termino</label>
+                            <input type="text" name="dateTimeEnd" value={dataReservation.dateTimeEnd} onChange={handleChange} className = {styles.modalInput} />
+                        </div>
+                        <div className={styles.modalContainer}>
+                        <label className = {styles.labelModal}>Precio</label>
+                        <label className = {styles.labelModal}>${court?.priceFee}</label>
+                        </div>
+                        <div className={styles.modalContainer2}>
+                        <label className = {styles.labelModal2}>Selecciona participantes</label>
                             <select
                                 name="FriendsId"
                                 value={dataReservation.FriendsId}
                                 onChange={(event) => handleChange(event)}
                                 multiple  // Permite seleccionar múltiples opciones
+                                className = {styles.modalInput2}
                             >
-                                <option value="" disabled>Selecciona amigos:</option>
+                                <option value="" disabled>Friends Id</option>
                                 {allFriends.map((friend) => (
                                     <option key={friend.id} value={friend.id}>{friend.displayName}</option>
                                     ))}
                             </select>
-                                    <br />
-
-                            <button type="submit">Crear Reserva</button>
-                            {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
                         </div>
+                            <button type="submit" className = {styles.createBtn}>Crear Reserva</button>
+                            {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
                     </form>
                 </div>
-            </>
+            </div>
         );
     };
 
