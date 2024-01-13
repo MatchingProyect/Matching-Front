@@ -35,7 +35,7 @@ export default function Profile() {
             </div>
             </div>
 
-        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo perfilDeportivo = {perfilDeportivo} sports = {sports}/>}
+        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo perfilDeportivo = {perfilDeportivo} sports = {sports} userProfile={userProfile} />}
         <NavbarLow></NavbarLow>
         </div>
 

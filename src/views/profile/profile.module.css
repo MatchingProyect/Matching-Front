@@ -235,3 +235,7 @@
   justify-content: space-between;
   
 }
+
+.valoracionesContainer{
+  z-index: 10;
+}
