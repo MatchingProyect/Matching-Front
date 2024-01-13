@@ -34,11 +34,11 @@ function App() {
   useEffect(() => {
     console.log("APP INICIADA")
 
-    const storedUserData = localStorage.getItem('userData');
-    if(storedUserData){
-      const userDataObject = JSON.parse(storedUserData);
-      dispatch(setDataUser(userDataObject));
-    }
+    // const storedUserData = localStorage.getItem('userData');
+    // if(storedUserData){
+    //   const userDataObject = JSON.parse(storedUserData);
+    //   dispatch(setDataUser(userDataObject));
+    // }
 
 
   }, []);

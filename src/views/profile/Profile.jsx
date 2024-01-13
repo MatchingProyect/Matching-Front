@@ -9,11 +9,12 @@ import { fetchProfile } from '../../redux/reducer';
 export default function Profile() {
     const dispatch = useDispatch();
     const userProfile = useSelector((state) => state.user?.datauser?.user);
+    const sports = useSelector((state) => state.user?.allSports);
     useEffect(() => {
         dispatch(fetchProfile(userProfile?.id));
     }, []);
 
-    const perfilDeportivo = useSelector((state) => state.user?.datauser?.profile);    
+    const perfilDeportivo = useSelector((state) => state.user?.allProfiles);
     const [ profileOrSportProfile, setProfile ] = useState(true);
     function miperfilHandler(){
         setProfile(true)
@@ -34,7 +35,7 @@ export default function Profile() {
             </div>
             </div>
 
-        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo perfilDeportivo = {perfilDeportivo}/>}
+        {profileOrSportProfile? <MiPerfil user = {userProfile}/> : <ProfileDeportivo perfilDeportivo = {perfilDeportivo} sports = {sports}/>}
         <NavbarLow></NavbarLow>
         </div>
 

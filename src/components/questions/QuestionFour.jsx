@@ -9,7 +9,7 @@ export const QuestionFour = () => {
   const [ clicked,setClicked ] = useState('');
   const { datosUser,setDatosUser } = useUserContext();
 
-  console.log(datosUser);
+  console.log(sports);
 
 
   function playground (event){

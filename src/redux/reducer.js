@@ -94,7 +94,7 @@ export const fetchUser = (id) => async (dispatch) => {
     try {
         const { data } = await axios(`/userProfiles/${id}`);
         if (data.status){
-            dispatch(setProfile(data.theOne));
+            dispatch(setProfiles(data.theOne));
         }
     } catch (error) {
         throw error.message;
@@ -111,10 +111,10 @@ export const fetchReservations = ()=>async(dispatch)=>{
     }
 };
 
-export const fetchProfiles = ()=>async(dispatch)=>{
+export const fetchProfiles = (id)=>async(dispatch)=>{
     try {
-         const {data} = await axios('/profiles')
-        if(data.status) dispatch(setProfiles(data.allProfiles))
+         const { data } = await axios.get(`/userProfiles/${id}`)
+        if(data.status) dispatch(setProfiles(data.theOne))
     } catch (error) {
         throw error.message
     }

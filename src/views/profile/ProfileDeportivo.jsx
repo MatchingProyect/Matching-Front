@@ -4,9 +4,11 @@ import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
-export default function ProfileDeportivo({perfilDeportivo}) {
+export default function ProfileDeportivo({perfilDeportivo, sports}) {
+
     const  [ depProfile, setDepProfile ] = useState(perfilDeportivo);
     const stats = null;//Aca puede ir un hardcodeo
+    console.log(sports);
 
     function handlerProfileChange (event){
         let buttonValue = event.target.value;
@@ -17,8 +19,7 @@ export default function ProfileDeportivo({perfilDeportivo}) {
     return(
         <div className = {styles.perfilesDeportivosContainer}>
             <div className = {styles.divOne}>
-        {/* {depProfile?.map((element) => <button key = {element.sport} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.sport}>{element.sport}</button>)} */}
-        <button onClick = {handlerProfileChange} className = {styles.sportText} >Padel</button>
+        {perfilDeportivo?.map((element) => <button key = {element.SportId} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.SportId}>{element.SportId}</button>)}
         </div>
         <div className = {styles.statsDiv}>
             <StatsPerfilDepor stats = {stats}/>
