@@ -31,7 +31,6 @@ export default function CardReservation() {
         fetchTeamMatch();
     }, []);
 
-    console.log('bbcita', infoReservation)
 
     useEffect(() => {
         const fetchReservationsInfo = async () => {
@@ -42,7 +41,8 @@ export default function CardReservation() {
                     return data.reservation[0];
                 });
                 const allInfoReservation = await Promise.all(promises);
-                setInfoReservation(allInfoReservation);
+                const filteredReservations = allInfoReservation.filter(reservation => reservation !== undefined);
+                setInfoReservation(filteredReservations);
             } catch (error) {
                 throw error.message;
             }
@@ -66,6 +66,7 @@ export default function CardReservation() {
         };
         fetchAnfitrionInfo();
     }, [infoReservation]);
+    console.log(infoReservation)
     
     useEffect(() => {
         const fetchTeamMatchName = async() => {

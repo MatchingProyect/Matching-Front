@@ -10,8 +10,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     const userLogeado = useSelector((state) => state.user?.datauser?.user);
     const allFriends = useSelector((state) => state.user?.allFriends);
     const [preferenceId, setPreferenceId] = useState('');
-    
-    console.log('holi',userLogeado)
 
     const [dataReservation, setDataReservation] = useState({
         dateTimeStart: '',
@@ -44,7 +42,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     //     FriendsId: []
     // })
 
-    const handleChange = (event) => {
+    const handleChange = async(event) => {
         const friendName = event.target.name;
         setDataReservation({
             ...dataReservation,
@@ -76,12 +74,11 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             if(preferenceId) setPreferenceId('');
             return null;
         }
-
+        
+        const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
         const crearReserva = async () => {
             try {
                 const endpoint = '/reservations';
-                const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
-                console.log(dataReservation);
                 const { data } = await axios.post(endpoint, {
                     dateTimeStart,
                     dateTimeEnd,
@@ -93,10 +90,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     FriendsId
                 });
 
-                console.log(data.addReservation);
-
                 if (data.status) {
-                    const reservations = data.addReservation;
+                    const reservations = await data.addReservation;
                     const endpoint = '/createOrder';
                     const response = await axios.post(endpoint, { id: reservations.id });
                     //*Con esto se abre el botón MP
@@ -104,7 +99,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     sendEmail(reservations);
                 }
             } catch (error) {
-               alert(error.message);
+               console.log(error.message);
             }
         };
 
@@ -142,6 +137,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                 throw error.message
             }
         }
+        console.log(userLogeado)
 
         return (
             <>
