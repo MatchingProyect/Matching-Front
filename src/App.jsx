@@ -26,6 +26,7 @@ import { useDispatch } from 'react-redux';
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
 import FunctionsAdmin from './views/home/FunctionsAdmin.jsx';
+import PartidosPublicos from './views/partidosPublicos/PartidosPublicos.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function App() {
         <Route path='/user/:id' element={<UserDetail/>} />
         <Route path='clubs/:id' element={<ClubsDetail/>} />
         <Route path='/functionsAdm' element={<FunctionsAdmin/>} />
+        <Route path='/partidosPublicos' element={<PartidosPublicos/>}/>
         
         <Route path = "*" element = {<Error />} />
       </Routes>

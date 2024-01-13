@@ -38,6 +38,7 @@ export default function NavBar() {
                         <LogoutIcon  className={styles.btnIcon} />
                     </div> 
                 </button>
+                <Link to='/partidosPublicos'><button>partidos publicos</button></Link>
             </div>
         </div>
 
