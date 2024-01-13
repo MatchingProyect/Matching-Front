@@ -69,9 +69,9 @@ export default function CardReservation() {
         fetchAnfitrionInfo();
     }, [infoReservation]);
     console.log(infoReservation)
-    
+
     useEffect(() => {
-        const fetchTeamMatchName = async() => {
+        const fetchTeamMatchName = async () => {
             try {
                 const name = teamMatch?.map(async (teamMatch) => {
                     const endpoint = `/teamMatch/${teamMatch.TeamMatchId}`;
@@ -87,7 +87,7 @@ export default function CardReservation() {
         fetchTeamMatchName()
     }, [teamMatch])
 
-    console.log('xd',infoReservation)
+    console.log('xd', infoReservation)
 
     return (
         <div>
@@ -100,11 +100,11 @@ export default function CardReservation() {
                     <h3>Precio Total: {reservation?.totalCost || 'No disponible'}</h3>
                     <br />
                     <ValorarUsuarios teamMatch={reservation.TeamMatchId
-} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}/>
-                    <button onClick={()=> setValorarUsuarios(true)} >Juego Terminado</button>
+                    } setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios} />
+                    {valorarUsuarios ? null : <button onClick={() => setValorarUsuarios(true)}>Juego Terminado</button>}
                 </div>
             ))}
         </div>
     );
-    
+
 }

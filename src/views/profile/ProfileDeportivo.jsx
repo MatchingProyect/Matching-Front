@@ -1,26 +1,43 @@
 import styles from './profile.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-export default function ProfileDeportivo({perfilDeportivo, sports}) {
+export default function ProfileDeportivo({perfilDeportivo, sports, userProfile}) {
     const  [ depProfile, setDepProfile ] = useState(perfilDeportivo[0]);
+    const [valoraciones, setValoraciones] = useState();
     // const stats = null;
     console.log(perfilDeportivo, sports);
-
+    
     function handlerProfileChange (event){
         let buttonValue = event.target.value;
         let findedProfile = perfilDeportivo.find((element) => element.SportId == buttonValue);
         setDepProfile(findedProfile);
     };
-
+    
     function justBtnsOfProfilesBrought (id) {
         let selectedSport = sports.find((element) => element.id == id)
         return selectedSport.name;
     };
-
+    
+    useEffect(() => {
+        
+        const fetchValoraciones = async() => {
+            try {
+                const endpoint = `/valoraciones/${userProfile.id}`;
+                const {data} = await axios(endpoint);
+                
+                if(data.status) setValoraciones(data.valoraciones);
+            } catch (error) {
+                throw error.message;
+            }
+        }
+        fetchValoraciones();
+    }, [userProfile])
+console.log('a', valoraciones)
     return(
         <div className = {styles.perfilesDeportivosContainer}>
             <div className = {styles.divOne}>
@@ -60,6 +77,16 @@ export default function ProfileDeportivo({perfilDeportivo, sports}) {
                         <p className = {styles.nombreDelDato}>Hora Preferida</p>
                     </div>
                 </div>
+        </div>
+
+        <div className={styles.valoracionesContainer}>
+            {valoraciones?.map((reseña) => (
+                <div key={reseña.id}>
+                    <br />
+                    <h2>Reseña:</h2>
+                    <h2>"{reseña.valoracion}"</h2>
+                </div>
+            ))}
         </div>
         </div>
     )
