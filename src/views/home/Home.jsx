@@ -58,9 +58,9 @@ export default function Home() {
 
             
             <div className={styles.navComponent}>
-                <button onClick={() => setActiveComponent('campos')}>Campos</button>
-                <button onClick={() => setActiveComponent('reservations')}>Ver Reservaciones</button>
-                <button onClick={() => setActiveComponent('user')}>Sugerencias</button>
+                <button onClick={() => setActiveComponent('campos')} className={styles.btnHomeNav}>Campos</button>
+                <button onClick={() => setActiveComponent('reservations')} className={styles.btnHomeNav}>Reservaciones</button>
+                <button onClick={() => setActiveComponent('user')} className={styles.btnHomeNav}>Sugerencias</button>
             </div>
 
 
