@@ -58,13 +58,13 @@ export default function Home() {
 
             
             <div className={styles.navComponent}>
-                <button onClick={() => setActiveComponent('campos')} className={styles.btnHomeNav}>Campos</button>
-                <button onClick={() => setActiveComponent('reservations')} className={styles.btnHomeNav}>Reservaciones</button>
-                <button onClick={() => setActiveComponent('user')} className={styles.btnHomeNav}>Sugerencias</button>
+                <button onClick={() => setActiveComponent('campos')} className={styles.btnHomeNav1}>Campos</button>
+                <button onClick={() => setActiveComponent('reservations')} className={styles.btnHomeNav2}>Reservas</button>
+                <button onClick={() => setActiveComponent('user')} className={styles.btnHomeNav3}>Sugerencias</button>
             </div>
 
 
-            <div>
+            <div className = {styles.principalDiv}>
                 {activeComponent === 'campos' && <Campos />}
                 {activeComponent === 'reservations' && (
                     <CardReservation courts = {courts} />

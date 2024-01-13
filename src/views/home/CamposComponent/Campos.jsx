@@ -1,4 +1,3 @@
-
 import styles from './campo.module.css';
 import { useState } from 'react';
 import CardCourt from '../../cardCourt/CardCourt';

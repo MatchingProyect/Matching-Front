@@ -3,40 +3,31 @@ import { useState } from 'react';
 import StatsPerfilDepor from '../../components/statsPerfilDepor/StatsPerfilDepor';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 export default function ProfileDeportivo({perfilDeportivo, sports}) {
-
-    const  [ depProfile, setDepProfile ] = useState(perfilDeportivo);
-    const stats = null;//Aca puede ir un hardcodeo
-    console.log(sports);
+    const  [ depProfile, setDepProfile ] = useState(perfilDeportivo[0]);
+    // const stats = null;
+    console.log(perfilDeportivo, sports);
 
     function handlerProfileChange (event){
         let buttonValue = event.target.value;
-        let selectedProfile = perfilDeportivo.find((element) => element.sport == buttonValue);
-        setDepProfile(selectedProfile);
+        let findedProfile = perfilDeportivo.find((element) => element.SportId == buttonValue);
+        setDepProfile(findedProfile);
+    };
+
+    function justBtnsOfProfilesBrought (id) {
+        let selectedSport = sports.find((element) => element.id == id)
+        return selectedSport.name;
     };
 
     return(
         <div className = {styles.perfilesDeportivosContainer}>
             <div className = {styles.divOne}>
-        {perfilDeportivo?.map((element) => <button key = {element.SportId} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.SportId}>{element.SportId}</button>)}
+        {perfilDeportivo?.map((element) => <button key = {element.SportId} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.SportId}>{justBtnsOfProfilesBrought(element.SportId)}</button>)}
         </div>
         <div className = {styles.statsDiv}>
-            <StatsPerfilDepor stats = {stats}/>
-        </div>
-        <div className = {styles.DivTwo}>
-            <p className = {styles.textOne}>Mis Puntos</p>
-            <div className = {styles.pointsContainer}>
-            <div>
-                Puntos Acumulados: 
-            </div>
-            <div>
-                <Link to = '/canjearPuntos'>
-            <button className = {styles.pointsBtn}>Canjear Puntos</button>
-            </Link>
-            </div>
-            </div>
-
+            {/* <StatsPerfilDepor stats = {stats}/> */}
         </div>
         <div className = {styles.divThree}>
                 <div className = {styles.divThree2}>
