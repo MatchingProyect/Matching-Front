@@ -11,11 +11,15 @@ import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 import GoogleIcon from '@mui/icons-material/Google';
 import { setDataUser } from '../../redux/reducer'; 
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [errorEmail, seterrorEmail] = useState()
+  const [errorPassword, seterrorPassword] = useState()
 
   useEffect(() =>{
     initializeGoogleAuth();
@@ -139,7 +143,10 @@ const Login = () => {
         navigate("/home");
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      seterrorEmail(error.response.data.email)
+      seterrorPassword(error.response.data.pass)
+
+      console.error("Error al iniciar sesión:", error.response.data);
     }
   };
   
@@ -196,6 +203,11 @@ const Login = () => {
                     {...field}
                   />
                   {errors.emailValue && <p className={styles.pPass}>{errors.emailValue.message}</p>}
+
+                  <div>
+                    {errorEmail?<p className={styles.pPass}>{errorEmail}</p> :null}
+                  </div>
+
                 </>
               )}
             />
@@ -210,14 +222,7 @@ const Login = () => {
               control={control}
               rules={{
                 required: "Este campo es requerido",
-                minLength: {
-                  value: 8,
-                  message: "La contraseña debe tener al menos 8 caracteres",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "La contraseña no debe exceder los 15 caracteres",
-                },
+
               }}
               render={({ field }) => (
                   <input
@@ -231,14 +236,21 @@ const Login = () => {
               type="button"
               className={styles.eyeButton}
               onClick={togglePasswordVisibility}>
-                👁️
+                {
+                showPassword? <VisibilityIcon/> : <VisibilityOffIcon/>
+               }
             </button>
-            
+      
             
             </div>
             {errors.password && <p className={styles.pPass}>{errors.password.message}</p>}
+            <div>
+                    {errorPassword?<p className={styles.pPass}>{errorPassword}</p> :null}
+            </div>
           </div>
         </div>
+ 
+
 
         <button type="submit" className={styles.submitButtonLogin}>
           INICIAR SESION
