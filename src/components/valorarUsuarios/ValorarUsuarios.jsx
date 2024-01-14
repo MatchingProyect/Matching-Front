@@ -1,11 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Resultado from '../resultado/Resultado';
 
 const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
 
     const [idUsuarios, setIdUsuarios] = useState([])
     const [usuarios, setUsuarios] = useState();
     const [valoracion, setValoracion] = useState({});
+    const [resultado, setResultado] = useState(false)
 
     console.log('luquitas wapo',idUsuarios)
 
@@ -61,6 +63,7 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
             if (data.status) {
                 setValoracion({});
                 setValorarUsuarios(false);
+                setResultado(true)
             } 
             else return console.log(data.message);
         } catch (error) {
@@ -95,6 +98,7 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
                     </form>
                 </div>
             ))}
+            <Resultado teamMatch={teamMatch} setResultado={setResultado} resultado={resultado} />
             <button type="submit">Enviar</button>
         </div>
     )
