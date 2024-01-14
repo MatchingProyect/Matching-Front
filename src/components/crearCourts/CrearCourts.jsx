@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styles from './CrearCourts.module.css';
+import { fetchCourts } from '../../redux/reducer';
 
 const CrearCourts = ({ crearCourt, setCrearCourt }) => {
   const sports = useSelector((state) => state.user.allSports);
@@ -31,6 +32,27 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleClubChange = (event) => {
+    setFormData({
+      ...formData,
+      ClubId: event.target.value,
+    });
+  };
+  
+  const handleSportChange = (event) => {
+    setFormData({
+      ...formData,
+      SportId: event.target.value,
+    });
+  };
+  
+  const handleLocationChange = (event) => {
+    setFormData({
+      ...formData,
+      LocationId: event.target.value,
     });
   };
 
@@ -72,8 +94,8 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
 
       console.log(data);
       if (data.status) {
-        //  dispatch(fetchCourts());
-        //  setCrearCourt(false);
+         dispatch(fetchCourts());
+         setCrearCourt(false);
       }
     } catch (error) {
       console.log(error);
@@ -86,17 +108,16 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
       event.preventDefault();
       await onSubmitCourts();
     } catch (error) {
+      console.log(formData)
       console.log(error);
       throw error.message;
     }
   }
-
   if (!crearCourt) return null;
-
 
   return (
     <div className={styles.holeCompContainer}>
-      <form onSubmit={() => handleSubmit(onSubmitCourts)} className={styles.formContainer}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
 
         <div className={styles.inputContainer}>
           <input
@@ -221,7 +242,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
 
 
         <div className={styles.inputContainer}>
-          <select id="clubSelect" className={styles.input}>
+          <select id="clubSelect" className={styles.input} onChange={handleClubChange}>
             {clubs?.map(club => (
               <option key={club.id} value={club.id}>
                 {club.name}
@@ -233,7 +254,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
         <div className={styles.inputContainer}>
 
 
-          <select id="sportSelect" className={styles.input}>
+          <select id="sportSelect" className={styles.input} onChange={handleSportChange}>
             {sports?.map(sport => (
               <option key={sport.id} value={sport.id}>
                 {sport.name}
@@ -244,7 +265,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
         </div>
         <div className={styles.inputContainer}>
 
-          <select id="locationSelect" className={styles.input}>
+          <select id="locationSelect" className={styles.input} onChange={handleLocationChange}>
             {location?.map(location => (
               <option key={location.id} value={location.id}>
                 {location.name}
