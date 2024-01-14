@@ -19,7 +19,7 @@ export default function Home() {
     const courts = useSelector((state) => state.user.allCourts);
     const estadoFriends = useSelector((state) => state.user.allFriends);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
-    console.log(estadoFriends);
+    console.log(courts);
 
     const [activeComponent, setActiveComponent] = useState('campos');
 

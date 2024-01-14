@@ -21,7 +21,7 @@ import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
 import Help from './views/help/Help.jsx';
-import { setDataUser } from './redux/reducer.js';
+import { setDataUser, setFriends } from './redux/reducer.js';
 import { useDispatch } from 'react-redux'; 
 
 import Solicitudes from './views/solicitudes/Solicitudes.jsx';
@@ -36,9 +36,14 @@ function App() {
     console.log("APP INICIADA")
 
     const storedUserData = localStorage.getItem('userData');
-    if(storedUserData){
+    if(storedUserData !="undefined"){
       const userDataObject = JSON.parse(storedUserData);
       dispatch(setDataUser(userDataObject));
+    }
+    const storedUserFriends= localStorage.getItem('userFriends');
+    if(storedUserFriends !="undefined"){
+      const userDataObject = JSON.parse(storedUserFriends);
+      dispatch(setFriends(userDataObject));
     }
 
 

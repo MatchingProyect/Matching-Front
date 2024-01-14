@@ -12,6 +12,8 @@
     display: flex;
     align-items: center;
     margin-left: auto; 
+    width: 10px;
+    height: 10px;
   }
 
 .centeredImage button {
