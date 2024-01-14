@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 
 export default function FriendsContainer({friends}){
+    console.log(friends);
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
             return (
@@ -23,7 +24,7 @@ export default function FriendsContainer({friends}){
                 <Link to = '/friends'> <p className = {styles.verTodos}>Ver Todos</p> </Link>
             </div>
             <div className = {styles.friendsImages}>
-                {friends?.map((element) => 
+                {friends.length > 0 && friends.map((element) => 
                 <div className = {styles.friend} key = {element.name}>
                     
                     <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
@@ -36,6 +37,6 @@ export default function FriendsContainer({friends}){
     )
 }
 
-FriendsContainer.propTypes = {
-    friends: PropTypes.object.isRequired,
-  };
+// FriendsContainer.propTypes = {
+//     friends: PropTypes.object.isRequired,
+//   };

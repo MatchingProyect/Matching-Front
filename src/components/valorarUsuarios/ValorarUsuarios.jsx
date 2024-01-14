@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
 
     const [idUsuarios, setIdUsuarios] = useState([])
-    const [usuarios, setUsuarios] = useState()
-    const [valoracion, setValoracion] = useState('');
+    const [usuarios, setUsuarios] = useState();
+    const [valoracion, setValoracion] = useState({});
 
     console.log('luquitas wapo',idUsuarios)
 
@@ -48,14 +48,20 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
         usuariosAValorar();
     }, [idUsuarios]);
     
-    const handleChange = (event) => {
-        setValoracion(event.target.value);
+    const handleChange = (event, UserId) => {
+        setValoracion({
+            ...valoracion,
+            [UserId]: event.target.value
+        });
     }
 
     const postValoracion = async (id) => {
         try {
-            const { data } = await axios.post(`/valoracion/${id}`, { valoracion });
-            if (data.status) setValorarUsuarios(false);
+            const { data } = await axios.post(`/valoraciones/${id}`, { valoracion: valoracion[id] });
+            if (data.status) {
+                setValoracion({});
+                setValorarUsuarios(false);
+            } 
             else return console.log(data.message);
         } catch (error) {
             throw Error(error.message);
@@ -83,13 +89,13 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
                         <input
                             type="text"
                             name="valoracion"
-                            value={valoracion}
-                            onChange={handleChange}
+                            value={valoracion[user.user.id]}
+                            onChange={(event) => handleChange(event, user.user.id)}
                         />
-                        <button type="submit">Enviar</button>
                     </form>
                 </div>
             ))}
+            <button type="submit">Enviar</button>
         </div>
     )
 }
