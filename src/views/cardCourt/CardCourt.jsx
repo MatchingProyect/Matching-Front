@@ -101,6 +101,7 @@ const CardCourt = ({ court }) => {
       <img src={court.imgClub} alt={court.name} className={styles.img} />
       <div className={styles.courtInfo}>
         <h2 className={styles.courtTitle}>{court.name}</h2>
+        <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
         <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
         <h3 className={styles.courtText}>{court.priceFee}$</h3>
       </div>      

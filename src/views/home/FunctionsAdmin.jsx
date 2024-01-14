@@ -7,47 +7,34 @@ import CardUser from "../cardUsers/CardUser";
 import { Link } from "react-router-dom";
 import CardClub from "../cardClubs/CardClub";
 import CardCourt from "../cardCourt/CardCourt";
-import { fetchCourts, fetchUsers } from "../../redux/reducer";
+import { fetchClubs, fetchCourts, fetchUsers } from "../../redux/reducer";
 import CrearSport from "../../components/crearSport/CrearSport";
 import CrearClub from "../../components/crearClub/CrearClub";
 import CrearCourts from "../../components/crearCourts/CrearCourts";
 import NavbarLow from "../../components/navbarLow/navbarLow";
 
 const FunctionsAdmin = () => {
+  
+  const dispatch = useDispatch();
+  const [usersDeshabilitados, setUsersDeshabilitados] = useState(false)
+  const [courtsDeshabilitados, setCourtsDeshabilitados] = useState(false)
+  const [clubDeshabilitados, setClubsDeshabilitados] = useState(false)
+  const [crearSport, setCrearSport] = useState(false)
+  const [crearClub, setCrearClub] = useState(false)
+  const [crearCourt, setCrearCourt] = useState(false)
 
 
-    const [usersDeshabilitados, setUsersDeshabilitados] = useState(false)
-    const [clubDeshabilitados, setClubsDeshabilitados] = useState(false)
-    const [courtsDeshabilitados, setCourtsDeshabilitados] = useState(false)
-    const [crearSport, setCrearSport] = useState(false)
-    const [crearClub, setCrearClub] = useState(false)
-    const [crearCourt, setCrearCourt] = useState(false)
-   
-
-    const {
-        handleSubmit,
-        formState: { errors },
-        register
-    } = useForm();
-
-    const users = useSelector((state) => state.user.allUsers);
-     const userLogeado =useSelector((state) =>state.user.dataUser.user)
-    const sports = useSelector((state) => state.user.allSports);
-     const clubs = useSelector((state) => state.user.allClubs);
-     const courts = useSelector((state) => state.user.allCourts);
-     const location = useSelector((state) => state.user.allLocations);
+  const users = useSelector((state) => state.user?.allUsers);
+  const userLogeado = useSelector((state) =>state.user?.datauser?.user)
+  // const sports = useSelector((state) => state.user?.allSports);
+  const courts = useSelector((state) => state.user?.allCourts);
+  const clubs = useSelector((state) => state.user?.allClubs);
+  // const location = useSelector((state) => state.user?.allLocations);
+  
+  
+  if(!userLogeado?.admin) return null
 
 
-    const dispatch = useDispatch();
-
-    if(!userLogeado?.admin) return null
-
-    
-
-    
-
-
-   
 
     const reactivarClub = async(id) =>{
       try {
@@ -91,6 +78,7 @@ const FunctionsAdmin = () => {
                       .map(filteredCourt => (
                           <div key={filteredCourt.id} className = {styles.courtDivDesabilitadas}>
                               <CardCourt court={filteredCourt} />
+                              <button onClick={()=> reactivarCourt(filteredCourt.id)} >Activar Court</button>
                               
                           </div>
                 ))}

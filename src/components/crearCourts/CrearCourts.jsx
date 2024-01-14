@@ -1,146 +1,261 @@
-import React from 'react'
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styles from './CrearCourts.module.css';
 
+const CrearCourts = ({ crearCourt, setCrearCourt }) => {
+  const sports = useSelector((state) => state.user.allSports);
+  const clubs = useSelector((state) => state.user.allClubs);
+  const location = useSelector((state) => state.user.allLocations);
 
-const CrearCourts = ({crearCourt, setCrearCourt}) => {
+  const dispatch = useDispatch();
 
-    const sports = useSelector((state) => state.user.allSports);
-     const clubs = useSelector((state) => state.user.allClubs);
-     const location = useSelector((state) => state.user.allLocations);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    priceFee: '',
+    warrantyReservation: '',
+    grassType: '',
+    lighting: '',
+    doorsType: '',
+    wallsType: '',
+    reputation: '',
+    horarioInicio: '',
+    horarioCierre: '',
+    ClubId: '', 
+    SportId: '', 
+    LocationId: '', 
+  });
 
-    
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-     const {
-        handleSubmit,
-        formState: { errors },
-        register
-    } = useForm();
+  const {
+    name,
+    description,
+    priceFee,
+    warrantyReservation,
+    grassType,
+    lighting,
+    doorsType,
+    wallsType,
+    reputation,
+    horarioInicio,
+    horarioCierre,
+    ClubId,
+    SportId,
+    LocationId
+  } = formData;
 
-    const dispatch = useDispatch();
+  const onSubmitCourts = async () => {
+    try {
+      const endPoint = '/courts';
+      const { data } = await axios.post(endPoint,{
+        name,
+        description,
+        priceFee: Number(priceFee),
+        warrantyReservation,
+        grassType,
+        lighting,
+        doorsType,
+        wallsType,
+        reputation,
+        horarioInicio,
+        horarioCierre,
+        ClubId,
+        SportId,
+        LocationId});
 
-    const onSubmitCourts = async (data) => {
-        try {
-            const endPoint = '/courts'
-            const response = await axios.post(endPoint, data)
-            if (response.status) {
-                 dispatch(fetchCourts());
-            }
-
-            
-            
-        } catch (error) {
-            throw error.message;
-        }
+      console.log(data);
+      if (data.status) {
+        //  dispatch(fetchCourts());
+        //  setCrearCourt(false);
+      }
+    } catch (error) {
+      console.log(error);
+      throw error.message;
     }
+  };
 
-    if(!crearCourt) return null
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      await onSubmitCourts();
+    } catch (error) {
+      console.log(error);
+      throw error.message;
+    }
+  }
+
+  if (!crearCourt) return null;
+
 
   return (
-    <div className = {styles.holeCompContainer}>
-        <form onSubmit={handleSubmit(onSubmitCourts)} className = {styles.formContainer}>
-        <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('name', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>Name</label>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('description', {required: true, maxLength: 100})} className = {styles.input}/>
-                <label className = {styles.label}>Description</label>
-                {errors.description?.type === "required" && <p>This field is required</p>}
-                {errors.description?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('pricefee', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>PriceFee</label>
-                {errors.pricefee?.type === "required" && <p>This field is required</p>}
-                {errors.pricefee?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('warranty', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>Warranty</label>
-                {errors.warranty?.type === "required" && <p>This field is required</p>}
-                {errors.warranty?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('grasstype', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>GrassType</label>
-                {errors.grasstype?.type === "required" && <p>This field is required</p>}
-                {errors.grasstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('lighting', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>Lighting</label>
-                {errors.lighting?.type === "required" && <p>This field is required</p>}
-                {errors.lighting?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('doorstype', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>DoorsType</label>
-                {errors.doorstype?.type === "required" && <p>This field is required</p>}
-                {errors.doorstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('wallstype', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>WallsType</label>
-                {errors.wallstype?.type === "required" && <p>This field is required</p>}
-                {errors.wallstype?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-                <input type="text" {...register('reputation', {required: true, maxLength: 100})} className = {styles.input}/>
-                <label className = {styles.label}>Reputation</label>
-                {errors.reputation?.type === "required" && <p>This field is required</p>}
-                {errors.reputation?.type === "maxLength" && <p>The max in the field is 100 characters</p>}
-                </div>
-                <div className = {styles.inputContainer}>
-                
-      <select id="clubSelect" className = {styles.input}>
-        {clubs?.map(club => (
-          <option key={club.id} value={club.id}>
-            {club.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="clubSelect" className = {styles.label}>Club</label>
-      </div>
-      <div className = {styles.inputContainer}>
+    <div className={styles.holeCompContainer}>
+      <form onSubmit={() => handleSubmit(onSubmitCourts)} className={styles.formContainer}>
 
-      
-      <select id="sportSelect" className = {styles.input}>
-        {sports?.map(sport => (
-          <option key={sport.id} value={sport.id}>
-            {sport.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="sportSelect" className = {styles.label}>Sport</label>
-      </div>
-      <div className = {styles.inputContainer}>
-      
-      <select id="locationSelect" className = {styles.input}>
-        {location?.map(location => (
-          <option key={location.id} value={location.id}>
-            {location.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="locationSelect" className = {styles.label}>Location</label>
-      </div>
-         <button type="submit" value='enviar' className = {styles.btnSubmit}>Create</button>
-        </form>
-        <button onClick={()=>setCrearCourt(false)} className = {styles.close}>Cerrar</button>
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Name</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Description</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="priceFee"
+            value={formData.priceFee}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>PriceFee</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="warrantyReservation"
+            value={formData.warrantyReservation}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Warranty</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="grassType"
+            value={formData.grassType}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>GrassType</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="lighting"
+            value={formData.lighting}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Lighting</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="doorsType"
+            value={formData.doorsType}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>DoorsType</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="wallsType"
+            value={formData.wallsType}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>WallsType</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="reputation"
+            value={formData.reputation}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Reputation</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="horarioInicio"
+            value={formData.horarioInicio}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Horario Inicio</label>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="horarioCierre"
+            value={formData.horarioCierre}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <label className={styles.label}>Horario Cierre</label>
+        </div>
+
+
+        <div className={styles.inputContainer}>
+          <select id="clubSelect" className={styles.input}>
+            {clubs?.map(club => (
+              <option key={club.id} value={club.id}>
+                {club.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="clubSelect" className={styles.label}>Club</label>
+        </div>
+        <div className={styles.inputContainer}>
+
+
+          <select id="sportSelect" className={styles.input}>
+            {sports?.map(sport => (
+              <option key={sport.id} value={sport.id}>
+                {sport.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="sportSelect" className={styles.label}>Sport</label>
+        </div>
+        <div className={styles.inputContainer}>
+
+          <select id="locationSelect" className={styles.input}>
+            {location?.map(location => (
+              <option key={location.id} value={location.id}>
+                {location.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="locationSelect" className={styles.label}>Location</label>
+        </div>
+        <button type="submit" value='enviar' className={styles.btnSubmit}>Create</button>
+      </form>
+      <button onClick={() => setCrearCourt(false)} className={styles.close}>Cerrar</button>
     </div>
   )
 }
