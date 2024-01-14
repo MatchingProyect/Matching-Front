@@ -1,5 +1,6 @@
 .cardCourtContainer{
-    width: 80vw;
+    width: 60vw;
+    max-width: 400px;
     height: auto;
     display: flex;
     flex-direction: column;

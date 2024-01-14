@@ -56,7 +56,7 @@
 
 .friendsContainer{
     width: 100vw;
-    height: auto;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +119,6 @@
 }
 
 .principalDiv{
-background-color: aquamarine;
 width: 100vw;
 height: auto;
 overflow-x: auto;

@@ -39,8 +39,8 @@ export default function ProfileDeportivo({perfilDeportivo, sports, userProfile})
     }, [userProfile])
 console.log('a', valoraciones)
     return(
-        <div className = {styles.perfilesDeportivosContainer}>
-            <div className = {styles.divOne}>
+                <div className = {styles.perfilesDeportivosContainer}> 
+                    <div className = {styles.divOne}>
         {perfilDeportivo?.map((element) => <button key = {element.SportId} onClick = {handlerProfileChange} className = {styles.sportText} value = {element.SportId}>{justBtnsOfProfilesBrought(element.SportId)}</button>)}
         </div>
         <div className = {styles.statsDiv}>
@@ -88,7 +88,7 @@ console.log('a', valoraciones)
                 </div>
             ))}
         </div>
-        </div>
+                </div>
     )
 }
 

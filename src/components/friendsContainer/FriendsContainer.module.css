@@ -1,52 +1,50 @@
 .friendsContainer{
     position: relative;
-    border-radius: 10px;
-    min-width: 90vw;
-    padding: 10px;
-    height: auto;
+    width: 100vw;
+    height: 100%;
 }
 
 
 .infoGeneral{
-    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .text1 {
     color: black;
     font-size: 18px;
-    font-weight: 500;
-    margin: 4px;
+    font-weight: 400;
+    margin-left: 10px;
 }
 
 .friendsImages{
-    position: relative;
-    height: auto;
+    height: 68%;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     margin-right:10px;
     margin-left: 10px;
     justify-content:baseline;
     overflow-x:auto;
+    overflow-y: hidden;
 }
 
 .friendImg{
-    position: relative;
     max-width: 90px;
     max-height: 90px;
-    width: 10vh;
-    height: 10vh;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border-style: solid;
-    border-width: 2px;
+    border-width: 3px;
     border-color: black;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274); 
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.274); 
 }
 .friend{
-    margin-right: 1vw;
+    margin-left: 1vw;
     width: 10vh;
     height: auto;
     max-width: 90px;
@@ -64,17 +62,16 @@
 
 }
 .verTodos{
-    background-color: rgb(55, 55, 255);
     text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-    position: relative;
+    color: blue;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     margin: 5px;
 }
 .label{
     text-align: center;
+    height: 25px;
+    font-weight: 500;
+    line-height: 100%;
 }
 

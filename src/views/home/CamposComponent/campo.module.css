@@ -48,3 +48,7 @@
     font-size: 35px;
 }
 
+.cardsContainerScroll{
+    width: 100%;
+    overflow-x: auto;
+}

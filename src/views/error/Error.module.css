@@ -22,11 +22,12 @@
     border-radius: 25px;
     padding: 20px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.274); 
+    margin-bottom: 80px;
 
 }
 
 .pageTitle2{
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
     position: relative;
 
 }
@@ -54,7 +55,7 @@
 .homeBtn{
     width: 30vw;
     height: 55px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: 500;
     font-size: 15px;
     color: white;
@@ -65,7 +66,7 @@
 .helpBtn{
     width: 30vw;
     height: 55px;
-    border-radius: 15px;
+    border-radius: 10px;
     font-weight: 500;
     font-size: 15px;
     color: white;

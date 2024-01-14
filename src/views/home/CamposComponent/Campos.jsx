@@ -47,6 +47,7 @@ const Campos = () => {
                 </select>
             </div>
         </div>
+        <div className = {styles.cardsContainerScroll}>
         {
             filteredCourts.length > 0 ? 
                 filteredCourts.filter(court => court.estado === true)
@@ -57,6 +58,7 @@ const Campos = () => {
                     <CardCourt key={filteredCourt.id} court={filteredCourt} />
                 ))
         }
+        </div>
     </div>
   );
 };
