@@ -189,7 +189,13 @@ export const fetchUpdateFriendRequest = (userFriend)=>async(dispatch)=>{
 export const fetchUpdateFriend = (friend)=>async(dispatch)=>{
     try {
         console.log("fetchUpdateFriend", friend)
-        if(friend) dispatch(setUpdateFriend(friend))
+        if(friend) {
+            dispatch(setUpdateFriend(friend))
+            
+            const userFriends = JSON.parse(localStorage.getItem('userFriends')) || [];
+            userFriends.push(friend);
+            localStorage.setItem('userFriends', JSON.stringify(userFriends));
+        }
     } catch (error) {
         throw error.message
     }

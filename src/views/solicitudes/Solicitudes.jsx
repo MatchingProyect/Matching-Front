@@ -101,7 +101,7 @@ const Solicitudes = () => {
                 <h2>Solicitudes</h2>
             </div>
             {
-                infoSoli? null : 
+                infoSoli.length? null : 
                 <h2>NO HAY SOLICITUDES DE AMISTAD</h2>
             }
 
