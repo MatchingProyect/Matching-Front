@@ -10,6 +10,7 @@ import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth
 import { fetchUser } from "../../redux/reducer";
 import {useDispatch} from "react-redux";
 import GoogleIcon from '@mui/icons-material/Google';
+import { setDataUser } from '../../redux/reducer'; 
 
 const Login = () => {
 
@@ -111,7 +112,13 @@ const Login = () => {
     try {
       const endpoint = "/users";
       const result = await axios.post(endpoint, data);
+      console.log("onRegister",result.data.userCreated)
       if (result) {
+
+        dispatch(setDataUser({
+          user:result.data.userCreated
+        }));
+
         console.log("register success")
         navigate("/questions");
       }

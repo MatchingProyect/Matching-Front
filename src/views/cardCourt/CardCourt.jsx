@@ -14,7 +14,6 @@ const CardCourt = ({ court }) => {
   const [reserva, setReserva] = useState(false);
   const [update, setUpdate] = useState(false);
   const [detail, setDetail] = useState(false);
-  console.log(court);
 
   const userLogeado = useSelector((state) => state.user?.dataUser?.user);
   const dispatch = useDispatch();

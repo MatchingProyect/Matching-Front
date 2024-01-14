@@ -4,6 +4,8 @@ import emailjs from '@emailjs/browser';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import styles from './CrearReserva.module.css';
+import { format } from 'date-fns';
+
 
 const CrearReserva = ({ court, reserva, setReserva }) => {
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
@@ -21,12 +23,12 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     useEffect(() => {
         const generarHorasDisponibles = () => {
             const horas = [];
-            let hora = new Date(horaInicio);  // Crear nueva instancia de Date
+            let hora = new Date(horaInicio);
     
             while (hora < horaCierre) {
                 const horaString = hora.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
                 horas.push(`${horaString}:00`);
-                hora = new Date(hora.getTime() + 60 * 60 * 1000);  // Avanzar una hora
+                hora = new Date(hora.getTime() + 60 * 60 * 1000);
             }
     
             setHorasDisponibles(horas);
@@ -81,8 +83,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
 
             setDataReservation({
                 ...dataReservation,
-                dateTimeStart: formatFechaHora(nuevaHoraInicio), // Convertir a cadena de texto
-                dateTimeEnd: formatFechaHora(nuevaHCierre), // Convertir a cadena de texto
+                dateTimeStart: formatFechaHora(nuevaHoraInicio),
+                dateTimeEnd: formatFechaHora(nuevaHCierre),
             });
         } else {
             setDataReservation({
@@ -93,11 +95,22 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     };
 
     const handleHoraInicioChange = (event) => {
-        const nuevaHoraInicio = new Date(`1970-01-01T${event.target.value}`);
+        const horaSeleccionada = event.target.value;
+        const nuevaHoraInicio = new Date();
+        nuevaHoraInicio.setHours(horaSeleccionada.split(':')[0]);
+        nuevaHoraInicio.setMinutes(horaSeleccionada.split(':')[1]);
         setHInicio(nuevaHoraInicio);
         const nuevaHCierre = new Date(nuevaHoraInicio.getTime() + 60 * 60 * 1000);
         setHCierre(nuevaHCierre);
+    
+        setDataReservation({
+            ...dataReservation,
+            dateTimeStart: format(nuevaHoraInicio, 'yyyy-MM-dd HH:mm:ss'),
+            dateTimeEnd: format(nuevaHCierre, 'yyyy-MM-dd HH:mm:ss'),
+        });
     };
+    
+    
 
 if (!reserva) {
     if (preferenceId) setPreferenceId('');
@@ -167,7 +180,7 @@ if (!reserva) {
                 throw error.message
         }
     }
-    console.log(dateTimeStart)
+    console.log(dataReservation)
     return (
         <div className={styles.holeModal}>
             <div className={styles.allContainer}>

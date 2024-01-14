@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './CardUser.module.css';
-import { fetchUpdateFriend, fetchUsers } from '../../redux/reducer';
+import { fetchUpdateFriendRequest, fetchUsers } from '../../redux/reducer';
 import { useDispatch } from 'react-redux'; 
 import PropTypes from 'prop-types';
 import * as React from 'react';
@@ -82,7 +82,7 @@ const CardUser = ({ user }) => {
       const {data} = await axios.post('/friendRequest', requestBody)
       if(data) {
           handleClick()
-          dispatch(fetchUpdateFriend(data.request))
+          dispatch(fetchUpdateFriendRequest(data.request))
         }
       } catch (error) {
         console.log(error)

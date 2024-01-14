@@ -11,6 +11,7 @@ export default function Profile() {
     const userProfile = useSelector((state) => state.user?.datauser?.user);
     const sports = useSelector((state) => state.user?.allSports);
     useEffect(() => {
+
         dispatch(fetchProfile(userProfile?.id));
     }, []);
 
