@@ -49,6 +49,10 @@
 }
 
 .cardsContainerScroll{
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
     width: 100%;
     overflow-x: auto;
 }
