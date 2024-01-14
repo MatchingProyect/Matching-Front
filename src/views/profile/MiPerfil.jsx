@@ -15,7 +15,7 @@ export default function MiPerfil() {
             </div>
             <div className = {styles.divTwoProfile}>
                 {
-                    userProfile.length > 0 && <FriendsContainer friends = {userProfile?.friends} />
+                    userProfile?.length > 0 && <FriendsContainer friends = {userProfile?.friends} />
                 }
                 
             </div>
