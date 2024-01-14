@@ -30,12 +30,12 @@ export default function FriendsContainer({friends}){
                     {estadoAvailable(element.active)}
                     <label className = {styles.label}>{element.displayName}</label>
                 </div>
-                )}
+                )} 
             </div>
         </div>
     )
 }
 
-// FriendsContainer.propTypes = {
-//     friends: PropTypes.object.isRequired,
-//   };
+FriendsContainer.propTypes = {
+    friends: PropTypes.object.isRequired,
+  };
