@@ -51,14 +51,14 @@ const PartidosPublicos = () => {
       ) : (
         partidoPublico.map((partido) => {
           
-          const canchaFiltrada = canchaEncontrada.filter(info => info.id === partido.CourtId);
+          const canchaFiltrada = canchaEncontrada?.filter(info => info.id === partido.CourtId);
   
           return (
             <div key={partido.id}>
               <h2>Inicio: {partido.dateTimeStart}</h2>
               <h2>Final: {partido.dateTimeEnd}</h2>
               <p>Precio: {partido.totalCost}</p>
-              {canchaFiltrada.length > 0 && <p>Cancha: {canchaFiltrada[0].nombre}</p>}
+              {canchaFiltrada?.length > 0 && <p>Cancha: {canchaFiltrada[0].nombre}</p>}
               <button onClick={()=> unirmeReserva(partido.TeamMatchId)}>unirme</button>
             </div>
           );
