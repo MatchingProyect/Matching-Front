@@ -62,8 +62,8 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
             const { data } = await axios.post(`/valoraciones/${id}`, { valoracion: valoracion[id] });
             if (data.status) {
                 setValoracion({});
-                setValorarUsuarios(false);
                 setResultado(true)
+                setValorarUsuarios(false);
             } 
             else return console.log(data.message);
         } catch (error) {
