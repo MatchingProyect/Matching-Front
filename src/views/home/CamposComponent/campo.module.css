@@ -52,10 +52,9 @@
 
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    justify-content: baseline;
     align-items: center;
-    width: 100%;
-    overflow-x: auto;
+
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 80px;
+    max-height: 100px;
 }

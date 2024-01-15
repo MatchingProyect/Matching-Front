@@ -73,9 +73,10 @@ const CardUser = ({ user }) => {
   }
 
   const enviarRequest = async()=>{
+    console.log("userInfo", userInfo)
     try {
       const requestBody = {
-        UserId: userInfo.id,
+        UserId: userInfo?.id,
         FriendRId: idUserQueRecibe
       };
       console.log("requestBody", requestBody)

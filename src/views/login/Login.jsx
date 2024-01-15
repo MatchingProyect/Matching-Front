@@ -94,6 +94,9 @@ const Login = () => {
   
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
+        
+
+
         navigate("/home");
       } else {
         // El usuario no existe, así que procedemos a guardarlo
