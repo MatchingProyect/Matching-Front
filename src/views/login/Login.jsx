@@ -84,7 +84,7 @@ const Login = () => {
 
   const saveUserToFirestore = async (user) => {
     const { uid, email, displayName } = user;
-  
+    
     const db = getFirestore(app);
     const userRef = doc(db, 'users', uid);
   
@@ -94,6 +94,15 @@ const Login = () => {
   
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
+
+        const response = await axios(`/userByEmail?email=${email}`);
+        console.log(response.data.userByEmailFound)
+
+        const id = response.data.userByEmailFound.id
+        if (id) dispatch(fetchUser(id))
+        localStorage.setItem('currentPath', "/home");
+
+
         navigate("/home");
       } else {
         // El usuario no existe, así que procedemos a guardarlo
