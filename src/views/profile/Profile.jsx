@@ -10,7 +10,7 @@ export default function Profile() {
     const dispatch = useDispatch();
     const userProfile = useSelector((state) => state.user?.datauser?.user);
     const sports = useSelector((state) => state.user?.allSports);
-    const [botonSeleccionado, setBotonSeleccionado] = useState(null);
+    const [botonSeleccionado, setBotonSeleccionado] = useState('miPerfil');
 
 
     useEffect(() => {

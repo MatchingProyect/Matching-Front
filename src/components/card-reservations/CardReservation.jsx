@@ -1,6 +1,4 @@
 import styles from './CardReservation.module.css';
-import CardsReservation from '../cards-reservations/CardsReservation';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import styles from './home.module.css';
-import FriendsContainer from '../../components/friendsContainer/FriendsContainer.jsx';
 import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
@@ -8,7 +7,7 @@ import { useState } from 'react';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchReservations, fetchLocations, fetchProfiles } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchLocations, fetchProfiles } from '../../redux/reducer.js';
 
 import Campos from './CamposComponent/Campos.jsx'
 import NavBar from './navBar/navBar.jsx'
@@ -17,7 +16,6 @@ import Cards from './Cards/Cards.jsx'
 export default function Home() {
     const dispatch = useDispatch();
     const courts = useSelector((state) => state.user.allCourts);
-    const estadoFriends = useSelector((state) => state.user.allFriends);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     console.log(courts);
 
@@ -53,9 +51,9 @@ export default function Home() {
                 <NavBar/>
             </div>
 
-            <div className={styles.friendsContainer}>
+            {/* <div className={styles.friendsContainer}>
                 <FriendsContainer friends={estadoFriends} />
-            </div>
+            </div> */}
 
             
             <div className={styles.navComponent}>
@@ -71,11 +69,11 @@ export default function Home() {
                 <div className={styles.divButtons1}>
                     <button
                         className={styles.btnHomeNav}
-                        onClick={() => setActiveComponent('Sugerencias')}
+                        onClick={() => setActiveComponent('user')}
                     >
                        Sugerencias
                     </button>
-                    {activeComponent === 'Sugerencias' && <div className={styles.bloqueAmarillo}></div>}
+                    {activeComponent === 'user' && <div className={styles.bloqueAmarillo}></div>}
                 </div>
                 <div className={styles.divButtons1}>
                     <button

@@ -13,10 +13,10 @@
 }
 
 .text1 {
-    color: black;
-    font-size: 18px;
+    color: #203144;
     font-weight: 400;
-    margin-left: 10px;
+    margin-left: 15px;
+    font-size: 14px;
 }
 
 .friendsImages{
@@ -62,8 +62,8 @@
 }
 .verTodos{
     text-align: center;
-    color: blue;
-    font-size: 18px;
+    color: #203144;
+    font-size: 14px;
     font-weight: 500;
     margin: 5px;
 }
