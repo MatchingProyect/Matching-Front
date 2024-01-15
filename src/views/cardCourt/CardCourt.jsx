@@ -15,9 +15,8 @@ const CardCourt = ({ court }) => {
   const [update, setUpdate] = useState(false);
   const [detail, setDetail] = useState(false);
 
-  const userLogeado = useSelector((state) => state.user?.dataUser?.user);
+  const userLogeado = useSelector((state) => state.user?.datauser?.user);
   const dispatch = useDispatch();
-
 
 
   const deleted = async () => {
@@ -94,20 +93,22 @@ const CardCourt = ({ court }) => {
       </div>
     )
   }
-
-  return (
-    <div className={styles.cardCourtContainer}>
-      <img src={court.imgClub} alt={court.name} className={styles.img} />
-      <div className={styles.courtInfo}>
-        <h2 className={styles.courtTitle}>{court.name}</h2>
-        <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
-        <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
-        <h3 className={styles.courtText}>{court.priceFee}$</h3>
-      </div>      
-      <CrearReserva court={court} reserva={reserva} setReserva={setReserva} />
-      <button onClick={() => setReserva(true)} className = {styles.openModalBtn}>Reservar</button>
-    </div>
-  )
+  else {
+    return (
+      
+      <div className={styles.cardCourtContainer}>
+        <img src={court.imgClub} alt={court.name} className={styles.img} />
+        <div className={styles.courtInfo}>
+          <h2 className={styles.courtTitle}>{court.name}</h2>
+          <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
+          <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
+          <h3 className={styles.courtText}>{court.priceFee}$</h3>
+        </div>      
+        <CrearReserva court={court} reserva={reserva} setReserva={setReserva} />
+        <button onClick={() => setReserva(true)} className = {styles.openModalBtn}>Reservar</button>
+      </div>
+    )
+  }
 }
 
 export default CardCourt;

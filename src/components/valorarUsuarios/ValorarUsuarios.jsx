@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Resultado from '../resultado/Resultado';
+import { useSelector } from 'react-redux';
 
 const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
 
@@ -9,9 +10,8 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
     const [valoracion, setValoracion] = useState({});
     const [resultado, setResultado] = useState(false)
 
-    console.log('luquitas wapo',idUsuarios)
+    const userLogeado = useSelector((state) => state.user?.datauser?.user);
 
-    console.log('luisito', teamMatch)
 
     useEffect(()=>{
         const fetchUsers = async () => {
@@ -40,8 +40,9 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
                         }
                     })
                 );
-    
-                setUsuarios(usersData);
+                const userFiltered = usersData.filter(users =>  (userLogeado.id != users.user.id))
+                    console.log("userFiltered", userFiltered)
+                setUsuarios(userFiltered);
             } catch (error) {
                 console.error(error);
             }
@@ -55,9 +56,11 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
             ...valoracion,
             [UserId]: event.target.value
         });
+        console.log(valoracion);
     }
 
     const postValoracion = async (id) => {
+        console.log("valoracion",`/valoraciones/${id}`);
         try {
             const { data } = await axios.post(`/valoraciones/${id}`, { valoracion: valoracion[id] });
             if (data.status) {
@@ -67,18 +70,16 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
             } 
             else return console.log(data.message);
         } catch (error) {
+            console.log(error)
             throw Error(error.message);
         }
     }
     
-    const handleSubmit = async (event, id) => {
-        event.preventDefault();
+    const handleSubmit = async (id) => {
+        console.log("handleSubmit")
         await postValoracion(id);
     }
     
-    console.log('aqui wapo', usuarios)
-    
-    if (!valorarUsuarios) return null;
     
     return (
         <div>
@@ -87,7 +88,7 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
             {usuarios?.map((user, index) => (
                 <div key={index}>
                     <h2>Deja una valoracion a: {user.user.displayName}</h2>
-                    <form onSubmit={(event) => handleSubmit(event, user.user.id)}>
+                    <form >
                         <label htmlFor="valoracion">Valorar usuario</label>
                         <input
                             type="text"
@@ -96,10 +97,11 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
                             onChange={(event) => handleChange(event, user.user.id)}
                         />
                     </form>
+                    <button type="submit" onClick={() => handleSubmit(user.user.id)}>Enviar</button>
                 </div>
+
             ))}
             <Resultado teamMatch={teamMatch} setResultado={setResultado} resultado={resultado} />
-            <button type="submit">Enviar</button>
         </div>
     )
 }
