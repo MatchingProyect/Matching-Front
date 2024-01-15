@@ -216,7 +216,7 @@ if (!reserva) {
                             className={styles.modalInput2}
                         >
                             <option value="" disabled></option>
-                            {horasDisponibles.map((hora) => (
+                            {horasDisponibles.length > 0 && horasDisponibles.map((hora) => (
                                 <option key={hora} value={hora}>{hora}</option>
                             ))}
                         </select>
