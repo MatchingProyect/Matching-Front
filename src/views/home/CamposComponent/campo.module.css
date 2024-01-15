@@ -49,10 +49,10 @@
 }
 
 .cardsContainerScroll{
-    display: flex;
-    flex-direction: row;
-    justify-content: baseline;
-    align-items: center;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px; 
+    justify-content: center;
     width: 100%;
-    overflow-x: auto;
 }
