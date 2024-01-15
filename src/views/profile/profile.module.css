@@ -9,7 +9,6 @@
 }
 
 .divButtons {
-  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -60,28 +59,18 @@
 .divProfile {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center; 
-  padding-bottom: 10%;
-
+  height: 90%;
+  margin: 50px 0 60px 0;
 }
 
 .divOneProfile {
   background-color: white;
-  max-width: 95%;
-  height: auto;
+  border-radius: 15px;
+  width: 95%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 90vw;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  padding-top: 1.5%;
-  border: 2px solid transparent; 
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.274); 
-  
-
 }
 
 .name {
@@ -93,7 +82,6 @@
 }
 
 .divTwoProfile {
-  position: relative;
   width: 90vw;
 }
 
@@ -108,55 +96,58 @@
 }
 
 .profileImg {
-  position: relative;
   background-color: white;
   border-radius: 50%;
-  border-style: solid;
   border: 3.5px solid transparent; 
   border-color: black;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.551);
-  height: 55vw;
-  width: 55vw;
-  max-height: 350px;
-  max-width: 350px;
-  margin-top: 1vh;
-  margin-bottom: 1vh;
+  max-height: 150px;
+  max-width: 150px;
+  margin-top: -75px;
 }
 
 .divThreeProfile {
-  position: relative;
-  width: 90vw;
-  margin-top:1%;
+  width: 100%;
+}
+.divContainer{
+  margin: 2px 16px;
 }
 
 .info {
   color: black;
-  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  border-radius: 5px;
-  border: 2px solid transparent; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  margin-top: 8px;
-  margin-bottom: 8px;
+  border-bottom: 1px solid #DDDDDD  ;
+  height: 39px;
+  padding: 10px 12px;
 }
 
 .dato {
-  position: relative;
   margin-left: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #203144;
 }
 
 .nombreDelDato {
-  position: relative;
+  font-size: 12px;
   margin-right: 5px;
+  font-weight: 400;
+  color: #959595;
+
+}
+.linksTo{
+  display: flex;
+  justify-content: end;
+  color:#203144;
+  font-weight: 500;
+
 }
 
 /* CSS Para el componente Perfiles deportivos */
 
 .perfilesDeportivosContainer{
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -213,7 +204,6 @@
 }
 
 .pointsBtn{
-  position: relative;
   height: 5vh;
   padding-left: 12px;
   padding-right: 12px;
