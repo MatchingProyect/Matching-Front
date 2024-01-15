@@ -12,22 +12,17 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 95vw;
-
+  width: 100%;
+  justify-content:  space-around;
+  margin: 1rem 10px;
 }
 
 .divButtons1 {
-  width: 38vw;
-  height: 52px;
+  width: 100%;
+  height: 40px;
   background-color: none;
 }
 
-.divButtons2 {
-  width: 38vw;
-  height: 52px;
-  background-color: none;
-}
 
 .miPerfilBtn{
   background-color: transparent;
@@ -39,8 +34,14 @@
   font-weight: 600;
   border-style: none;
   border-color: none;
-
 }
+
+.bloqueAmarillo {
+  display: block; 
+  height: 4px; 
+  background: linear-gradient(90deg, #E7B04B 0%, #F2E849 100%); 
+}
+
 
 .perfilDeportivoBtn{
   background-color: transparent;
