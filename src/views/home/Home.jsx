@@ -17,7 +17,6 @@ export default function Home() {
     const dispatch = useDispatch();
     const courts = useSelector((state) => state.user.allCourts);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
-    console.log(courts);
 
     const [activeComponent, setActiveComponent] = useState('campos');
 

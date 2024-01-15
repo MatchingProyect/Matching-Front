@@ -28,14 +28,7 @@ const PartidosPublicos = () => {
     fetchData();
   }, []);
 
-  const unirmeReserva = async(TeamMatchId)=>{
-    try {
-        const {data} = await axios.post(`/addUserInTeam?UserId=${userLogeado.id}&TeamMatchId=${TeamMatchId}`)
-        if(data.status) alert('te uniste con exito')
-    } catch (error) {
-        throw error.message
-    };
-  };
+
 
   return (
     <div className = {styles.holeComp}>
@@ -47,7 +40,7 @@ const PartidosPublicos = () => {
       {partidoPublico.length === 0 ? (
         <p>No hay partidos públicos disponibles.</p>
       ) : 
-       partidoPublico.map((element) => <CardPublicMatch unirmeReserva = {unirmeReserva} partidoPublico = {element} courts = {courts} locations = {locations} clubs = {clubs} sports = {sports} key = {element.id}/>)
+       partidoPublico.map((element) => <CardPublicMatch partidoPublico = {element} courts = {courts} locations = {locations} clubs = {clubs} sports = {sports} key = {element.id} userLogeado = {userLogeado}/>)
 
       }
       </div>
