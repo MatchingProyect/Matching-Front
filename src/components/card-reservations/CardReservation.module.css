@@ -1,43 +1,52 @@
 .cardReservationContainer {
-    border: 1px solid #4CAF50;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .cardReservationContainer:hover {
-    transform: scale(1.05);
-  }
-  
-  .cardReservationContainer h2,
-  .cardReservationContainer h3 {
-    margin: 5px 0;
-    color: #4CAF50;
-  }
-  
-  .cardReservationContainer h2 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .cardReservationContainer h3 {
-    font-size: 16px;
-  }
-  
-  .cardReservationContainer br {
-    display: none;
-  }
-  
-  .cardReservationContainer:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .cardReservationContainer:active {
-    transform: scale(0.95);
-  }
-  
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #203144; /* Azul oscuro */
+  transition: none;
+}
+
+.cardReservationContainer h2,
+.cardReservationContainer h3 {
+  margin: 5px 0;
+  color: #fff; /* Texto blanco para destacar en el fondo oscuro */
+}
+
+.cardReservationContainer h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cardReservationContainer h3 {
+  font-size: 16px;
+}
+
+.cardReservationContainer br {
+  display: none;
+}
+
+.cardReservationContainer:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cardReservationContainer:active {
+  transform: scale(0.95);
+}
+
+.cardReservationContainer button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.cardReservationContainer button:hover {
+  background-color: #333;
+}

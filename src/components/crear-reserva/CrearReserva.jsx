@@ -160,7 +160,7 @@ if (!reserva) {
             Muchas gracias!`,
         };
         emailjs
-        .send('service_dfonkqh', 'template_j9l4qgp', defaultValues, 'AOct4aYGtYkYpPDCn')
+        .send('service_svnbgjr', 'template_t5cgfx2', defaultValues, 'zADAsfTnn9pOJcyPO')
         .then(
             (result) => {
                 console.log(result.text);
