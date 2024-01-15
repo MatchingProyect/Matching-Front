@@ -13,10 +13,10 @@
     min-height: 60px;
 }
 .icon{
-    color: #DDDDDD;
+    color: rgb(206, 206, 206);
     font-size: 36px;
 }
 
 .activeLink {
-    color: #36424F ; 
+    color: black ; 
   }

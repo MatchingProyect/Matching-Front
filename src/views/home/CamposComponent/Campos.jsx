@@ -2,16 +2,13 @@ import styles from './campo.module.css';
 import { useState } from 'react';
 import CardCourt from '../../cardCourt/CardCourt';
 import { useSelector } from 'react-redux';
+import CardClub from '../../cardClubs/CardClub';
 
 
-const Campos = () => {
-
-    const clubs = useSelector((state) => state.user.allClubs);
-    const locations = useSelector((state) => state.user.allLocations);
-    const courts = useSelector((state) => state.user.allCourts);
+const Campos = ({clubs, locations, courts}) => {
+    console.log(clubs);
 
     const [filteredCourts, setFilteredCourts] = useState([]);
-
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
         let courtsFilteredByLocations = courts.filter((element) => element.LocationId == value);
@@ -28,6 +25,11 @@ const Campos = () => {
 
   return (
     <div className={styles.divCourts}>
+    {/* <div className = {styles.clubsComponent}>
+                {
+                    clubs.length > 0 && clubs.map((element) => <CardClub club = {element} key = {element.id}/>)
+                }
+            </div> */}
         <h2 className={styles.courtsTitle}>Campos</h2>
         <div className = {styles.filtroContainer}>
             <div className = {styles.filtrosDiv}>
@@ -48,6 +50,7 @@ const Campos = () => {
             </div>
         </div>
         <div className = {styles.cardsContainerScroll}>
+            <div  className = {styles.cardController}>
         {
             filteredCourts.length > 0 ? 
                 filteredCourts.filter(court => court.estado === true)
@@ -58,6 +61,7 @@ const Campos = () => {
                     <CardCourt key={filteredCourt.id} court={filteredCourt} />
                 ))
         }
+        </div>
         </div>
     </div>
   );

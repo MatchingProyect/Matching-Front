@@ -73,11 +73,16 @@
     margin-top: 12px;
     border-radius: 10px;
 }
+.clubLink{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .clubName{
     color: white;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
     text-align: center;
     position: relative;
     margin-top: 10px;

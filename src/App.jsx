@@ -75,10 +75,9 @@ function App() {
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo/>} />
         <Route path='/user/:id' element={<UserDetail/>} />
-        <Route path='clubs/:id' element={<ClubsDetail/>} />
+        <Route path='/clubs/:id' element={<ClubsDetail/>} />
         <Route path='/functionsAdm' element={<FunctionsAdmin/>} />
         <Route path='/partidosPublicos' element={<PartidosPublicos/>}/>
-        
         <Route path = "*" element = {<Error />} />
       </Routes>
     </div>

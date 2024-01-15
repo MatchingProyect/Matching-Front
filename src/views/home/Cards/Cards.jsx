@@ -7,7 +7,6 @@ export default function Cards() {
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
 
     return (
-            
         <div className = {styles.cardsGrid}>
             {users?.filter(user => user.estado === true && user.id !== userLogeado?.id)
                 .map(filteredUser => (

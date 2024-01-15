@@ -5,12 +5,14 @@ import axios from 'axios';
 import styles from './CardClub.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs } from '../../redux/reducer';
+import {Link} from 'react-router-dom';
 
 
 const CardClub = ({club}) => {
   const [editClub, setEditClub] = useState(false)
   const [detailClub, setDetailClub] = useState(false)
   const dispatch = useDispatch()
+  let imagen = 'https://res.cloudinary.com/dbffmtz0y/image/upload/v1704318585/360_F_332320458_OFW95fppmZAYYs3lT8CwDfK2HdQLF7RU_gmvtja.jpg';
 
   const user =useSelector((state) =>state.user?.dataUser?.user)
   // console.log(club);
@@ -46,8 +48,10 @@ const CardClub = ({club}) => {
 
   return (
     <div className = {styles.cardClub}>
-      <img src = {club.imgClub} alt = {club.name} className = {styles.imgClub}/>
+      <img src = {imagen} alt = {club.name} className = {styles.imgClub}/>
+       <Link to = {`/clubs/${club.id}`} className = {styles.clubLink}>      
         <h2 className = {styles.clubName}>{club.name}</h2>
+        </Link>
     </div>
   )
 }
