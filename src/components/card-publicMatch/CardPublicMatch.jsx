@@ -35,16 +35,27 @@ export default function CardPublicMatch({partidoPublico, unirmeReserva, courts, 
     }
 
     return(
-        <div>
-            <img src = {laImagen()} alt = 'Imagen Court'/>
-            <h3>{laCourta()}</h3>
-            <h5>{laLocation()}</h5>
-            <h5>{laClub()}</h5>
-            <h5>{laSport()}</h5>
-            <label>Inicio: {partidoPublico.dateTimeStart}</label>
-            <label>Termino: {partidoPublico.dateTimeEnd}</label>
-            <label>Precio: {partidoPublico.totalCost}</label>
-            <button onClick = {unirmeReserva}>Unirme</button>
+        <div className = {styles.cardDiv}>
+            <img src = {laImagen()} alt = 'Imagen Court' className = {styles.img}/>
+            <div className = {styles.dataReserva}>
+            <h1 className = {styles.nombreCancha}>{laCourta()}</h1>
+            <h2 className = {styles.infoCard}>{laLocation()}</h2>
+            <h2 className = {styles.infoCard}>{laClub()}</h2>
+            <h2 className = {styles.infoCard}>{laSport()}</h2>
+            </div>
+            <div className = {styles.infoComp}>
+            <label className = {styles.valueCard}>Inicio</label>
+            <label className = {styles.valueCard}>{partidoPublico.dateTimeStart}</label>
+            </div>
+            <div className = {styles.infoComp}>
+            <label className = {styles.valueCard}>Término</label>
+            <label className = {styles.valueCard}>{partidoPublico.dateTimeEnd}</label>
+            </div>
+            <div className = {styles.infoComp}>
+            <label className = {styles.valueCard}>Precio</label>
+            <label className = {styles.valueCard}>${partidoPublico.totalCost}</label>
+            </div>
+            <button onClick = {unirmeReserva} className = {styles.btnUnirme}>Unirme</button>
         </div>
     )
 }

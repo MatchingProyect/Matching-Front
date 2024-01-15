@@ -1,5 +1,7 @@
 import axios from 'axios';
+import styles from './PartidosPublicos.module.css'
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { useSelector } from 'react-redux';
 import CardPublicMatch from '../../components/card-publicMatch/CardPublicMatch';
@@ -36,18 +38,22 @@ const PartidosPublicos = () => {
   };
 
   return (
-    <div>
-      <h1>Partidos Publicos</h1>
+    <div className = {styles.holeComp}>
+      <div className = {styles.viewHeader}>
+       <Link to = '/home'><label className = {styles.backBtn}>Back</label></Link>
+      <h1 className = {styles.viewTitle}>Partidas Públicas</h1>
+      </div>
+      <div className = {styles.reservasDiv}>
       {partidoPublico.length === 0 ? (
         <p>No hay partidos públicos disponibles.</p>
       ) : 
        partidoPublico.map((element) => <CardPublicMatch unirmeReserva = {unirmeReserva} partidoPublico = {element} courts = {courts} locations = {locations} clubs = {clubs} sports = {sports} key = {element.id}/>)
 
       }
+      </div>
       <NavbarLow />
     </div>
-  );
-  
+  ); 
 };
 
 export default PartidosPublicos;
