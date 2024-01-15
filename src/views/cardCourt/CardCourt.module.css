@@ -1,12 +1,7 @@
 .cardCourtContainer{
-<<<<<<< HEAD
     max-width: 380px;
     max-height: 400px;
     width: 90%;
-=======
-    max-width: 400px;
-    height: 350px;
->>>>>>> 1effb5b40c5ee5af908a82e747cab9a785ba5bb8
     display: flex;
     flex-direction: column;
     align-items: center;
