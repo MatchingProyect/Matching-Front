@@ -7,6 +7,10 @@ import CardPublicMatch from '../../components/card-publicMatch/CardPublicMatch';
 const PartidosPublicos = () => {
   const [partidoPublico, setParticoPublico] = useState([]);
   const userLogeado = useSelector(state =>  state.user?.datauser?.user);
+  const courts = useSelector((state) => state.user?.allCourts);
+  const locations = useSelector((state) => state.user?.allLocations);
+  const clubs = useSelector((state) => state.user?.allClubs);
+  const sports = useSelector ((state)=> state.user?.allSports);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +41,7 @@ const PartidosPublicos = () => {
       {partidoPublico.length === 0 ? (
         <p>No hay partidos públicos disponibles.</p>
       ) : 
-       partidoPublico.map((element) => <CardPublicMatch unirmeReserva = {unirmeReserva} partidoPublico = {element}/>)
+       partidoPublico.map((element) => <CardPublicMatch unirmeReserva = {unirmeReserva} partidoPublico = {element} courts = {courts} locations = {locations} clubs = {clubs} sports = {sports} key = {element.id}/>)
 
       }
       <NavbarLow />
