@@ -130,7 +130,7 @@ if (!reserva) {
                 UserId,
                 CourtId,
                 MatchTypeId,
-                FriendsId
+                FriendsId: [FriendsId]
             });
             
             if (data.status) {

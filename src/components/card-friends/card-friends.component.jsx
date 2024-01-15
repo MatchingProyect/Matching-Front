@@ -19,7 +19,7 @@ function CardFriends({friend, index, onClick}) {
                 <Avatar alt="Travis Howard" src="" />
               </ListItemAvatar>
               <ListItemText
-                primary={friend.name}
+                primary={friend.displayName}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -30,13 +30,13 @@ function CardFriends({friend, index, onClick}) {
                     >
                     </Typography>
                     {
-                      friend.games>0 ? `(${friend.games} partidos juntos)`: `(No tienes partidos con ${friend.name})`
+                      friend.games>0 ? `(${friend.games} partidos juntos)`: `(No tienes partidos con ${friend.displayName})`
                     }
                   </React.Fragment>
                 }
               />
               <div className={styles.centeredImage}>
-                <button onClick={() => onClick(friend.name)}>
+                <button onClick={() => onClick(friend.displayName)}>
                   <img src={ "https://res.cloudinary.com/dbffmtz0y/image/upload/v1702507668/icon-park_more_m9dh5t.svg" } alt="Options" />
                 </button>
               </div>
@@ -52,7 +52,7 @@ function CardFriends({friend, index, onClick}) {
 
 CardFriends.propTypes = {
     friend: PropTypes.shape({
-        name: PropTypes.string.isRequired,
+        displayName: PropTypes.string.isRequired,
         games: PropTypes.number.isRequired,
       }).isRequired,
     index: PropTypes.number.isRequired, 

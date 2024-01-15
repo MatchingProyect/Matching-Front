@@ -5,53 +5,14 @@ import { Link } from 'react-router-dom';
 import CardsFriends from '../../components/cards-friends/cards-friends.component';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import OptionsFriends from '../../components/optionsFriends/optionsFriends';
+import { useSelector } from 'react-redux';
 
 
 export default function Friends(){
 
+    const friends = useSelector((state) => state.user?.allFriends);
 
-    const friends = [
-        {
-            name: "John",
-            games: 10
-        },
-        {
-            name: "Adam",
-            games: 8
-        },
-        {
-            name: "Peter",
-            games: 3
-        },
-        {
-            name: "Diego",
-            games: 3
-        },
-        {
-            name: "quart",
-            games: 0
-        },
-        {
-            name: "Daniel",
-            games: 0
-        },
-        {
-            name: "ferred",
-            games: 3
-        },
-        {
-            name: "aaa",
-            games: 0
-        },
-        {
-            name: "ssss",
-            games: 0
-        },
-        {
-            name: "qqq",
-            games: 3
-        },
-      ]
+
 
     const [name, setName] = useState('');
     const [showOptions, setShowOptions] = useState(false); 
@@ -80,7 +41,7 @@ export default function Friends(){
         <div className={styles.containerFriends}>
             <div className={styles.containerTitle}>
                 <div className={styles.containerTitleImg}>
-                    <Link to = '/profile'><img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" /></Link>
+                    <Link to = '/home'><img src="https://res.cloudinary.com/dbffmtz0y/image/upload/v1702573291/return_w8ycd2.svg" alt="Return" /></Link>
                 </div>
                 <div className={styles.containerTitleText}>
                     <p>Amigos</p>

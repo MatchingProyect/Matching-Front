@@ -1,7 +1,10 @@
-.cardsContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content:start;
-    align-items: center;
-    overflow-x: auto;
+.cardsContainer {
+
+    margin-top: 1rem;
+}
+.cardsGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px; 
+    justify-content: center !important;
 }
