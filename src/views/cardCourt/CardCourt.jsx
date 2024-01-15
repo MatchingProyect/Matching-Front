@@ -32,6 +32,15 @@ const CardCourt = ({ court }) => {
   if (userLogeado?.admin) {
     return (
       <div className={styles.cardCourtAdmin}>
+          <div className={styles.cardCourtContainer}>
+            <img src={court.imgClub} alt={court.name} className={styles.img} />
+            <div className={styles.courtInfo}>
+              <h2 className={styles.courtTitle}>{court.name}</h2>
+              <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
+              <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
+              <h3 className={styles.courtText}>{court.priceFee}$</h3>
+            </div>      
+         </div>
         <div className={styles.cardBody}>
           <div className={styles.courtTitleAdm}><p className={styles.textTxt}>{court.name}</p></div>
           <div className={styles.divButtons}>
