@@ -90,7 +90,7 @@ export default function Home() {
 
             <div className = {styles.principalDiv}>
                 {activeComponent === 'campos' && <Campos />}
-                {activeComponent === 'reservations' && (
+                {activeComponent === 'Reservas' && (
                     <CardReservation courts = {courts} />
                 )}
                 {activeComponent === 'user' && (

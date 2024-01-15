@@ -23,6 +23,7 @@ export default function CardReservation() {
                 });
                 const nameAnfitrion = await Promise.all(promises);
                 setInfoUser(nameAnfitrion);
+                
             } catch (error) {
                 throw error.message;
             }
@@ -41,28 +42,34 @@ export default function CardReservation() {
                 throw error.message;
             }
         }
+        const formatDate = (dateString) => {
+            const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        };
+
         const fetchReservationsInfo = async (team) => {
             try {
                 const promises = await Promise.all(team?.map(async (newTeam) => {
                     try {
                         const endpoint = `/reservationTeamMatch/${newTeam?.TeamMatchId}`;
                         const { data } = await axios(endpoint);
-                        console.log(data)
-                        if(data.status){
-                            return data.reservation;
-                        }else{
-                            return 'lo que quieras'
+                        if (data.status) {
+                            const formattedReservation = {
+                                ...data.reservation,
+                                dateTimeStart: formatDate(data.reservation.dateTimeStart),
+                                dateTimeEnd: formatDate(data.reservation.dateTimeEnd),
+                            };
+                            return formattedReservation;
+                        } else {
+                            return 'lo que quieras';
                         }
-                        
                     } catch (error) {
-                       console.log(error.message)
+                        console.log(error.message);
                     }
-                    
                 }));
-                console.log('un mensaje', promises)
-                const filteredReservations = promises.filter(reservation => reservation !== undefined);
+                const filteredReservations = promises.filter(reservation => reservation !== 'lo que quieras');
                 setInfoReservation(filteredReservations);
-                fetchAnfitrionInfo(filteredReservations)
+                fetchAnfitrionInfo(filteredReservations);
             } catch (error) {
                 throw error.message;
             }
