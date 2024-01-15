@@ -59,9 +59,34 @@ export default function Home() {
 
             
             <div className={styles.navComponent}>
-                <button onClick={() => setActiveComponent('campos')} className={styles.btnHomeNav1}>Campos</button>
-                <button onClick={() => setActiveComponent('reservations')} className={styles.btnHomeNav2}>Reservas</button>
-                <button onClick={() => setActiveComponent('user')} className={styles.btnHomeNav3}>Sugerencias</button>
+                <div className={styles.divButtons1}>
+                    <button
+                        className={styles.btnHomeNav}
+                        onClick={() => setActiveComponent('campos')}
+                    >
+                       Campos
+                    </button>
+                    {activeComponent === 'campos' && <div className={styles.bloqueAmarillo}></div>}
+                </div>
+                <div className={styles.divButtons1}>
+                    <button
+                        className={styles.btnHomeNav}
+                        onClick={() => setActiveComponent('Sugerencias')}
+                    >
+                       Sugerencias
+                    </button>
+                    {activeComponent === 'Sugerencias' && <div className={styles.bloqueAmarillo}></div>}
+                </div>
+                <div className={styles.divButtons1}>
+                    <button
+                        className={styles.btnHomeNav}
+                        onClick={() => setActiveComponent('Reservas')}
+                    >
+                       Reservas
+                    </button>
+                    {activeComponent === 'Reservas' && <div className={styles.bloqueAmarillo}></div>}
+                </div>
+
             </div>
 
 
@@ -83,27 +108,3 @@ export default function Home() {
 
 
 
-
-    {/* <div className={styles.clubsContainer}>
-        <div className = {styles.divFiltro}>
-            <label className = {styles.labelFiltros}>Ciudades</label>
-            <select onChange = {clubsFilterByLocations} className = {styles.selectFiltros}>
-                <option disabled>Ciudades</option>
-                <option>Todos los Clubs</option>
-                {locations?.length > 0 && locations.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
-            </select>
-        </div>
-        <div className = {styles.divCards}>
-        {
-            filteredClubs.length > 0 ?
-                filteredClubs.filter(club => club.estado === true)
-                .map(filteredClub => (
-                    <CardClub key={filteredClub.id} club={filteredClub} />
-                )) : clubs?.filter(club => club.estado === true)
-                .map(filteredClub => (
-                    <CardClub key={filteredClub.id} club={filteredClub} />
-                ))
-        }
-        </div>
-
-    </div> */}

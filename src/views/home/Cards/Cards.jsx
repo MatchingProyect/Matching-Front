@@ -8,8 +8,8 @@ export default function Cards() {
 
     return (
             
-        <div className = {styles.cardsContainer}>
-             {users?.filter(user => user.estado === true && user.id !== userLogeado?.id)
+        <div className = {styles.cardsGrid}>
+            {users?.filter(user => user.estado === true && user.id !== userLogeado?.id)
                 .map(filteredUser => (
                     <CardUser key={filteredUser.id} user={filteredUser} />
                 ))
