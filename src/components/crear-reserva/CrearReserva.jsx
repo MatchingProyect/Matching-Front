@@ -19,21 +19,21 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     const [hInicio, setHInicio] = useState(new Date(`1970-01-01T${court.horarioInicio}`));
     const [hCierre, setHCierre] = useState(new Date(hInicio.getTime() + 60 * 60 * 1000));
     const [horasDisponibles, setHorasDisponibles] = useState([]);
-    
+
     useEffect(() => {
         const generarHorasDisponibles = () => {
             const horas = [];
             let hora = new Date(horaInicio);
-    
+
             while (hora < horaCierre) {
                 const horaString = hora.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
                 horas.push(`${horaString}:00`);
                 hora = new Date(hora.getTime() + 60 * 60 * 1000);
             }
-    
+
             setHorasDisponibles(horas);
         };
-    
+
         generarHorasDisponibles();
     }, []);
 
@@ -102,23 +102,23 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         setHInicio(nuevaHoraInicio);
         const nuevaHCierre = new Date(nuevaHoraInicio.getTime() + 60 * 60 * 1000);
         setHCierre(nuevaHCierre);
-    
+
         setDataReservation({
             ...dataReservation,
             dateTimeStart: format(nuevaHoraInicio, 'yyyy-MM-dd HH:mm:ss'),
             dateTimeEnd: format(nuevaHCierre, 'yyyy-MM-dd HH:mm:ss'),
         });
     };
-    
-    
 
-if (!reserva) {
-    if (preferenceId) setPreferenceId('');
-    return null;
-}
+
+
+    if (!reserva) {
+        if (preferenceId) setPreferenceId('');
+        return null;
+    }
 
     const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
-    
+
     const crearReserva = async () => {
         try {
             const endpoint = '/reservations';
@@ -132,7 +132,7 @@ if (!reserva) {
                 MatchTypeId,
                 FriendsId: [FriendsId]
             });
-            
+
             if (data.status) {
                 const reservations = await data.addReservation;
                 const endpoint = '/createOrder';
@@ -160,24 +160,24 @@ if (!reserva) {
             Muchas gracias!`,
         };
         emailjs
-        .send('service_svnbgjr', 'template_t5cgfx2', defaultValues, 'zADAsfTnn9pOJcyPO')
-        .then(
-            (result) => {
-                console.log(result.text);
-            },
-            (error) => {
-                console.log(error.text);
-            }
+            .send('service_svnbgjr', 'template_t5cgfx2', defaultValues, 'zADAsfTnn9pOJcyPO')
+            .then(
+                (result) => {
+                    console.log(result.text);
+                },
+                (error) => {
+                    console.log(error.text);
+                }
             );
-        };
-        
-        const handleSumbit = async (event) => {
-            try {
-                event.preventDefault();
-                await crearReserva();
-            } catch (error) {
-                console.error(error)
-                throw error.message
+    };
+
+    const handleSumbit = async (event) => {
+        try {
+            event.preventDefault();
+            await crearReserva();
+        } catch (error) {
+            console.error(error)
+            throw error.message
         }
     }
     console.log(dataReservation)
@@ -222,6 +222,10 @@ if (!reserva) {
                         </select>
                     </div>
 
+                    <div className={styles.selectedHoursContainer}>
+                        <p>Horas seleccionadas:</p>
+                        <p>{formatFechaHora(hInicio)} - {formatFechaHora(hCierre)}</p>
+                    </div>
 
                     <div className={styles.modalContainer}>
                         <label className={styles.labelModal}>Precio</label>
