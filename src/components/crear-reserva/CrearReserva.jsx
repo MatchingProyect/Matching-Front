@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import emailjs from '@emailjs/browser';
@@ -5,10 +7,31 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import styles from './CrearReserva.module.css';
 import { format } from 'date-fns';
+import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 
+
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const CrearReserva = ({ court, reserva, setReserva }) => {
     initMercadoPago('TEST-ac197b9a-ae79-436d-9bdd-4bd088de5c27');
+
+    const theme = useTheme();
+    const [personName, setPersonName] = React.useState([]);
     const userLogeado = useSelector((state) => state.user?.datauser?.user);
     const allFriends = useSelector((state) => state.user?.allFriends);
     const [preferenceId, setPreferenceId] = useState('');
@@ -20,9 +43,20 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     const [hCierre, setHCierre] = useState(new Date(hInicio.getTime() + 60 * 60 * 1000));
     const [horasDisponibles, setHorasDisponibles] = useState([]);
 
+    function getStyles(name, personName, theme) {
+        return {
+          fontWeight:
+            personName.indexOf(name) === -1
+              ? theme.typography.fontWeightRegular
+              : theme.typography.fontWeightMedium,
+        };
+      }
+
+
+
     useEffect(() => {
         const generarHorasDisponibles = () => {
-            const horas = [];
+            const horas = ['00:00:00'];
             let hora = new Date(horaInicio);
 
             while (hora < horaCierre) {
@@ -30,7 +64,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                 horas.push(`${horaString}:00`);
                 hora = new Date(hora.getTime() + 60 * 60 * 1000);
             }
-
+            console.log(horas)
             setHorasDisponibles(horas);
         };
 
@@ -57,16 +91,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         })
     }, [userLogeado])
 
-    // const [errors, setErrors] = useState({
-    //     dateTimeStart: '',
-    //     dateTimeEnd: '',
-    //     totalCost: '',
-    //     teamMatch: '',
-    //     UserId: '',
-    //     CourtId: '',
-    //     MatchTypeId: '',
-    //     FriendsId: []
-    // })
+
 
     const formatFechaHora = (fecha) => {
         return fecha.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -92,9 +117,25 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                 [friendName]: event.target.value,
             });
         }
+
+        console.log(dataReservation)
     };
 
+
+    const handleChange2 = (event) => {
+        const {
+          target: { value },
+        } = event;
+        setPersonName(
+          typeof value === 'string' ? value.split(',') : value,
+        );
+
+        console.log(personName);
+      };
+    
     const handleHoraInicioChange = (event) => {
+        console.log( "aaaa", event.target.value)
+
         const horaSeleccionada = event.target.value;
         const nuevaHoraInicio = new Date();
         nuevaHoraInicio.setHours(horaSeleccionada.split(':')[0]);
@@ -108,6 +149,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             dateTimeStart: format(nuevaHoraInicio, 'yyyy-MM-dd HH:mm:ss'),
             dateTimeEnd: format(nuevaHCierre, 'yyyy-MM-dd HH:mm:ss'),
         });
+
+        console.log(dataReservation)
     };
 
 
@@ -117,32 +160,31 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         return null;
     }
 
-    const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId, FriendsId } = dataReservation;
+    const { dateTimeStart, dateTimeEnd, totalCost, teamMatch, UserId, CourtId, MatchTypeId } = dataReservation;
 
     const crearReserva = async () => {
         try {
             const endpoint = '/reservations';
-            const { data } = await axios.post(endpoint, {
-                dateTimeStart,
+            const reserva = { dateTimeStart,
                 dateTimeEnd,
                 totalCost: Number(totalCost),
                 teamMatch,
                 UserId,
                 CourtId,
                 MatchTypeId,
-                FriendsId: [FriendsId]
-            });
+                FriendsId: personName}
+            console.log(reserva)
+            const { data } = await axios.post(endpoint, reserva);
 
             if (data.status) {
                 const reservations = await data.addReservation;
                 const endpoint = '/createOrder';
                 const response = await axios.post(endpoint, { id: reservations.id });
-                //*Con esto se abre el botón MP
                 setPreferenceId(response.data.id);
                 sendEmail(reservations);
             }
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
         }
     };
 
@@ -171,6 +213,15 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             );
     };
 
+
+    const getDisplayNameById = (id) => {
+        const friend = allFriends.find((name) => name.id === id);
+        return friend ? friend.displayName : '';
+    };
+
+
+
+
     const handleSumbit = async (event) => {
         try {
             event.preventDefault();
@@ -180,7 +231,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             throw error.message
         }
     }
-    console.log(dataReservation)
+
     return (
         <div className={styles.holeModal}>
             <div className={styles.allContainer}>
@@ -215,11 +266,12 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                             onChange={(event) => handleHoraInicioChange(event)}
                             className={styles.modalInput2}
                         >
-                            <option value="" disabled></option>
+                            <option value="hora" disabled></option>
                             {horasDisponibles.length > 0 && horasDisponibles.map((hora) => (
                                 <option key={hora} value={hora}>{hora}</option>
                             ))}
                         </select>
+                        
                     </div>
 
                     <div className={styles.selectedHoursContainer}>
@@ -233,18 +285,33 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     </div>
                     <div className={styles.modalContainer2}>
                         <label className={styles.labelModal2}>Selecciona participantes</label>
-                        <select
-                            name="FriendsId"
-                            value={dataReservation.FriendsId}
-                            onChange={(event) => handleChange(event)}
-                            multiple  // Permite seleccionar múltiples opciones
-                            className={styles.modalInput2}
-                        >
-                            <option value="" disabled>Friends Id</option>
-                            {allFriends.map((friend) => (
-                                <option key={friend.id} value={friend.id}>{friend.displayName}</option>
+                        <Select
+                            labelId="demo-multiple-chip-label"
+                            id="demo-multiple-chip"
+                            multiple
+                            value={personName}
+                            onChange={handleChange2}
+                            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                {selected.map((value) => (
+                                    <Chip key={value} label={getDisplayNameById(value)} />
+                                    ))}
+                                </Box>
+                            )}
+                            MenuProps={MenuProps}
+                            >
+                            {allFriends.map((name) => (
+                                <MenuItem
+                                key={name.id}
+                                value={name.id}
+                                style={getStyles(name.id, personName, theme)}
+                                >
+                                {name.displayName}
+                                </MenuItem>
                             ))}
-                        </select>
+                        </Select>
+
                     </div>
                     <button type="submit" className={styles.createBtn}>Crear Reserva</button>
                     {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}

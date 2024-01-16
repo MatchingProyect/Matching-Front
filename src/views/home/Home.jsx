@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useState } from 'react';
-import CardClub from '../cardClubs/CardClub.jsx';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +19,8 @@ export default function Home() {
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     const clubs = useSelector(state => state.user?.allClubs);
     const locations = useSelector((state) => state.user.allLocations);
+
+
     const [activeComponent, setActiveComponent] = useState('campos');
 
     useEffect(() => {
@@ -51,11 +52,7 @@ export default function Home() {
             <div className={styles.navBarContainer}>
                 <NavBar/>
             </div>
-            <div className = {styles.clubsComponent}>
-                {
-                    clubs.length > 0 && clubs.map((element) => <CardClub club = {element} key = {element.id}/>)
-                }
-            </div>
+
 
             {/* <div className={styles.friendsContainer}>
                 <FriendsContainer friends={estadoFriends} />
