@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import ValorarUsuarios from '../valorarUsuarios/ValorarUsuarios';
+import Resultado from '../resultado/Resultado';
 
 
 export default function CardReservation() {
@@ -10,8 +11,10 @@ export default function CardReservation() {
     const [infoUser, setInfoUser] = useState([]);
     const [teamMatch, setTeamMatch] = useState([]);
     const [teamName, setTeamName] = useState([]);
-    const [valorarUsuarios, setValorarUsuarios] = useState(false)
+    const [valorarUsuarios, setValorarUsuarios] = useState(false);
+
     const userLogeado = useSelector((state) => state.user?.datauser?.user);
+    const [resultado, setResultado] = useState(false);
 
     useEffect(() => {
         const fetchAnfitrionInfo = async (infoReservation) => {
@@ -160,9 +163,11 @@ export default function CardReservation() {
                     <h3>Tiempo Fin: {reservation?.dateTimeEnd || 'No disponible'}</h3>
                     <h3>Precio Total: {reservation?.totalCost || 'No disponible'}</h3>
                     <br />
-                    <ValorarUsuarios teamMatch={reservation.TeamMatchId
-                    } setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios} />
-                    {valorarUsuarios ? null : <button onClick={() => setValorarUsuarios(true)}>Juego Terminado</button>}
+                    <Resultado teamMatch={reservation.TeamMatchId} setResultado={setResultado} resultado={resultado} setValorarUsuarios={setValorarUsuarios} />
+                    <ValorarUsuarios teamMatch={reservation.TeamMatchId} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}
+          />
+        
+                    <button onClick={() => setResultado(true)}>Juego Terminado</button>
                 </div>
             ))}
         </div>
