@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Resultado from '../resultado/Resultado';
 import { useSelector } from 'react-redux';
+import styles from './valorar.module.css'
 
 const ValorarUsuarios = ({ valorarUsuarios, setValorarUsuarios, teamMatch}) => {
     const [idUsuarios, setIdUsuarios] = useState([]);

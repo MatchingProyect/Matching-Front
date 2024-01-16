@@ -163,11 +163,11 @@ export default function CardReservation() {
                         <label className = {styles.textInfo}>{teamName[index]?.name || 'Equipo no disponible'}</label>
                     </div>
                     <div className={styles.divDeInfo}>
-                        <label className = {styles.textInfo}>Inicio</label>
+                        <label className = {styles.textInfo}>Inició</label>
                         <label className = {styles.textInfo}>{reservation?.dateTimeStart || 'No disponible'}</label>
                     </div>
                     <div className={styles.divDeInfo}>
-                        <label className = {styles.textInfo}>Termino</label>
+                        <label className = {styles.textInfo}>Terminó</label>
                         <label className = {styles.textInfo}>{reservation?.dateTimeEnd || 'No disponible'}</label>
                     </div>
                     <div className={styles.divDeInfo}>
