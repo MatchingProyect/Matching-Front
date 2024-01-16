@@ -20,8 +20,6 @@ export default function Home() {
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     const clubs = useSelector(state => state.user?.allClubs);
     const locations = useSelector((state) => state.user.allLocations);
-    console.log(clubs);
-
     const [activeComponent, setActiveComponent] = useState('campos');
 
     useEffect(() => {

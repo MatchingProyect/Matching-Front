@@ -1,21 +1,56 @@
-import React from 'react'
+import React from 'react';
+import styles from './DetailCourt.module.css';
 
 const DetailCourt = ({court ,detail, setDetail}) => {
 
     if(!detail) return null
   return (
-    <div>
-        <p>{court.description}</p>
-        <p>{court.priceFee}</p>
-        <p>{court.warrantyReservation}</p>
-        <p>{court.grassType}</p>
-        <p>{court.lighting}</p>
-        <p>{court.doorsType}</p>
-        <p>{court.wallsType}</p>
-        <p>{court.reputation}</p>
-        <button onClick={()=>{
+    <div className = {styles.holeModal}>
+      <div className = {styles.cuadroModal}>
+      <div className={styles.modalHeader}>
+                    <label className={styles.labelTop}>Información del Campo</label>
+                    <button onClick={()=>{
             setDetail(false)
-        }}>x</button>
+        }} className={styles.closeBtn}>x</button>
+                </div>
+        <div className={styles.modalContainer}>
+          <p>Descripción</p>
+        <p>{court.description}</p>
+        </div>
+        <div className={styles.modalContainer}>
+        <p>Precio</p>
+        <p>{court.priceFee}</p>
+        </div>
+        <div className={styles.modalContainer}>
+        <p>Garantía</p>
+        <p>{court.warrantyReservation}</p>
+        </div>
+        
+        <div className={styles.modalContainer}>
+        <p>Tipo Grass</p>
+        <p>{court.grassType}</p>
+        </div>
+        
+        <div className={styles.modalContainer}>
+        <p>Iluminación</p>
+        <p>{court.lighting}</p>
+        </div>
+        
+        <div className={styles.modalContainer}>
+        <p>Puertas</p>
+        <p>{court.doorsType}</p>
+        </div>
+        
+        <div className={styles.modalContainer}>
+        <p>Paredes</p>
+        <p>{court.wallsType}</p>
+        </div>
+        
+        <div className={styles.modalContainer}>
+        <p>Rating</p>
+        <p>{court.reputation}</p>
+        </div>
+        </div>
     </div>
   )
 }

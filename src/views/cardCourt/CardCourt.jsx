@@ -39,10 +39,8 @@ const CardCourt = ({ court }) => {
               <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
               <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
               <h3 className={styles.courtText}>{court.priceFee}$</h3>
-            </div>      
-         </div>
-        <div className={styles.cardBody}>
-          <div className={styles.courtTitleAdm}><p className={styles.textTxt}>{court.name}</p></div>
+            </div>
+            <div className={styles.cardBody}>
           <div className={styles.divButtons}>
             <Button
               sx={{
@@ -51,8 +49,10 @@ const CardCourt = ({ court }) => {
                 'borderColor': '#203144',
                 'backgroundColor': '#203144',
                 'borderRadius': '5px',
-                'fontSize': '12px',
-                'fontWeight': '700',
+                'fontSize': '10px',
+                'fontWeight': '500',
+                'paddingRight': '10px',
+                'paddingLeft': '10px',
                 'color': 'white',
                 'height': '30px',
                 'width': '10%',
@@ -61,14 +61,14 @@ const CardCourt = ({ court }) => {
 
 
               }}
-              variant="outlined" onClick={() => { setUpdate(true) }}>Update</Button>
+              variant="outlined" onClick={() => { setUpdate(true) }}>Actualizar</Button>
             <Button
               sx={{
                 'backgroundColor': 'white',
                 'borderRadius': '5px',
                 'borderStyle': 'none',
-                'fontSize': '12px',
-                'fontWeight': '700',
+                'fontSize': '10px',
+                'fontWeight': '500',
                 'color': '#203144',
                 'height': '30px',
                 'width': '10%',
@@ -76,15 +76,15 @@ const CardCourt = ({ court }) => {
                 'marginRight': '5px',
 
               }}
-              variant="outlined" onClick={() => { setDetail(true) }}>Detail</Button>
+              variant="outlined" onClick={() => { setDetail(true) }}>Info</Button>
             <Button
               onClick={deleted}
               sx={{
                 'backgroundColor': 'rgb(178, 0, 0)',
                 'borderRadius': '5px',
                 'borderStyle': 'none',
-                'fontSize': '12px',
-                'fontWeight': '700',
+                'fontSize': '10px',
+                'fontWeight': '500',
                 'color': 'white',
                 'height': '30px',
                 'width': '10%',
@@ -92,11 +92,12 @@ const CardCourt = ({ court }) => {
                 'marginRight': '5px',
 
               }}
-            >
-              Delete
+            >Eliminar
             </Button>
           </div>
         </div>
+         </div>
+        
         <AdminFunction court={court} update={update} setUpdate={setUpdate} />
         <DetailCourt court={court} detail={detail} setDetail={setDetail} />
       </div>
