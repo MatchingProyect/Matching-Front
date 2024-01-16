@@ -1,52 +1,60 @@
+
+
+
+.holeMiReserva{
+  width: 90%;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
 .cardReservationContainer {
-  border: 1px solid #000;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-  width: 350px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
   background-color: #203144; /* Azul oscuro */
-  transition: none;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px 2px black;
 }
 
-.cardReservationContainer h2,
-.cardReservationContainer h3 {
-  margin: 5px 0;
-  color: #fff; /* Texto blanco para destacar en el fondo oscuro */
+.textTitle{
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: 25px;
+
 }
 
-.cardReservationContainer h2 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.cardReservationContainer h3 {
-  font-size: 16px;
-}
-
-.cardReservationContainer br {
-  display: none;
-}
-
-.cardReservationContainer:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.cardReservationContainer:active {
-  transform: scale(0.95);
-}
-
-.cardReservationContainer button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  margin-top: 10px;
+.divDeInfo{
+  background-color: white;
+  width: 100%;
+  margin: 5px;
   border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cardReservationContainer button:hover {
-  background-color: #333;
+.textInfo{
+  font-size: 15px;
+  font-weight: 450;
+}
+
+.finishBtn{
+  padding: 10px;
+  margin: 10px;
+  font-size: 17px;
+  border-radius: 10px;
+  border-style: none;
+  background-color: rgb(34, 34, 34);
+  color: white;
 }

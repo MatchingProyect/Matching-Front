@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Resultado from '../resultado/Resultado';
 import { useSelector } from 'react-redux';
-import styles from './valorar.module.css'
 
 const ValorarUsuarios = ({ valorarUsuarios, setValorarUsuarios, teamMatch}) => {
     const [idUsuarios, setIdUsuarios] = useState([]);
@@ -95,7 +94,7 @@ const ValorarUsuarios = ({ valorarUsuarios, setValorarUsuarios, teamMatch}) => {
                     onChange={(event) => handleChange(event, user.user.id)}
                   />
                 </form>
-                <button className={styles.modalButton} type="submit" onClick={() => handleSubmit(user.user.id)}>Enviar</button>
+                <button className={styles.modalButton} type="submit" onClick={() => handleSubmit(user.user.id)}>✅</button>
               </div>
             ))}
             
