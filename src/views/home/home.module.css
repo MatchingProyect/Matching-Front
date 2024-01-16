@@ -68,21 +68,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  box-shadow: 0px 0px 8px 0px rgb(0, 0, 0);
   z-index: 2;
 }
 
 
 .principalDiv{
   width: 100vw;
-  height: 700px;
-  min-height: 400px;
   display: flex;
   flex-direction: row;
   justify-content: baseline;
   align-items: baseline;
-  box-shadow: 0px 0px 5px 0px rgb(0, 0, 0);
-
+  margin-bottom: 65px;
 }
 
 .btnHomeNav{
@@ -103,8 +99,8 @@
 
 
 .divButtons1 {
-  width: 33.3%;
-  height: 80%;
+  height: 50%;
+  width: 100%;
   background-color: white;
 }
 
@@ -116,13 +112,9 @@
 }
 
 .clubsComponent{
-  height: 210px;
   display: flex;
   flex-direction: row;
-  justify-content: baseline;
   align-items: center;
-  overflow-x: auto;
-  padding-left: 2vh;
 }
 
 .copyDiv{
@@ -141,6 +133,7 @@
 .principalDiv2{
   width: 100%;
   height: 250px;
+  margin-bottom: 180px;
 }
 
 .principalDiv3{

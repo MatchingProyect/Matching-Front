@@ -8,6 +8,7 @@ import CardClub from '../../cardClubs/CardClub';
 const Campos = ({clubs, locations, courts}) => {
     console.log(clubs);
 
+
     const [filteredCourts, setFilteredCourts] = useState([]);
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
@@ -25,12 +26,13 @@ const Campos = ({clubs, locations, courts}) => {
 
   return (
     <div className={styles.divCourts}>
-    {/* <div className = {styles.clubsComponent}>
-                {
-                    clubs.length > 0 && clubs.map((element) => <CardClub club = {element} key = {element.id}/>)
-                }
-            </div> */}
+
         <h2 className={styles.courtsTitle}>Campos</h2>
+        <div className = {styles.clubsComponent}>
+            {
+                clubs?.length > 0 && clubs?.map((element) => <CardClub club = {element} key = {element.id}/>)
+            }
+        </div>
         <div className = {styles.filtroContainer}>
             <div className = {styles.filtrosDiv}>
                 <label className = {styles.filterLabel}>Ciudades</label>
