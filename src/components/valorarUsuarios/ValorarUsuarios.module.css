@@ -1,0 +1,50 @@
+.holeComp{
+    width: 100%;
+}
+.compHeader{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+margin-top: 10px;
+margin-bottom: 10px;
+margin-top: 2vh;
+}
+
+.compTitle{
+    color:white;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+
+}
+
+.closeBtn{
+    height: 25px;
+    width: 25px;
+    background-color: rgb(32, 32, 32);
+    border-style: none;
+    font-size: 10px;
+    box-shadow: 0px 0px 5px 0px black;
+}
+.form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.namePlayer{
+    color:white;
+    font-size: 16px;
+    font-weight: 400;
+}
+.submitBtn{
+    background-color: transparent;
+    border-style: none;
+    font-size: 22px;
+}
+
+.input{
+    border-radius: 5px;
+    border-style: none;
+}

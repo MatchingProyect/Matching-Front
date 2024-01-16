@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Resultado from '../resultado/Resultado';
 import { useSelector } from 'react-redux';
+import styles from './ValorarUsuarios.module.css';
 
 const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
 
@@ -82,22 +83,27 @@ const ValorarUsuarios = ({valorarUsuarios, setValorarUsuarios, teamMatch}) => {
     
     
     return (
-        <div>
-            <button onClick={() => setValorarUsuarios(false)}>x</button>
+        <div className = {styles.holeComp}>
+            <div className = {styles.compHeader}>
+            <h1 className = {styles.compTitle}>Rating</h1>
+            <button onClick={() => setValorarUsuarios(false)} className = {styles.closeBtn}>❌</button>
+            </div>
+            
     
             {usuarios?.map((user, index) => (
                 <div key={index}>
-                    <h2>Deja una valoracion a: {user.user.displayName}</h2>
-                    <form >
-                        <label htmlFor="valoracion">Valorar usuario</label>
+                    <h2 className = {styles.namePlayer}>{user.user.displayName}</h2>
+                    <form className = {styles.form}>
                         <input
-                            type="text"
+                            type="number"
                             name="valoracion"
+                            className = {styles.input}
                             value={valoracion[user.user.id]}
                             onChange={(event) => handleChange(event, user.user.id)}
                         />
+                        <button type="submit" onClick={() => handleSubmit(user.user.id)} className = {styles.submitBtn}>✅</button>
                     </form>
-                    <button type="submit" onClick={() => handleSubmit(user.user.id)}>Enviar</button>
+                    
                 </div>
 
             ))}

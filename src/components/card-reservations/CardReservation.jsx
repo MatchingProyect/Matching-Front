@@ -23,7 +23,7 @@ export default function CardReservation() {
                 });
                 const nameAnfitrion = await Promise.all(promises);
                 setInfoUser(nameAnfitrion);
-                
+
             } catch (error) {
                 throw error.message;
             }
@@ -94,11 +94,11 @@ export default function CardReservation() {
 
 
     // useEffect(() => {
-        
+
     //     const fetchReservationsInfo = async () => {
     //         try {
     //             const promises = await Promise.all(teamMatch?.map(async (teamMatch) => {
-                    
+
     //                 const endpoint = `/reservationTeamMatch/${teamMatch?.TeamMatchId}`;
     //                 const { data } = await axios(endpoint);
     //                 return data.reservation[0];
@@ -151,18 +151,30 @@ export default function CardReservation() {
     console.log('xd', infoReservation)
 
     return (
-        <div>
+        <div className={styles.holeMiReserva}>
             {infoReservation?.map((reservation, index) => (
                 <div key={index} className={styles.cardReservationContainer}>
-                    <h2>Anfitrión: {infoUser[index] || 'Nombre no disponible'}</h2>
-                    <h2>Nombre Equipo: {teamName[index]?.name || 'Equipo no disponible'}</h2>
-                    <h3>Tiempo Inicio: {reservation?.dateTimeStart || 'No disponible'}</h3>
-                    <h3>Tiempo Fin: {reservation?.dateTimeEnd || 'No disponible'}</h3>
-                    <h3>Precio Total: {reservation?.totalCost || 'No disponible'}</h3>
-                    <br />
+                    <h1 className={styles.textTitle}>Reserva de {infoUser[index] || 'Nombre no disponible'}</h1>
+                    <div className={styles.divDeInfo}>
+                        <label className = {styles.textInfo}>Equipo</label>
+                        <label className = {styles.textInfo}>{teamName[index]?.name || 'Equipo no disponible'}</label>
+                    </div>
+                    <div className={styles.divDeInfo}>
+                        <label className = {styles.textInfo}>Inicio</label>
+                        <label className = {styles.textInfo}>{reservation?.dateTimeStart || 'No disponible'}</label>
+                    </div>
+                    <div className={styles.divDeInfo}>
+                        <label className = {styles.textInfo}>Termino</label>
+                        <label className = {styles.textInfo}>{reservation?.dateTimeEnd || 'No disponible'}</label>
+                    </div>
+                    <div className={styles.divDeInfo}>
+                        <label className = {styles.textInfo}>Precio</label>
+                        <label className = {styles.textInfo}>{reservation?.totalCost || 'No disponible'}</label>
+                    </div>
+
                     <ValorarUsuarios teamMatch={reservation.TeamMatchId
                     } setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios} />
-                    {valorarUsuarios ? null : <button onClick={() => setValorarUsuarios(true)}>Juego Terminado</button>}
+                    {valorarUsuarios ? null : <button onClick={() => setValorarUsuarios(true)} className = {styles.finishBtn}>Finalizar</button>}
                 </div>
             ))}
         </div>
