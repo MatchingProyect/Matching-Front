@@ -112,7 +112,7 @@ const CardUser = ({ user }) => {
       <h3 className = {styles.nameUser}>{user.displayName}</h3>
       {sendSolicitud? 
         (
-          <div>
+          <div className = {styles.soliEnviada}>
             Solicitud Enviada
           </div>
         ) : 

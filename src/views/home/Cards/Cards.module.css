@@ -1,12 +1,12 @@
 
 .cardsGrid{
-    background-color: aquamarine;
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 25px; 
-    justify-content: center !important;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: baseline;
+    overflow-x: scroll;
+    margin-top: 1vh;
 
 }

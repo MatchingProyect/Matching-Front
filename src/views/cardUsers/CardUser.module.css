@@ -1,52 +1,57 @@
 .userContainer{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: baseline;
     align-items: center;
-    width: 20vw;
-    height: auto;
-    min-width: 150px;
-    min-height: 220px;
-    max-width: 140px;
-    max-height: 180px;
-    margin-top: 1%;
-    margin-bottom: 1vh;
-    border-radius: 8px;
+    width: 300px;
+    min-width: 130px;
+    min-height: 210px;
+    max-height: 210px;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    margin-left: 3vh;
 
 }
 .avatarImg{
     height: 50%;
-    width: 50%;
+    width: 70%;
     border-radius: 50%;
     position: relative;
     top:10px;
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
 }
-
-.nameUser{
-color: black;
-    text-align: center;
-    position: relative;
-    font-size: 15px;
-    font-weight: 500;
-    top:15px;
-    width: 90%;
-    height: 10%;
-    max-height: 15px;
-}
-
 .btnAgregar{
     position: relative;
-    width: 95%;
+    width: 85%;
     height: 40px;
     border-radius: 8px;
     color: white;
     background-color: rgb(36, 36, 36);
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    margin-bottom: 4px;
 }
+.soliEnviada{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 120%;
+}
+
+
+.nameUser{
+color: black;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    width: 90%;
+    height: 40px;
+    margin-top: 20px;
+    line-height: 120%;
+}
+
+
 .btnUserDiv{
     width: 100%;
     display: flex;

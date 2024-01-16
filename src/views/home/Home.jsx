@@ -96,18 +96,25 @@ export default function Home() {
             </div>
 
 
-            <div className = {styles.principalDiv}>
-                {activeComponent === 'campos' && <Campos courts = {courts} locations = {locations} clubs = {clubs}/>}
+                {activeComponent === 'campos' && 
+                <div className = {styles.principalDiv}>
+                <Campos courts = {courts} locations = {locations} clubs = {clubs} />
+                </div>
+                }
                 {activeComponent === 'Reservas' && (
+                    <div className = {styles.principalDiv3}>
                     <CardReservation courts = {courts} />
+                    </div>
                 )}
                 {activeComponent === 'user' && (
+                    <div className = {styles.principalDiv2}>
                     <Cards />
+                    </div>
                 )}
-            </div>
-            <div className = {styles.copyDiv}>
+            
+            {/* <div className = {styles.copyDiv}>
             <label className = {styles.copyright}>© Matching 2024</label>
-            </div>
+            </div> */}
             <NavbarLow />
         </div>
     );
