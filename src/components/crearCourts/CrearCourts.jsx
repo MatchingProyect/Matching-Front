@@ -140,6 +140,20 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
       throw error.message;
     }
   }
+
+  const generateOptions =() => {
+    const options = [];
+    for (let hour = 7; hour <= 24; hour++) {
+      const formattedHour = hour < 10 ? `0${hour}` : `${hour}`;
+      options.push(
+        <option key={formattedHour} value={`${formattedHour}:00:00`}>
+          {formattedHour}:00
+        </option>
+      );
+    }
+    return options;
+  }
+
   if (!crearCourt) return null;
 
   return (
@@ -267,28 +281,30 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
         </div>
 
         <div className={styles.inputContainer}>
-          <input
-            type="text"
-            name="horarioInicio"
-            value={formData.horarioInicio}
-            onChange={handleChange}
-            className={styles.input}
-            />
-          <label className={styles.label}>Horario Inicio</label>
-            {errors.horarioInicio && <p className={styles.error}>{errors.horarioInicio}</p>}
-        </div>
+  <select
+    name="horarioInicio"
+    value={formData.horarioInicio}
+    onChange={handleChange}
+    className={styles.input}
+  >
+    {generateOptions()}
+  </select>
+  <label className={styles.label}>Horario Inicio</label>
+  {errors.horarioInicio && <p className={styles.error}>{errors.horarioInicio}</p>}
+</div>
 
-        <div className={styles.inputContainer}>
-          <input
-            type="text"
-            name="horarioCierre"
-            value={formData.horarioCierre}
-            onChange={handleChange}
-            className={styles.input}
-            />
-          <label className={styles.label}>Horario Cierre</label>
-            {errors.horarioCierre && <p className={styles.error}>{errors.horarioCierre}</p>}
-        </div>
+<div className={styles.inputContainer}>
+  <select
+    name="horarioCierre"
+    value={formData.horarioCierre}
+    onChange={handleChange}
+    className={styles.input}
+  >
+    {generateOptions()}
+  </select>
+  <label className={styles.label}>Horario Cierre</label>
+  {errors.horarioCierre && <p className={styles.error}>{errors.horarioCierre}</p>}
+</div>
 
 
         <div className={styles.inputContainer}>
