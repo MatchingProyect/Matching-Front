@@ -94,16 +94,19 @@ const Login = () => {
   
       if (userSnapshot.exists()) {
         console.log('Usuario ya existe en Firestore');
+        console.log(email)
+        try {
+          const response = await axios(`/userByEmail?email=${email}`);
+          console.log("response", response.data.userByEmailFound)
+          const id = response.data.userByEmailFound.id
+          if (id) dispatch(fetchUser(id))
+          localStorage.setItem('currentPath', "/home");
+          navigate("/home");
 
-        const response = await axios(`/userByEmail?email=${email}`);
-        console.log(response.data.userByEmailFound)
-
-        const id = response.data.userByEmailFound.id
-        if (id) dispatch(fetchUser(id))
-        localStorage.setItem('currentPath', "/home");
-
-
-        navigate("/home");
+        } catch (error) {
+                console.error('Error al guardar/verificar usuario en Firestore:', error);
+        }
+    
       } else {
         // El usuario no existe, así que procedemos a guardarlo
         await setDoc(userRef, {
@@ -274,7 +277,7 @@ const Login = () => {
           <div className={styles.textGoogle }>
               <div className={styles.iconGoogle }><GoogleIcon></GoogleIcon></div>
               Iniciar sesión con Google
-            </div>
+              </div>
           </button>
         </div>
 
