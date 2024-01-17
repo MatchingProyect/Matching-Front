@@ -76,3 +76,18 @@
     align-items: center;
     overflow-y: auto;
 }
+
+.divNoCourts{
+    width: 90%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textNoCourts{
+    text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+    color:white;
+}

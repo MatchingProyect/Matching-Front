@@ -1,18 +1,22 @@
 import styles from './campo.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CardCourt from '../../cardCourt/CardCourt';
 import { useSelector } from 'react-redux';
 import CardClub from '../../cardClubs/CardClub';
 
 
 const Campos = ({clubs, locations, courts}) => {
-    console.log(clubs);
-
-
     const [filteredCourts, setFilteredCourts] = useState([]);
+    useEffect(()=> {
+        setFilteredCourts(courts);
+    }, []);
+
+    console.log(filteredCourts);
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
+        console.log(value);
         let courtsFilteredByLocations = courts.filter((element) => element.LocationId == value);
+        console.log(courtsFilteredByLocations);
         return setFilteredCourts(courtsFilteredByLocations);
       };
     
@@ -22,6 +26,19 @@ const Campos = ({clubs, locations, courts}) => {
         return setFilteredCourts(courtsFilteredByClubs);
       };
     
+    //   const renderCourts = function(){
+    //     if (filteredCourts.length > 0) {
+    //         filteredCourts.filter(court => court.estado === true)
+    //             .map(filteredCourt => 
+    //                 <CardCourt key={filteredCourt.id} court={filteredCourt} />)
+    //     } else if (filteredCourts.length == 0){
+    //         return (
+    //         <h1>No existen courts.</h1>
+    //         )
+    //     };
+    //   };
+
+      
 
 
   return (
@@ -38,7 +55,6 @@ const Campos = ({clubs, locations, courts}) => {
                 <label className = {styles.filterLabel}>Ciudades</label>
                 <select onChange = {courtsFilterByLocations} className = {styles.selectFiltros}>
                     <option disabled >Ciudades</option>
-                    <option>Todas las Ciudades</option>
                     {locations?.filter(location => location.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option>)}
                 </select>
             </div>
@@ -46,23 +62,22 @@ const Campos = ({clubs, locations, courts}) => {
                 <label className = {styles.filterLabel}>Clubes</label>
                 <select onChange = {courtsFilterByClubs} className = {styles.selectFiltros}>
                     <option disabled >Clubes</option>
-                    <option>Todos los Clubes</option>
                     {clubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                 </select>
             </div>
         </div>
         <div className = {styles.cardsContainerScroll}>
             <div  className = {styles.cardController}>
-        {
+         {
             filteredCourts.length > 0 ? 
                 filteredCourts.filter(court => court.estado === true)
                 .map(filteredCourt => (
                     <CardCourt key={filteredCourt.id} court={filteredCourt} />
-                )) : courts?.filter(court => court.estado === true)
-                .map(filteredCourt => (
-                    <CardCourt key={filteredCourt.id} court={filteredCourt} />
-                ))
-        }
+                )) : 
+                <div className = {styles.divNoCourts}>
+                    <h1 className = {styles.textNoCourts}>No existen courts con este club o en esta localidad.</h1>
+                </div>
+        } 
         </div>
         </div>
     </div>

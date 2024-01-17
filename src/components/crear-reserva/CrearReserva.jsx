@@ -64,7 +64,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                 horas.push(`${horaString}:00`);
                 hora = new Date(hora.getTime() + 60 * 60 * 1000);
             }
-            console.log(horas)
             setHorasDisponibles(horas);
         };
 
