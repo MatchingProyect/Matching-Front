@@ -1,7 +1,7 @@
 import axios from 'axios'
 import  { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUpdateFriend } from '../../redux/reducer';
+import { fetchUpdateFriend, fetchUser } from '../../redux/reducer';
 import styles from './solicitudes.module.css'
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom';
@@ -97,6 +97,7 @@ const Solicitudes = () => {
             //     dispatch(fetchUser())
             // }
         } catch (error) {
+            console.log(error.message)
             throw error.message;
         }
     };
