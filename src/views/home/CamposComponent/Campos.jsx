@@ -6,7 +6,7 @@ import CardClub from '../../cardClubs/CardClub';
 
 
 const Campos = ({clubs, locations, courts}) => {
-    const [filteredCourts, setFilteredCourts] = useState([]);
+    const [filteredCourts, setFilteredCourts] = useState([courts]);
     useEffect(()=> {
         setFilteredCourts(courts);
     }, []);
