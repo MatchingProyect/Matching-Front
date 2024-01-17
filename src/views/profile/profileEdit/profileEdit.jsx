@@ -6,11 +6,14 @@ import NavbarLow from '../../../components/navbarLow/navbarLow';
 import { Container, TextField, Button, InputAdornment, NativeSelect } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProfiles } from '../../../redux/reducer';
 
 export default function ProfileEdit() {
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     const [estadoImg , setEstadoImg] = useState(userLogeado?.avatarImg);
+
+    const dispatch = useDispatch()
 
     const form = useForm({
         defaultValues: {
@@ -30,22 +33,23 @@ export default function ProfileEdit() {
     });
     const { register, handleSubmit, formState: { errors }, setValue } = form;
 
-    const sumiteando = (data) => {
+    const sumiteando = async(data) => {
         console.log('formData', data);
-        alert(`Solicitud de actualizacion de perfil correctamente enviada.`);
+        
 
         //Function para enviar la actualizacion del perfil al backEnd
-        // try {
-        //     const endPoint = `/users/${data.id}`;
-        //     const response = await axios.put(endPoint, data);
-        //     if (response.status) {
-        //         dispatch(fetchProfiles());
-        //     } else {
-        //         alert(response.message);
-        //     }
-        // } catch (error) {
-        //     alert(error.message);
-        // }
+        try {
+            const endPoint = `/users/${data.id}`;
+            const response = await axios.put(endPoint, data);
+            if (response.status) {
+                dispatch(fetchProfiles());
+                alert(`Solicitud de actualizacion de perfil correctamente enviada.`);
+            } else {
+                alert(response.message);
+            }
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
 
