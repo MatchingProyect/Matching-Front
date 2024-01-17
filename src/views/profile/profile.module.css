@@ -62,7 +62,8 @@
   justify-content: space-around;
   align-items: center; 
   height: 90%;
-  margin: 50px 0 60px 0;
+  margin: 2rem 0 60px 0;
+  margin-bottom: 10%;
 }
 
 .divOneProfile {
