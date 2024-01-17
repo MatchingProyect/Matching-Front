@@ -29,9 +29,12 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchSports());
-        dispatch(fetchFriends(userLogeado.id));
 
-        if(userLogeado) dispatch(fetchProfiles(userLogeado.id));
+        if(userLogeado) {
+            dispatch(fetchFriends(userLogeado?.id));
+
+            dispatch(fetchProfiles(userLogeado.id))
+        };
 
     }, []);
     

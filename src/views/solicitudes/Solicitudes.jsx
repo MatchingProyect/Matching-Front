@@ -83,14 +83,19 @@ const Solicitudes = () => {
 
     const rechazarAmigo = async (friend, user) => {
         try {
-            const rechazado = await axios.post('/addFriend', {
-                FriendId: friend,
+            console.log(
+                {FriendId: friend,
                 UserId: user,
-                status: "rechazado",
-            });
-            if(rechazado) {
-                // dispatch(fetchUser())
-            }
+                status: "rechazado",})
+
+            // const rechazado = await axios.post('/addFriend', {
+            //     FriendId: friend,
+            //     UserId: user,
+            //     status: "rechazado",
+            // });
+            // if(rechazado) {
+            //     dispatch(fetchUser())
+            // }
         } catch (error) {
             throw error.message;
         }
