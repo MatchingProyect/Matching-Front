@@ -5,11 +5,13 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background-color: #203144;
 
 }
 
 .pageTitle{
     margin-top: 4vh;
+    color:white;
 
 }
 
@@ -19,10 +21,11 @@
     justify-content: center;
     align-items: first baseline;
     width: 70vw;
-    border-radius: 25px;
+    border-radius: 15px;
     padding: 20px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.274); 
     margin-bottom: 80px;
+    background-color: white;
 
 }
 

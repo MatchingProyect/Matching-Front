@@ -7,22 +7,35 @@
   align-items: center;
   background-color: #203144;
 }
+.solicitudesDiv{
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+}
 .container {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    background-color: #9e9e9e;
-    margin: 20px;
+    background-color: white;
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 15px;
     justify-content: space-around;
-    margin-bottom: 10%;
+    width: 90%;
+    margin: 1vh;
+    box-shadow: 0px 0px 6px 0px black;
+  }
+  .solicitudName{
+    font-size: 16px;
+    font-weight: 600;
   }
   
   .profile {
     display: flex;
     align-items: center;
   }
+
 
   .divNoMatches{
     width: 90%;
@@ -42,8 +55,8 @@
 }
   
   .profile img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%; 
     margin-right: 10px;
   }

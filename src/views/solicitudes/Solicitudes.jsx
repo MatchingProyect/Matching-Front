@@ -108,14 +108,14 @@ const Solicitudes = () => {
           <h1 className = {styles.textNoMatches}>No tienes solicitudes de amistad</h1>
         </div>
             }
-
+            <div className = {styles.solicitudesDiv}>
             {infoSoli?.map(requestItem => {
                 return (
 
                     <div key={requestItem.id} className={styles.container}>
                         <div className={styles.profile}>
                             <img src={`${requestItem?.userFound?.user?.avatarImg}`} alt={requestItem?.userFound?.user?.displayName} /> 
-                            <h4>{requestItem?.userFound?.user?.displayName}</h4>
+                            <h1 className = {styles.solicitudName}>{requestItem?.userFound?.user?.displayName}</h1>
                         </div>
                         <div className={styles.buttons}>
                             <button className={styles.accept} onClick={() => agregarAmigo(requestItem?.userFound?.user?.id, id )}>Aceptar</button>
@@ -124,6 +124,7 @@ const Solicitudes = () => {
                     </div>
                 );
             })}
+            </div>
             <NavbarLow />
         </div>
 
