@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUpdateFriend } from '../../redux/reducer';
 import styles from './solicitudes.module.css'
 import NavbarLow from '../../components/navbarLow/navbarLow';
+import { Link } from 'react-router-dom';
 
 const Solicitudes = () => {
     const [request, setRequest] = useState([])
@@ -96,13 +97,16 @@ const Solicitudes = () => {
     };
 
     return (
-        <div>
-            <div>
-                <h2>Solicitudes</h2>
-            </div>
+        <div className = {styles.holeComp}>
+      <div className = {styles.viewHeader}>
+       <Link to = '/home'><label className = {styles.backBtn}>Back</label></Link>
+      <h1 className = {styles.viewTitle}>Solicitudes</h1>
+      </div>
             {
                 infoSoli.length? null : 
-                <h2>NO HAY SOLICITUDES DE AMISTAD</h2>
+                <div className = {styles.divNoMatches}>
+          <h1 className = {styles.textNoMatches}>No tienes solicitudes de amistad</h1>
+        </div>
             }
 
             {infoSoli?.map(requestItem => {

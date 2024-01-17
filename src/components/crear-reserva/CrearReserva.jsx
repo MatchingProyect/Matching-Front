@@ -280,7 +280,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
 
 
                     <div className={styles.modalContainer2}>
-                        <label className={styles.labelModal2}>Selecciona un horario de inicio</label>
+                        <label className={styles.labelModal2}>Hora de Inicio</label>
                         <select
                             name="dateTimeStart"
                             value={hInicio.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
@@ -297,7 +297,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                     </div>
 
                     <div className={styles.selectedHoursContainer}>
-                        <p>Horas seleccionadas:</p>
+                        <p>Horas seleccionadas</p>
                         <p>{formatFechaHora(hInicio)} - {formatFechaHora(hCierre)}</p>
                     </div>
 
@@ -306,16 +306,25 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                         <label className={styles.labelModal}>${court?.priceFee}</label>
                     </div>
                     <div className={styles.modalContainer2}>
-                        <label className={styles.labelModal2}>Selecciona participantes</label>
+                        <label className={styles.labelModal2}>Participantes</label>
                         <Select
                             labelId="demo-multiple-chip-label"
                             id="demo-multiple-chip"
+                            sx = {{
+                                width: '65%',
+                                height: 'auto',
+                            }}
                             multiple
                             value={personName}
                             onChange={handleChange2}
                             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
                             renderValue={(selected) => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                <Box sx={{ 
+                                    display: 'flex', 
+                                    flexWrap: 'wrap', 
+                                    gap: 0.5,
+                                    
+                                    }}>
                                 {selected.map((value) => (
                                     <Chip key={value} label={getDisplayNameById(value)} />
                                     ))}

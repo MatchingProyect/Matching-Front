@@ -1,3 +1,12 @@
+.holeComp{
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #203144;
+}
 .container {
     display: flex;
     align-items: center;
@@ -14,6 +23,23 @@
     display: flex;
     align-items: center;
   }
+
+  .divNoMatches{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.textNoMatches{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color:rgb(189, 189, 189);
+    line-height: 170%;
+}
   
   .profile img {
     width: 40px;
@@ -30,6 +56,30 @@
     display: flex;
    
   }
+  .viewHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
+
+}
+
+.viewTitle{
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    width: 90%;
+}
+
+.backBtn{
+    position: absolute;
+    text-align: center;
+    left: 30px;
+    top:50px;
+    color: white;
+    font-size: 20px;
+}
   
   .buttons button {
     margin-right: 10px;
