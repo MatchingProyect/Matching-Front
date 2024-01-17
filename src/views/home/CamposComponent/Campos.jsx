@@ -62,7 +62,7 @@ const Campos = ({clubs, locations, courts}) => {
                     <CardCourt key={filteredCourt.id} court={filteredCourt} />
                 )) : 
                 <div className = {styles.divNoCourts}>
-                    <h1 className = {styles.textNoCourts}>No existen courts con este club o en esta localidad.</h1>
+                    <h1 className = {styles.textNoCourts}>No existen courts con este club o en esta localidad</h1>
                 </div>
                 
         } 

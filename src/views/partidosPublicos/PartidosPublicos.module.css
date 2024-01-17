@@ -1,7 +1,7 @@
 .holeComp{
     
     width: 100vw;
-    height: auto;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,28 +13,48 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 150px;
 
 }
 
 .viewTitle{
     color: white;
     text-align: center;
-    font-size: 40px;
-    width: 90%;
+    font-size: 35px;
+    width: 60%;
     padding: 1vh;
 }
 
 .backBtn{
-    width: 5%;
-    z-index: 5;
+    position: absolute;
+    text-align: center;
+    left: 20px;
     color: white;
+
 }
 
 .reservasDiv{
     display: flex;
+    height: 90%;
     width: 90%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 5vh;
+}
+.divNoMatches{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.textNoMatches{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color:rgb(189, 189, 189);
+    line-height: 170%;
 }

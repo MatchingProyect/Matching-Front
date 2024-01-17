@@ -38,7 +38,10 @@ const PartidosPublicos = () => {
       </div>
       <div className = {styles.reservasDiv}>
       {partidoPublico.length === 0 ? (
-        <p>No hay partidos públicos disponibles.</p>
+        <div className = {styles.divNoMatches}>
+          <h1 className = {styles.textNoMatches}>No hay partidas públicos disponibles</h1>
+        </div>
+        
       ) : 
        partidoPublico.map((element) => <CardPublicMatch partidoPublico = {element} courts = {courts} locations = {locations} clubs = {clubs} sports = {sports} key = {element.id} userLogeado = {userLogeado}/>)
 

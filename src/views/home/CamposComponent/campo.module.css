@@ -87,7 +87,8 @@
 
 .textNoCourts{
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 700;
-    color:white;
+    color:rgb(189, 189, 189);
+    line-height: 170%;
 }
