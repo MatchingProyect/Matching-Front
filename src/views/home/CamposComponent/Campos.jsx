@@ -7,16 +7,19 @@ import CardClub from '../../cardClubs/CardClub';
 
 const Campos = ({clubs, locations, courts}) => {
     const [filteredCourts, setFilteredCourts] = useState([courts]);
+    const [filteredClubs, setFilteredClubs] = useState([clubs]);
     useEffect(()=> {
         setFilteredCourts(courts);
-    }, [courts]);
+        setFilteredClubs(clubs)
+    }, [courts, clubs]);
+    console.log(filteredClubs);
 
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
         console.log(value);
         let courtsFilteredByLocations = courts.filter((element) => element.LocationId == value);
-        console.log(courtsFilteredByLocations);
-        return setFilteredCourts(courtsFilteredByLocations);
+        let filteredClubs = clubs.filter((element) => element.LocationId == value);
+        return setFilteredCourts(courtsFilteredByLocations), setFilteredClubs(filteredClubs);
       };
     
       const courtsFilterByClubs = function(event){
@@ -46,7 +49,7 @@ const Campos = ({clubs, locations, courts}) => {
                 <label className = {styles.filterLabel}>Clubes</label>
                 <select onChange = {courtsFilterByClubs} className = {styles.selectFiltros}>
                     <option disabled >Clubes</option>
-                    {clubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
+                    {filteredClubs?.filter(club => club.estado == true).map((element) => <option value = {element.id} key = {element.id}>{element.name}</option> )}
                 </select>
             </div>
         </div>
