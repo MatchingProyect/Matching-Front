@@ -111,6 +111,10 @@
 .divContainer{
   margin: 2px 16px;
 }
+.friendsContainer{
+  margin: 1vh;
+  height: 180px;
+}
 
 .info {
   color: black;
