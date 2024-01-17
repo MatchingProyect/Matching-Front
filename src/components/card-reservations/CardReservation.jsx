@@ -175,8 +175,8 @@ export default function CardReservation() {
                         <label className = {styles.textInfo}>{reservation?.totalCost || 'No disponible'}</label>
                     </div>
 
-                    <Resultado teamMatch={reservation.TeamMatchId} setResultado={setResultado} resultado={resultado} setValorarUsuarios={setValorarUsuarios} />
-                    <ValorarUsuarios teamMatch={reservation.TeamMatchId} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}
+                    <Resultado teamMatch={reservation?.TeamMatchId} setResultado={setResultado} resultado={resultado} setValorarUsuarios={setValorarUsuarios} />
+                    <ValorarUsuarios teamMatch={reservation?.TeamMatchId} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}
           />
         
                     <button onClick={() => setResultado(true)} className={styles.finishBtn}>Juego Terminado</button>
