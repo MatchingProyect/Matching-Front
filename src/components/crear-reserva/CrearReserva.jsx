@@ -81,7 +81,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
 
     const [errors, setErrors] = useState({
         dateTimeStart: '',
-        FriendsId: ''
+        FriendsId: '',
+        MatchTypeId: ''
     })
     
     useEffect(() => {
@@ -131,6 +132,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         );
 
         console.log(personName);
+        console.log(dataReservation)
       };
     
     const handleHoraInicioChange = (event) => {
@@ -148,7 +150,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             dateTimeEnd: format(nuevaHCierre, 'yyyy-MM-dd HH:mm:ss'),
         });
 
-        console.log(dataReservation)
     };
 
     if (!reserva) {
@@ -224,7 +225,8 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             // Limpiar los errores antes de hacer nuevas validaciones
             setErrors({
                 dateTimeStart: '',
-                FriendsId: ''
+                FriendsId: '',
+                MatchTypeId: ''
             });
 
             // Validaciones
@@ -241,8 +243,15 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                 }));
             }
 
+            if (!dataReservation.MatchTypeId) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    MatchTypeId: 'Debes seleccionar un tipo de juego.'
+                }));
+            }
+
             // Verificar si hay errores
-            if (errors.FriendsId || errors.dateTimeStart) {
+            if (!personName.length || !dataReservation.dateTimeStart || !dataReservation.MatchTypeId) {
                 return null;  // Detener la ejecución si hay errores
             } else {
                 await crearReserva();
@@ -276,6 +285,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                             <option value="ca221323-2fac-450f-8b6e-f8edc9f14e5d">Privado</option>
                             <option value="d81fe1b8-345a-4b4c-97b9-6e64b1116aec">Público</option>
                         </select>
+                        {errors.MatchTypeId && <p className={styles.errorMessage}>{errors.MatchTypeId}</p>}
                     </div>
 
 
@@ -292,7 +302,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                                 <option key={hora} value={hora}>{hora}</option>
                             ))}
                         </select>
-                        {errors.dateTimeStart && <p>{errors.dateTimeStart}</p>}
+                        {errors.dateTimeStart && <p className={styles.errorMessage}>{errors.dateTimeStart}</p>}
                         
                     </div>
 
@@ -342,7 +352,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                                 </MenuItem>
                             ))}
                         </Select>
-                            {errors.FriendsId && <p>{errors.FriendsId}</p>}
+                            {errors.FriendsId && <p className={styles.errorMessage}>{errors.FriendsId}</p>}
 
                     </div>
                     <button type="submit" className={styles.createBtn}>Crear Reserva</button>
