@@ -20,7 +20,6 @@ import ProfileChangeEmail from './views/profile/profileEdit/ProfileChangeEmail/P
 import './App.css';
 import ProfileChangePassword from './views/profile/profileEdit/ProfileChangePassword/ProfileChangePassword.jsx';
 import ClubsDetail from './views/clubsDetail/ClubsDetail.jsx';
-import Help from './views/help/Help.jsx';
 import { setDataUser, setFriends } from './redux/reducer.js';
 import { useDispatch } from 'react-redux'; 
 
@@ -71,7 +70,6 @@ function App() {
         <Route path="/questions" element={ <Questions /> } />
         <Route path='/solicitudes' element={<Solicitudes/>} />
         <Route path="/registro" element={<Registro />} />
-        <Route path='/help' element={<Help/>} />
         <Route path="/restaurar-contrasenia" element={<RestaurarContrasenia />} />
         <Route path="/restaurar-contrasenia-codigo" element={<RestaurarContraseniaCodigo/>} />
         <Route path='/user/:id' element={<UserDetail/>} />

@@ -17,7 +17,6 @@ export default function Error() {
                 <p className={styles.pageText}>Lo sentimos, pero la página que estás buscando no existe en nuestro sitio. Puede deberse a un enlace incorrecto, una página eliminada o un error tipográfico. Si crees que esto es un error del sitio, por favor, ponte en contacto con nuestro equipo de soporte técnico. Lamentamos cualquier inconveniente.</p>
                 <div className={styles.buttons}>
                     <Link to='/home'><button className={styles.homeBtn}>Home</button></Link>
-                    <Link to='/help'><button className={styles.helpBtn}>Contáctanos</button></Link>
                 </div>
             </div>
             <NavbarLow />       
