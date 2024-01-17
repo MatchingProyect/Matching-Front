@@ -81,21 +81,22 @@ const Solicitudes = () => {
         }
     };
 
-    const rechazarAmigo = async (friend, user) => {
+    const rechazarAmigo = async (user, friend ) => {
         try {
             console.log(
                 {FriendId: friend,
                 UserId: user,
                 status: "rechazado",})
 
-            // const rechazado = await axios.post('/addFriend', {
-            //     FriendId: friend,
-            //     UserId: user,
-            //     status: "rechazado",
-            // });
-            // if(rechazado) {
-            //     dispatch(fetchUser())
-            // }
+            const rechazado = await axios.post('/addFriend', {
+                FriendId: friend,
+                UserId: user,
+                status: "rechazado",
+            });
+            console.log("rechazado", rechazado)
+            if(rechazado) {
+                dispatch(fetchUser(user.id))
+            }
         } catch (error) {
             console.log(error.message)
             throw error.message;
