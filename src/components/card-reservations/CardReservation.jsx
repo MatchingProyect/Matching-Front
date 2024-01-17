@@ -16,6 +16,10 @@ export default function CardReservation() {
     const userLogeado = useSelector((state) => state.user?.datauser?.user);
     const [resultado, setResultado] = useState(false);
 
+    const formattedReservation = []
+
+
+
     useEffect(() => {
         const fetchAnfitrionInfo = async (infoReservation) => {
             try {
@@ -28,6 +32,7 @@ export default function CardReservation() {
                 setInfoUser(nameAnfitrion);
 
             } catch (error) {
+                console.log(error)
                 throw error.message;
             }
         };
@@ -50,13 +55,16 @@ export default function CardReservation() {
             return new Date(dateString).toLocaleDateString(undefined, options);
         };
 
+
         const fetchReservationsInfo = async (team) => {
+            console.log("team", team)
             try {
                 const promises = await Promise.all(team?.map(async (newTeam) => {
+                    const endpoint = `/reservationTeamMatch/${newTeam?.TeamMatchId}`;
                     try {
-                        const endpoint = `/reservationTeamMatch/${newTeam?.TeamMatchId}`;
                         const { data } = await axios(endpoint);
-                        if (data.status) {
+                        console.log("dataaaaaa", data);
+                        if (data?.status) {
                             const formattedReservation = {
                                 ...data.reservation,
                                 dateTimeStart: formatDate(data.reservation.dateTimeStart),
@@ -64,24 +72,32 @@ export default function CardReservation() {
                             };
                             return formattedReservation;
                         } else {
-                            return 'lo que quieras';
+                            throw new Error('La solicitud no tuvo éxito.');
                         }
-                    } catch (error) {
-                        console.log(error.message);
+                    } catch (apiError) {
+                        console.log(`Error en la solicitud para ${newTeam?.TeamMatchId}: ${apiError.message}`);
+                        return 'lo que quieras';
                     }
                 }));
-                const filteredReservations = promises.filter(reservation => reservation !== 'lo que quieras');
-                setInfoReservation(filteredReservations);
-                fetchAnfitrionInfo(filteredReservations);
+                      
+                console.log("filteredReservations", promises)
+                setInfoReservation(promises);
+                fetchAnfitrionInfo(promises);
             } catch (error) {
-                throw error.message;
+                
+                console.log("Error general:", error.message);
             }
+
         };
+
+
+
         const fetchTeamMatch = async () => {
             try {
                 const endpoint = `/teamMatchByUser/${userLogeado?.id}`;
                 const { data } = await axios(endpoint);
-                if (data.status) {
+                console.log(data)
+                if (data?.status) {
                     setTeamMatch(data.teamMatchByUser);
                     fetchReservationsInfo(data.teamMatchByUser);
                     fetchTeamMatchName(data.teamMatchByUser)
@@ -151,7 +167,6 @@ export default function CardReservation() {
     //     fetchTeamMatchName()
     // }, [teamMatch])
 
-    console.log('xd', infoReservation)
 
     return (
         <div className={styles.holeMiReserva}>
@@ -175,8 +190,8 @@ export default function CardReservation() {
                         <label className = {styles.textInfo}>{reservation?.totalCost || 'No disponible'}</label>
                     </div>
 
-                    <Resultado teamMatch={reservation.TeamMatchId} setResultado={setResultado} resultado={resultado} setValorarUsuarios={setValorarUsuarios} />
-                    <ValorarUsuarios teamMatch={reservation.TeamMatchId} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}
+                    <Resultado teamMatch={reservation?.TeamMatchId} setResultado={setResultado} resultado={resultado} setValorarUsuarios={setValorarUsuarios} />
+                    <ValorarUsuarios teamMatch={reservation?.TeamMatchId} setValorarUsuarios={setValorarUsuarios} valorarUsuarios={valorarUsuarios}
           />
         
                     <button onClick={() => setResultado(true)} className={styles.finishBtn}>Juego Terminado</button>
