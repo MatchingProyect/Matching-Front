@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styles from './CrearCourts.module.css';
 import { fetchCourts } from '../../redux/reducer';
+import validar from './validations';
 
 const CrearCourts = ({ crearCourt, setCrearCourt }) => {
   const sports = useSelector((state) => state.user.allSports);
@@ -21,18 +22,41 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     doorsType: '',
     wallsType: '',
     reputation: '',
+    imgClub: '',
     horarioInicio: '',
     horarioCierre: '',
-    ClubId: '', 
-    SportId: '', 
-    LocationId: '', 
+    ClubId: '',
+    SportId: '',
+    LocationId: '',
+  });
+
+  const [errors, setErrors] = useState({
+    name: '',
+    description: '',
+    priceFee: '',
+    warrantyReservation: '',
+    grassType: '',
+    lighting: '',
+    doorsType: '',
+    wallsType: '',
+    reputation: '',
+    imgClub: '',
+    horarioInicio: '',
+    horarioCierre: '',
+    ClubId: '',
+    SportId: '',
+    LocationId: '',
   });
 
   const handleChange = (event) => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
-    });
+      [event.target.name]: event.target.value
+    }),
+    setErrors(validar({
+      ...formData,
+      [event.target.name]: event.target.value
+    }))
   };
 
   const handleClubChange = (event) => {
@@ -41,14 +65,14 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
       ClubId: event.target.value,
     });
   };
-  
+
   const handleSportChange = (event) => {
     setFormData({
       ...formData,
       SportId: event.target.value,
     });
   };
-  
+
   const handleLocationChange = (event) => {
     setFormData({
       ...formData,
@@ -66,6 +90,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     doorsType,
     wallsType,
     reputation,
+    imgClub,
     horarioInicio,
     horarioCierre,
     ClubId,
@@ -76,7 +101,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
   const onSubmitCourts = async () => {
     try {
       const endPoint = '/courts';
-      const { data } = await axios.post(endPoint,{
+      const { data } = await axios.post(endPoint, {
         name,
         description,
         priceFee: Number(priceFee),
@@ -86,16 +111,18 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
         doorsType,
         wallsType,
         reputation,
+        imgClub,
         horarioInicio,
         horarioCierre,
         ClubId,
         SportId,
-        LocationId});
+        LocationId
+      });
 
       console.log(data);
       if (data.status) {
-         dispatch(fetchCourts());
-         setCrearCourt(false);
+        dispatch(fetchCourts());
+        setCrearCourt(false);
       }
     } catch (error) {
       console.log(error);
@@ -119,7 +146,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     <div className={styles.holeCompContainer}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
 
-        <div className={styles.inputContainer}>
+      <div className={styles.inputContainer}>
           <input
             type="text"
             name="name"
@@ -127,7 +154,8 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             onChange={handleChange}
             className={styles.input}
           />
-          <label className={styles.label}>Name</label>
+          <label className={styles.label}>Nombre</label>
+          {errors.name && <p className={styles.error}>{errors.name}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -138,7 +166,8 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             onChange={handleChange}
             className={styles.input}
           />
-          <label className={styles.label}>Description</label>
+          <label className={styles.label}>Descripción</label>
+          {errors.description && <p className={styles.error}>{errors.description}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -149,7 +178,8 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             onChange={handleChange}
             className={styles.input}
           />
-          <label className={styles.label}>PriceFee</label>
+          <label className={styles.label}>Precio</label>
+          {errors.priceFee && <p className={styles.error}>{errors.priceFee}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -159,8 +189,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.warrantyReservation}
             onChange={handleChange}
             className={styles.input}
-          />
-          <label className={styles.label}>Warranty</label>
+            />
+          <label className={styles.label}>Garantía</label>
+            {errors.warrantyReservation && <p className={styles.error}>{errors.warrantyReservation}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -170,8 +201,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.grassType}
             onChange={handleChange}
             className={styles.input}
-          />
-          <label className={styles.label}>GrassType</label>
+            />
+          <label className={styles.label}>Tipo de Pasto</label>
+            {errors.grassType && <p className={styles.error}>{errors.grassType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -181,8 +213,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.lighting}
             onChange={handleChange}
             className={styles.input}
-          />
-          <label className={styles.label}>Lighting</label>
+            />
+          <label className={styles.label}>Iluminación</label>
+            {errors.lighting && <p className={styles.error}>{errors.lighting}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -192,8 +225,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.doorsType}
             onChange={handleChange}
             className={styles.input}
-          />
-          <label className={styles.label}>DoorsType</label>
+            />
+          <label className={styles.label}>Tipo de Puerta</label>
+            {errors.doorsType && <p className={styles.error}>{errors.doorsType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -203,8 +237,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.wallsType}
             onChange={handleChange}
             className={styles.input}
-          />
-          <label className={styles.label}>WallsType</label>
+            />
+          <label className={styles.label}>Tipo de Muro</label>
+            {errors.wallsType && <p className={styles.error}>{errors.wallsType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -214,8 +249,21 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.reputation}
             onChange={handleChange}
             className={styles.input}
-          />
+            />
           <label className={styles.label}>Reputation</label>
+            {errors.reputation && <p className={styles.error}>{errors.reputation}</p>}
+        </div>
+
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            name="imgClub"
+            value={formData.imgClub}
+            onChange={handleChange}
+            className={styles.input}
+            />
+          <label className={styles.label}>Imagen</label>
+            {errors.imgClub && <p className={styles.error}>{errors.imgClub}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -225,8 +273,9 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.horarioInicio}
             onChange={handleChange}
             className={styles.input}
-          />
+            />
           <label className={styles.label}>Horario Inicio</label>
+            {errors.horarioInicio && <p className={styles.error}>{errors.horarioInicio}</p>}
         </div>
 
         <div className={styles.inputContainer}>
@@ -236,44 +285,52 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             value={formData.horarioCierre}
             onChange={handleChange}
             className={styles.input}
-          />
+            />
           <label className={styles.label}>Horario Cierre</label>
+            {errors.horarioCierre && <p className={styles.error}>{errors.horarioCierre}</p>}
         </div>
 
 
         <div className={styles.inputContainer}>
           <select id="clubSelect" className={styles.input} onChange={handleClubChange}>
+            <option value="">Selecciona un club:</option>
             {clubs?.map(club => (
               <option key={club.id} value={club.id}>
-                {club.name}
-              </option>
+                  {club.name}
+                </option>
             ))}
           </select>
           <label htmlFor="clubSelect" className={styles.label}>Club</label>
+            {errors.ClubId && <p className={styles.error}>{errors.ClubId}</p>}
         </div>
         <div className={styles.inputContainer}>
 
 
           <select id="sportSelect" className={styles.input} onChange={handleSportChange}>
+            <option value="">Selecciona un deporte:</option>
             {sports?.map(sport => (
               <option key={sport.id} value={sport.id}>
-                {sport.name}
-              </option>
+                  {sport.name}
+                </option>
             ))}
           </select>
           <label htmlFor="sportSelect" className={styles.label}>Sport</label>
+            {errors.SportId && <p className={styles.error}>{errors.SportId}</p>}
         </div>
         <div className={styles.inputContainer}>
 
           <select id="locationSelect" className={styles.input} onChange={handleLocationChange}>
+            <option value="">Selecciona una ubicación:</option>
             {location?.map(location => (
               <option key={location.id} value={location.id}>
-                {location.name}
-              </option>
+                  {location.name}
+                </option>
             ))}
           </select>
           <label htmlFor="locationSelect" className={styles.label}>Location</label>
+            {errors.LocationId && <p className={styles.error}>{errors.LocationId}</p>}
         </div>
+
         <button type="submit" value='enviar' className={styles.btnSubmit}>Create</button>
       </form>
       <button onClick={() => setCrearCourt(false)} className={styles.close}>Cerrar</button>

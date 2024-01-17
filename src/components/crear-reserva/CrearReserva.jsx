@@ -14,8 +14,6 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
-
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -82,6 +80,11 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
         FriendsId: []
     })
 
+    const [errors, setErrors] = useState({
+        dateTimeStart: '',
+        FriendsId: ''
+    })
+    
     useEffect(() => {
         setDataReservation({
             ...dataReservation,
@@ -90,8 +93,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
             CourtId: court?.id
         })
     }, [userLogeado])
-
-
 
     const formatFechaHora = (fecha) => {
         return fecha.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -134,8 +135,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
       };
     
     const handleHoraInicioChange = (event) => {
-        console.log( "aaaa", event.target.value)
-
         const horaSeleccionada = event.target.value;
         const nuevaHoraInicio = new Date();
         nuevaHoraInicio.setHours(horaSeleccionada.split(':')[0]);
@@ -152,8 +151,6 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
 
         console.log(dataReservation)
     };
-
-
 
     if (!reserva) {
         if (preferenceId) setPreferenceId('');
@@ -225,10 +222,35 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
     const handleSumbit = async (event) => {
         try {
             event.preventDefault();
-            await crearReserva();
+            // Limpiar los errores antes de hacer nuevas validaciones
+            setErrors({
+                dateTimeStart: '',
+                FriendsId: ''
+            });
+
+            // Validaciones
+            if (!personName.length) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    FriendsId: 'Debes seleccionar al menos un amigo.'
+                }));
+            }
+            if (!dataReservation.dateTimeStart) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    dateTimeStart: 'Debes seleccionar un horario para la cancha.'
+                }));
+            }
+
+            // Verificar si hay errores
+            if (errors.FriendsId || errors.dateTimeStart) {
+                return null;  // Detener la ejecución si hay errores
+            } else {
+                await crearReserva();
+            }
         } catch (error) {
-            console.error(error)
-            throw error.message
+            console.error(error);
+            throw error.message;
         }
     }
 
@@ -271,6 +293,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                                 <option key={hora} value={hora}>{hora}</option>
                             ))}
                         </select>
+                        {errors.dateTimeStart && <p>{errors.dateTimeStart}</p>}
                         
                     </div>
 
@@ -311,6 +334,7 @@ const CrearReserva = ({ court, reserva, setReserva }) => {
                                 </MenuItem>
                             ))}
                         </Select>
+                            {errors.FriendsId && <p>{errors.FriendsId}</p>}
 
                     </div>
                     <button type="submit" className={styles.createBtn}>Crear Reserva</button>

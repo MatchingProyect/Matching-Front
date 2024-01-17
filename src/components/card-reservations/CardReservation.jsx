@@ -71,6 +71,7 @@ export default function CardReservation() {
                     }
                 }));
                 const filteredReservations = promises.filter(reservation => reservation !== 'lo que quieras');
+                console.log(filteredReservations)
                 setInfoReservation(filteredReservations);
                 fetchAnfitrionInfo(filteredReservations);
             } catch (error) {

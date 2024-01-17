@@ -54,3 +54,6 @@
     font-weight: 500;
     border-radius: 10px;
 }
+.error{
+    color: red;
+}
