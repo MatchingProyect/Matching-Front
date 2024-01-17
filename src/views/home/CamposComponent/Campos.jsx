@@ -11,7 +11,6 @@ const Campos = ({clubs, locations, courts}) => {
         setFilteredCourts(courts);
     }, []);
 
-    console.log(filteredCourts);
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
         console.log(value);
@@ -25,21 +24,6 @@ const Campos = ({clubs, locations, courts}) => {
         let courtsFilteredByClubs = courts.filter((element) => element.ClubId == value);
         return setFilteredCourts(courtsFilteredByClubs);
       };
-    
-    //   const renderCourts = function(){
-    //     if (filteredCourts.length > 0) {
-    //         filteredCourts.filter(court => court.estado === true)
-    //             .map(filteredCourt => 
-    //                 <CardCourt key={filteredCourt.id} court={filteredCourt} />)
-    //     } else if (filteredCourts.length == 0){
-    //         return (
-    //         <h1>No existen courts.</h1>
-    //         )
-    //     };
-    //   };
-
-      
-
 
   return (
     <div className={styles.divCourts}>
@@ -77,6 +61,7 @@ const Campos = ({clubs, locations, courts}) => {
                 <div className = {styles.divNoCourts}>
                     <h1 className = {styles.textNoCourts}>No existen courts con este club o en esta localidad.</h1>
                 </div>
+                
         } 
         </div>
         </div>
