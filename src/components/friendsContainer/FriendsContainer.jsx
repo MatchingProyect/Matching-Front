@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 
 export default function FriendsContainer({friends}){
+    console.log(friends);
     function estadoAvailable(isAvailable){
         if (isAvailable == true){
             return (
@@ -24,7 +25,7 @@ export default function FriendsContainer({friends}){
             </div>
             <div className = {styles.friendsImages}>
                 {friends?.length > 0 && friends?.map((element) => 
-                <div className = {styles.friend} key = {element.name}>
+                <div className = {styles.friend} key = {element.id}>
                     
                     <img className = {styles.friendImg} src = {element.avatarImg} alt = {element.id}/>
                     {estadoAvailable(element.active)}

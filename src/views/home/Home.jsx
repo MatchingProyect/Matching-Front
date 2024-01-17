@@ -19,6 +19,7 @@ export default function Home() {
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     const clubs = useSelector(state => state.user?.allClubs);
     const locations = useSelector((state) => state.user.allLocations);
+    console.log(userLogeado.id);
 
 
     const [activeComponent, setActiveComponent] = useState('campos');

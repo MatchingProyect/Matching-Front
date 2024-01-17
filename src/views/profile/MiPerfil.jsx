@@ -22,7 +22,7 @@ export default function MiPerfil() {
 
             <div className = {styles.divThreeProfile}>
                 <div className = {styles.divContainer}>
-                    <Link to = {`/profile/edit/${userProfile?.id}`}><p className = {styles.linksTo}>Editar</p></Link>
+                    <Link to = {`/profile/edit`}><p className = {styles.linksTo}>Editar</p></Link>
                     <div className = {styles.info}>
                         <p className = {styles.dato}>{userProfile?.displayName}</p>
                         <p className = {styles.nombreDelDato}>Nombre y Apellido</p>

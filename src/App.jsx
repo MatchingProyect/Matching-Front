@@ -59,7 +59,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home/>} />
         <Route path="/profile" element={ <Profile /> } />
-        <Route path="/profile/edit/:id" element={<ProfileEdit />} />
+        <Route path="/profile/edit" element={<ProfileEdit />} />
         <Route path="/profile/edit/resetpassword" element={<ProfileChangePassword />} />
         <Route path="/profile/edit/resetemail" element={<ProfileChangeEmail />} />
         <Route path="/profile/editDepor" element={<EditDepor />} />
