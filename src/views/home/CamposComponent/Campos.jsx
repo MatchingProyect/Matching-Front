@@ -12,7 +12,7 @@ const Campos = ({clubs, locations, courts}) => {
         setFilteredCourts(courts);
         setFilteredClubs(clubs)
     }, [courts, clubs]);
-    console.log(filteredClubs);
+    // console.log(filteredClubs);
 
     const courtsFilterByLocations = function(event){
         let value = event.target.value;
