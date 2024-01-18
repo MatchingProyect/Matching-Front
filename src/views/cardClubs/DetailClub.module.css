@@ -1,0 +1,61 @@
+.holeModal{
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.766);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 20px 10px rgb(0, 0, 0);
+}
+.holeComp{
+    background-color: rgb(255, 255, 255);
+    width: 85%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1vh;
+}
+
+.modalHeader{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.labelTop{
+    margin-left: 10px;
+    font-weight: 600;
+    color: black;
+}
+
+.closeBtn{
+    text-align: center;
+    background-color: rgb(34, 34, 34);
+    color: white;
+    width: 23px;
+    height: 25px;
+    font-size: 13px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+.modalContainer{
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px -5px black;
+    margin: 3px;
+    padding: 3px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}

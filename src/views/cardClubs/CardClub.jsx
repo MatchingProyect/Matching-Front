@@ -14,8 +14,7 @@ const CardClub = ({club}) => {
   const dispatch = useDispatch()
   let imagen = 'https://res.cloudinary.com/dbffmtz0y/image/upload/v1704318585/360_F_332320458_OFW95fppmZAYYs3lT8CwDfK2HdQLF7RU_gmvtja.jpg';
 
-  const user =useSelector((state) =>state.user?.dataUser?.user)
-  // console.log(club);
+  const user =useSelector((state) =>state.user?.datauser?.user)
 
   const deleteClub = async()=>{
     try {
