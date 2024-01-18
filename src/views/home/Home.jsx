@@ -15,10 +15,10 @@ import Cards from './Cards/Cards.jsx'
 
 export default function Home() {
     const dispatch = useDispatch();
-    const courts = useSelector((state) => state.user.allCourts);
+    const courts = useSelector((state) => state.user?.allCourts);
     const userLogeado = useSelector(state =>  state.user?.datauser?.user);
     const clubs = useSelector(state => state.user?.allClubs);
-    const locations = useSelector((state) => state.user.allLocations);
+    const locations = useSelector((state) => state.user?.allLocations);
 
 
     const [activeComponent, setActiveComponent] = useState('campos');
@@ -29,7 +29,7 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchSports());
-        if(userLogeado) dispatch(fetchProfiles(userLogeado.id));
+        if(userLogeado) dispatch(fetchProfiles(userLogeado?.id));
 
     }, []);
     
