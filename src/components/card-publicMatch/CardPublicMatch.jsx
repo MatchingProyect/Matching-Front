@@ -1,18 +1,43 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './CardPublicMatch.module.css';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 export default function CardPublicMatch({partidoPublico, courts, locations, clubs, sports, userLogeado}){
     console.log(partidoPublico);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+      };
+
+      const handleClick = () => {
+        setOpen(true);
+      };
+    
 
     const unirmeReserva = async()=>{
         try {
-            const {data} = await axios.post(`/addUserInTeam?UserId=${userLogeado.id}&TeamMatchId=${partidoPublico.TeamMatchId}`)
+            console.log("{userLogeado.id", userLogeado?.id, partidoPublico?.TeamMatchId)
+            const {data} = await axios.post(`/addUserInTeam?UserId=${userLogeado?.id}&TeamMatchId=${partidoPublico?.TeamMatchId}`)
             console.log(data);
-            if(data.status) alert('te uniste con exito')
+            if(data.status) {
+                handleClick()
+            }
         } catch (error) {
+            console.log(error)
             throw error.message
-        };
+        }
       };
 
     const laCourta = function (){
@@ -41,8 +66,8 @@ export default function CardPublicMatch({partidoPublico, courts, locations, club
     }
 
     const laImagen = function(){
-        let theCourtOne = courts?.find((element) => element.id == partidoPublico.CourtId);
-        return theCourtOne.imgClub;
+        let theCourtOne = courts?.find((element) => element.id == partidoPublico?.CourtId);
+        return theCourtOne?.imgClub? theCourtOne?.imgClub : null ;
     }
 
     return(
@@ -67,6 +92,16 @@ export default function CardPublicMatch({partidoPublico, courts, locations, club
             <label className = {styles.valueCard}>${partidoPublico.totalCost}</label>
             </div>
             <button onClick = {unirmeReserva} className = {styles.btnUnirme}>Unirme</button>
+
+            <Stack spacing={2}>
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Te uniste correctamente!
+                </Alert>
+                </Snackbar>
+            </Stack>
+
+
         </div>
     )
 }

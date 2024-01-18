@@ -22,7 +22,6 @@ const PartidosPublicos = () => {
 
       } catch (error) {
         console.error('Error al obtener información de las canchas:', error);
-        Alert(error.message);
       }
     };
     fetchData();
