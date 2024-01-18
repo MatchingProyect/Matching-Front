@@ -3,12 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
 import styles from './CrearClub.module.css';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const CrearClub = ({crearClub, setCrearClub}) =>{ 
     const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
 
     if(!crearClub) return null
 
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+  
     const {
         handleSubmit,
         formState: { errors },
@@ -22,7 +42,9 @@ const CrearClub = ({crearClub, setCrearClub}) =>{
             const endPoint = '/clubs'
             const response = await axios.post(endPoint, data)
             if (response.status) {
-                 dispatch(fetchClubs());
+                handleClick()
+
+                //  dispatch(fetchClubs());
             }
            
         } catch (error) {
@@ -75,19 +97,31 @@ const CrearClub = ({crearClub, setCrearClub}) =>{
                 </div>
                 <div className = {styles.inputContainer}>
                 <div className = {styles.formValores}>
-      <select id="locationSelect" className = {styles.input}>
-        {location?.map(location => (
-          <option key={location.id} value={location.id}>
-            {location.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="locationSelect" className = {styles.label}>Location</label>
-      </div>
-      </div>
-         <button type="submit" value='enviar' className = {styles.btnSubmit}> Create </button>
-        </form>
-        <button onClick={()=>setCrearClub(false)} className = {styles.close}>Cerrar</button>
+            <select id="locationSelect" className = {styles.input}>
+              {location?.map(location => (
+                <option key={location.id} value={location.id}>
+                  {location.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="locationSelect" className = {styles.label}>Location</label>
+            </div>
+            </div>
+              <button type="submit" value='enviar' className = {styles.btnSubmit}> Create </button>
+              </form>
+              <button onClick={()=>setCrearClub(false)} className = {styles.close}>Cerrar</button>
+
+
+
+              <Stack spacing={2}>
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Club Creado!
+                </Alert>
+                </Snackbar>
+            </Stack>
+
+
         </div>
   )
 }
