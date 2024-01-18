@@ -243,36 +243,6 @@ export default function ProfileEdit() {
                         <p className = {styles.aviso}>260 caracteres</p>
                         {errors.description && <p className = {styles.Description}>{errors.description.message}</p>}
                         </div>
-                        <Button
-                        sx={{
-                            marginTop: '2vh',
-                            marginBottom: '1vh',
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            backgroundColor: '#203144',
-                            minWidth: '70vw',
-                            height: '50px',
-                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
-                        }}
-                        color='success'
-                        variant='contained'
-                        className={styles.submitBtn}
-                    ><Link to = "/profile/edit/resetpassword"><p className = {styles.link}>Cambiar Contraseña</p></Link></Button>
-                    <Button
-                        sx={{
-                            marginTop: '1vh',
-                            marginBottom: '1vh',
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            backgroundColor: '#203144',
-                            minWidth: '70vw',
-                            height: '50px',
-                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.274)',
-                        }}
-                        color='success'
-                        variant='contained'
-                        className={styles.submitBtn}
-                    ><Link to = "/profile/edit/resetemail"><p className = {styles.link}>Cambiar Correo Electronico</p></Link></Button>
                     <Button
                         type="submit"
                         sx={{
