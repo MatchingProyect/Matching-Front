@@ -1,6 +1,6 @@
 .cardCourtContainer{
     max-width: 380px;
-    max-height: 400px;
+    
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -14,6 +14,12 @@
 .cardCourtAdmin{
     display: flex;
     flex-direction: column;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .img{

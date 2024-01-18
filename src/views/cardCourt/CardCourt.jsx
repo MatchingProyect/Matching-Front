@@ -113,9 +113,28 @@ const CardCourt = ({ court }) => {
           <h2 className={styles.courtTitle}>{court.horarioInicio} - {court.horarioCierre}</h2>
           <h4 className={styles.courtText}>Reputacion: {court.reputation}</h4>
           <h3 className={styles.courtText}>{court.priceFee}$</h3>
-        </div>      
-        <CrearReserva court={court} reserva={reserva} setReserva={setReserva} />
+        </div>  
+        <div className={styles.btnContainer}>
+        <Button
+              sx={{
+                'backgroundColor': 'white',
+                'borderRadius': '5px',
+                'borderStyle': 'none',
+                'fontSize': '10px',
+                'fontWeight': '500',
+                'color': '#203144',
+                'height': '30px',
+                'width': '10%',
+                'boxShadow': '0px 0px 4px 0px rgb(0, 0, 0)',
+                'marginRight': '5px',
+
+              }}
+              variant="outlined" onClick={() => { setDetail(true) }}>Info</Button>
         <button onClick={() => setReserva(true)} className = {styles.openModalBtn}>Reservar</button>
+          
+          </div>    
+        <DetailCourt court={court} detail={detail} setDetail={setDetail} />
+        <CrearReserva court={court} reserva={reserva} setReserva={setReserva} />
       </div>
     )
   }

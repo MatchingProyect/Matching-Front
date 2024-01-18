@@ -40,7 +40,6 @@ const CardClub = ({club}) => {
         setDetailClub(true)
       }} className = {styles.btnInfo}>Informacion</button>
       <DetailClub detailClub={detailClub} setDetailClub={setDetailClub} club={club} />
-      
       <AdminFunction editClub={editClub} setEditClub={setEditClub} club={club}/>
       </div>
   )
