@@ -32,10 +32,14 @@ const CrearSport = ({crearSport, setCrearSport}) => {
   return (
     <div className = {styles.holeCompContainer}>
     <form onSubmit={handleSubmit(onSubmitSports)} className = {styles.formContainer}>
+        <div className = {styles.formValores}>
         <label className = {styles.label}>Name</label>
         <input className = {styles.input} type="text" {...register('name', {required: true, maxLength: 20})}/>
+        </div>
+        <div className = {styles.formErros}>
         {errors.name?.type === "required" && <p>This field is required</p>}
         {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
     <button className = {styles.btnSubmit} type="submit" value='enviar'> Create </button>
     </form>
     <button onClick={()=> setCrearSport(false)} className = {styles.close} >Cerrar</button>
