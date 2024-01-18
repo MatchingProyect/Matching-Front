@@ -20,6 +20,7 @@ const Login = () => {
 
   const [errorEmail, seterrorEmail] = useState()
   const [errorPassword, seterrorPassword] = useState()
+  const [errorBan, seterrorBan] = useState()
 
   useEffect(() =>{
     initializeGoogleAuth();
@@ -145,15 +146,19 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
+      seterrorBan("")
       const endpoint = "/login";
       const response = await axios.post(endpoint, data);
       console.log("onSubmit",response)
-      if (response.data) {
+      if (response.data.estado) {
         const id = response.data.id
         if (id) dispatch(fetchUser(id))
         localStorage.setItem('currentPath', "/home");
         navigate("/home");
       }
+
+      seterrorBan("El usuario se encuentra baneado, ponte en contacto con el administrador")
+
     } catch (error) {
       seterrorEmail(error.response.data.email)
       seterrorPassword(error.response.data.pass)
@@ -261,7 +266,10 @@ const Login = () => {
             </div>
           </div>
         </div>
- 
+
+        <div>
+                    {errorBan?<p className={styles.pPass}>{errorBan}</p> :null}
+          </div>
 
 
         <button type="submit" className={styles.submitButtonLogin}>
