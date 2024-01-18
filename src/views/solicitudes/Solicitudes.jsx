@@ -9,18 +9,19 @@ import { Link } from 'react-router-dom';
 const Solicitudes = () => {
     const [request, setRequest] = useState([])
     const [infoSoli, setInfoSoli] = useState([])
+    let act = false
     const user = useSelector(state =>  state.user?.datauser?.user);
     const dispatch = useDispatch()
     const id = user?.id;
     let allUsers = []
 
     useEffect(() => {
-        
+        console.log("aaaaa")
         const infoSoliFetch = async () => {
             try {
                 if(request.length > 0){
                     const usersRequest = await Promise.all(request?.map( async(req) =>{
-                        const { data } = await axios(`/users/${req.UserId}`);                
+                        const { data } = await axios(`/users/${req?.UserId}`);                
                         if (data) allUsers.push(data)
                     }))
                     if(usersRequest) setInfoSoli(allUsers)   
@@ -36,6 +37,8 @@ const Solicitudes = () => {
 
     
     useEffect(() => {
+        console.log("bbb")
+
         const fetchData = async () => {
             if(id) {
                 try {
@@ -81,21 +84,33 @@ const Solicitudes = () => {
         }
     };
 
-    const rechazarAmigo = async (friend, user) => {
+    const rechazarAmigo = async (user, friend ) => {
         try {
             console.log(
                 {FriendId: friend,
                 UserId: user,
                 status: "rechazado",})
 
-            // const rechazado = await axios.post('/addFriend', {
-            //     FriendId: friend,
-            //     UserId: user,
-            //     status: "rechazado",
-            // });
-            // if(rechazado) {
-            //     dispatch(fetchUser())
-            // }
+            const rechazado = await axios.post('/addFriend', {
+                FriendId: friend,
+                UserId: user,
+                status: "rechazado",
+            });
+            console.log("rechazado", rechazado)
+            if(rechazado) {
+                dispatch(fetchUser(friend))
+                console.log(infoSoli, user)
+                const updatedAllUsers = infoSoli.filter((ele) => {
+                    if (ele.userFound?.user?.id === user) {
+                        console.log("aaaaaaaaaaaaaa", friend)
+                        return false; 
+                    }
+                    return true; 
+                });
+                console.log("updatedAllUsers",updatedAllUsers)
+                setInfoSoli(updatedAllUsers) 
+
+            }
         } catch (error) {
             console.log(error.message)
             throw error.message;

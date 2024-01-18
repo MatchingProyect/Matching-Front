@@ -161,6 +161,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
       <form onSubmit={handleSubmit} className={styles.formContainer}>
 
       <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="name"
@@ -169,10 +170,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
           />
           <label className={styles.label}>Nombre</label>
+          </div>
           {errors.name && <p className={styles.error}>{errors.name}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="description"
@@ -181,10 +184,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
           />
           <label className={styles.label}>Descripción</label>
+          </div>
           {errors.description && <p className={styles.error}>{errors.description}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="priceFee"
@@ -193,10 +198,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
           />
           <label className={styles.label}>Precio</label>
+          </div>
           {errors.priceFee && <p className={styles.error}>{errors.priceFee}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="warrantyReservation"
@@ -205,10 +212,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Garantía</label>
+          </div>
             {errors.warrantyReservation && <p className={styles.error}>{errors.warrantyReservation}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="grassType"
@@ -217,10 +226,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Tipo de Pasto</label>
+          </div>
             {errors.grassType && <p className={styles.error}>{errors.grassType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="lighting"
@@ -229,10 +240,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Iluminación</label>
+          </div>
             {errors.lighting && <p className={styles.error}>{errors.lighting}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="doorsType"
@@ -241,10 +254,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Tipo de Puerta</label>
+          </div>
             {errors.doorsType && <p className={styles.error}>{errors.doorsType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="wallsType"
@@ -253,10 +268,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Tipo de Muro</label>
+          </div>
             {errors.wallsType && <p className={styles.error}>{errors.wallsType}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="reputation"
@@ -265,10 +282,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Reputation</label>
+          </div>
             {errors.reputation && <p className={styles.error}>{errors.reputation}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <input
             type="text"
             name="imgClub"
@@ -277,10 +296,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             className={styles.input}
             />
           <label className={styles.label}>Imagen</label>
+          </div>
             {errors.imgClub && <p className={styles.error}>{errors.imgClub}</p>}
         </div>
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
   <select
     name="horarioInicio"
     value={formData.horarioInicio}
@@ -290,10 +311,12 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     {generateOptions()}
   </select>
   <label className={styles.label}>Horario Inicio</label>
+  </div>
   {errors.horarioInicio && <p className={styles.error}>{errors.horarioInicio}</p>}
 </div>
 
 <div className={styles.inputContainer}>
+<div className = {styles.inputDiv}>
   <select
     name="horarioCierre"
     value={formData.horarioCierre}
@@ -303,11 +326,13 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
     {generateOptions()}
   </select>
   <label className={styles.label}>Horario Cierre</label>
+  </div>
   {errors.horarioCierre && <p className={styles.error}>{errors.horarioCierre}</p>}
 </div>
 
 
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
           <select id="clubSelect" className={styles.input} onChange={handleClubChange}>
             <option value="">Selecciona un club:</option>
             {clubs?.map(club => (
@@ -317,11 +342,11 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             ))}
           </select>
           <label htmlFor="clubSelect" className={styles.label}>Club</label>
+          </div>
             {errors.ClubId && <p className={styles.error}>{errors.ClubId}</p>}
         </div>
         <div className={styles.inputContainer}>
-
-
+        <div className = {styles.inputDiv}>
           <select id="sportSelect" className={styles.input} onChange={handleSportChange}>
             <option value="">Selecciona un deporte:</option>
             {sports?.map(sport => (
@@ -331,9 +356,11 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             ))}
           </select>
           <label htmlFor="sportSelect" className={styles.label}>Sport</label>
+          </div>
             {errors.SportId && <p className={styles.error}>{errors.SportId}</p>}
         </div>
         <div className={styles.inputContainer}>
+        <div className = {styles.inputDiv}>
 
           <select id="locationSelect" className={styles.input} onChange={handleLocationChange}>
             <option value="">Selecciona una ubicación:</option>
@@ -344,6 +371,7 @@ const CrearCourts = ({ crearCourt, setCrearCourt }) => {
             ))}
           </select>
           <label htmlFor="locationSelect" className={styles.label}>Location</label>
+          </div>
             {errors.LocationId && <p className={styles.error}>{errors.LocationId}</p>}
         </div>
 

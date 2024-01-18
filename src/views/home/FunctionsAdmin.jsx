@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './FunctionsAdmin.module.css';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CardUser from "../cardUsers/CardUser";
-import { Link } from "react-router-dom";
 import CardClub from "../cardClubs/CardClub";
 import CardCourt from "../cardCourt/CardCourt";
-import { fetchClubs, fetchCourts, fetchUsers } from "../../redux/reducer";
+import { fetchClubs, fetchCourts } from "../../redux/reducer";
 import CrearSport from "../../components/crearSport/CrearSport";
 import CrearClub from "../../components/crearClub/CrearClub";
 import CrearCourts from "../../components/crearCourts/CrearCourts";
@@ -25,7 +23,8 @@ const FunctionsAdmin = () => {
 
 
   const users = useSelector((state) => state.user?.allUsers);
-  const userLogeado = useSelector((state) =>state.user?.datauser?.user)
+  const userLogeado = useSelector((state) =>state.user?.datauser?.user);
+  const location = useSelector((state) => state.user.allLocations);
   // const sports = useSelector((state) => state.user?.allSports);
   const courts = useSelector((state) => state.user?.allCourts);
   const clubs = useSelector((state) => state.user?.allClubs);
@@ -102,7 +101,7 @@ const FunctionsAdmin = () => {
       </div>
       <div className = {styles.individualDivCrear}>
         <button onClick={()=>setCrearClub(true)} className = {styles.btnCrear}>Crear Club</button>
-        <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} />
+        <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} location = {location}/>
         </div>
         <div className = {styles.individualDivCrearLast}>
         <button onClick={()=>setCrearCourt(true)} className = {styles.btnCrear}>Crear Courts</button>

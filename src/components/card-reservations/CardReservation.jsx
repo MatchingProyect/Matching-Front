@@ -47,6 +47,7 @@ export default function CardReservation() {
                 const nameTeamMatch = await Promise.all(name);
                 setTeamName(nameTeamMatch);
             } catch (error) {
+                console.log(error)
                 throw error.message;
             }
         }
@@ -54,8 +55,8 @@ export default function CardReservation() {
             const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
             return new Date(dateString).toLocaleDateString(undefined, options);
         };
-
-
+        
+        
         const fetchReservationsInfo = async (team) => {
             console.log("team", team)
             try {
@@ -79,19 +80,19 @@ export default function CardReservation() {
                         return 'lo que quieras';
                     }
                 }));
-                      
+                
                 console.log("filteredReservations", promises)
                 setInfoReservation(promises);
                 fetchAnfitrionInfo(promises);
             } catch (error) {
                 
-                console.log("Error general:", error.message);
+                console.log("Error general:", error);
             }
-
+            
         };
-
-
-
+        
+        
+        
         const fetchTeamMatch = async () => {
             try {
                 const endpoint = `/teamMatchByUser/${userLogeado?.id}`;
@@ -103,70 +104,12 @@ export default function CardReservation() {
                     fetchTeamMatchName(data.teamMatchByUser)
                 }
             } catch (error) {
+                console.log(error)
                 throw error.message;
             }
         };
         fetchTeamMatch();
     }, [userLogeado]);
-
-
-
-
-    // useEffect(() => {
-
-    //     const fetchReservationsInfo = async () => {
-    //         try {
-    //             const promises = await Promise.all(teamMatch?.map(async (teamMatch) => {
-
-    //                 const endpoint = `/reservationTeamMatch/${teamMatch?.TeamMatchId}`;
-    //                 const { data } = await axios(endpoint);
-    //                 return data.reservation[0];
-    //             }));
-    //             console.log('un mensaje', promises)
-    //             const filteredReservations = promises.filter(reservation => reservation !== undefined);
-    //             setInfoReservation(filteredReservations);
-    //         } catch (error) {
-    //             throw error.message;
-    //         }
-    //     };
-    //     fetchReservationsInfo();
-    // }, [teamMatch]);
-
-    // useEffect(() => {
-    //     const fetchAnfitrionInfo = async () => {
-    //         try {
-    //             const promises = infoReservation?.map(async (info) => {
-    //                 const endpoint = `/users/${info.UserId}`;
-    //                 const { data } = await axios(endpoint);
-    //                 return data.userFound.user['displayName'];
-    //             });
-    //             const nameAnfitrion = await Promise.all(promises);
-    //             setInfoUser(nameAnfitrion);
-    //         } catch (error) {
-    //             throw error.message;
-    //         }
-    //     };
-    //     fetchAnfitrionInfo();
-    // }, [infoReservation]);
-    // console.log(infoReservation)
-
-    // useEffect(() => {
-    //     const fetchTeamMatchName = async () => {
-    //         try {
-    //             const name = teamMatch?.map(async (nombreTeam) => {
-    //                 const endpoint = `/teamMatch/${nombreTeam.TeamMatchId}`;
-    //                 const { data } = await axios(endpoint);
-    //                 return data.oneTeamMatch;
-    //             });
-    //             const nameTeamMatch = await Promise.all(name);
-    //             setTeamName(nameTeamMatch);
-    //         } catch (error) {
-    //             throw error.message;
-    //         }
-    //     }
-    //     fetchTeamMatchName()
-    // }, [teamMatch])
-
 
     return (
         <div className={styles.holeMiReserva}>
