@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import CardReservation from '../../components/card-reservations/CardReservation.jsx';
 import { useState } from 'react';
-
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchLocations, fetchProfiles, fetchFriends } from '../../redux/reducer.js';
-
 import Campos from './CamposComponent/Campos.jsx'
 import NavBar from './navBar/navBar.jsx'
 import Cards from './Cards/Cards.jsx'
@@ -29,13 +27,11 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchSports());
-        dispatch(fetchFriends(userLogeado.id));
-
-        if(userLogeado) dispatch(fetchProfiles(userLogeado.id));
-
+        if(userLogeado) {
+            dispatch(fetchProfiles(userLogeado.id));
+            dispatch(fetchFriends(userLogeado.id));
+        };
     }, []);
-    
-
 
     return (
 

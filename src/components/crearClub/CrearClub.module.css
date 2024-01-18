@@ -17,12 +17,19 @@
 }
 .inputContainer{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
+    height: auto;
     width: 90%;
     margin: 3px;
+}
+.formValores{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .close{
@@ -45,6 +52,10 @@
     font-weight: 500;
     width: 60%;
     border-radius: 8px;
+}
+.pErrors{
+    color: red;
+    font-weight: 500;
 }
 
 .btnSubmit{

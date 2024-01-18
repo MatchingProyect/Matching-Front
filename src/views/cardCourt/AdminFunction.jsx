@@ -73,62 +73,97 @@ const AdminFunction = ({court, update, setUpdate}) => {
     <form onSubmit={handleSubmit(onSubmitCourt)} className = {styles.holeModalComp}>
     <div className = {styles.formBody}>
     <div className={styles.modalHeader}>
-                    <label className={styles.labelTop}>Crear Reserva</label>
+                    <label className={styles.labelTop}>Actualizar Campo</label>
                     <button className={styles.closeBtn} onClick={() => setUpdate(false)}>x</button>
                 </div>
-                <div className={styles.modalContainer}>
+        <div className={styles.modalContainer}>
+          <div className = {styles.formValores}>
         <label>Nombre</label>
         <input type="text" {...register('name', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}</div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Descripción</label>
         <input type="text" {...register('description', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Precio</label>
         <input type="text" {...register('priceFee', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Garantía</label>
         <input type="text" {...register('warrantyReservation', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Tipo de Grass</label>
         <input type="text" {...register('grassType', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Iluminación</label>
         <input type="text" {...register('lighting', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Puertas</label>
         <input type="text" {...register('doorsType', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Paredes</label>
         <input type="text" {...register('wallsType', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
+        <div className = {styles.formValores}>
         <label>Reputación</label>
         <input type="text" {...register('reputation', {required: true, maxLength: 20})}/>
-        {errors.name?.type === "required" && <p>This field is required</p>}
-        {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+        </div>
+        <div className = {styles.divErros}>
+        {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+        {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
+        </div>
         </div>
         <div className={styles.modalContainer}>
         <label htmlFor="clubSelect">Club</label>

@@ -34,41 +34,47 @@ const CrearClub = ({crearClub, setCrearClub}) =>{
     <div className = {styles.holeCompContainer}>
     <form onSubmit={handleSubmit(onSubmitClubs)} className = {styles.formContainer}>
       <div className = {styles.inputContainer}>
-                
+        <div className = {styles.formValores}>
                 <input type="text" {...register('name', {required: true, maxLength: 20})} className = {styles.input}/>
                 <label className = {styles.label}>Name</label>
-                {errors.name?.type === "required" && <p>This field is required</p>}
-                {errors.name?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                </div>
+                {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+                {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
                 </div>
                 <div className = {styles.inputContainer}>
-                
+                <div className = {styles.formValores}>
                 <input type="text" {...register('showers', {required: true, maxLength: 20})} className = {styles.input}/>
                 <label className = {styles.label}>Showers</label>
-                {errors.showers?.type === "required" && <p>This field is required</p>}
-                {errors.showers?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                </div>
+                {errors.showers?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+                {errors.showers?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
                 </div>
                 <div className = {styles.inputContainer}>
-                
+                <div className = {styles.formValores}>
                 <input type="text" {...register('grills', {required: true, maxLength: 20})} className = {styles.input}/>
                 <label className = {styles.label}>Grills</label>
-                {errors.grills?.type === "required" && <p>This field is required</p>}
-                {errors.grills?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                </div>
+                {errors.grills?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+                {errors.grills?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
                 </div>
                 <div className = {styles.inputContainer}>
-                
+                <div className = {styles.formValores}>
                 <input type="text" {...register('parking', {required: true, maxLength: 20})} className = {styles.input}/>
                 <label className = {styles.label}>Parking</label>
-                {errors.parking?.type === "required" && <p>This field is required</p>}
-                {errors.parking?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                </div>
+                {errors.parking?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+                {errors.parking?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
                 </div>
                 <div className = {styles.inputContainer}>
-                
+                <div className = {styles.formValores}>
                 <input type="text" {...register('security', {required: true, maxLength: 20})} className = {styles.input}/>
                 <label className = {styles.label}>Security</label>
-                {errors.security?.type === "required" && <p>This field is required</p>}
-                {errors.security?.type === "maxLength" && <p>The max in the field is 20 characters</p>}
+                </div>
+                {errors.security?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
+                {errors.security?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
                 </div>
                 <div className = {styles.inputContainer}>
+                <div className = {styles.formValores}>
       <select id="locationSelect" className = {styles.input}>
         {location?.map(location => (
           <option key={location.id} value={location.id}>
@@ -77,6 +83,7 @@ const CrearClub = ({crearClub, setCrearClub}) =>{
         ))}
       </select>
       <label htmlFor="locationSelect" className = {styles.label}>Location</label>
+      </div>
       </div>
          <button type="submit" value='enviar' className = {styles.btnSubmit}> Create </button>
         </form>

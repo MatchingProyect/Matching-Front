@@ -31,10 +31,21 @@ box-shadow: 0px 0px 20px 10px rgb(0, 0, 0);
     margin: 3px;
     padding: 3px;
     width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formValores{
+    margin: 3px;
+    padding: 3px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .modalHeader{
@@ -48,7 +59,11 @@ box-shadow: 0px 0px 20px 10px rgb(0, 0, 0);
     margin-left: 10px;
     font-weight: 600;
 }
-
+.pErrors{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
 .closeBtn{
     text-align: center;
     background-color: rgb(34, 34, 34);
@@ -58,6 +73,9 @@ box-shadow: 0px 0px 20px 10px rgb(0, 0, 0);
     font-size: 13px;
     border-radius: 5px;
     font-weight: 600;
+}
+.divErros{
+    text-align: center;
 }
 
 .updateBtn{
