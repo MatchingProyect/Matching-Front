@@ -15,6 +15,7 @@
 .cardCourtAdmin{
     display: flex;
     flex-direction: column;
+    width: 90%;
 }
 
 .img{
@@ -52,6 +53,10 @@
     font-size: 18px;
     font-weight: 600;
 }
+.courtTitle2{
+    font-size: 16px;
+    font-weight: 450;
+}
 .courtTitleAdm{
     color: black;
     height: 120%;
@@ -64,12 +69,13 @@
     justify-content: center;
 }
 .courtText{
-    font-size: 15px;
-    font-weight: 500;
-}
-.textTxt{
     font-size: 16px;
+    font-weight: 450;
+}
 
+.courtText2{
+    font-size: 17px;
+    font-weight: 600;
 }
 
 .openModalBtn{
