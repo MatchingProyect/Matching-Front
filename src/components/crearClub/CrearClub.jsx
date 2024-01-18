@@ -12,6 +12,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   });
 
 const CrearClub = ({crearClub, setCrearClub, location}) =>{ 
+  console.log(location);
 
     if(!crearClub) return null
 
@@ -37,6 +38,7 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
 
 
     const onSubmitClubs = async (data) => {
+      console.log(data);
         try {
             const endPoint = '/clubs'
             const response = await axios.post(endPoint, data)
@@ -95,7 +97,7 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
                 </div> 
                 <div className = {styles.inputContainer}>
                     <div className = {styles.formValores}>
-                        <select id="locationSelect" className = {styles.input}>
+                        <select id="locationSelect" className = {styles.input} {...register('LocationId')}>
                           {location?.map(locatione => (
                             <option key={locatione.id} value={locatione.id}>
                               {locatione.name}
