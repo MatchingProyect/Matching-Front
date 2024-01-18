@@ -1,7 +1,7 @@
 import axios from 'axios'
 import  { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUpdateFriend } from '../../redux/reducer';
+import { fetchUpdateFriend, fetchUser } from '../../redux/reducer';
 import styles from './solicitudes.module.css'
 import NavbarLow from '../../components/navbarLow/navbarLow';
 import { Link } from 'react-router-dom';
@@ -81,17 +81,24 @@ const Solicitudes = () => {
         }
     };
 
-    const rechazarAmigo = async (friend, user) => {
+    const rechazarAmigo = async (user, friend ) => {
         try {
+            console.log(
+                {FriendId: friend,
+                UserId: user,
+                status: "rechazado",})
+
             const rechazado = await axios.post('/addFriend', {
                 FriendId: friend,
                 UserId: user,
                 status: "rechazado",
             });
+            console.log("rechazado", rechazado)
             if(rechazado) {
-                // dispatch(fetchUser())
+                dispatch(fetchUser(user.id))
             }
         } catch (error) {
+            console.log(error.message)
             throw error.message;
         }
     };
