@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
 import styles from './CrearClub.module.css';
@@ -13,9 +12,16 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   });
 
 const CrearClub = ({crearClub, setCrearClub, location}) =>{ 
-    const [open, setOpen] = useState(false);
 
     if(!crearClub) return null
+
+    const {
+      handleSubmit,
+      formState: { errors },
+      register
+  } = useForm();
+
+    const [open, setOpen] = React.useState(false);
 
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -28,11 +34,7 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
       setOpen(true);
     };
   
-    const {
-        handleSubmit,
-        formState: { errors },
-        register
-    } = useForm();
+
 
     const onSubmitClubs = async (data) => {
         try {
@@ -40,7 +42,6 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
             const response = await axios.post(endPoint, data)
             if (response.status) {
                 handleClick()
-
                 //  dispatch(fetchClubs());
             }
            
@@ -53,13 +54,13 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
     <div className = {styles.holeCompContainer}>
     <form onSubmit={handleSubmit(onSubmitClubs)} className = {styles.formContainer}>
       <div className = {styles.inputContainer}>
-        <div className = {styles.formValores}>
-                <input type="text" {...register('name', {required: true, maxLength: 20})} className = {styles.input}/>
-                <label className = {styles.label}>Name</label>
+                <div className = {styles.formValores}>
+                  <input type="text" {...register('name', {required: true, maxLength: 20})} className = {styles.input}/>
+                  <label className = {styles.label}>Name</label>
                 </div>
                 {errors.name?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
                 {errors.name?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
-                </div>
+      </div>
                 <div className = {styles.inputContainer}>
                 <div className = {styles.formValores}>
                 <input type="text" {...register('showers', {required: true, maxLength: 20})} className = {styles.input}/>
@@ -91,32 +92,31 @@ const CrearClub = ({crearClub, setCrearClub, location}) =>{
                 </div>
                 {errors.security?.type === "required" && <p className = {styles.pErrors}>This field is required</p>}
                 {errors.security?.type === "maxLength" && <p className = {styles.pErrors}>The max in the field is 20 characters</p>}
-                </div>
+                </div> 
                 <div className = {styles.inputContainer}>
-                <div className = {styles.formValores}>
-            <select id="locationSelect" className = {styles.input}>
-              {location?.map(location => (
-                <option key={location.id} value={location.id}>
-                  {location.name}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="locationSelect" className = {styles.label}>Location</label>
-            </div>
-            </div>
-              <button type="submit" value='enviar' className = {styles.btnSubmit}> Create </button>
+                    <div className = {styles.formValores}>
+                        <select id="locationSelect" className = {styles.input}>
+                          {location?.map(locatione => (
+                            <option key={locatione.id} value={locatione.id}>
+                              {locatione.name}
+                            </option>
+                          ))}
+                        </select>
+                        <label htmlFor="locationSelect" className = {styles.label}>Location</label>
+                    </div>
+                </div> 
+                <button type="submit" value='enviar' className = {styles.btnSubmit}> Create </button>
               </form>
-              <button onClick={()=>setCrearClub(false)} className = {styles.close}>Cerrar</button>
+              <button onClick={()=>setCrearClub(false)} className = {styles.close}>Cerrar</button> 
 
 
-
-              <Stack spacing={2}>
+            <Stack spacing={2}>
                 <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     Club Creado!
                 </Alert>
                 </Snackbar>
-            </Stack>
+            </Stack>  
 
 
         </div>

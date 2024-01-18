@@ -101,7 +101,7 @@ const FunctionsAdmin = () => {
       </div>
       <div className = {styles.individualDivCrear}>
         <button onClick={()=>setCrearClub(true)} className = {styles.btnCrear}>Crear Club</button>
-        <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} location = {location}/>
+          <CrearClub setCrearClub={setCrearClub} crearClub={crearClub} location = {location}/>
         </div>
         <div className = {styles.individualDivCrearLast}>
         <button onClick={()=>setCrearCourt(true)} className = {styles.btnCrear}>Crear Courts</button>
