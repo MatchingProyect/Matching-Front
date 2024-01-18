@@ -8,7 +8,7 @@ const DetailCourt = ({court ,detail, setDetail}) => {
     <div className = {styles.holeModal}>
       <div className = {styles.cuadroModal}>
       <div className={styles.modalHeader}>
-                    <label className={styles.labelTop}>Información del Campo</label>
+                    <label className={styles.labelTop}>Información {court.name}</label>
                     <button onClick={()=>{
             setDetail(false)
         }} className={styles.closeBtn}>x</button>

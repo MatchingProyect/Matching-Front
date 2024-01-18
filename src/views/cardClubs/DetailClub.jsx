@@ -8,7 +8,7 @@ const DetailClub = ({detailClub, setDetailClub, club}) => {
     <div className = {styles.holeModal}>
       <div className = {styles.holeComp}>
       <div className={styles.modalHeader}>
-                    <label className={styles.labelTop}>Información del Campo</label>
+                    <label className={styles.labelTop}>Informacion del Club</label>
                     <button onClick={()=>{setDetailClub(false)}} className={styles.closeBtn}>x</button>
                 </div>
                 <div className={styles.modalContainer}>

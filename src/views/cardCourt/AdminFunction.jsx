@@ -73,7 +73,7 @@ const AdminFunction = ({court, update, setUpdate}) => {
     <form onSubmit={handleSubmit(onSubmitCourt)} className = {styles.holeModalComp}>
     <div className = {styles.formBody}>
     <div className={styles.modalHeader}>
-                    <label className={styles.labelTop}>Actualizar Campo</label>
+                    <label className={styles.labelTop}>Actualizar {court.name}</label>
                     <button className={styles.closeBtn} onClick={() => setUpdate(false)}>x</button>
                 </div>
         <div className={styles.modalContainer}>

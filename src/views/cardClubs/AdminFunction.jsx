@@ -66,7 +66,7 @@ const AdminFunction = ({club, setEditClub, editClub}) => {
     <form onSubmit={handleSubmit(onSubmitClubs)} className = {styles.holeModal}>
     <div className = {styles.holeComp}>
     <div className={styles.modalHeader}>
-                    <label className={styles.labelTop}>Información del Campo</label>
+                    <label className={styles.labelTop}>Editar {club.name}</label>
                     <button onClick={()=>{setEditClub(false)}} className={styles.closeBtn}>x</button>
                 </div>
     <div className={styles.modalContainer}>
