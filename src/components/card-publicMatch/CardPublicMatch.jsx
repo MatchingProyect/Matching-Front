@@ -11,7 +11,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   });
 
 export default function CardPublicMatch({partidoPublico, courts, locations, clubs, sports, userLogeado}){
-    console.log(partidoPublico);
     const [open, setOpen] = React.useState(false);
 
     const handleClose = (event, reason) => {
@@ -30,12 +29,10 @@ export default function CardPublicMatch({partidoPublico, courts, locations, club
         try {
             console.log("{userLogeado.id", userLogeado?.id, partidoPublico?.TeamMatchId)
             const {data} = await axios.post(`/addUserInTeam?UserId=${userLogeado?.id}&TeamMatchId=${partidoPublico?.TeamMatchId}`)
-            console.log(data);
             if(data.status) {
                 handleClick()
             }
         } catch (error) {
-            console.log(error)
             throw error.message
         }
       };

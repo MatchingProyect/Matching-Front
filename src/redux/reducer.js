@@ -85,7 +85,6 @@ export const fetchUser = (id) => async (dispatch) => {
         dispatch(setDataUser(data.userFound));
 
         const friends = await axios(`/friends/${data.userFound.user.id}`)
-        console.log("friends", friends)
         if(friends) {
             dispatch(setFriends(friends.data.friends))
             localStorage.setItem('userFriends', JSON.stringify(friends.data.friends));   //local storage solo almacena tipo texto
@@ -180,7 +179,6 @@ export const fetchClubs = ()=>async(dispatch)=>{
 export const fetchFriends = (id)=>async(dispatch)=>{
     try {
         const friends = await axios(`/friends/${id}`)
-        console.log("friends", friends)
         if(friends) {
             dispatch(setFriends(friends.data.friends))
             localStorage.setItem('userFriends', JSON.stringify(friends.data.friends));   //local storage solo almacena tipo texto
@@ -193,7 +191,6 @@ export const fetchFriends = (id)=>async(dispatch)=>{
 
 export const fetchUpdateFriendRequest = (userFriend)=>async(dispatch)=>{
     try {
-        console.log("userFriend", userFriend)
          if(userFriend) dispatch(setFriend(userFriend))
     } catch (error) {
         throw error.message
@@ -202,7 +199,6 @@ export const fetchUpdateFriendRequest = (userFriend)=>async(dispatch)=>{
 
 export const fetchUpdateFriend = (friend)=>async(dispatch)=>{
     try {
-        console.log("fetchUpdateFriend", friend)
         if(friend) {
             dispatch(setUpdateFriend(friend))
             

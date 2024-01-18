@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
 import styles from './CrearClub.module.css';
@@ -12,9 +12,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-const CrearClub = ({crearClub, setCrearClub}) =>{ 
-    const dispatch = useDispatch();
-    const [open, setOpen] = React.useState(false);
+const CrearClub = ({crearClub, setCrearClub, location}) =>{ 
+    const [open, setOpen] = useState(false);
 
     if(!crearClub) return null
 
@@ -34,8 +33,6 @@ const CrearClub = ({crearClub, setCrearClub}) =>{
         formState: { errors },
         register
     } = useForm();
-
-    const location = useSelector((state) => state.user.allLocations);
 
     const onSubmitClubs = async (data) => {
         try {
