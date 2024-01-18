@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchLocations, fetchProfiles } from '../../redux/reducer.js';
+import { fetchClubs, fetchCourts, fetchSports, fetchUsers, fetchLocations, fetchProfiles, fetchFriends } from '../../redux/reducer.js';
 
 import Campos from './CamposComponent/Campos.jsx'
 import NavBar from './navBar/navBar.jsx'
@@ -29,7 +29,12 @@ export default function Home() {
         dispatch(fetchCourts());
         dispatch(fetchLocations());
         dispatch(fetchSports());
-        if(userLogeado) dispatch(fetchProfiles(userLogeado?.id));
+
+        if(userLogeado) {
+            dispatch(fetchFriends(userLogeado?.id));
+
+            dispatch(fetchProfiles(userLogeado.id))
+        };
 
     }, []);
     
