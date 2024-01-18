@@ -6,6 +6,7 @@
     width: 100%;
     height: auto;
 
+
 }
 .formContainer{
     display: flex;
@@ -14,26 +15,36 @@
     align-items: center;
     margin: 2vh;
     height: auto;
-    width: 90%;
+    width: 100%;
+
 }
 .inputContainer{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
+    height: auto;
     width: 90%;
     margin: 3px;
 }
 .label{
+    background-color: aquamarine;
+    width: 50%;
     font-size: 18px;
     font-weight: 500;
+}
+.inputDiv{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .input{
     font-size: 17px;
     font-weight: 500;
-    width: 60%;
+    width: 50%;
     border-radius: 8px;
 }
 
@@ -56,4 +67,6 @@
 }
 .error{
     color: red;
+    text-align: center;
+    font-weight: 500;
 }
